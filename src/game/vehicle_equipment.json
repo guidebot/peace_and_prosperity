@@ -1,0 +1,297 @@
+[
+    {
+        "id": "mmg",
+        "skill": "WPN_mg",
+        "name": "Пулемёт 7,62 мм",
+        "weight": 0,
+        "ammo": 40,
+        "ammoWeight": 0,
+        "bestRange": 40,
+        "effectiveRange": 80,
+        "maxRange": 160,
+        "minRange": 0,
+        "ap": 2,
+        "he": 3,
+        "deployBonus": 0,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
+        "id": "hmg",
+        "skill": "WPN_mg",
+        "name": "Крупнокалиберный пулемёт 12,7-14,5 мм",
+        "weight": 0,
+        "ammo": 20,
+        "ammoWeight": 0,
+        "bestRange": 50,
+        "effectiveRange": 100,
+        "maxRange": 200,
+        "minRange": 0,
+        "ap": 3,
+        "he": 3,
+        "deployBonus": 0,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
+        "id": "ac20",
+        "skill": "WPN_ac",
+        "name": "Автопушка 20 мм",
+        "weight": 0,
+        "ammo": 10,
+        "ammoWeight": 0,
+        "bestRange": 50,
+        "effectiveRange": 100,
+        "maxRange": 200,
+        "minRange": 0,
+        "ap": 4,
+        "he": 3,
+        "deployBonus": 0,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
+        "id": "ac30",
+        "skill": "WPN_ac",
+        "name": "Автопушка 30 мм",
+        "optic": {
+            "day": {
+                "mod": 3,
+                "maxRange": 160
+            },
+            "dawn": {
+                "mod": 3,
+                "maxRange": 160
+            },
+            "night": {
+                "mod": 9,
+                "maxRange": 160
+            }
+        },
+        "weight": 0,
+        "ammo": 10,
+        "ammoWeight": 0,
+        "bestRange": 50,
+        "effectiveRange": 100,
+        "maxRange": 200,
+        "minRange": 0,
+        "ap": 6,
+        "he": 3,
+        "deployBonus": 0,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
+        "id": "ac40",
+        "skill": "WPN_ac",
+        "name": "Автопушка 40-57 мм",
+        "optic": {
+            "day": {
+                "mod": 3,
+                "maxRange": 160
+            },
+            "dawn": {
+                "mod": 4,
+                "maxRange": 160
+            },
+            "night": {
+                "mod": 12,
+                "maxRange": 160
+            },
+            "fog": {
+                "mod": 4,
+                "maxRange": 10
+            }
+        },
+        "weight": 0,
+        "ammo": 10,
+        "ammoWeight": 0,
+        "bestRange": 50,
+        "effectiveRange": 100,
+        "maxRange": 200,
+        "minRange": 0,
+        "ap": 7,
+        "he": 3,
+        "deployBonus": 0,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
+        "id": "recoiless",
+        "skill": "WPN_recoiless",
+        "name": "Безоткатное орудие 74 мм",
+        "weight": 0,
+        "ammo": 6,
+        "ammoWeight": 0,
+        "bestRange": 40,
+        "effectiveRange": 80,
+        "maxRange": 160,
+        "minRange": 2,
+        "ap": 8,
+        "he": 3,
+        "deployBonus": 0,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
+        "id": "milan1",
+        "skill": "WPN_at_guided",
+        "name": "MILAN 1",
+        "optic": {
+            "day": {
+                "mod": 3,
+                "maxRange": 160
+            },
+            "dawn": {
+                "mod": 1,
+                "maxRange": 160
+            }
+        },
+        "weight": 0,
+        "ammo": 2,
+        "ammoWeight": 0,
+        "bestRange": 180,
+        "effectiveRange": 180,
+        "maxRange": 180,
+        "minRange": 15,
+        "ap": 7,
+        "he": 0,
+        "deployBonus": 0,
+        "mustBeDeployed": true,
+        "dispersion": 0
+    },
+    {
+        "id": "milan2",
+        "skill": "WPN_at_guided",
+        "name": "MILAN 2",
+        "optic": {
+            "day": {
+                "mod": 3,
+                "maxRange": 160
+            },
+            "dawn": {
+                "mod": 3,
+                "maxRange": 160
+            },
+            "night": {
+                "mod": 9,
+                "maxRange": 160
+            }
+        },
+        "weight": 0,
+        "ammo": 2,
+        "ammoWeight": 0,
+        "bestRange": 180,
+        "effectiveRange": 180,
+        "maxRange": 180,
+        "minRange": 15,
+        "ap": 9,
+        "he": 0,
+        "deployBonus": 0,
+        "mustBeDeployed": true,
+        "dispersion": 0
+    },
+    {
+        "id": "gun",
+        "skill": "WPN_tank_guns",
+        "name": "Танковое орудие 115-125 мм",
+        "weight": 0,
+        "ammo": 20,
+        "ammoWeight": 0,
+        "bestRange": 60,
+        "effectiveRange": 120,
+        "maxRange": 240,
+        "minRange": 0,
+        "ap": 11,
+        "he": 4,
+        "deployBonus": 0,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
+        "id": "gun_thermal",
+        "skill": "WPN_tank_guns",
+        "name": "Танковое орудие 120-125 мм (с тепловизором)",
+        "optic": {
+            "day": {
+                "mod": 3,
+                "maxRange": 160
+            },
+            "dawn": {
+                "mod": 4,
+                "maxRange": 160
+            },
+            "night": {
+                "mod": 12,
+                "maxRange": 160
+            },
+            "fog": {
+                "mod": 4,
+                "maxRange": 10
+            }
+        },
+        "weight": 0,
+        "ammo": 20,
+        "ammoWeight": 0,
+        "bestRange": 60,
+        "effectiveRange": 120,
+        "maxRange": 240,
+        "minRange": 0,
+        "ap": 11,
+        "he": 4,
+        "deployBonus": 0,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
+        "id": "hw122",
+        "skill": "WPN_howitzers",
+        "name": "Гаубица 122 мм",
+        "weight": 0,
+        "ammo": 16,
+        "ammoWeight": 0,
+        "bestRange": 1000,
+        "effectiveRange": 1000,
+        "maxRange": 1000,
+        "minRange": 12,
+        "ap": 8,
+        "he": 4,
+        "deployBonus": 0,
+        "mustBeDeployed": true,
+        "dispersion": 5
+    },
+    {
+        "id": "hw155",
+        "skill": "WPN_howitzers",
+        "name": "Гаубица 155 мм",
+        "weight": 0,
+        "ammo": 10,
+        "ammoWeight": 0,
+        "bestRange": 2000,
+        "effectiveRange": 2000,
+        "maxRange": 2000,
+        "minRange": 12,
+        "ap": 8,
+        "he": 4,
+        "deployBonus": 0,
+        "mustBeDeployed": true,
+        "dispersion": 6
+    },
+    {
+        "id": "bm21",
+        "skill": "WPN_mlrs",
+        "name": "БМ 21 Град",
+        "weight": 0,
+        "ammo": 1,
+        "ammoWeight": 0,
+        "bestRange": 1200,
+        "effectiveRange": 1200,
+        "maxRange": 1200,
+        "minRange": 0,
+        "ap": 8,
+        "he": 4,
+        "deployBonus": 0,
+        "mustBeDeployed": true,
+        "dispersion": 15
+    }
+]
