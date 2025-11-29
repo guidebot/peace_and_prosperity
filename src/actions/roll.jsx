@@ -4,19 +4,21 @@ import { GiCancel, GiConfirmed } from 'react-icons/gi';
 
 export function RollModal({ players, actors, title, targets = [], isOpen, calculateEffect, onCancel, onConfirm }) {
     const [selectedTargetId, setSelectedTargetId] = useState(targets[0]?.id || '');
+
+    const hasTargets = targets.length > 0;
+    const target = hasTargets ? targets.find(t => t.id === selectedTargetId) : null;
+
+    const [blindFire, setBlindFire] = useState(target.isHidden);
+
     const [selectedDef, setSelectedDef] = useState("0");
     const [selectedDistance, setSelectedDistance] = useState("1");
     const [reactionFire, setReactionFire] = useState(false);
     const [flankFire, setFlankFire] = useState(false);
-    const [blindFire, setBlindFire] = useState(false);
     const [indirectFire, setIndirectFire] = useState(false);
     const [pureRolls, setPureRolls] = useState(actors.map(actor => {
         const roll = Math.floor(Math.random() * 20) + 1;
         return { id: actor.actor.id, roll: roll };
     }));
-
-    const hasTargets = targets.length > 0;
-    const target = hasTargets ? targets.find(t => t.id === selectedTargetId) : null;
 
     const getRollsCallback = useCallback(() => {
         return pureRolls.map(pr => { return { id: pr.id, roll: pr.roll, flankFire: flankFire, reactionFire: reactionFire, blindFire: blindFire, indirectFire: indirectFire, selectedDef: Number(selectedDef), selectedDistance: selectedDistance } });
@@ -27,6 +29,10 @@ export function RollModal({ players, actors, title, targets = [], isOpen, calcul
     useEffect(() => {
         setEffects(calculateEffect(players, getRollsCallback(), actors, target));
     }, [selectedDef, selectedDistance, selectedTargetId, reactionFire, flankFire, blindFire, indirectFire, pureRolls, calculateEffect, actors, getRollsCallback, players, target]);
+
+    useEffect(() => {
+        setBlindFire(target.isHidden);
+    }, [target]);
 
     if (!isOpen) return null;
 

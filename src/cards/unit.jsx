@@ -82,9 +82,13 @@ export function UnitForm({ players, data, onChange, onOtherChange, setPlayers, a
         if (!data.children) return;
         onChange("fatigue", data.fatigue + 1);
         onChange("hasMoved", true);
+        onChange("isMarked", true);
     }
 
     function toggleHasMoved() {
+        if (!data.hasMoved) {
+            onChange("isMarked", true);
+        }
         onChange("hasMoved", !data.hasMoved);
     }
 
