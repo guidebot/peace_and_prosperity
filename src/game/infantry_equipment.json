@@ -95,8 +95,25 @@
         "effectiveRange": 10,
         "maxRange": 20,
         "minRange": 0,
+        "ap": 0,
+        "he": 1,
+        "deployBonus": 0,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+{
+        "id": "short_rifle",
+        "skill": "WPN_rifles",
+        "name": "Укороченный автомат",
+        "weight": 33,
+        "ammo": 6,
+        "ammoWeight": 1,
+        "bestRange": 6,
+        "effectiveRange": 10,
+        "maxRange": 20,
+        "minRange": 0,
         "ap": 1,
-        "he": 2,
+        "he": 1,
         "deployBonus": 0,
         "mustBeDeployed": false,
         "dispersion": 0
@@ -136,9 +153,9 @@
         "dispersion": 0
     },
     {
-        "id": "sniper",
+        "id": "h&kg2810x",
         "skill": "WPN_sniper",
-        "name": "Снайперская винтовка 10x",
+        "name": "H&K G28 10x",
         "optic": {
             "day": {
                 "mod": 3,
@@ -149,16 +166,43 @@
                 "maxRange": 160
             }
         },
-        "weight": 45,
+        "weight": 57,
         "ammo": 10,
         "ammoWeight": 1,
         "bestRange": 0,
-        "effectiveRange": 120,
-        "maxRange": 120,
+        "effectiveRange": 80,
+        "maxRange": 80,
         "minRange": 0,
-        "ap": 2,
-        "he": 2,
+        "ap": 1,
+        "he": 1,
         "deployBonus": 8,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
+        "id": "barretm107a1",
+        "skill": "WPN_sniper",
+        "name": "Barret M107A1 30x",
+        "optic": {
+            "day": {
+                "mod": 4,
+                "maxRange": 320
+            },
+            "dawn": {
+                "mod": 2,
+                "maxRange": 320
+            }
+        },
+        "weight": 137,
+        "ammo": 10,
+        "ammoWeight": 2,
+        "bestRange": 0,
+        "effectiveRange": 150,
+        "maxRange": 150,
+        "minRange": 0,
+        "ap": 3,
+        "he": 1,
+        "deployBonus": 9,
         "mustBeDeployed": true,
         "dispersion": 0
     },
