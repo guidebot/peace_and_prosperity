@@ -9,6 +9,7 @@ body {
   background-color: #151515;
   color: #999999;
   height: 100%;
+  overflow: hidden;
 }
 
 .app-container {
@@ -171,7 +172,7 @@ button:hover {
 }
 
 .node-container.hidden {
-  background-color: #5a00a4;
+  background-color: #43007a;
   color: #ffffff;
 }
 

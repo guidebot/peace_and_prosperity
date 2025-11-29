@@ -12,7 +12,7 @@ export function RollModal({ players, actors, title, targets = [], isOpen, calcul
     const hasTargets = targets.length > 0;
     const target = hasTargets ? targets.find(t => t.id === selectedTargetId) : null;
 
-    const [blindFire, setBlindFire] = useState(target.isHidden);
+    const [blindFire, setBlindFire] = useState(hasTargets ? target.isHidden : false);
 
     const [selectedDef, setSelectedDef] = useState("0");
     const [selectedDistance, setSelectedDistance] = useState("1");
@@ -34,7 +34,7 @@ export function RollModal({ players, actors, title, targets = [], isOpen, calcul
     }, [selectedDef, selectedDistance, selectedTargetId, reactionFire, flankFire, blindFire, indirectFire, pureRolls, calculateEffect, actors, getRollsCallback, players, target]);
 
     useEffect(() => {
-        setBlindFire(target.isHidden);
+        setBlindFire(target ? target.isHidden : false);
     }, [target]);
 
     if (!isOpen) return null;
