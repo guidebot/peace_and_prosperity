@@ -17,7 +17,8 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
     }
 
     return (
-        <div className={`node-container ${isSelected ? 'selected' : !node.isEditing && node.data.type === "entity" && node.data.isDead ? 'inactive' : ''}`} style={style} ref={dragHandle}>
+        <div className={`node-container ${isSelected ? 'selected' : !node.isEditing && node.data.type === "entity" && node.data.isDead ? 'inactive' : node.data.type === 'unit' && node.data.isHidden ? 'hidden' : ''
+            } `} style={style} ref={dragHandle}>
             <div className="node-content">
                 <span>
                     <span className="arrow" onClick={() => node.isInternal && node.toggle()}>{renderGlyph(node)}</span>
