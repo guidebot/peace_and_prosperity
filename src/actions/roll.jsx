@@ -1,9 +1,13 @@
 import { useState, useCallback } from 'react';
 import { useEffect } from 'react';
 import { GiCancel, GiConfirmed } from 'react-icons/gi';
+import { CurrentUnit } from '../cards/utils';
 
 export function RollModal({ players, actors, title, targets = [], isOpen, calculateEffect, onCancel, onConfirm }) {
     const [selectedTargetId, setSelectedTargetId] = useState(targets[0]?.id || '');
+
+    const currentUnit = CurrentUnit(players, actors[0].actor);
+    const [reactionFire, setReactionFire] = useState((currentUnit?.fatigue ?? 0) > 0);
 
     const hasTargets = targets.length > 0;
     const target = hasTargets ? targets.find(t => t.id === selectedTargetId) : null;
@@ -12,7 +16,6 @@ export function RollModal({ players, actors, title, targets = [], isOpen, calcul
 
     const [selectedDef, setSelectedDef] = useState("0");
     const [selectedDistance, setSelectedDistance] = useState("1");
-    const [reactionFire, setReactionFire] = useState(false);
     const [flankFire, setFlankFire] = useState(false);
     const [indirectFire, setIndirectFire] = useState(false);
     const [pureRolls, setPureRolls] = useState(actors.map(actor => {
