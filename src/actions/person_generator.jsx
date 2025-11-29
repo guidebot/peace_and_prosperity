@@ -20,22 +20,19 @@ function assignEquipment(skills) {
         equipment.push("lmg_pkm")
     }
     else if (FP >= 3 && (skills.WPN_sniper ?? 0) > (skills.WPN_rifles ?? 0)) {
-        equipment.push("sniper")
-    }
-    else if (FP >= 3) {
-        equipment.push("rifle");
-        if ((skills.WPN_gl ?? 0) >= 3) {
-            equipment.push("gp");
-        }
+        equipment.push("h&kg2810x")
     }
     else if (FP >= 1) {
-        const mexSkills = ["MEX_trucks", "MEX_wheeled", "MEX_tracked"];
+        const mexSkills = ["MEX_wheeled", "MEX_tracked"];
         const hasHighMex = mexSkills.some(skillId => (skills[skillId] ?? 0) >= 5);
         if (hasHighMex) {
-            equipment.push("smg");
+            equipment.push("short_rifle");
         }
         else {
             equipment.push("rifle");
+            if (FP >= 3 && (skills.WPN_gl ?? 0) >= 3) {
+                equipment.push("gp");
+            }
         }
     }
 
