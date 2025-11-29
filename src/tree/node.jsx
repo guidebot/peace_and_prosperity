@@ -17,7 +17,7 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
     }
 
     return (
-        <div className={`node-container ${isSelected ? 'selected' : !node.isEditing && node.data.type === "entity" && node.data.isDead ? 'inactive' : node.data.type === 'unit' && node.data.isHidden && node.data.isActive ? 'hidden' : ''
+        <div className={`node-container ${isSelected ? 'selected' : !node.isEditing && ((node.data.type === "entity" && node.data.isDead) || (node.data.type === 'unit' && !node.data.isActive)) ? 'inactive' : node.data.type === 'unit' && node.data.isHidden && node.data.isActive ? 'hidden' : ''
             } `} style={style} ref={dragHandle}>
             <div className="node-content">
                 <span>
@@ -65,6 +65,12 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
                     </button>
                     <button style={{ display: !node.isEditing && node.data.type === 'unit' ? 'inline' : 'none' }} onClick={(e) => {
                         e.stopPropagation();
+                        if (node.data.isActive) {
+                            node.close();
+                        }
+                        else {
+                            node.open();
+                        }
                         handlePropertyChange(node.id, "isActive", !node.data.isActive);
                     }} title={node.data.isActive ? "Не активен" : "Активен"}>
                         <GiInvisible />

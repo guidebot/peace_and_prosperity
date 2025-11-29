@@ -39,6 +39,28 @@ function App() {
 
   const treeRef = useRef(null);
 
+  useEffect(() => {
+    if (treeRef.current && players.length > 0) {
+      const closeInactiveNodes = (nodes) => {
+        nodes.forEach(node => {
+          if (node.isActive === false) {
+            treeRef.current?.close(node.id);
+          }
+          if (node.children) {
+            closeInactiveNodes(node.children);
+          }
+        });
+      };
+
+      // Запускаем после рендера
+      const timer = setTimeout(() => {
+        closeInactiveNodes(players);
+      }, 0);
+
+      return () => clearTimeout(timer);
+    }
+  }, [players]);
+
   const handleInitiativeClick = (unitId) => {
     if (treeRef.current) {
       treeRef.current.scrollTo(unitId, 'center');
