@@ -289,6 +289,13 @@ button:hover {
   z-index: 1000;
 }
 
+.battlefield-button {
+  position: fixed;
+  bottom: 5px;
+  right: 200px;
+  z-index: 1000;
+}
+
 .equipment-select {
   width: 300px;
 }

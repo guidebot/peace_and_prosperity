@@ -93,9 +93,6 @@ export const BattlefieldMapModal = ({
                         );
                     })}
                 </div>
-                <button className="modal-close-btn" onClick={onClose}>
-                    Закрыть
-                </button>
             </div>
         </div>
     );
