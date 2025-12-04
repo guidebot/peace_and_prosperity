@@ -9,6 +9,7 @@ import { GiCheckMark } from 'react-icons/gi';
 import { UpdateCardProperty } from './cards/utils';
 import { GenerateDefaultPerson } from './actions/person_generator';
 import { VisibilityConditionsProvider } from './game/conditions';
+import { BattlefieldMapModal } from './map';
 
 function App() {
   const soldiers = [
@@ -37,6 +38,9 @@ function App() {
     setPlayers(prev => UpdateCardProperty(prev, id, name, value));
   };
 
+  const [showBattlefieldModal, setBattlefieldModal] = useState(false);
+  const [squadPositions, setSquadPositions] = useState({});
+
   const treeRef = useRef(null);
 
   useEffect(() => {
@@ -52,7 +56,6 @@ function App() {
         });
       };
 
-      // Запускаем после рендера
       const timer = setTimeout(() => {
         closeInactiveNodes(players);
       }, 0);
@@ -89,6 +92,15 @@ function App() {
     }
   }, [log]);
 
+  const handleSquadPositionChange = (unitId, position) => {
+    console.debug(unitId);
+    console.debug(position);
+    setSquadPositions(prev => ({
+      ...prev,
+      [unitId]: position
+    }));
+  };
+
   const getPlayOrder = () => {
     const order = [];
 
@@ -103,6 +115,18 @@ function App() {
     return order.sort((a, b) => {
       return b.initiative === a.initiative ? 0.5 - randomN : b.initiative - a.initiative;
     });
+  };
+
+  const getAllUnits = () => {
+    const units = [];
+    players.forEach(player => {
+      if (player.children) {
+        player.children.forEach(unit => {
+          if (unit.isActive) units.push(unit);
+        });
+      }
+    });
+    return units;
   };
 
   return (
@@ -128,14 +152,22 @@ function App() {
                 ))
               )}
             </div>
-            <button
-              className="initiative-button"
-              onClick={() => {
-                setInitiativeModal(!showInitiativeModal);
-              }}
-            >
-              Инициатива
-            </button>
+            <div className="log-controls">
+              <button
+                className="initiative-button"
+                onClick={() => {
+                  setInitiativeModal(!showInitiativeModal);
+                }}
+              >
+                Инициатива
+              </button>
+              <button
+                className="battlefield-button"
+                onClick={() => setBattlefieldModal(!showBattlefieldModal)}
+              >
+                Расположение
+              </button>
+            </div>
           </div>
         </div>
         {showInitiativeModal && (
@@ -161,6 +193,14 @@ function App() {
           </div>
         )
         }
+        {showBattlefieldModal && (
+          <BattlefieldMapModal
+            units={getAllUnits()}
+            positions={squadPositions}
+            onPositionChange={handleSquadPositionChange}
+            onClose={() => setBattlefieldModal(false)}
+          />
+        )}
       </div >
     </VisibilityConditionsProvider>);
 }
