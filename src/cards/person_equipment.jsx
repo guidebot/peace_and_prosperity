@@ -139,9 +139,9 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                             <td>{(item.weight + item.ammo * item.ammoWeight) / 10} кг</td>
                             <td>{Level(actor.skills[item.skill] || 0)}</td>
                             <td>{item.minRange > 0 ? item.minRange : "-"}</td>
-                            <td>{(item.bestRange === item.effectiveRange && item.effectiveRange === item.maxRange) ? "-" : item.bestRange}</td>
-                            <td>{(item.bestRange === item.effectiveRange && item.effectiveRange === item.maxRange) ? "-" : item.effectiveRange}</td>
-                            <td>{item.maxRange}</td>
+                            <td>{item.bestRange > 0 ? item.bestRange : "-"}</td>
+                            <td>{item.effectiveRange > 0 ? item.effectiveRange : "-"}</td>
+                            <td>{item.maxRange > 0 ? item.maxRange : "-"}</td>
                             <td>{item.ap > 0 ? item.ap : "-"}</td>
                             <td>{item.he > 0 ? item.he : "-"}</td>
                             <td>

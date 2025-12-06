@@ -9,7 +9,7 @@ import { useVisibilityConditions } from './game/conditions';
 export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) {
     const fileInputRef = useRef(null);
 
-    const { activeConditionIds, maxRange, toggleCondition, conditionsList } = useVisibilityConditions();
+    const { activeConditionIds, toggleCondition, conditionsList } = useVisibilityConditions();
 
     const [modalData, setModalData] = useState({});
     const resetModalData = () => setModalData({ equipment: null, open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
@@ -90,7 +90,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
     };
 
     const handleCreatePlayer = () => {
-        const newPlayer = new player("Новый игрок", []);
+        const newPlayer = new player("Новая фракция", []);
         setPlayers((prev) => [...prev, newPlayer]);
         setSelectedNode({ node: newPlayer.id });
     };
@@ -102,7 +102,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                 children: player.children?.map(unit => {
                     const initiative = effects.filter(e => e.id === unit.id)[0]?.initiative ?? 0;
 
-                    const newFatigue = unit.hasMoved && unit.vehicle
+                    const newFatigue = unit.hasMoved && !unit.vehicle
                         ? unit.fatigue
                         : unit.fatigue > 0
                             ? unit.fatigue - 1
@@ -145,7 +145,6 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
             <button onClick={() => handleSaveToFile()} title="Сохранить состояние...">
                 <MdDownload />
             </button>
-
             <input
                 type="file"
                 accept=".json"
@@ -154,19 +153,15 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                 style={{ display: 'none' }}
                 value=""
             />
-
             <button onClick={triggerFileSelect} title="Загрузить состояние...">
                 <MdUpload />
             </button>
-
             <button title="Добавить игрока" onClick={handleCreatePlayer}>
                 <GiTabletopPlayers />
             </button>
-
             <button title="Закончить ход" onClick={() => setModalData({ open: true, title: "Инициатива", actors: players.flatMap(p => p.children).filter(u => u.isActive).map(u => ({ actor: u })), targets: [], onConfirm: applyInitiativeRoll, calculateEffect: getInitiativeRoll })}>
                 <MdTimer />
             </button>
-
             {conditionsList.map(cond => (
                 <button
                     key={cond.id}
@@ -177,9 +172,6 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                     {cond.pic}
                 </button>
             ))}
-
-            <span>{maxRange * 10} м</span>
-
             {
                 modalData?.open && (
                     <RollModal

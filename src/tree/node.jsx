@@ -52,7 +52,7 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
                     {!node.isEditing && (<span>{node.data.name}</span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.stress > 0 && (<span style={{ color: 'red' }}> {node.data.stress}</span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.fatigue > 0 && (<span style={{ color: 'orange' }}> {node.data.fatigue}</span>)}
-                    {!node.isEditing && node.data.type === 'unit' && node.data.correction > 0 && (<span style={{ color: 'green' }}> {node.data.correction}</span>)}
+                    {!node.isEditing && node.data.type === 'unit' && node.data.correction > 0 && (<span style={{ color: 'lightgreen' }}> {node.data.correction}</span>)}
                 </span>
             </div>
             <div className="node-actions">

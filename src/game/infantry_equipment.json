@@ -101,7 +101,7 @@
         "mustBeDeployed": false,
         "dispersion": 0
     },
-{
+    {
         "id": "short_rifle",
         "skill": "WPN_rifles",
         "name": "Укороченный автомат",

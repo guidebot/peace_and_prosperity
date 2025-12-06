@@ -148,7 +148,7 @@ export function RollModal({ players, actors, title, targets = [], isOpen, calcul
                 )}
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <div className="buttons-panel" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <button title="Так точно" onClick={() => onConfirm(players, getRollsCallback(), actors, hasTargets ? targets.find(t => t.id === selectedTargetId) : null)}><GiConfirmed /></button>
                 <button title="Никак нет" onClick={onCancel}><GiCancel /></button>
             </div>
