@@ -6,17 +6,20 @@ import { forwardRef } from 'react';
 
 export const ObjectsTree = forwardRef(({ players, setPlayers, selectedNode, setSelectedNode, handlePropertyChange }, ref) => {
     const containerRef = useRef(null);
-    const [width, setWidth] = useState(200);
+    const [width, setWidth] = useState(100);
+    const [height, setHeight] = useState(500);
 
     useLayoutEffect(() => {
         if (containerRef.current) {
             setWidth(containerRef.current.offsetWidth);
+            setHeight(containerRef.current.offsetHeight);
         }
     }, []);
 
     useResizeObserver(containerRef, (entry) => {
         if (entry) {
             setWidth(entry.contentRect.width);
+            setHeight(entry.contentRect.height);
         }
     });
 
@@ -135,11 +138,12 @@ export const ObjectsTree = forwardRef(({ players, setPlayers, selectedNode, setS
     };
 
     return (
-        <div ref={containerRef} style={{ width: '100%' }}>
+        <div ref={containerRef}>
             <Tree
                 ref={ref}
                 disableMultiSelection={true}
                 width={width}
+                height={height}
                 data={players}
                 onRename={onRename}
                 onDelete={onDelete}

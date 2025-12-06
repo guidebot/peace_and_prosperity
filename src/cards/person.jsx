@@ -36,7 +36,7 @@ export function PersonForm({ players, data, onPropertyChange, onOtherChange, add
     return (
         <div>
             <label className="form-label" >
-                <span>Имя:</span>
+                <span>Имя персонажа:</span>
                 <input name="name" type="text" value={data.name} onChange={(e) => onPropertyChange(e.target.name, e.target.value)} />
             </label>
             <label className="form-label" >

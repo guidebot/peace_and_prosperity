@@ -9,7 +9,6 @@ import { GiCheckMark } from 'react-icons/gi';
 import { UpdateCardProperty } from './cards/utils';
 import { GenerateDefaultPerson } from './actions/person_generator';
 import { VisibilityConditionsProvider } from './game/conditions';
-import { BattlefieldMapModal } from './map';
 
 function App() {
   const soldiers = [
@@ -38,7 +37,6 @@ function App() {
     setPlayers(prev => UpdateCardProperty(prev, id, name, value));
   };
 
-  const [showBattlefieldModal, setBattlefieldModal] = useState(false);
   const [squadPositions, setSquadPositions] = useState({});
 
   const treeRef = useRef(null);
@@ -63,6 +61,36 @@ function App() {
       return () => clearTimeout(timer);
     }
   }, [players]);
+
+  useEffect(() => {
+    const getAllUnits = () => {
+      const units = [];
+      players.forEach(player => {
+        if (player.children) {
+          player.children.forEach(unit => {
+            if (unit.isActive) units.push(unit);
+          });
+        }
+      });
+      return units;
+    };
+
+    const allUnits = getAllUnits();
+    const needsInit = allUnits.some(unit => !squadPositions[unit.id]);
+
+    if (needsInit) {
+      const newPositions = { ...squadPositions };
+      allUnits.forEach((unit, idx) => {
+        if (!newPositions[unit.id]) {
+          newPositions[unit.id] = {
+            x: 40 + (idx % 10) * 50,
+            y: 40 + Math.floor(idx / 10) * 50
+          };
+        }
+      });
+      setSquadPositions(newPositions);
+    }
+  }, [players, squadPositions]);
 
   const handleInitiativeClick = (unitId) => {
     if (treeRef.current) {
@@ -93,8 +121,6 @@ function App() {
   }, [log]);
 
   const handleSquadPositionChange = (unitId, position) => {
-    console.debug(unitId);
-    console.debug(position);
     setSquadPositions(prev => ({
       ...prev,
       [unitId]: position
@@ -117,18 +143,6 @@ function App() {
     });
   };
 
-  const getAllUnits = () => {
-    const units = [];
-    players.forEach(player => {
-      if (player.children) {
-        player.children.forEach(unit => {
-          if (unit.isActive) units.push(unit);
-        });
-      }
-    });
-    return units;
-  };
-
   return (
     <VisibilityConditionsProvider>
       <div className="app-container">
@@ -138,7 +152,14 @@ function App() {
         </div>
         <div className="right-panel">
           <div className="content">
-            {selectedNode && <ObjectCard players={players} node={selectedNode} setPlayers={setPlayers} addLogEntry={addLogEntry} />}
+            {selectedNode && <ObjectCard
+              players={players}
+              positions={squadPositions}
+              onPositionChange={handleSquadPositionChange}
+              node={selectedNode}
+              setSelectedNode={handleInitiativeClick}
+              setPlayers={setPlayers}
+              addLogEntry={addLogEntry} />}
           </div>
           <div className="log-container">
             <div className="log-content" ref={logContainerRef}>
@@ -160,12 +181,6 @@ function App() {
                 }}
               >
                 Инициатива
-              </button>
-              <button
-                className="battlefield-button"
-                onClick={() => setBattlefieldModal(!showBattlefieldModal)}
-              >
-                Расположение
               </button>
             </div>
           </div>
@@ -193,14 +208,6 @@ function App() {
           </div>
         )
         }
-        {showBattlefieldModal && (
-          <BattlefieldMapModal
-            units={getAllUnits()}
-            positions={squadPositions}
-            onPositionChange={handleSquadPositionChange}
-            onClose={() => setBattlefieldModal(false)}
-          />
-        )}
       </div >
     </VisibilityConditionsProvider>);
 }

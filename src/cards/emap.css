@@ -1,0 +1,51 @@
+.interactive-battlefield-container {
+    margin: 2px 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.interactive-battlefield {
+    position: relative;
+    background-color: #2f2f2f;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    background-image: radial-gradient(#ccc 1px, transparent 1px);
+    background-size: 15px 15px;
+    width: 540px;
+    height: 360px;
+    cursor: default;
+}
+
+.squad-marker {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: move;
+    user-select: none;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+}
+
+.squad-icon {
+    width: 9px;
+    height: 9px;
+    background: #8a8a8a;
+    border-radius: 2px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+
+.squad-marker.current .squad-icon {
+    background: #ff4f4f;
+}
+
+.squad-label {
+    font-size: 8px;
+    color: #ffffff;
+    white-space: nowrap;
+    max-width: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}

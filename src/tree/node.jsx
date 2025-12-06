@@ -55,8 +55,8 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
                     {!node.isEditing && node.data.type === 'unit' && node.data.correction > 0 && (<span style={{ color: 'green' }}> {node.data.correction}</span>)}
                 </span>
             </div>
-            <div className="buttons-panel">
-                <div className="node-actions">
+            <div className="node-actions">
+                <div className="buttons-panel">
                     <button style={{ display: !node.isEditing && node.data.type === "entity" && !node.data.isDead ? 'inline' : 'none' }} onClick={(e) => {
                         e.stopPropagation();
                         handlePropertyChange(node.id, "isDead", true);

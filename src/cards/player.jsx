@@ -26,7 +26,7 @@ export function PlayerForm({ data, setPlayers, onChange }) {
                 </button>
             </div>
             <label className="form-label">
-                <span>Название:</span>
+                <span>Фракция:</span>
                 <input name="name" type="text" value={data.name} onChange={(e) => onChange(e.target.name, e.target.value)} />
             </label>
         </div>

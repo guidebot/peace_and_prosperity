@@ -3,13 +3,7 @@ import { UnitForm } from './unit';
 import { PlayerForm } from './player';
 import { UpdateCardProperty } from './utils';
 
-const TypeTitle = {
-    entity: "Персонаж",
-    unit: "Отряд",
-    player: "Группа"
-}
-
-export function ObjectCard({ players, node, setPlayers, addLogEntry }) {
+export function ObjectCard({ players, node, positions, onPositionChange, setSelectedNode, setPlayers, addLogEntry }) {
     const getData = (nodes, id) => {
         for (const element of nodes) {
             if (element.id === id)
@@ -51,6 +45,9 @@ export function ObjectCard({ players, node, setPlayers, addLogEntry }) {
                 return <UnitForm
                     players={players}
                     data={data}
+                    positions={positions}
+                    onPositionChange={onPositionChange}
+                    setSelectedNode={setSelectedNode}
                     onChange={handlePropertyChange}
                     onOtherChange={handleOtherPropertyChange}
                     setPlayers={setPlayers}
@@ -64,7 +61,6 @@ export function ObjectCard({ players, node, setPlayers, addLogEntry }) {
 
     return (
         <div className='object-card'>
-            <h1>{TypeTitle[data.type]}</h1>
             {renderForm()}
         </div>
     );

@@ -2,20 +2,23 @@ import { useState } from 'react';
 import { CreateVehicle, Vehicles, RangeKey } from '../game/equipment';
 import { Level, MinSkill, MaxSkill } from '../game/skills';
 import { RollModal } from '../actions/roll';
-import { GiRallyTheTroops, GiCheckMark } from "react-icons/gi";
+import { GiCheckMark, GiBullseye, GiGunshot, GiWeight, GiTireTracks, GiFootsteps } from "react-icons/gi";
 import { GiRun } from 'react-icons/gi';
 import { PiBinocularsFill } from 'react-icons/pi';
-import { FaLocationPinLock } from "react-icons/fa6";
+import { FaLocationPinLock, FaRoad } from "react-icons/fa6";
 import { TfiTarget } from "react-icons/tfi";
 import { CalculateFireEffects, ApplyFireEffects } from '../actions/fire';
 import { IoIosPersonAdd, IoMdMove } from "react-icons/io";
 import { PersonGenerator } from '../actions/person_generator';
-import { BiSolidShow, BiSolidHide } from "react-icons/bi";
+import { BiSolidShow, BiSolidHide, BiShowAlt, BiPulse } from "react-icons/bi";
 import { PossibleTargets, MovementSpeed, TotalWeight, TotalCapacity } from './utils';
 import { MdDelete } from 'react-icons/md';
 import { CalculateWatchEffectWithConditions } from '../game/conditions';
+import { UnitMap } from './emap';
+import { GrUserPolice } from "react-icons/gr";
+import { TbFlag, TbFlagUp } from 'react-icons/tb';
 
-export function UnitForm({ players, data, onChange, onOtherChange, setPlayers, addLogEntry }) {
+export function UnitForm({ players, data, positions, onPositionChange, onChange, onOtherChange, setSelectedNode, setPlayers, addLogEntry }) {
     const calculateWatchEffect = CalculateWatchEffectWithConditions();
     const [personGeneratorOpen, setPersonGeneratorOpen] = useState(false);
     const [modalData, setModalData] = useState({});
@@ -64,8 +67,8 @@ export function UnitForm({ players, data, onChange, onOtherChange, setPlayers, a
 
     function checkIfCanMove() {
         if (!data.children) return false;
-
         if (data.isDeployed) return false;
+        if (MovementSpeed(data) === 0) return false;
 
         return true;
     }
@@ -103,6 +106,18 @@ export function UnitForm({ players, data, onChange, onOtherChange, setPlayers, a
     function toggleIsHidden() {
         onChange("isHidden", !data.isHidden);
     }
+
+    const getAllUnits = () => {
+        const units = [];
+        players.forEach(player => {
+            if (player.children) {
+                player.children.forEach(unit => {
+                    if (unit.isActive) units.push(unit);
+                });
+            }
+        });
+        return units;
+    };
 
     const applyWatchEffect = (players, rolls, result, actors, target) => {
         const effects = calculateWatchEffect(players, rolls, result, actors, target);
@@ -171,54 +186,6 @@ export function UnitForm({ players, data, onChange, onOtherChange, setPlayers, a
 
     return (
         <div>
-            <div className="buttons-panel">
-                <button key="addPerson" title="Добавить персонаж" onClick={() => setPersonGeneratorOpen(true)}>
-                    <IoIosPersonAdd />
-                </button>
-                <button key="rally" title="Восстановить эффективность" onClick={() => setModalData({ open: true, actors: [{ actor: data }], targets: [], onConfirm: applyRallyEffect, calculateEffect: getRallyEffects })}>
-                    <GiRallyTheTroops />
-                </button>
-                {PossibleTargets(players, data).length > 0 && (<button key="watch" title="Наблюдать" onClick={() => setModalData({ open: true, actors: [{ actor: data }], targets: PossibleTargets(players, data), onConfirm: applyWatchEffect, calculateEffect: calculateWatchEffect })}>
-                    <PiBinocularsFill />
-                </button>)}
-                <button key="run" title="Бежать" onClick={run} style={{ display: checkIfCanRun() ? 'inline' : 'none' }}>
-                    <GiRun />
-                </button>
-                <button key="toggleHasMoved" title="Переключить пометку передвижения" onClick={toggleHasMoved} style={{ display: checkIfCanMove() ? 'inline' : 'none' }}>
-                    <IoMdMove />
-                </button>
-                <button key="toggleIsDeployed" title="Переключить пометку стационарного положения" onClick={toggleIsDeployed} style={{ display: checkIfCanDeploy() ? 'inline' : 'none' }}>
-                    <FaLocationPinLock />
-                </button>
-                <button key="toggleIsMarked" title="Переключить пометку завершения действия" onClick={toggleIsMarked}>
-                    <GiCheckMark />
-                </button>
-                <button key="toggleIsHidden" title="Переключить пометку маскировки" onClick={toggleIsHidden}>
-                    {data.isHidden ? (<BiSolidShow />) : (<BiSolidHide />)}
-                </button>
-                {
-                    getUnitFireGroups(data).map((group) => (
-                        <>
-                            {PossibleTargets(players, data).length > 0 && (<button key={group.key}
-                                title={`Групповой огонь (${group.actors[0].equipment.name} x${group.actors.length})`}
-                                onClick={() => {
-                                    const possibleTargets = PossibleTargets(players, data);
-                                    if (possibleTargets.length === 0) return;
-                                    setModalData({
-                                        open: true,
-                                        actors: group.actors,
-                                        targets: PossibleTargets(players, data),
-                                        title: `Групповой огонь (${data.name}, ${group.actors[0].equipment.name})`,
-                                        onConfirm: applyFireEffects,
-                                        calculateEffect: CalculateFireEffects
-                                    });
-                                }}>
-                                <TfiTarget />
-                            </button>)}
-                        </>
-                    ))
-                }
-            </div >
             {
                 personGeneratorOpen && (
                     <PersonGenerator onCancel={() => setPersonGeneratorOpen(false)} onConfirm={(newPerson) => { handleCreatePerson(newPerson); setPersonGeneratorOpen(false); }} />
@@ -239,73 +206,161 @@ export function UnitForm({ players, data, onChange, onOtherChange, setPlayers, a
                     />
                 )
             }
-
-            <label className="form-label">
-                <span>Название:</span>
-                <input name="name" type="text" value={data.name} onChange={(e) => onChange(e.target.name, e.target.value)} />
-            </label>
-            <label className="form-label">
-                <span>Очки стресса:</span>
-                <input min={0} name="stress" type="number" value={data.stress} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
-            </label>
-            <label className="form-label">
-                <span>Очки усталости:</span>
-                <input min={0} max={MinSkill(data, "FP")} name="fatigue" type="number" value={data.fatigue} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
-            </label>
-            <label className="form-label">
-                <span>Очки корректировки:</span>
-                <input min={0} max={5} name="correction" type="number" value={data.correction} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
-            </label>
-            <label className="form-label">
-                <span>Транспортное средство:</span>
-                <span style={{ textAlign: 'left' }}>{data.vehicle ? data.vehicle.name : "нет"}</span>
-                <select name="vehicle" onChange={onSetVehicle} value="0">
-                    <option key="0" value="0">Заменить...</option>
-                    {Vehicles
-                        // .filter((item) => {
-                        //     const canUseBySkill = Level(currentSkills[item.skill] || 0) > 0;
-                        //     const canUseByCategory = item.skill === "WPN_rifles";
-                        //     const alreadyTaken = currentEquipment.includes(item.id);
-                        //     return (canUseBySkill || canUseByCategory) && !alreadyTaken;
-                        // })
-                        .map((item) => (
-                            <option key={item.id} value={item.id}>
-                                {item.name}
-                            </option>
-                        ))}
-                </select>
-                <button title="Бросить" onClick={() => onChange("vehicle", null)}>
-                    <MdDelete />
-                </button>
-            </label>
-            <label className="form-label">
-                <span>Максимальная численность:</span>
-                <input name="people" readOnly={true} type="number" value={3 * Level(MaxSkill(data, "LID"))} />
-            </label>
-            {
-                data.vehicle ? (
+            <div className="unit-form-content">
+                {players && positions && onPositionChange && (
+                    <div className="unit-map-wrapper">
+                        <UnitMap
+                            units={getAllUnits()}
+                            positions={positions}
+                            currentUnitId={data.id}
+                            setSelectedNode={setSelectedNode}
+                            onPositionChange={onPositionChange}
+                        />
+                    </div>
+                )}
+                <div className="unit-form-fields">
                     <label className="form-label">
-                        <span>Скорость перемещения:</span>
-                        <input name="plain" readOnly={true} type="number" value={speed.plain} />
-                        <span>По дороге:</span>
-                        <input name="road" readOnly={true} type="number" value={speed.road} />
+                        <input name="name" type="text" value={data.name} onChange={(e) => onChange(e.target.name, e.target.value)} />
                     </label>
-                ) : (
-                    <>
+                    <div className="buttons-panel">
+                        <TbFlag />
                         <label className="form-label">
-                            <span>Вес сняражения:</span>
-                            <input name="weight" readOnly={true} type="number" value={TotalWeight(data) / 10} />кг
+                            <input min={0} name="stress" type="number" value={data.stress} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
                         </label>
+                        <button key="rally" title="Восстановить эффективность" onClick={() => setModalData({ open: true, actors: [{ actor: data }], targets: [], onConfirm: applyRallyEffect, calculateEffect: getRallyEffects })}>
+                            <TbFlagUp />
+                        </button>
+                        <button key="toggleIsMarked" title="Переключить пометку завершения действия" onClick={toggleIsMarked}>
+                            <GiCheckMark />
+                        </button>
+                    </div>
+                    <div className="buttons-panel">
+                        <BiShowAlt />
+                        <button key="toggleIsHidden" title="Переключить пометку маскировки" onClick={toggleIsHidden}>
+                            {data.isHidden ? (<BiSolidShow />) : (<BiSolidHide />)}
+                        </button>
+                        {PossibleTargets(players, data).length > 0 && (<button key="watch" title="Наблюдать" onClick={() => setModalData({ open: true, actors: [{ actor: data }], targets: PossibleTargets(players, data), onConfirm: applyWatchEffect, calculateEffect: calculateWatchEffect })}>
+                            <PiBinocularsFill />
+                        </button>)}
+                    </div>
+                    <div className="buttons-panel">
+                        <GiGunshot />
+                        {
+                            getUnitFireGroups(data).map((group) => (
+                                <>
+                                    {PossibleTargets(players, data).length > 0 && (<button key={group.key}
+                                        title={`Групповой огонь (${group.actors[0].equipment.name} x${group.actors.length})`}
+                                        onClick={() => {
+                                            const possibleTargets = PossibleTargets(players, data);
+                                            if (possibleTargets.length === 0) return;
+                                            setModalData({
+                                                open: true,
+                                                actors: group.actors,
+                                                targets: PossibleTargets(players, data),
+                                                title: `Групповой огонь (${data.name}, ${group.actors[0].equipment.name})`,
+                                                onConfirm: applyFireEffects,
+                                                calculateEffect: CalculateFireEffects
+                                            });
+                                        }}>
+                                        <TfiTarget />
+                                    </button>)}
+                                </>
+                            ))
+                        }
+                    </div >
+                    <div className="buttons-panel">
+                        {data.vehicle ? (<GiTireTracks />) : (<GiFootsteps />)}
                         <label className="form-label">
-                            <span>Грузоподъёмность:</span>
-                            <input name="capacity" readOnly={true} type="number" value={TotalCapacity(data) / 10} />кг
+                            <select style={{ width: "auto" }} name="vehicle" onChange={onSetVehicle} value="0">
+                                <option key="0" value="0">{data.vehicle ? data.vehicle.name : "Пешком"}</option>
+                                {Vehicles
+                                    // .filter((item) => {
+                                    //     const canUseBySkill = Level(currentSkills[item.skill] || 0) > 0;
+                                    //     const canUseByCategory = item.skill === "WPN_rifles";
+                                    //     const alreadyTaken = currentEquipment.includes(item.id);
+                                    //     return (canUseBySkill || canUseByCategory) && !alreadyTaken;
+                                    // })
+                                    .map((item) => (
+                                        <option key={item.id} value={item.id}>
+                                            {item.name}
+                                        </option>
+                                    ))}
+                            </select>
+                            <button title="Бросить" onClick={() => onChange("vehicle", null)}>
+                                <MdDelete />
+                            </button>
                         </label>
+                    </div>
+                    <div className="buttons-panel">
+                        {
+                            data.vehicle ? (
+                                <>
+                                    <IoMdMove />
+                                    <label className="form-label">
+                                        <input name="plain" readOnly={true} type="number" value={speed.plain} />
+                                    </label>
+                                    <FaRoad />
+                                    <label className="form-label">
+                                        <input name="road" readOnly={true} type="number" value={speed.road} />
+                                    </label>
+                                </>
+                            ) : (
+                                <>
+                                    <IoMdMove />
+                                    <label className="form-label">
+                                        <input name="speed" readOnly={true} type="number" value={speed} />
+                                    </label>
+                                </>)
+                        }
+                        {checkIfCanMove() && (
+                            <button key="toggleHasMoved" title="Переключить пометку передвижения" onClick={toggleHasMoved}>
+                                <IoMdMove />
+                            </button>)}
+                        <button key="toggleIsDeployed" title="Переключить пометку стационарного положения" onClick={toggleIsDeployed} style={{ display: checkIfCanDeploy() ? 'inline' : 'none' }}>
+                            <FaLocationPinLock />
+                        </button>
+                    </div>
+                    <div className="buttons-panel">
+                        <BiPulse />
                         <label className="form-label">
-                            <span>Скорость перемещения:</span>
-                            <input name="speed" readOnly={true} type="number" value={speed} />
+                            <input min={0} max={MinSkill(data, "FP")} name="fatigue" type="number" value={data.fatigue} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
                         </label>
-                    </>)
-            }
+                        {checkIfCanRun() && (
+                            <button key="run" title="Бежать" onClick={run}>
+                                <GiRun />
+                            </button>)}
+                    </div>
+                    <div className="buttons-panel">
+                        <GiBullseye />
+                        <label className="form-label">
+                            <input min={0} max={5} name="correction" type="number" value={data.correction} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
+                        </label>
+                    </div>
+                    <div className="buttons-panel">
+                        <GrUserPolice />
+                        <label className="form-label">
+                            <input name="current_people" readOnly={true} type="number" value={data.children?.length ?? 0} />
+                        </label>
+                        /
+                        <label className="form-label">
+                            <input name="max_people" readOnly={true} type="number" value={3 * Level(MaxSkill(data, "LID"))} />
+                        </label>
+                        <button key="addPerson" title="Добавить персонаж" onClick={() => setPersonGeneratorOpen(true)}>
+                            <IoIosPersonAdd />
+                        </button>
+                    </div>
+                    <div className="buttons-panel">
+                        <GiWeight />
+                        <label className="form-label">
+                            <input name="weight" readOnly={true} type="number" value={TotalWeight(data) / 10} />
+                        </label>
+                        /
+                        <label className="form-label">
+                            <input name="capacity" readOnly={true} type="number" value={TotalCapacity(data) / 10} />
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div >
     );
 }
