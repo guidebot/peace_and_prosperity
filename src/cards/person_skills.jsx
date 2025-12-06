@@ -42,14 +42,15 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
 
     return (
         <div>
-            <button onClick={toggle}>
-                {isOpen ? <MdArrowDropDown /> : <MdArrowRight />} {title}
-            </button>
-            {isOpen && (
-                <button onClick={() => setFilterSkills(!filterSkills)}>
-                    {filterSkills ? <TbFilterOff /> : <TbFilter />}
-                </button>)}
-
+            <div className="buttons-panel">
+                <button onClick={toggle}>
+                    {isOpen ? <MdArrowDropDown /> : <MdArrowRight />} {title}
+                </button>
+                {isOpen && (
+                    <button onClick={() => setFilterSkills(!filterSkills)}>
+                        {filterSkills ? <TbFilterOff /> : <TbFilter />}
+                    </button>)}
+            </div>
             {
                 modalData?.open && (
                     <RollModal

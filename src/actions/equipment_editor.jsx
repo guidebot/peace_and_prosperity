@@ -67,7 +67,7 @@ export function EquipmentEditorModal({ isOpen, onClose, onSave, initialData }) {
                     }}
                 />
 
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <div className="buttons-panel" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <button title="Так точно" onClick={handleSave}><GiConfirmed /></button>
                     <button title="Никак нет" onClick={onClose}><GiCancel /></button>
                 </div>

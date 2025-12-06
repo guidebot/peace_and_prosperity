@@ -82,15 +82,17 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
     return (
         <div>
             <h2>
-                <button onClick={toggle}>
-                    {isOpen ? <MdArrowDropDown /> : <MdArrowRight />}
-                    Снаряжение
-                </button>
-                {isOpen && (
-                    <button title="Добавить" onClick={() => setEditorModal({ open: true, equipment: null })}>
-                        <MdOutlineAdd />
+                <div className="buttons-panel">
+                    <button onClick={toggle}>
+                        {isOpen ? <MdArrowDropDown /> : <MdArrowRight />}
+                        Снаряжение
                     </button>
-                )}
+                    {isOpen && (
+                        <button title="Добавить" onClick={() => setEditorModal({ open: true, equipment: null })}>
+                            <MdOutlineAdd />
+                        </button>
+                    )}
+                </div>
             </h2>
             <EquipmentEditorModal
                 isOpen={editorModal.open}
