@@ -174,7 +174,7 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                                 </button>}
                             </td>
                             <td>
-                                <div className='buttons-panel'>
+                                <div className='buttons-panel' style={{ justifyContent: "center" }}>
                                     {PossibleTargets(players, actor).length > 0 && CanFireInfantryEquipment(players, actor, item) && (<button title="Огонь!" onClick={() => setModalData({
                                         open: true,
                                         equipment: item,

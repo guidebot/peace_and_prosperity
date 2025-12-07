@@ -16,6 +16,8 @@ export const UnitMap = ({
     const handleMouseDown = (e, unitId) => {
         if (!battlefieldRef.current) return;
 
+        setSelectedNode(unitId);
+
         const battlefieldRect = battlefieldRef.current.getBoundingClientRect();
         const marker = e.currentTarget;
         const markerRect = marker.getBoundingClientRect();
@@ -46,7 +48,7 @@ export const UnitMap = ({
 
     const handleRightClick = (e, unitId) => {
         e.preventDefault();
-        setSelectedNode(unitId);
+        // setSelectedNode(unitId);
     };
 
     if (!units) return null;
