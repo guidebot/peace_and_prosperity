@@ -60,6 +60,15 @@ export function UnitForm({ players, data, positions, onPositionChange, onChange,
 
         if (data.vehicle) return false;
 
+        const totalWeight = TotalWeight(data);
+        const totalCapacity = TotalCapacity(data);
+
+        if (totalWeight > totalCapacity) return false;
+
+        const loadout = totalWeight / totalCapacity;
+
+        if (loadout > 0.75) return false;
+
         const minFpLevel = Level(MinSkill(data, "FP"));
 
         return data.fatigue < minFpLevel;

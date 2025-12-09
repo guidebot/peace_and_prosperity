@@ -61,9 +61,10 @@ export function MovementSpeed(unitData) {
         const totalWeight = TotalWeight(unitData);
         const totalCapacity = TotalCapacity(unitData);
         if (totalWeight > totalCapacity) return 0;
-        const lightness = Math.max(Math.floor((totalCapacity - totalWeight) / unitData.children.filter(p => !p.isDead).length / 60), 0);
-        const speed = lightness > 3 ? 5 : 2 + lightness;
-        return speed;
+        const loadout = totalWeight / totalCapacity;
+        return loadout <= 0.25 ? 5 :
+            loadout <= 0.5 ? 4 :
+                loadout <= 0.75 ? 3 : 2;
     }
 };
 
