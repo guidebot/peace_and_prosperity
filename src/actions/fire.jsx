@@ -61,7 +61,7 @@ function CalculateFireEffect(players, roll, actorData, target) {
 
     const reactionFireMod = roll.reactionFire ? 2 : 0;
     const flankFireMod = roll.flankFire ? (target != null && target.vehicle && target.vehicle.armor > 0 ? 4 : 2) : 0;
-    const blindFireMod = roll.blindFire ? 5 : 0;
+    const blindFireMod = roll.blindFire ? 6 : 0;
 
     const bestRangeMod = 6;
     const effectiveRangeMod = deploymentMod;
