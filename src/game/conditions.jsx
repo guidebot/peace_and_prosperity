@@ -9,8 +9,8 @@ import { ApplyFireEffects, CalculateFireEffects } from '../actions/fire';
 
 const VisibilityConditions =
     [
-        { id: "day", maxRange: 200, value: 12, pic: <BsFillSunFill />, label: "День" },
-        { id: "dawn", maxRange: 200, value: 7, pic: <PiSunHorizonFill />, label: "Сумерки" },
+        { id: "day", maxRange: 160, value: 12, pic: <BsFillSunFill />, label: "День" },
+        { id: "dawn", maxRange: 160, value: 7, pic: <PiSunHorizonFill />, label: "Сумерки" },
         { id: "night", maxRange: 20, value: 2, pic: <MdNightlight />, label: "Ночь" },
         { id: "rain", maxRange: 80, value: 8, pic: <FaCloudRain />, label: "Осадки" },
         { id: "fog", maxRange: 10, value: 7, pic: <RiFoggyFill />, label: "Туман" }

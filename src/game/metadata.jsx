@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
+export const SCALE_PREFIX = 4;
+
 export class skill {
     constructor(category, id, name) {
         this.category = category;

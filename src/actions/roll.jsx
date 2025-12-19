@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { useEffect } from 'react';
 import { GiCancel, GiConfirmed } from 'react-icons/gi';
 import { CurrentUnit } from '../cards/utils';
+import { SCALE_PREFIX } from '../game/metadata';
 
 export function RollModal({ players, actors, title, targets = [], isOpen, calculateEffect, onCancel, onConfirm }) {
     const [selectedTargetId, setSelectedTargetId] = useState(targets[0]?.id || '');
@@ -114,13 +115,13 @@ export function RollModal({ players, actors, title, targets = [], isOpen, calcul
                                 onChange={(e) => setSelectedDistance(e.target.value)}
                             >
                                 <option key="best_range" value="0">
-                                    Идеальная (до {actors[0].equipment.bestRange})
+                                    Идеальная (до {actors[0].equipment.bestRange + SCALE_PREFIX})
                                 </option>
                                 <option key="effective_range" value="1">
-                                    Эффективная (от {actors[0].equipment.bestRange} до {actors[0].equipment.effectiveRange})
+                                    Эффективная (от {actors[0].equipment.bestRange + SCALE_PREFIX} до {actors[0].equipment.effectiveRange + SCALE_PREFIX})
                                 </option>
                                 <option key="max_range" value="2">
-                                    Максимальная (от {actors[0].equipment.effectiveRange} до {actors[0].equipment.maxRange})
+                                    Максимальная (от {actors[0].equipment.effectiveRange + SCALE_PREFIX} до {actors[0].equipment.maxRange + SCALE_PREFIX})
                                 </option>
                             </select>
                         </label>)}

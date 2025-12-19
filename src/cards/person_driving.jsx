@@ -8,6 +8,7 @@ import { PossibleTargets, CurrentUnit } from './utils';
 import { CanWatchEquipment } from '../actions/watch';
 import { PiBinocularsFill } from 'react-icons/pi';
 import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from "../game/conditions";
+import { SCALE_PREFIX } from '../game/metadata';
 
 export function CollapsibleDrivingGroup({ isOpen, toggle, players, actor, onOtherChange, addLogEntry }) {
     const calculateWatchEffect = CalculateWatchEffectWithConditions();
@@ -76,10 +77,10 @@ export function CollapsibleDrivingGroup({ isOpen, toggle, players, actor, onOthe
                             <tr key={item}>
                                 <td>{item.name}</td>
                                 <td>{Level(actor.skills[item.skill] || 0)}</td>
-                                <td>{item.minRange > 0 && (item.minRange)}</td>
-                                <td>{item.bestRange}</td>
-                                <td>{item.effectiveRange}</td>
-                                <td>{item.maxRange}</td>
+                                <td>{item.minRange > 0 && (item.minRange + SCALE_PREFIX)}</td>
+                                <td>{item.bestRange + SCALE_PREFIX}</td>
+                                <td>{item.effectiveRange + SCALE_PREFIX}</td>
+                                <td>{item.maxRange + SCALE_PREFIX}</td>
                                 <td>{item.ap}</td>
                                 <td>{item.he}</td>
                                 <td>

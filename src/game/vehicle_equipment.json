@@ -48,7 +48,17 @@
         "he": 3,
         "deployBonus": 0,
         "mustBeDeployed": false,
-        "dispersion": 0
+        "dispersion": 0,
+        "optic": {
+            "day": {
+                "mod": 3,
+                "maxRange": 280
+            },
+            "dawn": {
+                "mod": 1,
+                "maxRange": 280
+            }
+        }
     },
     {
         "id": "ac30",
@@ -57,11 +67,11 @@
         "optic": {
             "day": {
                 "mod": 3,
-                "maxRange": 160
+                "maxRange": 280
             },
             "dawn": {
                 "mod": 3,
-                "maxRange": 160
+                "maxRange": 280
             },
             "night": {
                 "mod": 9,
@@ -88,11 +98,11 @@
         "optic": {
             "day": {
                 "mod": 3,
-                "maxRange": 160
+                "maxRange": 280
             },
             "dawn": {
                 "mod": 4,
-                "maxRange": 160
+                "maxRange": 280
             },
             "night": {
                 "mod": 12,
@@ -131,7 +141,17 @@
         "he": 3,
         "deployBonus": 0,
         "mustBeDeployed": false,
-        "dispersion": 0
+        "dispersion": 0,
+        "optic": {
+            "day": {
+                "mod": 3,
+                "maxRange": 280
+            },
+            "dawn": {
+                "mod": 1,
+                "maxRange": 280
+            }
+        }
     },
     {
         "id": "milan1",
@@ -140,11 +160,11 @@
         "optic": {
             "day": {
                 "mod": 3,
-                "maxRange": 160
+                "maxRange": 280
             },
             "dawn": {
                 "mod": 1,
-                "maxRange": 160
+                "maxRange": 280
             }
         },
         "weight": 0,
@@ -167,15 +187,15 @@
         "optic": {
             "day": {
                 "mod": 3,
-                "maxRange": 160
+                "maxRange": 280
             },
             "dawn": {
                 "mod": 3,
-                "maxRange": 160
+                "maxRange": 280
             },
             "night": {
                 "mod": 9,
-                "maxRange": 160
+                "maxRange": 280
             }
         },
         "weight": 0,
@@ -206,7 +226,17 @@
         "he": 4,
         "deployBonus": 0,
         "mustBeDeployed": false,
-        "dispersion": 0
+        "dispersion": 0,
+        "optic": {
+            "day": {
+                "mod": 3,
+                "maxRange": 280
+            },
+            "dawn": {
+                "mod": 1,
+                "maxRange": 280
+            }
+        }
     },
     {
         "id": "gun_thermal",
@@ -215,11 +245,11 @@
         "optic": {
             "day": {
                 "mod": 3,
-                "maxRange": 160
+                "maxRange": 280
             },
             "dawn": {
                 "mod": 4,
-                "maxRange": 160
+                "maxRange": 280
             },
             "night": {
                 "mod": 12,

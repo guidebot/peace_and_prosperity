@@ -253,31 +253,29 @@ export function UnitForm({ players, data, positions, onPositionChange, onChange,
                             <PiBinocularsFill />
                         </button>)}
                     </div>
-                    <div className="buttons-panel">
-                        <GiGunshot />
-                        {
-                            getUnitFireGroups(data).map((group) => (
-                                <>
-                                    {PossibleTargets(players, data).length > 0 && (<button key={group.key}
-                                        title={`Групповой огонь (${group.actors[0].equipment.name} x${group.actors.length})`}
-                                        onClick={() => {
-                                            const possibleTargets = PossibleTargets(players, data);
-                                            if (possibleTargets.length === 0) return;
-                                            setModalData({
-                                                open: true,
-                                                actors: group.actors,
-                                                targets: PossibleTargets(players, data),
-                                                title: `Групповой огонь (${data.name}, ${group.actors[0].equipment.name})`,
-                                                onConfirm: applyFireEffects,
-                                                calculateEffect: calculateFireEffect
-                                            });
-                                        }}>
-                                        <TfiTarget />
-                                    </button>)}
-                                </>
-                            ))
-                        }
-                    </div >
+                    {
+                        getUnitFireGroups(data).map((group) => (
+                            <div className="buttons-panel">
+                                <GiGunshot />
+                                {PossibleTargets(players, data).length > 0 && (<button key={group.key}
+                                    title={`Групповой огонь (${group.actors[0].equipment.name} x${group.actors.length})`}
+                                    onClick={() => {
+                                        const possibleTargets = PossibleTargets(players, data);
+                                        if (possibleTargets.length === 0) return;
+                                        setModalData({
+                                            open: true,
+                                            actors: group.actors,
+                                            targets: PossibleTargets(players, data),
+                                            title: `Групповой огонь (${data.name}, ${group.actors[0].equipment.name})`,
+                                            onConfirm: applyFireEffects,
+                                            calculateEffect: calculateFireEffect
+                                        });
+                                    }}>
+                                    <TfiTarget />
+                                </button>)}
+                                {group.actors[0].equipment.name} x{group.actors.length}
+                            </div >
+                        ))}
                     <div className="buttons-panel">
                         {data.vehicle ? (<GiTireTracks />) : (<GiFootsteps />)}
                         <label className="form-label">

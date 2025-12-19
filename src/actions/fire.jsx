@@ -1,6 +1,7 @@
 import { Level, MinSkill } from "../game/skills";
 import { CurrentUnit } from "../cards/utils";
 import { ModifiedVisibilityData } from "../game/conditions";
+import { SCALE_PREFIX } from "../game/metadata";
 
 export function ApplyFireEffects(players, rolls, actors, target, onPropertyChange, activeConditions) {
     const effects = CalculateFireEffects(players, rolls, actors, target, activeConditions);
@@ -216,8 +217,8 @@ function CalculateFireEffect(players, roll, actorData, target, activeConditions)
         }
 
         const message = hits > 0 ?
-            `Стрельба ${actor.name} по ${target.name} (${equipment.name}, макс. дистанция ${visData.maxRange}): d20=${roll.roll}, результат ${modifiedResult}, транспортное средство уничтожено, требуется рассчёт поражения экипажа/десанта.` :
-            `Стрельба ${actor.name} по ${target.name} (${equipment.name}, макс. дистанция ${visData.maxRange}): d20=${roll.roll}, результат ${modifiedResult}, ${supression} очков стресса.`;
+            `Стрельба ${actor.name} по ${target.name} (${equipment.name}, макс. дистанция ${visData.maxRange + SCALE_PREFIX}): d20=${roll.roll}, результат ${modifiedResult}, транспортное средство уничтожено, требуется рассчёт поражения экипажа/десанта.` :
+            `Стрельба ${actor.name} по ${target.name} (${equipment.name}, макс. дистанция ${visData.maxRange + SCALE_PREFIX}): d20=${roll.roll}, результат ${modifiedResult}, ${supression} очков стресса.`;
 
         return { result: true, actorData: actorData, supression: supression, hits: hits, message: message };
     }
@@ -257,7 +258,7 @@ function CalculateFireEffect(players, roll, actorData, target, activeConditions)
             supression = 0;
         }
 
-        const message = `Стрельба ${actor.name} по ${target.name} (${equipment.name}, макс. дистанция ${visData.maxRange}): d20=${roll.roll}, результат ${modifiedResult}, ${hits} ранений и ${supression} очков стресса.`;
+        const message = `Стрельба ${actor.name} по ${target.name} (${equipment.name}, макс. дистанция ${visData.maxRange + SCALE_PREFIX}): d20=${roll.roll}, результат ${modifiedResult}, ${hits} ранений и ${supression} очков стресса.`;
 
         return { result: true, actorData: actorData, supression: supression, hits: hits, message: message };
     }

@@ -12,6 +12,7 @@ import { PossibleTargets } from './utils';
 import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from "../game/conditions";
 import { PiBinocularsFill } from 'react-icons/pi';
 import { MdSettingsSuggest, MdOutlineAdd } from 'react-icons/md';
+import { SCALE_PREFIX } from '../game/metadata';
 
 import { RiTimerFlashLine } from 'react-icons/ri';
 
@@ -140,10 +141,10 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                             <td>{item.name}</td>
                             <td>{(item.weight + item.ammo * item.ammoWeight) / 10} кг</td>
                             <td>{Level(actor.skills[item.skill] || 0)}</td>
-                            <td>{item.minRange > 0 ? item.minRange : "-"}</td>
-                            <td>{item.bestRange > 0 ? item.bestRange : "-"}</td>
-                            <td>{item.effectiveRange > 0 ? item.effectiveRange : "-"}</td>
-                            <td>{item.maxRange > 0 ? item.maxRange : "-"}</td>
+                            <td>{item.minRange > 0 ? item.minRange + SCALE_PREFIX : "-"}</td>
+                            <td>{item.bestRange > 0 ? item.bestRange + SCALE_PREFIX : "-"}</td>
+                            <td>{item.effectiveRange > 0 ? item.effectiveRange + SCALE_PREFIX : "-"}</td>
+                            <td>{item.maxRange > 0 ? item.maxRange + SCALE_PREFIX : "-"}</td>
                             <td>{item.ap > 0 ? item.ap : "-"}</td>
                             <td>{item.he > 0 ? item.he : "-"}</td>
                             <td>
