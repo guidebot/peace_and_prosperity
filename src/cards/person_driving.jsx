@@ -3,18 +3,20 @@ import { Level } from '../game/skills';
 import { MdArrowRight, MdArrowDropDown } from "react-icons/md";
 import { RollModal } from '../actions/roll';
 import { TfiTarget } from "react-icons/tfi";
-import { CalculateFireEffects, ApplyFireEffects, CanFireVehicleEquipment } from '../actions/fire';
+import { CanFireVehicleEquipment } from '../actions/fire';
 import { PossibleTargets, CurrentUnit } from './utils';
 import { CanWatchEquipment } from '../actions/watch';
 import { PiBinocularsFill } from 'react-icons/pi';
-import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions } from "../game/conditions";
+import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from "../game/conditions";
 
 export function CollapsibleDrivingGroup({ isOpen, toggle, players, actor, onOtherChange, addLogEntry }) {
     const calculateWatchEffect = CalculateWatchEffectWithConditions();
     const applyWatchEffectWithConditions = ApplyWatchEffectWithConditions();
+    const calculateFireEffect = CalculateFireEffectWithConditions();
+    const applyFireEffect = ApplyFireEffectWithConditions();
 
     const applyFireEffects = (players, rolls, actors, target) => {
-        const effects = ApplyFireEffects(players, rolls, actors, target, onOtherChange);
+        const effects = applyFireEffect(players, rolls, actors, target, onOtherChange);
         addLogEntry(effects[0].message);
         resetModalData();
     };
@@ -102,7 +104,7 @@ export function CollapsibleDrivingGroup({ isOpen, toggle, players, actor, onOthe
                                                 targets: PossibleTargets(players, actor),
                                                 title: "Огонь",
                                                 onConfirm: applyFireEffects,
-                                                calculateEffect: CalculateFireEffects
+                                                calculateEffect: calculateFireEffect
                                             })} >
                                                 <TfiTarget />
                                             </button>

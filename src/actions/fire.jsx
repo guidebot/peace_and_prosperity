@@ -1,8 +1,9 @@
 import { Level, MinSkill } from "../game/skills";
 import { CurrentUnit } from "../cards/utils";
+import { ModifiedVisibilityData } from "../game/conditions";
 
-export function ApplyFireEffects(players, rolls, actors, target, onPropertyChange) {
-    const effects = CalculateFireEffects(players, rolls, actors, target);
+export function ApplyFireEffects(players, rolls, actors, target, onPropertyChange, activeConditions) {
+    const effects = CalculateFireEffects(players, rolls, actors, target, activeConditions);
 
     if (!target) return effects;
 
@@ -19,7 +20,7 @@ export function ApplyFireEffects(players, rolls, actors, target, onPropertyChang
     return effects;
 }
 
-function CalculateFireEffect(players, roll, actorData, target) {
+function CalculateFireEffect(players, roll, actorData, target, activeConditions) {
     let supression = 0;
     let hits = 0;
 
@@ -32,6 +33,8 @@ function CalculateFireEffect(players, roll, actorData, target) {
     const unit = CurrentUnit(players, actor);
 
     const equipment = actorData.equipment;
+
+    const visData = ModifiedVisibilityData(equipment, activeConditions);
 
     if (!unit.isDeployed && equipment.mustBeDeployed) {
         return { result: false, actorData: actorData, supression: supression, hits: hits, message: `${equipment.name} не готово к стрельбе` }
@@ -213,8 +216,8 @@ function CalculateFireEffect(players, roll, actorData, target) {
         }
 
         const message = hits > 0 ?
-            `Стрельба ${actor.name} по ${target.name} (${equipment.name}): d20=${roll.roll}, результат ${modifiedResult}, транспортное средство уничтожено, требуется рассчёт поражения экипажа/десанта.` :
-            `Стрельба ${actor.name} по ${target.name} (${equipment.name}): d20=${roll.roll}, результат ${modifiedResult}, ${supression} очков стресса.`;
+            `Стрельба ${actor.name} по ${target.name} (${equipment.name}, макс. дистанция ${visData.maxRange}): d20=${roll.roll}, результат ${modifiedResult}, транспортное средство уничтожено, требуется рассчёт поражения экипажа/десанта.` :
+            `Стрельба ${actor.name} по ${target.name} (${equipment.name}, макс. дистанция ${visData.maxRange}): d20=${roll.roll}, результат ${modifiedResult}, ${supression} очков стресса.`;
 
         return { result: true, actorData: actorData, supression: supression, hits: hits, message: message };
     }
@@ -254,14 +257,14 @@ function CalculateFireEffect(players, roll, actorData, target) {
             supression = 0;
         }
 
-        const message = `Стрельба ${actor.name} по ${target.name} (${equipment.name}): d20=${roll.roll}, результат ${modifiedResult}, ${hits} ранений и ${supression} очков стресса.`;
+        const message = `Стрельба ${actor.name} по ${target.name} (${equipment.name}, макс. дистанция ${visData.maxRange}): d20=${roll.roll}, результат ${modifiedResult}, ${hits} ранений и ${supression} очков стресса.`;
 
         return { result: true, actorData: actorData, supression: supression, hits: hits, message: message };
     }
 }
 
-export function CalculateFireEffects(players, rolls, actors, target) {
-    return rolls.map(roll => CalculateFireEffect(players, roll, actors.find(a => a.actor.id === roll.id), target));
+export function CalculateFireEffects(players, rolls, actors, target, activeConditions) {
+    return rolls.map(roll => CalculateFireEffect(players, roll, actors.find(a => a.actor.id === roll.id), target, activeConditions));
 }
 
 export function CanFireInfantryEquipment(players, actor, equipment) {

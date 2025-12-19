@@ -5,6 +5,7 @@ import { MdNightlight } from 'react-icons/md';
 import { FaCloudRain } from 'react-icons/fa6';
 import { RiFoggyFill } from 'react-icons/ri';
 import { ApplyWatchEffect, CalculateWatchEffect } from '../actions/watch';
+import { ApplyFireEffects, CalculateFireEffects } from '../actions/fire';
 
 const VisibilityConditions =
     [
@@ -99,5 +100,40 @@ export function ApplyWatchEffectWithConditions() {
 
     return (players, rolls, actors, target) => {
         return ApplyWatchEffect(players, rolls, actors, target, activeConditionIds);
+    };
+}
+
+export function CalculateFireEffectWithConditions() {
+    const { activeConditionIds } = useVisibilityConditions();
+
+    return (players, rolls, actors, target) => {
+        return CalculateFireEffects(players, rolls, actors, target, activeConditionIds);
+    };
+}
+
+export function ApplyFireEffectWithConditions() {
+    const { activeConditionIds } = useVisibilityConditions();
+
+    return (players, rolls, actors, target) => {
+        return ApplyFireEffects(players, rolls, actors, target, activeConditionIds);
+    };
+}
+
+export function ModifiedVisibilityData(equipment, activeConditions) {
+    const values = activeConditions.map(conditionId => {
+        const condition = VisibilityConditionsCatalog[conditionId];
+        const optic = equipment?.optic?.[conditionId];
+        return {
+            visibility: condition.value + (optic?.mod ?? 0),
+            maxRange: optic?.maxRange ?? condition.maxRange
+        };
+    });
+
+    const minVisibility = Math.min(...values.map(v => v.visibility));
+    const minMaxRange = Math.min(...values.map(v => v.maxRange));
+
+    return {
+        visibility: minVisibility,
+        maxRange: minMaxRange
     };
 }

@@ -84,9 +84,6 @@ export function CreateInfantryEquipment(ids) {
 
 export function RangeKey(equipment) {
     const { bestRange, effectiveRange, maxRange } = equipment;
-    if (bestRange === effectiveRange && effectiveRange === maxRange) {
-        return `fixed_${maxRange}`;
-    }
     return `${bestRange}_${effectiveRange}_${maxRange}`;
 }
 

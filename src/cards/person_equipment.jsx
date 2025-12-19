@@ -4,12 +4,12 @@ import { MdArrowRight, MdArrowDropDown, MdDelete } from "react-icons/md";
 import { EquipmentEditorModal } from '../actions/equipment_editor';
 import { RollModal } from '../actions/roll';
 import { TfiTarget } from "react-icons/tfi";
-import { CalculateFireEffects, ApplyFireEffects, CanFireInfantryEquipment } from '../actions/fire';
+import { CanFireInfantryEquipment } from '../actions/fire';
 import { CanWatchEquipment } from '../actions/watch';
 import { CiBookmark, CiBookmarkCheck } from "react-icons/ci";
 import { GiSmokeBomb } from 'react-icons/gi';
 import { PossibleTargets } from './utils';
-import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions } from "../game/conditions";
+import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from "../game/conditions";
 import { PiBinocularsFill } from 'react-icons/pi';
 import { MdSettingsSuggest, MdOutlineAdd } from 'react-icons/md';
 
@@ -18,6 +18,8 @@ import { RiTimerFlashLine } from 'react-icons/ri';
 export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPropertyChange, onOtherChange, addLogEntry }) {
     const calculateWatchEffect = CalculateWatchEffectWithConditions();
     const applyWatchEffectWithConditions = ApplyWatchEffectWithConditions();
+    const calculateFireEffects = CalculateFireEffectWithConditions();
+    const applyFireEffectsWithConditions = ApplyFireEffectWithConditions();
 
     const handleRemoveEquipment = (equipment) => {
         const newEquipment = actor.equipment.filter(eq => eq.id !== equipment.id);
@@ -62,7 +64,7 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
     }
 
     function applyFireEffects(players, rolls, actors, target) {
-        const effects = ApplyFireEffects(players, rolls, actors, target, onOtherChange);
+        const effects = applyFireEffectsWithConditions(players, rolls, actors, target, onOtherChange);
         addLogEntry(effects[0].message);
         resetModalData();
     };
@@ -181,7 +183,7 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                                         targets: PossibleTargets(players, actor),
                                         title: "Огонь",
                                         onConfirm: applyFireEffects,
-                                        calculateEffect: CalculateFireEffects
+                                        calculateEffect: calculateFireEffects
                                     })} >
                                         <TfiTarget />
                                     </button>)}

@@ -7,19 +7,20 @@ import { GiRun } from 'react-icons/gi';
 import { PiBinocularsFill } from 'react-icons/pi';
 import { FaLocationPinLock, FaRoad } from "react-icons/fa6";
 import { TfiTarget } from "react-icons/tfi";
-import { CalculateFireEffects, ApplyFireEffects } from '../actions/fire';
 import { IoIosPersonAdd, IoMdMove } from "react-icons/io";
 import { PersonGenerator } from '../actions/person_generator';
 import { BiSolidShow, BiSolidHide, BiShowAlt, BiPulse } from "react-icons/bi";
 import { PossibleTargets, MovementSpeed, TotalWeight, TotalCapacity } from './utils';
 import { MdDelete } from 'react-icons/md';
-import { CalculateWatchEffectWithConditions } from '../game/conditions';
+import { CalculateWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from '../game/conditions';
 import { UnitMap } from './emap';
 import { GrUserPolice } from "react-icons/gr";
 import { TbFlag, TbFlagUp } from 'react-icons/tb';
 
 export function UnitForm({ players, data, positions, onPositionChange, onChange, onOtherChange, setSelectedNode, setPlayers, addLogEntry }) {
     const calculateWatchEffect = CalculateWatchEffectWithConditions();
+    const calculateFireEffect = CalculateFireEffectWithConditions();
+    const applyFireEffectsWithConditions = ApplyFireEffectWithConditions();
     const [personGeneratorOpen, setPersonGeneratorOpen] = useState(false);
     const [modalData, setModalData] = useState({});
     const resetModalData = () => setModalData({ equipment: null, open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
@@ -159,7 +160,7 @@ export function UnitForm({ players, data, positions, onPositionChange, onChange,
     const speed = MovementSpeed(data);
 
     function applyFireEffects(players, rolls, actors, target) {
-        const effects = ApplyFireEffects(players, rolls, actors, target, onOtherChange);
+        const effects = applyFireEffectsWithConditions(players, rolls, actors, target, onOtherChange);
         addLogEntry(`Групповой огонь ${data.name} по ${target.name} (${actors[0].equipment.name}).`);
         effects.forEach(element => {
             addLogEntry(element.message);
@@ -268,7 +269,7 @@ export function UnitForm({ players, data, positions, onPositionChange, onChange,
                                                 targets: PossibleTargets(players, data),
                                                 title: `Групповой огонь (${data.name}, ${group.actors[0].equipment.name})`,
                                                 onConfirm: applyFireEffects,
-                                                calculateEffect: CalculateFireEffects
+                                                calculateEffect: calculateFireEffect
                                             });
                                         }}>
                                         <TfiTarget />

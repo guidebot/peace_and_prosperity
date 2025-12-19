@@ -1,25 +1,6 @@
 import { Level, MinSkill } from '../game/skills';
 import { CurrentUnit } from '../cards/utils';
-import { VisibilityConditionsCatalog } from '../game/conditions';
-
-function getModifiedVisibilityData(equipment, activeConditions) {
-    const values = activeConditions.map(conditionId => {
-        const condition = VisibilityConditionsCatalog[conditionId];
-        const optic = equipment?.optic?.[conditionId];
-        return {
-            visibility: condition.value + (optic?.mod ?? 0),
-            maxRange: optic?.maxRange ?? condition.maxRange
-        };
-    });
-
-    const minVisibility = Math.min(...values.map(v => v.visibility));
-    const minMaxRange = Math.min(...values.map(v => v.maxRange));
-
-    return {
-        visibility: minVisibility,
-        maxRange: minMaxRange
-    };
-}
+import { VisibilityConditionsCatalog, ModifiedVisibilityData } from '../game/conditions';
 
 function getBestActorForUnit(unit, activeConditions) {
     const candidates = [];
@@ -37,7 +18,7 @@ function getBestActorForUnit(unit, activeConditions) {
         const equipmentList = Array.isArray(person.equipment) ? person.equipment : [];
         for (const eq of equipmentList.filter(eq => eq.optic)) {
             if (eq?.optic) {
-                const visData = getModifiedVisibilityData(eq, activeConditions);
+                const visData = ModifiedVisibilityData(eq, activeConditions);
                 const score = visData.visibility + 2 * baseSkillLevel;
                 candidates.push({
                     actor: person,
@@ -75,7 +56,7 @@ export function CalculateWatchEffect(players, rolls, actors, target, activeCondi
     const actor = actorData.actor;
     const equipment = actorData.equipment;
 
-    const visData = getModifiedVisibilityData(equipment, activeConditions);
+    const visData = ModifiedVisibilityData(equipment, activeConditions);
 
     const actorWatchSkillLevel = Level(actor.skills["MSK"]) || 0;
     const actorUavSkillLevel = Level(actor.skills["WPN_uav"]) || 0;
