@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { CreateVehicle, Vehicles, RangeKey } from '../game/equipment';
 import { Level, MinSkill, MaxSkill } from '../game/skills';
 import { RollModal } from '../actions/roll';
-import { GiCheckMark, GiBullseye, GiGunshot, GiWeight, GiTireTracks, GiFootsteps } from "react-icons/gi";
+import { GiBullseye, GiGunshot, GiWeight, GiTireTracks, GiFootsteps } from "react-icons/gi";
 import { GiRun } from 'react-icons/gi';
 import { PiBinocularsFill } from 'react-icons/pi';
-import { FaLocationPinLock, FaRoad } from "react-icons/fa6";
+import { FaRoad } from "react-icons/fa6";
 import { TfiTarget } from "react-icons/tfi";
 import { IoIosPersonAdd, IoMdMove } from "react-icons/io";
 import { PersonGenerator } from '../actions/person_generator';
@@ -16,6 +16,9 @@ import { CalculateWatchEffectWithConditions, CalculateFireEffectWithConditions, 
 import { UnitMap } from './emap';
 import { GrUserPolice } from "react-icons/gr";
 import { TbFlag, TbFlagUp } from 'react-icons/tb';
+import { RiCheckboxIndeterminateLine, RiCheckboxLine } from 'react-icons/ri';
+import { CiLocationOff, CiLocationOn } from 'react-icons/ci';
+import { BsArrowsMove, BsSignStop } from 'react-icons/bs';
 
 export function UnitForm({ players, data, positions, onPositionChange, onChange, onOtherChange, setSelectedNode, setPlayers, addLogEntry }) {
     const calculateWatchEffect = CalculateWatchEffectWithConditions();
@@ -241,7 +244,7 @@ export function UnitForm({ players, data, positions, onPositionChange, onChange,
                             <TbFlagUp />
                         </button>
                         <button key="toggleIsMarked" title="Переключить пометку завершения действия" onClick={toggleIsMarked}>
-                            <GiCheckMark />
+                            {data.isMarked ? (<RiCheckboxIndeterminateLine />) : (<RiCheckboxLine />)}
                         </button>
                     </div>
                     <div className="buttons-panel">
@@ -322,10 +325,10 @@ export function UnitForm({ players, data, positions, onPositionChange, onChange,
                         }
                         {checkIfCanMove() && (
                             <button key="toggleHasMoved" title="Переключить пометку передвижения" onClick={toggleHasMoved}>
-                                <IoMdMove />
+                                {data.hasMoved ? (<BsSignStop />) : (<BsArrowsMove />)}
                             </button>)}
                         <button key="toggleIsDeployed" title="Переключить пометку стационарного положения" onClick={toggleIsDeployed} style={{ display: checkIfCanDeploy() ? 'inline' : 'none' }}>
-                            <FaLocationPinLock />
+                            {data.isDeployed ? (<CiLocationOff />) : (<CiLocationOn />)}
                         </button>
                     </div>
                     <div className="buttons-panel">
