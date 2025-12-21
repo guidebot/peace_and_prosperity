@@ -113,9 +113,8 @@ export function CalculateFireEffectWithConditions() {
 
 export function ApplyFireEffectWithConditions() {
     const { activeConditionIds } = useVisibilityConditions();
-
-    return (players, rolls, actors, target) => {
-        return ApplyFireEffects(players, rolls, actors, target, activeConditionIds);
+    return (players, rolls, actors, target, onPropertyChange) => {
+        return ApplyFireEffects(players, rolls, actors, target, onPropertyChange, activeConditionIds);
     };
 }
 
