@@ -15,7 +15,7 @@ import { MdDelete } from 'react-icons/md';
 import { CalculateWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from '../game/conditions';
 import { UnitMap } from './emap';
 import { GrUserPolice } from "react-icons/gr";
-import { TbFlag, TbFlagUp } from 'react-icons/tb';
+import { TbFlag } from 'react-icons/tb';
 import { RiCheckboxIndeterminateLine, RiCheckboxLine } from 'react-icons/ri';
 import { CiLocationOff, CiLocationOn } from 'react-icons/ci';
 import { BsArrowsMove, BsSignStop } from 'react-icons/bs';
@@ -27,35 +27,6 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
     const [personGeneratorOpen, setPersonGeneratorOpen] = useState(false);
     const [modalData, setModalData] = useState({});
     const resetModalData = () => setModalData({ equipment: null, open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
-
-    const applyRallyEffect = (players, rolls, actors, target) => {
-        const effects = getRallyEffects(players, rolls, actors, target);
-        onChange("stress", effects[0].value);
-        addLogEntry(effects[0].message);
-        resetModalData();
-    };
-
-    function getRallyEffects(players, rolls, actors, target) {
-        const unit = actors[0].actor;
-        const maxSkill = MaxSkill(unit, "LID");
-        const skillLevel = Level(maxSkill);
-
-        const rallyPoints = rolls[0].roll >= 20 ? skillLevel + 1 :
-            rolls[0].roll >= 18 && skillLevel > 0 ? skillLevel :
-                rolls[0].roll >= 16 && skillLevel > 1 ? skillLevel - 1 :
-                    rolls[0].roll >= 14 && skillLevel > 2 ? skillLevel - 2 :
-                        rolls[0].roll >= 12 && skillLevel > 3 ? skillLevel - 3 :
-                            rolls[0].roll >= 9 && skillLevel > 4 ? skillLevel - 4 :
-                                rolls[0].roll >= 5 && skillLevel > 5 ? skillLevel - 5 : 0;
-
-        const stress = Number(data.stress) || 0;
-        if (rallyPoints > 0) {
-            const newStress = stress - rallyPoints > 0 ? stress - rallyPoints : 0;
-            return [{ value: newStress, message: `Восстановление эффективности отряда ${data.name}: d20=${rolls[0].roll}, уменьшение очков стресса на ${rallyPoints}.` }];
-        } else {
-            return [{ value: data.stress, message: `Восстановление эффективности отряда ${data.name}: d20=${rolls[0].roll}, эффекта нет.` }];
-        };
-    }
 
     function checkIfCanRun() {
         if (!data.children) return false;
@@ -239,9 +210,6 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                         <label className="form-label">
                             <input min={0} name="stress" type="number" value={data.stress} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
                         </label>
-                        <button key="rally" title="Восстановить эффективность" onClick={() => setModalData({ open: true, actors: [{ actor: data }], targets: [], onConfirm: applyRallyEffect, calculateEffect: getRallyEffects })}>
-                            <TbFlagUp />
-                        </button>
                         <button key="toggleIsMarked" title="Переключить пометку завершения действия" onClick={toggleIsMarked}>
                             {data.isMarked ? (<RiCheckboxIndeterminateLine />) : (<RiCheckboxLine />)}
                         </button>
@@ -322,7 +290,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                                     </label>
                                 </>)
                         }
-                        {checkIfCanMove() && (
+                        {checkIfCanMove() && data.hasMoved && (
                             <button key="toggleHasMoved" title="Переключить пометку передвижения" onClick={toggleHasMoved}>
                                 {data.hasMoved ? (<BsSignStop />) : (<BsArrowsMove />)}
                             </button>)}

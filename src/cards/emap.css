@@ -31,16 +31,23 @@
     width: 9px;
     height: 9px;
     background: #aaaaaa;
-    border-radius: 2px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
-}
-
-.squad-marker.current .squad-icon {
-    background: #00ff99;
 }
 
 .squad-marker.hidden .squad-icon {
     background: #8f58a6;
+}
+
+.squad-marker.current .squad-icon::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1px solid #00ff99;
+    border-radius: 3px;
+    pointer-events: none;
 }
 
 .squad-label {

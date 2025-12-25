@@ -11,17 +11,27 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
 
     const { activeConditionIds, toggleCondition, conditionsList } = useVisibilityConditions();
 
+    const [startPositions, setStartPositions] = useState({});
+
     const [modalData, setModalData] = useState({});
     const resetModalData = () => setModalData({ equipment: null, open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
 
-    const applyInitiativeRoll = (players, rolls, actors, target) => {
+    const applyInitiativeRoll = (players, rolls, actors, target, positions) => {
         const expiringCounters = [];
         let logMessages = [];
+        const actuallyMoved = new Set();
 
         players.forEach(player => {
             player.children?.forEach(unit => {
-                if (unit.hasMoved) {
-                    logMessages.push(`${unit.name} перемещался.`);
+                if (!unit.id) return;
+                const startPos = positions[unit.id];
+                const currentPos = unit.position;
+                if (startPos && currentPos &&
+                    (startPos.x !== currentPos.x || startPos.y !== currentPos.y)) {
+                    if (unit.hasMoved) {
+                        logMessages.push(`${unit.name} перемещался.`);
+                    }
+                    actuallyMoved.add(unit.id);
                 }
 
                 unit.children?.forEach(person => {
@@ -50,9 +60,19 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
             }
         })
 
-        const updatedPlayers = processNextTurn(players, effects);
+        const updatedPlayers = processNextTurn(players, effects, actuallyMoved);
+
+        const newStartPositions = {};
+        updatedPlayers.forEach(player => {
+            player.children?.forEach(unit => {
+                if (unit.id && unit.position) {
+                    newStartPositions[unit.id] = unit.position;
+                }
+            });
+        });
 
         setPlayers(updatedPlayers);
+        setStartPositions(newStartPositions);
 
         logMessages.forEach(msg => addLogEntry(msg));
         addLogEntry(`Начинается новый ход.`);
@@ -86,6 +106,19 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
             };
         });
     }
+
+    const handleEndTurn = () => {
+        setModalData({
+            open: true,
+            title: "Инициатива",
+            actors: players.flatMap(p => p.children).filter(u => u.isActive).map(u => ({ actor: u })),
+            targets: [],
+            onConfirm: (players, rolls, actors, target) => {
+                applyInitiativeRoll(players, rolls, actors, target, startPositions);
+            },
+            calculateEffect: getInitiativeRoll
+        });
+    };
 
     const handleSaveToFile = () => {
         const dataStr = JSON.stringify(players, null, 2);
@@ -124,7 +157,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
         setSelectedNode({ node: newPlayer.id });
     };
 
-    const processNextTurn = (players, effects) => {
+    const processNextTurn = (players, effects, actuallyMoved) => {
         return players.map(player => {
             return {
                 ...player,
@@ -139,6 +172,8 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                         : unit.fatigue > 0
                             ? unit.fatigue - 1
                             : 0;
+
+                    const newHasMoved = unit.hasMoved && !actuallyMoved.has(unit.id) ? false : unit.hasMoved;
 
                     const updatedPersons = unit.children?.map(person => {
                         const updatedEquipment = person.equipment?.map(item => {
@@ -161,6 +196,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                         initiative: initiative,
                         stress: stress,
                         fatigue: newFatigue,
+                        hasMoved: newHasMoved,
                         isMarked: false,
                         children: updatedPersons
                     };
@@ -192,7 +228,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
             <button title="Добавить игрока" onClick={handleCreatePlayer}>
                 <GiTabletopPlayers />
             </button>
-            <button title="Закончить ход" onClick={() => setModalData({ open: true, title: "Инициатива", actors: players.flatMap(p => p.children).filter(u => u.isActive).map(u => ({ actor: u })), targets: [], onConfirm: applyInitiativeRoll, calculateEffect: getInitiativeRoll })}>
+            <button title="Закончить ход" onClick={handleEndTurn}>
                 <MdTimer />
             </button>
             {conditionsList.map(cond => (

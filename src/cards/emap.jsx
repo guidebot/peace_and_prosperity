@@ -17,6 +17,10 @@ export const UnitMap = ({
 
         setSelectedNode(unitId);
 
+        if (units.filter(u => u.id === unitId)[0].isDeployed) {
+            return;
+        }
+
         const battlefieldRect = battlefieldRef.current.getBoundingClientRect();
         const marker = e.currentTarget;
         const markerRect = marker.getBoundingClientRect();
@@ -34,6 +38,7 @@ export const UnitMap = ({
             const boundedY = Math.max(0, Math.min(currentY, FIELD_HEIGHT));
 
             onOtherChange(unitId, "hasMoved", true);
+            onOtherChange(unitId, "isMarked", true);
             onOtherChange(unitId, "position", { x: boundedX, y: boundedY });
         };
 
@@ -48,7 +53,6 @@ export const UnitMap = ({
 
     const handleRightClick = (e, unitId) => {
         e.preventDefault();
-        // setSelectedNode(unitId);
     };
 
     if (!units) return null;
@@ -67,7 +71,7 @@ export const UnitMap = ({
                     return (
                         <div
                             key={unit.id}
-                            className={`squad-marker ${isCurrent ? 'current' : isHidden ? 'hidden' : ''}`}
+                            className={`squad-marker ${isCurrent ? 'current' : ''} ${isHidden ? 'hidden' : ''}`}
                             style={{
                                 left: pos.x,
                                 top: pos.y,
