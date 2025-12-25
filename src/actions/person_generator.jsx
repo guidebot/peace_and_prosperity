@@ -55,6 +55,10 @@ function assignEquipment(skills) {
         equipment.push("uav");
     }
 
+    if (FP >= 7 && (skills.WPN_uav ?? 0) >= 12) {
+        equipment.push("uav_grenade");
+    }
+
     return CreateInfantryEquipment(equipment);
 }
 
@@ -151,7 +155,7 @@ export function GenerateDefaultPerson(isMilitary, hasWeapon) {
 
 export function GeneratePerson(titleName, isMilitary, hasWeapon, name) {
     const title = Titles.find(title => title.name === titleName);
-    const skills = isMilitary ? { LID: title.lid, FP: 4, TP: 3, MSK: 1, WPN_rifles: 3, WPN_grenades: 1 } : { LID: title.lid, FP: 3 };
+    const skills = isMilitary ? { LID: title.lid, FP: 8, TP: 4, MSK: 1, WPN_rifles: 5, WPN_grenades: 2 } : { LID: title.lid, FP: 5 };
     const skillsForRoll = Skills.filter(sk => !sk.id.startsWith("WPN_") && sk.id !== "LID");
     for (let sr = 0; sr < title.skillRolls; sr++) {
         const skillRoll = Math.floor(Math.random() * skillsForRoll.length);

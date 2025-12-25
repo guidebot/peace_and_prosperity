@@ -7,7 +7,7 @@
 
 .interactive-battlefield {
     position: relative;
-    background-color: #2f2f2f;
+    background-color: #222222;
     border: 1px solid #ddd;
     overflow: hidden;
     background-image: radial-gradient(#7a7a7a 1px, transparent 1px);
@@ -30,13 +30,17 @@
 .squad-icon {
     width: 9px;
     height: 9px;
-    background: #8a8a8a;
+    background: #aaaaaa;
     border-radius: 2px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
 }
 
 .squad-marker.current .squad-icon {
-    background: #ff4f4f;
+    background: #00ff99;
+}
+
+.squad-marker.hidden .squad-icon {
+    background: #8f58a6;
 }
 
 .squad-label {

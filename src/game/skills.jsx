@@ -4,11 +4,11 @@ export function Level(skillPoints) {
     const points = Number(skillPoints);
 
     if (isNaN(points) || points < 1) return 0;
-    if (points <= 2) return 1;
-    if (points <= 4) return 2;
-    if (points <= 7) return 3;
-    if (points <= 12) return 4;
-    if (points <= 19) return 5;
+    if (points < 3) return 1;
+    if (points < 7) return 2;
+    if (points < 12) return 3;
+    if (points < 16) return 4;
+    if (points < 20) return 5;
     if (points >= 20) return 6;
 
     return 0;

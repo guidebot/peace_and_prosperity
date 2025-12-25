@@ -62,11 +62,12 @@ export const UnitMap = ({
                 {units.map(unit => {
                     const pos = positions[unit.id] || { x: 50, y: 50 };
                     const isCurrent = unit.id === currentUnitId;
+                    const isHidden = unit.isHidden;
 
                     return (
                         <div
                             key={unit.id}
-                            className={`squad-marker ${isCurrent ? 'current' : ''}`}
+                            className={`squad-marker ${isCurrent ? 'current' : isHidden ? 'hidden' : ''}`}
                             style={{
                                 left: pos.x,
                                 top: pos.y,

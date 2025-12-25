@@ -3,7 +3,7 @@ import { MdDownload, MdUpload, MdTimer } from "react-icons/md";
 import { GiTabletopPlayers } from "react-icons/gi";
 import { player } from './game/metadata';
 import { RollModal } from './actions/roll';
-import { MaxSkill } from './game/skills';
+import { MaxSkill, Level } from './game/skills';
 import { useVisibilityConditions } from './game/conditions';
 
 export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) {
@@ -16,9 +16,14 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
 
     const applyInitiativeRoll = (players, rolls, actors, target) => {
         const expiringCounters = [];
+        let logMessages = [];
 
         players.forEach(player => {
             player.children?.forEach(unit => {
+                if (unit.hasMoved) {
+                    logMessages.push(`${unit.name} перемещался.`);
+                }
+
                 unit.children?.forEach(person => {
                     person.equipment?.forEach(item => {
                         if (item.counter === 1) {
@@ -32,13 +37,19 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
             });
         });
 
-        let logMessages = [];
         if (expiringCounters.length > 0) {
             const messages = expiringCounters.map(e => `${e.actorName}: ${e.equipmentName} — эффект окончен.`);
             logMessages.push(...messages);
         }
 
         const effects = getInitiativeRoll(players, rolls, actors, target);
+
+        effects.forEach(effect => {
+            if (effect.rally > 0) {
+                logMessages.push(effect.message);
+            }
+        })
+
         const updatedPlayers = processNextTurn(players, effects);
 
         setPlayers(updatedPlayers);
@@ -51,10 +62,28 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
 
     function getInitiativeRoll(players, rolls, actors, target) {
         return rolls.map(roll => {
-            const unit = actors.filter(a => a.actor.id === roll.id)[0];
+            const unit = actors.filter(a => a.actor.id === roll.id)[0].actor;
             const lid = MaxSkill(unit, "LID");
+            const skillLevel = Level(lid);
+
+            const rallyPoints = roll.roll >= 20 ? skillLevel + 1 :
+                roll.roll >= 18 && skillLevel > 0 ? skillLevel :
+                    roll.roll >= 16 && skillLevel > 1 ? skillLevel - 1 :
+                        roll.roll >= 14 && skillLevel > 2 ? skillLevel - 2 :
+                            roll.roll >= 12 && skillLevel > 3 ? skillLevel - 3 :
+                                roll.roll >= 9 && skillLevel > 4 ? skillLevel - 4 :
+                                    roll.roll >= 5 && skillLevel > 5 ? skillLevel - 5 : 0;
+
+            const stress = Number(unit.stress) || 0;
+
             const initiative = roll.roll + lid;
-            return { id: roll.id, initiative: initiative, message: `d20=${roll.roll}, результат ${initiative}.` }
+
+            if (rallyPoints > 0 && stress > 0) {
+                const newStress = Math.max(stress - rallyPoints, 0);
+                return { id: roll.id, initiative: initiative, stress: newStress, rally: rallyPoints, message: `Инициатива ${unit.name}: d20=${roll.roll}, результат ${initiative}, восстановление стресса ${rallyPoints}.` }
+            } else {
+                return { id: roll.id, initiative: initiative, stress: stress, rally: 0, message: `Инициатива ${unit.name}: d20=${roll.roll}, результат ${initiative}.` }
+            };
         });
     }
 
@@ -100,7 +129,10 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
             return {
                 ...player,
                 children: player.children?.map(unit => {
-                    const initiative = effects.filter(e => e.id === unit.id)[0]?.initiative ?? 0;
+                    const newUnit = effects.filter(e => e.id === unit.id)[0];
+
+                    const initiative = newUnit?.initiative ?? 0;
+                    const stress = newUnit?.stress ?? 0;
 
                     const newFatigue = unit.hasMoved && !unit.vehicle
                         ? unit.fatigue
@@ -127,6 +159,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                     return {
                         ...unit,
                         initiative: initiative,
+                        stress: stress,
                         fatigue: newFatigue,
                         isMarked: false,
                         children: updatedPersons

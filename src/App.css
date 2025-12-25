@@ -181,8 +181,7 @@ button:hover {
 }
 
 .node-container.hidden {
-  background-color: #43007a;
-  color: #ffffff;
+  color: #8f58a6;
 }
 
 .node-container.inactive {

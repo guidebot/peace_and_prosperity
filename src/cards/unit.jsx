@@ -120,6 +120,11 @@ export function UnitForm({ players, data, positions, onPositionChange, onChange,
         onChange("isHidden", !data.isHidden);
     }
 
+    function onPositionChangeProxy(unitId, position) {
+        onOtherChange(unitId, "hasMoved", true);
+        onPositionChange(unitId, position);
+    }
+
     const getAllUnits = () => {
         const units = [];
         players.forEach(player => {
@@ -227,7 +232,7 @@ export function UnitForm({ players, data, positions, onPositionChange, onChange,
                             positions={positions}
                             currentUnitId={data.id}
                             setSelectedNode={setSelectedNode}
-                            onPositionChange={onPositionChange}
+                            onPositionChange={onPositionChangeProxy}
                         />
                     </div>
                 )}

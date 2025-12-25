@@ -13,8 +13,9 @@ export class unit {
         this.hasMoved = false;
         this.isDeployed = false;
         this.isMarked = false;
-        this.isHidden = false;
+        this.isHidden = true;
         this.initiative = 0;
         this.correction = 0;
+        this.position = null;
     }
 }
