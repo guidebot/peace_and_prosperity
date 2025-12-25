@@ -27,6 +27,13 @@ function App() {
     new unit("Player2", [soldiers[3], soldiers[5]])
   ];
 
+  units.forEach((unit, idx) => {
+    unit.position = {
+      x: 40 + (idx % 10) * 50,
+      y: 40 + Math.floor(idx / 10) * 50
+    };
+  });
+
   const [players, setPlayers] = useState([
     new player("GM", [units[0], units[1]]),
     new player("Player1", [units[2]]),
@@ -36,8 +43,6 @@ function App() {
   const handleOtherPropertyChange = (id, name, value) => {
     setPlayers(prev => UpdateCardProperty(prev, id, name, value));
   };
-
-  const [squadPositions, setSquadPositions] = useState({});
 
   const treeRef = useRef(null);
 
@@ -61,36 +66,6 @@ function App() {
       return () => clearTimeout(timer);
     }
   }, [players]);
-
-  useEffect(() => {
-    const getAllUnits = () => {
-      const units = [];
-      players.forEach(player => {
-        if (player.children) {
-          player.children.forEach(unit => {
-            if (unit.isActive) units.push(unit);
-          });
-        }
-      });
-      return units;
-    };
-
-    const allUnits = getAllUnits();
-    const needsInit = allUnits.some(unit => !squadPositions[unit.id]);
-
-    if (needsInit) {
-      const newPositions = { ...squadPositions };
-      allUnits.forEach((unit, idx) => {
-        if (!newPositions[unit.id]) {
-          newPositions[unit.id] = {
-            x: 40 + (idx % 10) * 50,
-            y: 40 + Math.floor(idx / 10) * 50
-          };
-        }
-      });
-      setSquadPositions(newPositions);
-    }
-  }, [players, squadPositions]);
 
   const handleInitiativeClick = (unitId) => {
     if (treeRef.current) {
@@ -120,13 +95,6 @@ function App() {
     }
   }, [log]);
 
-  const handleSquadPositionChange = (unitId, position) => {
-    setSquadPositions(prev => ({
-      ...prev,
-      [unitId]: position
-    }));
-  };
-
   const getPlayOrder = () => {
     const order = [];
 
@@ -154,8 +122,6 @@ function App() {
           <div className="content">
             {selectedNode && <ObjectCard
               players={players}
-              positions={squadPositions}
-              onPositionChange={handleSquadPositionChange}
               node={selectedNode}
               setSelectedNode={handleInitiativeClick}
               setPlayers={setPlayers}

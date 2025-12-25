@@ -3,7 +3,7 @@ import { UnitForm } from './unit';
 import { PlayerForm } from './player';
 import { UpdateCardProperty } from './utils';
 
-export function ObjectCard({ players, node, positions, onPositionChange, setSelectedNode, setPlayers, addLogEntry }) {
+export function ObjectCard({ players, node, setSelectedNode, setPlayers, addLogEntry }) {
     const getData = (nodes, id) => {
         for (const element of nodes) {
             if (element.id === id)
@@ -45,8 +45,6 @@ export function ObjectCard({ players, node, positions, onPositionChange, setSele
                 return <UnitForm
                     players={players}
                     data={data}
-                    positions={positions}
-                    onPositionChange={onPositionChange}
                     setSelectedNode={setSelectedNode}
                     onChange={handlePropertyChange}
                     onOtherChange={handleOtherPropertyChange}

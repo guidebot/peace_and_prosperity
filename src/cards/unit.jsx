@@ -20,7 +20,7 @@ import { RiCheckboxIndeterminateLine, RiCheckboxLine } from 'react-icons/ri';
 import { CiLocationOff, CiLocationOn } from 'react-icons/ci';
 import { BsArrowsMove, BsSignStop } from 'react-icons/bs';
 
-export function UnitForm({ players, data, positions, onPositionChange, onChange, onOtherChange, setSelectedNode, setPlayers, addLogEntry }) {
+export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNode, setPlayers, addLogEntry }) {
     const calculateWatchEffect = CalculateWatchEffectWithConditions();
     const calculateFireEffect = CalculateFireEffectWithConditions();
     const applyFireEffectsWithConditions = ApplyFireEffectWithConditions();
@@ -118,11 +118,6 @@ export function UnitForm({ players, data, positions, onPositionChange, onChange,
 
     function toggleIsHidden() {
         onChange("isHidden", !data.isHidden);
-    }
-
-    function onPositionChangeProxy(unitId, position) {
-        onOtherChange(unitId, "hasMoved", true);
-        onPositionChange(unitId, position);
     }
 
     const getAllUnits = () => {
@@ -225,14 +220,13 @@ export function UnitForm({ players, data, positions, onPositionChange, onChange,
                 )
             }
             <div className="unit-form-content">
-                {players && positions && onPositionChange && (
+                {players && (
                     <div className="unit-map-wrapper">
                         <UnitMap
                             units={getAllUnits()}
-                            positions={positions}
                             currentUnitId={data.id}
                             setSelectedNode={setSelectedNode}
-                            onPositionChange={onPositionChangeProxy}
+                            onOtherChange={onOtherChange}
                         />
                     </div>
                 )}

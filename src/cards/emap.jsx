@@ -6,10 +6,9 @@ const FIELD_HEIGHT = 360;
 
 export const UnitMap = ({
     units,
-    positions,
     currentUnitId,
     setSelectedNode,
-    onPositionChange
+    onOtherChange
 }) => {
     const battlefieldRef = useRef(null);
 
@@ -34,7 +33,8 @@ export const UnitMap = ({
             const boundedX = Math.max(0, Math.min(currentX, FIELD_WIDTH));
             const boundedY = Math.max(0, Math.min(currentY, FIELD_HEIGHT));
 
-            onPositionChange(unitId, { x: boundedX, y: boundedY });
+            onOtherChange(unitId, "hasMoved", true);
+            onOtherChange(unitId, "position", { x: boundedX, y: boundedY });
         };
 
         const handleMouseUp = () => {
@@ -60,7 +60,7 @@ export const UnitMap = ({
                 className="interactive-battlefield"
             >
                 {units.map(unit => {
-                    const pos = positions[unit.id] || { x: 50, y: 50 };
+                    const pos = unit.position || { x: 50, y: 50 };
                     const isCurrent = unit.id === currentUnitId;
                     const isHidden = unit.isHidden;
 
