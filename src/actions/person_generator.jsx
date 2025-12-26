@@ -7,31 +7,39 @@ import { CreateInfantryEquipment } from '../game/equipment';
 
 function assignEquipment(skills) {
     const FP = skills.FP ?? 0;
+    const TP = skills.TP ?? 0;
     const MSK = skills.MSK ?? 0;
     const grenadeSkill = skills.WPN_grenades ?? 0;
+    const sniperSkill = skills.WPN_sniper ?? 0;
 
     const equipment = [];
 
     if (FP >= 4 && (skills.WPN_at_launcher ?? 0) > 0) {
-        equipment.push("rifle");
+        equipment.push("ak74");
         equipment.push("rpg29");
     }
     else if (FP >= 4 && (skills.WPN_mg ?? 0) > (skills.WPN_rifles ?? 0)) {
         equipment.push("lmg_pkm")
     }
-    else if (FP >= 3 && (skills.WPN_sniper ?? 0) > (skills.WPN_rifles ?? 0)) {
+    else if (FP >= 3 && sniperSkill >= 7 && sniperSkill > (skills.WPN_rifles ?? 0)) {
         equipment.push("h&kg2810x")
     }
     else if (FP >= 1) {
         const mexSkills = ["MEX_wheeled", "MEX_tracked"];
-        const hasHighMex = mexSkills.some(skillId => (skills[skillId] ?? 0) >= 5);
+        const hasHighMex = mexSkills.some(skillId => (skills[skillId] ?? 0) >= 7);
         if (hasHighMex) {
-            equipment.push("short_rifle");
+            equipment.push("aks74u");
         }
         else {
-            equipment.push("rifle");
             if (FP >= 3 && (skills.WPN_gl ?? 0) >= 3) {
+                equipment.push("ak74");
                 equipment.push("gp");
+            }
+            else if (TP >= 3 && MSK >= 3) {
+                equipment.push("h&k416_silencer_collimator");
+            }
+            else {
+                equipment.push("ak74");
             }
         }
     }
@@ -40,7 +48,7 @@ function assignEquipment(skills) {
         equipment.push("binoculars");
     }
 
-    if (MSK >= 8 && FP >= 2) {
+    if (MSK >= 7 && FP >= 2) {
         equipment.push("nvg");
     }
 
@@ -51,7 +59,7 @@ function assignEquipment(skills) {
         equipment.push("smoke");
     }
 
-    if (MSK >= 3 && FP >= 3 && (skills.WPN_uav ?? 0) >= 3) {
+    if (MSK >= 3 && FP >= 3 && (skills.WPN_uav ?? 0) >= 7) {
         equipment.push("uav");
     }
 
@@ -147,8 +155,7 @@ export function PersonGenerator({ onCancel, onConfirm }) {
     );
 }
 
-export function GenerateDefaultPerson(isMilitary, hasWeapon) {
-    const titleName = Titles[1].name;
+export function GenerateDefaultPerson(isMilitary, hasWeapon, titleName) {
     const name = generateNameForCountry(CountriesData[0].CountryName, Genders[0].id);
     return GeneratePerson(titleName, isMilitary, hasWeapon, name);
 }

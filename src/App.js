@@ -9,15 +9,16 @@ import { GiCheckMark } from 'react-icons/gi';
 import { UpdateCardProperty } from './cards/utils';
 import { GenerateDefaultPerson } from './actions/person_generator';
 import { VisibilityConditionsProvider } from './game/conditions';
+import { Titles } from './game/titles';
 
 function App() {
   const soldiers = [
-    GenerateDefaultPerson(true, true),
-    GenerateDefaultPerson(true, true),
-    GenerateDefaultPerson(true, true),
-    GenerateDefaultPerson(true, true),
-    GenerateDefaultPerson(true, true),
-    GenerateDefaultPerson(true, true)
+    GenerateDefaultPerson(true, true, Titles[4].name),
+    GenerateDefaultPerson(true, true, Titles[6].name),
+    GenerateDefaultPerson(true, true, Titles[2].name),
+    GenerateDefaultPerson(true, true, Titles[2].name),
+    GenerateDefaultPerson(true, true, Titles[1].name),
+    GenerateDefaultPerson(true, true, Titles[1].name)
   ];
 
   const units = [

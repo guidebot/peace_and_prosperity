@@ -83,13 +83,13 @@ export function CalculateWatchEffect(players, rolls, actors, target, activeCondi
                 vehicleWatchResult >= 32 && visData.maxRange * 2 >= 160 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 160 + SCALE_PREFIX ? `контакт на расстоянии до ${160 + SCALE_PREFIX} см` :
                     vehicleWatchResult >= 27 && visData.maxRange * 2 >= 80 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 80 + SCALE_PREFIX ? `контакт на расстоянии до ${80 + SCALE_PREFIX} см` :
                         vehicleWatchResult >= 22 && visData.maxRange * 2 >= 40 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 40 + SCALE_PREFIX ? `контакт на расстоянии до ${40 + SCALE_PREFIX} см` :
-                            vehicleWatchResult >= 17 && visData.maxRange * 2 >= 20 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 20 + SCALE_PREFIX ? `контакт на расстоянии до ${20 + SCALE_PREFIX} см` : `контакт на расстоянии до ${6 + SCALE_PREFIX} см`
+                            vehicleWatchResult >= 17 && visData.maxRange * 2 >= 20 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 20 + SCALE_PREFIX ? `контакт на расстоянии до ${20 + SCALE_PREFIX} см` : `контакт на расстоянии до ${SCALE_PREFIX} см`
         : infantryWatchResult >= 42 && visData.maxRange >= 320 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 320 + SCALE_PREFIX ? `контакт на расстоянии до ${320 + SCALE_PREFIX} см` :
             infantryWatchResult >= 37 && visData.maxRange >= 160 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 160 + SCALE_PREFIX ? `контакт на расстоянии до ${160 + SCALE_PREFIX} см` :
                 infantryWatchResult >= 32 && visData.maxRange >= 80 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 80 + SCALE_PREFIX ? `контакт на расстоянии до ${80 + SCALE_PREFIX} см` :
                     infantryWatchResult >= 27 && visData.maxRange >= 40 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 40 + SCALE_PREFIX ? `контакт на расстоянии до ${40 + SCALE_PREFIX} см` :
                         infantryWatchResult >= 22 && visData.maxRange >= 20 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 20 + SCALE_PREFIX ? `контакт на расстоянии до ${20 + SCALE_PREFIX} см` :
-                            infantryWatchResult >= 17 && visData.maxRange >= 10 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 10 + SCALE_PREFIX ? `контакт на расстоянии до ${10 + SCALE_PREFIX} см` : `контакт на расстоянии до ${3 + SCALE_PREFIX} см`;
+                            infantryWatchResult >= 17 && visData.maxRange >= 10 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 10 + SCALE_PREFIX ? `контакт на расстоянии до ${10 + SCALE_PREFIX} см` : `контакт на расстоянии до ${SCALE_PREFIX} см`;
 
     const mineResult = equipment?.skill !== "WPN_uav" && (equipment?.minRange ?? 0) < 1 && infantryWatchResult >= 22 ? " (мины обнаружены)" : "";
 
