@@ -67,6 +67,8 @@ function assignEquipment(skills) {
         equipment.push("uav_grenade");
     }
 
+    equipment.push("baofeng");
+
     return CreateInfantryEquipment(equipment);
 }
 
