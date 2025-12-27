@@ -8,6 +8,7 @@ export class entity {
         this.skills = skills;
         this.isDead = false;
         this.isThermal = true;
+        this.isBleeding = false;
         this.equipment = equipment;
         this.defaultEquipment = equipment.length > 0 ? equipment[0].id : null;
     }

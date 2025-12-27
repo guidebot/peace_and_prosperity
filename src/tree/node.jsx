@@ -1,11 +1,13 @@
 import { MdArrowRight, MdArrowDropDown } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
-import { GiStopSign, GiCheckMark, GiTruck, GiApc, GiTank, GiHealthNormal, GiSkullCrossedBones, GiInvisible } from 'react-icons/gi';
+import { GiStopSign, GiCheckMark, GiTruck, GiApc, GiTank, GiHealthNormal, GiSkullCrossedBones } from 'react-icons/gi';
 import { FaLocationPinLock } from "react-icons/fa6";
 import { IoMdMove } from "react-icons/io";
-import { BiSolidHide } from "react-icons/bi";
+import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { MaxTeamSize, MovementSpeed } from "../cards/utils";
 import { GrUserPolice } from "react-icons/gr";
+import { PiDropFill, PiDropSlashFill } from "react-icons/pi";
+import { TbPlayerPause, TbPlayerPlay } from "react-icons/tb";
 
 export function TreeNode({ node, style, dragHandle, tree, isSelected, handlePropertyChange }) {
     if (!node) return null;
@@ -17,7 +19,7 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
     }
 
     return (
-        <div className={`node-container ${isSelected ? 'selected' : !node.isEditing && ((node.data.type === "entity" && node.data.isDead) || (node.data.type === 'unit' && !node.data.isActive)) ? 'inactive' : node.data.type === 'unit' && node.data.isHidden && node.data.isActive ? 'hidden' : ''
+        <div className={`node-container ${isSelected ? 'selected' : !node.isEditing && ((node.data.type === "entity" && (node.data.isDead || node.data.isBleeding)) || (node.data.type === 'unit' && !node.data.isActive)) ? 'inactive' : node.data.type === 'unit' && node.data.isHidden && node.data.isActive ? 'hidden' : ''
             } `} style={style} ref={dragHandle}>
             <div className="node-content">
                 <span>
@@ -38,7 +40,7 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
                         </div>
                     )}
                     {!node.isEditing && node.data.type === "entity" && node.data.isDead && (<span><GiSkullCrossedBones /></span>)}
-                    {!node.isEditing && node.data.type === 'unit' && !node.data.isActive && (<span><GiInvisible /></span>)}
+                    {!node.isEditing && node.data.type === 'unit' && !node.data.isActive && (<span><TbPlayerPause /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.isHidden && (<span><BiSolidHide /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.vehicle?.type === "truck" && (<span><GiTruck /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.vehicle?.type === "wheel" && (<span><GiApc /></span>)}
@@ -48,6 +50,7 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
                     {!node.isEditing && node.data.type === 'unit' && node.data.hasMoved && (<span><IoMdMove /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.isDeployed && (<span><FaLocationPinLock /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.isMarked && (<span><GiCheckMark /></span>)}
+                    {!node.isEditing && node.data.type === 'entity' && !node.data.isDead && node.data.isBleeding && (<span style={{ color: 'red' }}><PiDropFill /></span>)}
                     {!node.isEditing && node.data.type === "entity" && !node.data.isDead && (node.data.skills["MED"] ?? 0) > 0 && (<span><GiHealthNormal /></span>)}
                     {!node.isEditing && (<span>{node.data.name}</span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.stress > 0 && (<span style={{ color: 'red' }}> {node.data.stress}</span>)}
@@ -57,11 +60,17 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
             </div>
             <div className="node-actions">
                 <div className="buttons-panel">
+                    <button style={{ display: !node.isEditing && node.data.type === "unit" ? 'inline' : 'none' }} onClick={(e) => {
+                        e.stopPropagation();
+                        handlePropertyChange(node.id, "isHidden", !node.data.isHidden);
+                    }} title={node.data.isHidden ? "Демаскировать" : "Замаскировать"}>
+                        {node.data.isHidden ? (<BiSolidShow />) : (<BiSolidHide />)}
+                    </button>
                     <button style={{ display: !node.isEditing && node.data.type === "entity" && !node.data.isDead ? 'inline' : 'none' }} onClick={(e) => {
                         e.stopPropagation();
-                        handlePropertyChange(node.id, "isDead", true);
-                    }} title="Умер">
-                        <GiSkullCrossedBones />
+                        handlePropertyChange(node.id, "isBleeding", !node.data.isBleeding);
+                    }} title={node.data.isBleeding ? "Остановить кровотечение" : "Кровотечение"}>
+                        {node.data.isBleeding ? (<PiDropSlashFill />) : (<PiDropFill />)}
                     </button>
                     <button style={{ display: !node.isEditing && node.data.type === 'unit' ? 'inline' : 'none' }} onClick={(e) => {
                         e.stopPropagation();
@@ -72,8 +81,8 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
                             node.open();
                         }
                         handlePropertyChange(node.id, "isActive", !node.data.isActive);
-                    }} title={node.data.isActive ? "Не активен" : "Активен"}>
-                        <GiInvisible />
+                    }} title={node.data.isActive ? "Скрыть из игры" : "Показать в игре"}>
+                        {node.data.isActive ? (<TbPlayerPause />) : (<TbPlayerPlay />)}
                     </button>
                     <button onClick={(e) => {
                         e.stopPropagation();

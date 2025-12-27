@@ -60,7 +60,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
             }
         })
 
-        const updatedPlayers = processNextTurn(players, effects, actuallyMoved);
+        const updatedPlayers = processNextTurn(players, effects, actuallyMoved, logMessages);
 
         const newStartPositions = {};
         updatedPlayers.forEach(player => {
@@ -157,7 +157,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
         setSelectedNode({ node: newPlayer.id });
     };
 
-    const processNextTurn = (players, effects, actuallyMoved) => {
+    const processNextTurn = (players, effects, actuallyMoved, logMessages) => {
         return players.map(player => {
             return {
                 ...player,
@@ -185,9 +185,30 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                             }
                             return item;
                         }) || [];
+
+                        let updatedSkills = person.skills;
+                        let isDead = person.isDead;
+
+                        if (person.isBleeding && !person.isDead) {
+                            const currentFP = person.skills["FP"] ?? 0;
+                            const newFP = currentFP - 1;
+
+                            updatedSkills = {
+                                ...person.skills,
+                                FP: newFP > 0 ? newFP : 0
+                            };
+
+                            if (newFP < 0) {
+                                isDead = true;
+                                logMessages.push(`${person.name} умер.`);
+                            }
+                        }
+
                         return {
                             ...person,
-                            equipment: updatedEquipment
+                            equipment: updatedEquipment,
+                            skills: updatedSkills,
+                            isDead: isDead
                         };
                     }) || [];
 

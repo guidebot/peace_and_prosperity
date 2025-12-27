@@ -4,7 +4,6 @@ import { GiHealing } from 'react-icons/gi';
 import { Level } from '../game/skills';
 import { RollModal } from '../actions/roll';
 import { TbFilter, TbFilterOff } from 'react-icons/tb';
-import { CurrentUnit } from './utils';
 import { PiBinocularsFill } from 'react-icons/pi';
 import { PossibleTargets } from './utils';
 import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions } from "../game/conditions";
@@ -32,10 +31,8 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
     }
 
     function applyHealEffect(players, rolls, actors, target) {
-        const actor = actors[0].actor;
+        // const actor = actors[0].actor;
         const effects = calculateHealEffect(players, rolls, actors, target);
-        const unit = CurrentUnit(players, actor);
-        onOtherChange(unit.id, "stress", unit.stress + 2);
         addLogEntry(effects[0].message);
         resetModalData();
     }
