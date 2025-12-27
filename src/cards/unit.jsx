@@ -145,7 +145,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
     function getUnitFireGroups(unit) {
         if (!unit?.children) return [];
 
-        const shooters = unit.children.filter(p => !p.isDead && p.defaultEquipment);
+        const shooters = unit.children.filter(p => !p.isDead && !p.isBleeding && p.defaultEquipment);
 
         const groups = {};
         for (const person of shooters) {

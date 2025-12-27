@@ -227,7 +227,7 @@
         "id": "lmg_pkm",
         "skill": "WPN_mg",
         "name": "ПКМ",
-        "weight": 75,
+        "weight": 82,
         "ammo": 10,
         "ammoWeight": 16,
         "bestRange": 24,
@@ -236,7 +236,7 @@
         "minRange": 0,
         "ap": 2,
         "he": 2,
-        "deployBonus": 2,
+        "deployBonus": 1,
         "mustBeDeployed": false,
         "dispersion": 0
     },
@@ -253,7 +253,7 @@
         "minRange": 0,
         "ap": 2,
         "he": 2,
-        "deployBonus": 2,
+        "deployBonus": 1,
         "mustBeDeployed": false,
         "dispersion": 0
     },

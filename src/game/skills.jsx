@@ -17,7 +17,7 @@ export function Level(skillPoints) {
 export function MaxSkill(unitData, skillKey) {
     if (!unitData.children || unitData.children.length === 0) return 0;
 
-    return unitData.children.filter(s => !s.isDead).reduce((maxPoints, soldier) => {
+    return unitData.children.filter(s => !s.isDead && !s.isBleeding).reduce((maxPoints, soldier) => {
         const points = soldier.skills?.[skillKey] || 0;
         return Math.max(maxPoints, points);
     }, 0);
@@ -26,7 +26,7 @@ export function MaxSkill(unitData, skillKey) {
 export function MinSkill(unitData, skillKey) {
     if (!unitData.children || unitData.children.length === 0) return 0;
 
-    return unitData.children.filter(s => !s.isDead).reduce((maxPoints, soldier) => {
+    return unitData.children.filter(s => !s.isDead && !s.isBleeding).reduce((maxPoints, soldier) => {
         const points = soldier.skills?.[skillKey] || 0;
         return Math.min(maxPoints, points);
     }, 999);
@@ -36,7 +36,7 @@ export function MedianSkill(unitData, skillKey) {
     if (!unitData.children || unitData.children.length === 0) return 0;
 
     const skillValues = unitData.children
-        .filter(soldier => !soldier.isDead)
+        .filter(soldier => !soldier.isDead && !soldier.isBleeding)
         .map(soldier => soldier.skills?.[skillKey] || 0);
 
     if (skillValues.length === 0) return 0;
