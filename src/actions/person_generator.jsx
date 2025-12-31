@@ -4,6 +4,7 @@ import { entity } from '../game/person';
 import { Titles } from '../game/titles';
 import { CountriesData, generateNameForCountry, Genders } from '../game/names';
 import { CreateInfantryEquipment } from '../game/equipment';
+import { GiConfirmed, GiCancel } from 'react-icons/gi';
 
 function assignEquipment(skills) {
     const FP = skills.FP ?? 0;
@@ -145,13 +146,12 @@ export function PersonGenerator({ onCancel, onConfirm }) {
                 <input title='Имеет оружие' type="checkbox" checked={defaultWeapon} onChange={() => setDefaultWeapon(!defaultWeapon)} />
             </label>
 
-            <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
-                <button onClick={onCancel}>Отмена</button>
-                <button onClick={() => {
+            <div className="buttons-panel" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <button title="Так точно" onClick={() => {
                     const newPerson = GeneratePerson(selectedTitle, isMilitary, defaultWeapon, name);
-
                     onConfirm(newPerson);
-                }}>Применить</button>
+                }}><GiConfirmed /></button>
+                <button title="Никак нет" onClick={onCancel}><GiCancel /></button>
             </div>
         </div>
     );
