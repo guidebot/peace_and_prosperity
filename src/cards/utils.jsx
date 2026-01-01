@@ -110,3 +110,15 @@ export function UpdateCardProperty(nodes, id, property, value) {
         return node;
     });
 };
+
+export function RemoveEquipmentFromPerson(person, equipment, onPropertyChange) {
+    const newEquipment = person.equipment.filter(eq => eq.id !== equipment.id);
+    if (newEquipment.length === 0) {
+        onPropertyChange(person.id, "defaultEquipment", null);
+    }
+    else if (equipment.id === person.defaultEquipment) {
+        onPropertyChange(person.id, "defaultEquipment", newEquipment.find(eq => eq.skill === "WPN_rifles" || eq.skill === "WPN_sniper" || eq.skill === "WPN_mg")?.id);
+    }
+
+    onPropertyChange(person.id, "equipment", newEquipment);
+}

@@ -8,7 +8,7 @@ import { CanFireInfantryEquipment } from '../actions/fire';
 import { CanWatchEquipment } from '../actions/watch';
 import { CiBookmark, CiBookmarkCheck } from "react-icons/ci";
 import { GiSmokeBomb, GiConfirmed, GiCancel } from 'react-icons/gi';
-import { PossibleTargets } from './utils';
+import { PossibleTargets, RemoveEquipmentFromPerson } from './utils';
 import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from "../game/conditions";
 import { PiBinocularsFill } from 'react-icons/pi';
 import { MdSettingsSuggest, MdOutlineAdd } from 'react-icons/md';
@@ -104,18 +104,6 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
     const applyWatchEffectWithConditions = ApplyWatchEffectWithConditions();
     const calculateFireEffects = CalculateFireEffectWithConditions();
     const applyFireEffectsWithConditions = ApplyFireEffectWithConditions();
-
-    const handleRemoveEquipment = (equipment) => {
-        const newEquipment = actor.equipment.filter(eq => eq.id !== equipment.id);
-        if (newEquipment.length === 0) {
-            onPropertyChange("defaultEquipment", null);
-        }
-        else if (equipment.id === actor.defaultEquipment) {
-            onPropertyChange("defaultEquipment", newEquipment.find(eq => eq.skill !== "WPN_grenades")?.id);
-        }
-
-        onPropertyChange("equipment", newEquipment);
-    };
 
     const [editorModal, setEditorModal] = useState({ open: false, equipment: null });
 
@@ -340,7 +328,7 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                                     <button title="Редактировать" onClick={() => { setEditorModal({ open: true, equipment: item }); }}>
                                         <MdSettingsSuggest />
                                     </button>
-                                    <button title="Убрать" onClick={() => handleRemoveEquipment(item)}>
+                                    <button title="Убрать" onClick={() => RemoveEquipmentFromPerson(actor.id, item, onOtherChange)}>
                                         <MdDelete />
                                     </button>
                                 </div>

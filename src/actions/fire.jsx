@@ -1,5 +1,5 @@
 import { Level, MinSkill } from "../game/skills";
-import { CurrentUnit } from "../cards/utils";
+import { CurrentUnit, RemoveEquipmentFromPerson } from "../cards/utils";
 import { ModifiedVisibilityData } from "../game/conditions";
 import { SCALE_PREFIX } from "../game/metadata";
 
@@ -15,7 +15,12 @@ export function ApplyFireEffects(players, rolls, actors, target, onPropertyChang
     onPropertyChange(target.id, "stress", newStress);
 
     effects.filter(ef => ef.result).forEach(ef => {
-        onPropertyChange(ef.actorData.equipment.id, "ammo", ef.actorData.equipment.ammo - 1);
+        if (ef.actorData.equipment.ammo === 1 && ef.actorData.equipment.weight === 0) {
+            RemoveEquipmentFromPerson(ef.actorData.actor, ef.actorData.equipment, onPropertyChange);
+        }
+        else {
+            onPropertyChange(ef.actorData.equipment.id, "ammo", ef.actorData.equipment.ammo - 1);
+        }
     });
 
     return effects;
