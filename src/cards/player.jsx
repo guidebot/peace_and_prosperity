@@ -21,14 +21,14 @@ export function PlayerForm({ data, setPlayers, onChange }) {
     return (
         <div>
             <div className='buttons-panel'>
+                <label className="form-label">
+                    <span>Фракция:</span>
+                    <input name="name" type="text" value={data.name} onChange={(e) => onChange(e.target.name, e.target.value)} />
+                </label>
                 <button title="Добавить отряд" onClick={handleCreateUnit}>
                     <RiTeamFill />
                 </button>
             </div>
-            <label className="form-label">
-                <span>Фракция:</span>
-                <input name="name" type="text" value={data.name} onChange={(e) => onChange(e.target.name, e.target.value)} />
-            </label>
         </div>
     );
 }

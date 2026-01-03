@@ -31,7 +31,6 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
     }
 
     function applyHealEffect(players, rolls, actors, target) {
-        // const actor = actors[0].actor;
         const effects = calculateHealEffect(players, rolls, actors, target);
         addLogEntry(effects[0].message);
         resetModalData();

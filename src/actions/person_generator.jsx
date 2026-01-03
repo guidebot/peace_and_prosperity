@@ -16,7 +16,7 @@ function assignEquipment(skills) {
     const equipment = [];
 
     if (FP >= 4 && (skills.WPN_at_launcher ?? 0) > 0) {
-        equipment.push("ak74");
+        equipment.push("ak12");
         equipment.push("rpg29");
     }
     else if (FP >= 4 && (skills.WPN_mg ?? 0) > (skills.WPN_rifles ?? 0)) {
@@ -33,14 +33,14 @@ function assignEquipment(skills) {
         }
         else {
             if (FP >= 3 && (skills.WPN_gl ?? 0) >= 3) {
-                equipment.push("ak74");
+                equipment.push("ak12");
                 equipment.push("gp");
             }
             else if (TP >= 3 && MSK >= 3) {
                 equipment.push("h&k416_silencer_collimator");
             }
             else {
-                equipment.push("ak74");
+                equipment.push("ak12");
             }
         }
     }
