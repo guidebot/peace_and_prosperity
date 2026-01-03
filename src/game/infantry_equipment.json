@@ -119,9 +119,26 @@
         "dispersion": 0
     },
     {
-        "id": "ak74",
+        "id": "m4a1",
         "skill": "WPN_rifles",
-        "name": "АК-74",
+        "name": "M4A1 (AR-15)",
+        "weight": 36,
+        "ammo": 10,
+        "ammoWeight": 1,
+        "bestRange": 9,
+        "effectiveRange": 18,
+        "maxRange": 32,
+        "minRange": 0,
+        "ap": 1,
+        "he": 1,
+        "deployBonus": 0,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
+        "id": "ak12",
+        "skill": "WPN_rifles",
+        "name": "АК-12",
         "weight": 37,
         "ammo": 10,
         "ammoWeight": 1,
@@ -197,6 +214,60 @@
         "dispersion": 0
     },
     {
+        "id": "svtch7",
+        "skill": "WPN_sniper",
+        "name": "СВЧ-308 7,62",
+        "optic": {
+            "day": {
+                "mod": 3,
+                "maxRange": 280
+            },
+            "dawn": {
+                "mod": 1,
+                "maxRange": 280
+            }
+        },
+        "weight": 53,
+        "ammo": 10,
+        "ammoWeight": 1,
+        "bestRange": 0,
+        "effectiveRange": 120,
+        "maxRange": 120,
+        "minRange": 0,
+        "ap": 1,
+        "he": 1,
+        "deployBonus": 8,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
+        "id": "svtch8",
+        "skill": "WPN_sniper",
+        "name": "СВЧ-8,6 .338",
+        "optic": {
+            "day": {
+                "mod": 3,
+                "maxRange": 280
+            },
+            "dawn": {
+                "mod": 1,
+                "maxRange": 280
+            }
+        },
+        "weight": 63,
+        "ammo": 10,
+        "ammoWeight": 1,
+        "bestRange": 0,
+        "effectiveRange": 120,
+        "maxRange": 120,
+        "minRange": 0,
+        "ap": 2,
+        "he": 1,
+        "deployBonus": 8,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
         "id": "barretm107a1",
         "skill": "WPN_sniper",
         "name": "Barret M107A1 30x",
@@ -241,10 +312,27 @@
         "dispersion": 0
     },
     {
+        "id": "lmg_petcheneg",
+        "skill": "WPN_mg",
+        "name": "ПКП Печенег",
+        "weight": 82,
+        "ammo": 10,
+        "ammoWeight": 16,
+        "bestRange": 24,
+        "effectiveRange": 60,
+        "maxRange": 120,
+        "minRange": 0,
+        "ap": 2,
+        "he": 2,
+        "deployBonus": 1,
+        "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
         "id": "lmg_m240",
         "skill": "WPN_mg",
         "name": "M240",
-        "weight": 122,
+        "weight": 124,
         "ammo": 10,
         "ammoWeight": 16,
         "bestRange": 24,
