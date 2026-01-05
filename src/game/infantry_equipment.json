@@ -974,9 +974,9 @@
         "dispersion": 0
     },
     {
-        "id": "aqueduct",
+        "id": "aqueduct_p",
         "skill": "LID",
-        "name": "Радиостанция 4 поколения",
+        "name": "Р-168 Акведук",
         "weight": 10,
         "ammo": 0,
         "ammoWeight": 0,
@@ -991,20 +991,37 @@
         "dispersion": 0
     },
     {
-        "id": "azart",
+        "id": "azart_p",
         "skill": "LID",
-        "name": "Радиостанция 5 поколения",
-        "weight": 10,
+        "name": "Р-187-П1 Азарт",
+        "weight": 5,
         "ammo": 0,
         "ammoWeight": 0,
         "bestRange": 0,
-        "effectiveRange": 200,
-        "maxRange": 0,
+        "effectiveRange": 0,
+        "maxRange": 200,
         "minRange": 0,
         "ap": 0,
         "he": 0,
         "deployBonus": 0,
         "mustBeDeployed": false,
+        "dispersion": 0
+    },
+    {
+        "id": "belozer",
+        "skill": "LID",
+        "name": "Р-438М Белозер",
+        "weight": 160,
+        "ammo": 0,
+        "ammoWeight": 0,
+        "bestRange": 0,
+        "effectiveRange": 0,
+        "maxRange": 0,
+        "minRange": 20000000,
+        "ap": 0,
+        "he": 0,
+        "deployBonus": 0,
+        "mustBeDeployed": true,
         "dispersion": 0
     }
 ]

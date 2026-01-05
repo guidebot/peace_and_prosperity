@@ -264,7 +264,7 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                             <td>{item.minRange > 0 ? item.minRange + SCALE_PREFIX : "-"}</td>
                             <td>{item.bestRange > 0 ? item.bestRange + SCALE_PREFIX : "-"}</td>
                             <td>{item.effectiveRange > 0 ? item.effectiveRange + SCALE_PREFIX : "-"}</td>
-                            <td>{item.maxRange > 0 ? item.maxRange + SCALE_PREFIX : "-"}</td>
+                            <td>{item.maxRange > 0 ? item.maxRange >= 20000000 ? "∞" : item.maxRange + SCALE_PREFIX : "-"}</td>
                             <td>{item.ap > 0 ? item.ap : "-"}</td>
                             <td>{item.he > 0 ? item.he : "-"}</td>
                             <td>
