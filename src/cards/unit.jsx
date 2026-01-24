@@ -12,18 +12,19 @@ import { PersonGenerator } from '../actions/person_generator';
 import { BiSolidShow, BiSolidHide, BiShowAlt, BiPulse } from "react-icons/bi";
 import { PossibleTargets, MovementSpeed, TotalWeight, TotalCapacity } from './utils';
 import { MdDelete } from 'react-icons/md';
-import { CalculateWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from '../game/conditions';
+import { CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from '../game/conditions';
 import { UnitMap } from './emap';
 import { GrUserPolice } from "react-icons/gr";
 import { TbFlag } from 'react-icons/tb';
 import { RiCheckboxIndeterminateLine, RiCheckboxLine } from 'react-icons/ri';
 import { CiLocationOff, CiLocationOn } from 'react-icons/ci';
 import { BsArrowsMove, BsSignStop } from 'react-icons/bs';
+import { useVisibilityConditions, ModifiedVisibilityData, VisibilityConditionsCatalog } from '../game/conditions';
 
 export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNode, setPlayers, addLogEntry }) {
-    const calculateWatchEffect = CalculateWatchEffectWithConditions();
     const calculateFireEffect = CalculateFireEffectWithConditions();
     const applyFireEffectsWithConditions = ApplyFireEffectWithConditions();
+    const { activeConditionIds } = useVisibilityConditions();
     const [personGeneratorOpen, setPersonGeneratorOpen] = useState(false);
     const [modalData, setModalData] = useState({});
     const resetModalData = () => setModalData({ equipment: null, open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
@@ -91,24 +92,6 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
         onChange("isHidden", !data.isHidden);
     }
 
-    const getAllUnits = () => {
-        const units = [];
-        players.forEach(player => {
-            if (player.children) {
-                player.children.forEach(unit => {
-                    if (unit.isActive) units.push(unit);
-                });
-            }
-        });
-        return units;
-    };
-
-    const applyWatchEffect = (players, rolls, result, actors, target) => {
-        const effects = calculateWatchEffect(players, rolls, result, actors, target);
-        addLogEntry(effects[0].message);
-        resetModalData();
-    };
-
     const handleCreatePerson = (newPerson) => {
         setPlayers((prevPlayers) => {
             return prevPlayers.map(player => {
@@ -168,6 +151,88 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
         onChange("vehicle", newVehicleId === 0 ? null : CreateVehicle([newVehicleId])[0]);
     }
 
+    const applyAlertnessRoll = (players, rolls, actors, target) => {
+        const effects = getAlertnessRoll(players, rolls, actors, target);
+
+        const effectMap = new Map();
+        effects.forEach(effect => {
+            addLogEntry(effect.message);
+            effectMap.set(effect.id, effect);
+        });
+
+        const updatedPlayers = players.map(player => {
+            return {
+                ...player,
+                children: player.children?.map(unit => {
+                    if (effectMap.has(unit.id)) {
+                        const effect = effectMap.get(unit.id);
+                        return {
+                            ...unit,
+                            alertness: effect.alertness
+                        };
+                    }
+                    return unit;
+                }) || []
+            };
+        });
+
+        setPlayers(updatedPlayers);
+
+        resetModalData();
+    };
+
+
+    function getBestActorForUnit(unit, activeConditions) {
+        const candidates = [];
+
+        const evaluatePerson = (person) => {
+            const baseSkillLevel = Level(person.skills["MSK"]) || 0;
+            const baseVisibility = Math.min(...activeConditions.map(c => VisibilityConditionsCatalog[c].value));
+            candidates.push({
+                actor: person,
+                equipment: null,
+                visibilityValue: baseVisibility,
+                totalScore: baseVisibility + 2 * baseSkillLevel
+            });
+
+            const equipmentList = Array.isArray(person.equipment) ? person.equipment : [];
+            for (const eq of equipmentList.filter(eq => eq.optic)) {
+                if (eq?.optic) {
+                    const visData = ModifiedVisibilityData(eq, activeConditions);
+                    const score = visData.visibility + 2 * baseSkillLevel;
+                    candidates.push({
+                        actor: person,
+                        equipment: eq,
+                        visibilityValue: visData.visibility,
+                        totalScore: score
+                    });
+                }
+            }
+        };
+
+        if (Array.isArray(unit.children)) {
+            for (const child of unit.children) {
+                evaluatePerson(child);
+            }
+        }
+
+        const bestActor = candidates.reduce((best, curr) =>
+            curr.totalScore > best.totalScore ? curr : best
+        );
+
+        return bestActor;
+    }
+
+    function getAlertnessRoll(players, rolls, actors, target) {
+        return rolls.map(roll => {
+            const unit = actors.filter(a => a.actor.id === roll.id)[0].actor;
+
+            const unitData = getBestActorForUnit(unit, activeConditionIds);
+
+            return { id: roll.id, alertness: roll.roll, message: `Наблюдение ${unit.name}${unitData.equipment ? " (" + unitData.equipment.name + ")" : ""}: d20=${rolls[0].roll}.` };
+        });
+    }
+
     return (
         <div>
             {
@@ -194,8 +259,9 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                 {players && (
                     <div className="unit-map-wrapper">
                         <UnitMap
-                            units={getAllUnits()}
+                            players={players}
                             currentUnitId={data.id}
+                            activeConditions={activeConditionIds}
                             setSelectedNode={setSelectedNode}
                             onOtherChange={onOtherChange}
                         />
@@ -219,7 +285,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                         <button key="toggleIsHidden" title="Переключить пометку маскировки" onClick={toggleIsHidden}>
                             {data.isHidden ? (<BiSolidShow />) : (<BiSolidHide />)}
                         </button>
-                        {PossibleTargets(players, data).length > 0 && (<button key="watch" title="Наблюдать" onClick={() => setModalData({ open: true, actors: [{ actor: data }], targets: PossibleTargets(players, data), onConfirm: applyWatchEffect, calculateEffect: calculateWatchEffect })}>
+                        {PossibleTargets(players, data).length > 0 && (<button key="watch" title="Наблюдать" onClick={() => setModalData({ open: true, actors: [{ actor: data }], targets: [], onConfirm: applyAlertnessRoll, calculateEffect: getAlertnessRoll })}>
                             <PiBinocularsFill />
                         </button>)}
                     </div>

@@ -49,6 +49,47 @@ export function ApplyWatchEffect(players, rolls, result, actor, target, activeCo
     return effects;
 };
 
+export function CalculateVisibilityDistance(observerUnit, targetUnit, activeConditions, roll, isInDef) {
+    const observerData = getBestActorForUnit(observerUnit, activeConditions);
+    const visData = ModifiedVisibilityData(observerData.equipment, activeConditions);
+
+    const observerMSK = Level(observerData.actor.skills["MSK"]) || 0;
+    const observerUAV = Level(observerData.actor.skills["WPN_uav"]) || 0;
+
+    const minTargetSkill = MinSkill(targetUnit, "MSK");
+    const targetMSK = Level(minTargetSkill) || 0;
+
+    const isUAV = observerData.equipment?.skill === "WPN_uav";
+    const baseMod = isUAV ? (observerUAV + observerMSK) : (2 * observerMSK);
+
+    const defMod = isInDef ? 5 : 0;
+
+    const infantryResult = roll + visData.visibility + baseMod - 2 * targetMSK - defMod;
+    const vehicleResult = roll + visData.visibility + baseMod + 6;
+
+    const isVehicle = targetUnit.vehicle;
+
+    let maxDistance = SCALE_PREFIX;
+
+    if (isVehicle) {
+        if (vehicleResult >= 42 && visData.maxRange * 2 >= 640 + SCALE_PREFIX) maxDistance = 640 + SCALE_PREFIX;
+        else if (vehicleResult >= 37 && visData.maxRange * 2 >= 320 + SCALE_PREFIX) maxDistance = 320 + SCALE_PREFIX;
+        else if (vehicleResult >= 32 && visData.maxRange * 2 >= 160 + SCALE_PREFIX) maxDistance = 160 + SCALE_PREFIX;
+        else if (vehicleResult >= 27 && visData.maxRange * 2 >= 80 + SCALE_PREFIX) maxDistance = 80 + SCALE_PREFIX;
+        else if (vehicleResult >= 22 && visData.maxRange * 2 >= 40 + SCALE_PREFIX) maxDistance = 40 + SCALE_PREFIX;
+        else if (vehicleResult >= 17 && visData.maxRange * 2 >= 20 + SCALE_PREFIX) maxDistance = 20 + SCALE_PREFIX;
+    } else {
+        if (infantryResult >= 42 && visData.maxRange >= 320 + SCALE_PREFIX) maxDistance = 320 + SCALE_PREFIX;
+        else if (infantryResult >= 37 && visData.maxRange >= 160 + SCALE_PREFIX) maxDistance = 160 + SCALE_PREFIX;
+        else if (infantryResult >= 32 && visData.maxRange >= 80 + SCALE_PREFIX) maxDistance = 80 + SCALE_PREFIX;
+        else if (infantryResult >= 27 && visData.maxRange >= 40 + SCALE_PREFIX) maxDistance = 40 + SCALE_PREFIX;
+        else if (infantryResult >= 22 && visData.maxRange >= 20 + SCALE_PREFIX) maxDistance = 20 + SCALE_PREFIX;
+        else if (infantryResult >= 17 && visData.maxRange >= 10 + SCALE_PREFIX) maxDistance = 10 + SCALE_PREFIX;
+    }
+
+    return maxDistance * 3;
+}
+
 export function CalculateWatchEffect(players, rolls, actors, target, activeConditions) {
     const actorData = actors[0].actor.type === "unit"
         ? getBestActorForUnit(actors[0].actor, activeConditions)

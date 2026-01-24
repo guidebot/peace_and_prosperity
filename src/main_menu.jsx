@@ -16,15 +16,19 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
     const [modalData, setModalData] = useState({});
     const resetModalData = () => setModalData({ equipment: null, open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
 
-    const applyInitiativeRoll = (players, rolls, actors, target, positions) => {
+    const handleEndTurn = () => {
+        const STRESS_RECOVERY_PER_TURN = [1, 2, 5, 8, 13, 19, 27];
+        const effects = [];
+
         const expiringCounters = [];
         let logMessages = [];
         const actuallyMoved = new Set();
 
         players.forEach(player => {
             player.children?.forEach(unit => {
-                if (!unit.id) return;
-                const startPos = positions[unit.id];
+                if (!unit.id || !unit.isActive) return;
+
+                const startPos = startPositions[unit.id];
                 const currentPos = unit.position;
                 if (startPos && currentPos &&
                     (startPos.x !== currentPos.x || startPos.y !== currentPos.y)) {
@@ -44,6 +48,20 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                         }
                     });
                 });
+
+                let stress = Number(unit.stress) || 0;
+                if (stress > 0) {
+                    const lid = MaxSkill(unit, "LID");
+                    const skillLevel = Level(lid);
+
+                    const recovery = Math.min(stress, STRESS_RECOVERY_PER_TURN[skillLevel]);
+                    const newStress = stress - recovery;
+
+                    effects.push({
+                        id: unit.id,
+                        stress: newStress
+                    });
+                }
             });
         });
 
@@ -51,14 +69,6 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
             const messages = expiringCounters.map(e => `${e.actorName}: ${e.equipmentName} — эффект окончен.`);
             logMessages.push(...messages);
         }
-
-        const effects = getInitiativeRoll(players, rolls, actors, target);
-
-        effects.forEach(effect => {
-            if (effect.rally > 0) {
-                logMessages.push(effect.message);
-            }
-        })
 
         const updatedPlayers = processNextTurn(players, effects, actuallyMoved, logMessages);
 
@@ -78,46 +88,6 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
         addLogEntry(`Начинается новый ход.`);
 
         resetModalData();
-    };
-
-    function getInitiativeRoll(players, rolls, actors, target) {
-        return rolls.map(roll => {
-            const unit = actors.filter(a => a.actor.id === roll.id)[0].actor;
-            const lid = MaxSkill(unit, "LID");
-            const skillLevel = Level(lid);
-
-            const rallyPoints = roll.roll >= 20 ? skillLevel + 1 :
-                roll.roll >= 18 && skillLevel > 0 ? skillLevel :
-                    roll.roll >= 16 && skillLevel > 1 ? skillLevel - 1 :
-                        roll.roll >= 14 && skillLevel > 2 ? skillLevel - 2 :
-                            roll.roll >= 12 && skillLevel > 3 ? skillLevel - 3 :
-                                roll.roll >= 9 && skillLevel > 4 ? skillLevel - 4 :
-                                    roll.roll >= 5 && skillLevel > 5 ? skillLevel - 5 : 0;
-
-            const stress = Number(unit.stress) || 0;
-
-            const initiative = roll.roll + lid;
-
-            if (rallyPoints > 0 && stress > 0) {
-                const newStress = Math.max(stress - rallyPoints, 0);
-                return { id: roll.id, initiative: initiative, stress: newStress, rally: rallyPoints, message: `Инициатива ${unit.name}: d20=${roll.roll}, результат ${initiative}, восстановление стресса ${rallyPoints}.` }
-            } else {
-                return { id: roll.id, initiative: initiative, stress: stress, rally: 0, message: `Инициатива ${unit.name}: d20=${roll.roll}, результат ${initiative}.` }
-            };
-        });
-    }
-
-    const handleEndTurn = () => {
-        setModalData({
-            open: true,
-            title: "Инициатива",
-            actors: players.flatMap(p => p.children).filter(u => u.isActive).map(u => ({ actor: u })),
-            targets: [],
-            onConfirm: (players, rolls, actors, target) => {
-                applyInitiativeRoll(players, rolls, actors, target, startPositions);
-            },
-            calculateEffect: getInitiativeRoll
-        });
     };
 
     const handleSaveToFile = () => {

@@ -24,7 +24,7 @@ export function MaxSkill(unitData, skillKey) {
 }
 
 export function MinSkill(unitData, skillKey) {
-    if (!unitData.children || unitData.children.length === 0) return 0;
+    if (!unitData || !unitData.children || unitData.children.length === 0) return 0;
 
     return unitData.children.filter(s => !s.isDead && !s.isBleeding).reduce((maxPoints, soldier) => {
         const points = soldier.skills?.[skillKey] || 0;

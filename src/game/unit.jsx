@@ -14,8 +14,8 @@ export class unit {
         this.isDeployed = false;
         this.isMarked = false;
         this.isHidden = true;
-        this.initiative = 0;
         this.correction = 0;
         this.position = null;
+        this.alertness = 1;
     }
 }
