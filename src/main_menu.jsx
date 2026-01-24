@@ -134,7 +134,6 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                 children: player.children?.map(unit => {
                     const newUnit = effects.filter(e => e.id === unit.id)[0];
 
-                    const initiative = newUnit?.initiative ?? 0;
                     const stress = newUnit?.stress ?? 0;
 
                     const newFatigue = unit.hasMoved && !unit.vehicle
@@ -184,7 +183,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
 
                     return {
                         ...unit,
-                        initiative: initiative,
+                        alertness: 1,
                         stress: stress,
                         fatigue: newFatigue,
                         hasMoved: newHasMoved,

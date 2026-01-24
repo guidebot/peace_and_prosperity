@@ -328,7 +328,7 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                                     <button title="Редактировать" onClick={() => { setEditorModal({ open: true, equipment: item }); }}>
                                         <MdSettingsSuggest />
                                     </button>
-                                    <button title="Убрать" onClick={() => RemoveEquipmentFromPerson(actor.id, item, onOtherChange)}>
+                                    <button title="Убрать" onClick={() => RemoveEquipmentFromPerson(actor, item, onOtherChange)}>
                                         <MdDelete />
                                     </button>
                                 </div>
