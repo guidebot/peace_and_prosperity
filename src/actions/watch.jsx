@@ -49,7 +49,7 @@ export function ApplyWatchEffect(players, rolls, result, actor, target, activeCo
     return effects;
 };
 
-export function CalculateVisibilityDistance(observerUnit, targetUnit, activeConditions, roll, isInDef) {
+export function CalculateVisibilityDistance(observerUnit, targetUnit, activeConditions, roll, isInDef, forceUAV = false) {
     const observerData = getBestActorForUnit(observerUnit, activeConditions);
     const visData = ModifiedVisibilityData(observerData.equipment, activeConditions);
 
@@ -59,7 +59,7 @@ export function CalculateVisibilityDistance(observerUnit, targetUnit, activeCond
     const minTargetSkill = MinSkill(targetUnit, "MSK");
     const targetMSK = Level(minTargetSkill) || 0;
 
-    const isUAV = observerData.equipment?.skill === "WPN_uav";
+    const isUAV = forceUAV || (observerData.equipment?.skill === "WPN_uav");
     const baseMod = isUAV ? (observerUAV + observerMSK) : (2 * observerMSK);
 
     const defMod = isInDef ? 5 : 0;

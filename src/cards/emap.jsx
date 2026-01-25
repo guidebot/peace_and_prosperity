@@ -14,6 +14,7 @@ export const UnitMap = ({
 }) => {
     const battlefieldRef = useRef(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [uavClickPos, setUavClickPos] = useState(null);
     const [draggingUnitPos, setDraggingUnitPos] = useState(null);
 
     const getAllUnits = () => {
@@ -60,76 +61,141 @@ export const UnitMap = ({
 
             if (isTargetFriendly) return;
 
-            const maxPlainDistance = CalculateVisibilityDistance(observer, target, activeConditions, 20, false);
-            const maxDefDistance = CalculateVisibilityDistance(observer, target, activeConditions, 20, true);
+            if (uavClickPos) {
+                const maxPlainUavDistance = CalculateVisibilityDistance(observer, target, activeConditions, 20, false, true);
+                const maxDefUavDistance = CalculateVisibilityDistance(observer, target, activeConditions, 20, true, true);
+                const plainUavDistance = CalculateVisibilityDistance(observer, target, activeConditions, observer.alertness, false, true);
+                const defUavDistance = CalculateVisibilityDistance(observer, target, activeConditions, observer.alertness, true, true);
 
-            const plainDistance = CalculateVisibilityDistance(observer, target, activeConditions, observer.alertness, false);
-            const defDistance = CalculateVisibilityDistance(observer, target, activeConditions, observer.alertness, true);
+                const dx = target.position.x - uavClickPos.x;
+                const dy = target.position.y - uavClickPos.y;
+                const actualUavDistance = Math.sqrt(dx * dx + dy * dy);
 
-            const dx = target.position.x - observerPos.x;
-            const dy = target.position.y - observerPos.y;
-            const actualDistance = Math.sqrt(dx * dx + dy * dy);
+                if (plainUavDistance >= actualUavDistance) {
+                    lines.push(
+                        <line
+                            key={`vis-uav-plain-${target.id}`}
+                            x1={uavClickPos.x}
+                            y1={uavClickPos.y}
+                            x2={target.position.x}
+                            y2={target.position.y}
+                            stroke="rgb(115, 115, 115)"
+                            strokeWidth="2"
+                        />
+                    );
+                }
 
-            if (defDistance >= actualDistance) {
-                lines.push(
-                    <line
-                        key={`vis-def-${target.id}`}
-                        x1={observerPos.x}
-                        y1={observerPos.y}
-                        x2={target.position.x}
-                        y2={target.position.y}
-                        stroke="rgb(127, 246, 255)"
-                        strokeWidth="1"
-                    />
-                );
+                if (defUavDistance >= actualUavDistance) {
+                    lines.push(
+                        <line
+                            key={`vis-uav-def-${target.id}`}
+                            x1={uavClickPos.x}
+                            y1={uavClickPos.y}
+                            x2={target.position.x}
+                            y2={target.position.y}
+                            stroke="rgb(150, 255, 255)"
+                            strokeWidth="1"
+                        />
+                    );
+                }
 
-                return;
+                if (maxPlainUavDistance >= actualUavDistance && maxDefUavDistance < actualUavDistance) {
+                    lines.push(
+                        <line
+                            key={`vis-uav-max-plain-${target.id}`}
+                            x1={uavClickPos.x}
+                            y1={uavClickPos.y}
+                            x2={target.position.x}
+                            y2={target.position.y}
+                            stroke="rgb(115, 115, 115)"
+                            strokeWidth="2"
+                            stroke-dasharray="5 10"
+                        />
+                    );
+                }
+
+                if (maxDefUavDistance >= actualUavDistance) {
+                    lines.push(
+                        <line
+                            key={`vis-uav-max-def-${target.id}`}
+                            x1={uavClickPos.x}
+                            y1={uavClickPos.y}
+                            x2={target.position.x}
+                            y2={target.position.y}
+                            stroke="rgb(150, 255, 255)"
+                            strokeWidth="1"
+                            stroke-dasharray="5 10"
+                        />
+                    );
+                }
             }
+            else {
+                const maxPlainDistance = CalculateVisibilityDistance(observer, target, activeConditions, 20, false, false);
+                const maxDefDistance = CalculateVisibilityDistance(observer, target, activeConditions, 20, true, false);
+                const plainDistance = CalculateVisibilityDistance(observer, target, activeConditions, observer.alertness, false);
+                const defDistance = CalculateVisibilityDistance(observer, target, activeConditions, observer.alertness, true);
 
-            if (maxDefDistance >= actualDistance) {
-                lines.push(
-                    <line
-                        key={`vis-max-def-${target.id}`}
-                        x1={observerPos.x}
-                        y1={observerPos.y}
-                        x2={target.position.x}
-                        y2={target.position.y}
-                        stroke="rgb(127, 246, 255)"
-                        strokeWidth="2"
-                        stroke-dasharray="5 10"
-                    />
-                );
-            }
+                const dx = target.position.x - observerPos.x;
+                const dy = target.position.y - observerPos.y;
+                const actualDistance = Math.sqrt(dx * dx + dy * dy);
 
-            if (plainDistance >= actualDistance) {
-                lines.push(
-                    <line
-                        key={`vis-plain-${target.id}`}
-                        x1={observerPos.x}
-                        y1={observerPos.y}
-                        x2={target.position.x}
-                        y2={target.position.y}
-                        stroke="rgb(100, 100, 100)"
-                        strokeWidth="1"
-                    />
-                );
+                if (plainDistance >= actualDistance) {
+                    lines.push(
+                        <line
+                            key={`vis-plain-${target.id}`}
+                            x1={observerPos.x}
+                            y1={observerPos.y}
+                            x2={target.position.x}
+                            y2={target.position.y}
+                            stroke="rgb(115, 115, 115)"
+                            strokeWidth="2"
+                        />
+                    );
+                }
 
-                return;
-            }
+                if (defDistance >= actualDistance) {
+                    lines.push(
+                        <line
+                            key={`vis-def-${target.id}`}
+                            x1={observerPos.x}
+                            y1={observerPos.y}
+                            x2={target.position.x}
+                            y2={target.position.y}
+                            stroke="rgb(150, 255, 255)"
+                            strokeWidth="1"
+                        />
+                    );
+                }
 
-            if (maxPlainDistance >= actualDistance && maxDefDistance < actualDistance) {
-                lines.push(
-                    <line
-                        key={`vis-max-plain-${target.id}`}
-                        x1={observerPos.x}
-                        y1={observerPos.y}
-                        x2={target.position.x}
-                        y2={target.position.y}
-                        stroke="rgb(95, 95, 95)"
-                        strokeWidth="2"
-                        stroke-dasharray="5 10"
-                    />
-                );
+                if (maxPlainDistance >= actualDistance && maxDefDistance < actualDistance) {
+                    lines.push(
+                        <line
+                            key={`vis-max-plain-${target.id}`}
+                            x1={observerPos.x}
+                            y1={observerPos.y}
+                            x2={target.position.x}
+                            y2={target.position.y}
+                            stroke="rgb(115, 115, 115)"
+                            strokeWidth="2"
+                            stroke-dasharray="5 10"
+                        />
+                    );
+                }
+
+                if (maxDefDistance >= actualDistance) {
+                    lines.push(
+                        <line
+                            key={`vis-max-def-${target.id}`}
+                            x1={observerPos.x}
+                            y1={observerPos.y}
+                            x2={target.position.x}
+                            y2={target.position.y}
+                            stroke="rgb(150, 255, 255)"
+                            strokeWidth="1"
+                            stroke-dasharray="5 10"
+                        />
+                    );
+                }
             }
         });
 
@@ -149,6 +215,8 @@ export const UnitMap = ({
     }, []);
 
     const handleMouseDown = (e, unitId) => {
+        setUavClickPos(null);
+
         if (!battlefieldRef.current) return;
 
         setSelectedNode(unitId);
@@ -189,8 +257,16 @@ export const UnitMap = ({
         document.addEventListener('mouseup', handleMouseUp);
     };
 
-    const handleRightClick = (e, unitId) => {
+    const handleRightClick = (e) => {
         e.preventDefault();
+
+        if (!currentUnitId || !battlefieldRef.current) return;
+
+        const rect = battlefieldRef.current.getBoundingClientRect();
+        const x = Math.max(0, Math.min(e.clientX - rect.left, FIELD_WIDTH));
+        const y = Math.max(0, Math.min(e.clientY - rect.top, FIELD_HEIGHT));
+
+        setUavClickPos({ x, y });
     };
 
     let distanceToCursor = null;
@@ -225,6 +301,7 @@ export const UnitMap = ({
                 className="interactive-battlefield"
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
+                onContextMenu={(e) => handleRightClick(e)}
             >
                 {allUnits.map(unit => {
                     const pos = unit.position || { x: 50, y: 50 };
@@ -240,7 +317,6 @@ export const UnitMap = ({
                                 top: pos.y,
                             }}
                             onMouseDown={(e) => handleMouseDown(e, unit.id)}
-                            onContextMenu={(e) => handleRightClick(e, unit.id)}
                         >
                             <div className="squad-icon" />
                             <div className="squad-label">{unit.name}</div>

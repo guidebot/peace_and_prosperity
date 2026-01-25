@@ -53,7 +53,7 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
                     {!node.isEditing && node.data.type === 'entity' && !node.data.isDead && node.data.isBleeding && (<span style={{ color: 'red' }}><PiDropFill /></span>)}
                     {!node.isEditing && node.data.type === "entity" && !node.data.isDead && (node.data.skills["MED"] ?? 0) > 0 && (<span><GiHealthNormal /></span>)}
                     {!node.isEditing && (<span>{node.data.name}</span>)}
-                    {!node.isEditing && node.data.type === 'unit' && node.data.stress > 0 && (<span style={{ color: 'red' }}> {node.data.stress}</span>)}
+                    {!node.isEditing && node.data.type === 'unit' && node.data.stress > 0 && (<span style={{ color: 'red' }}> {node.data.stress.toFixed(1)}</span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.fatigue > 0 && (<span style={{ color: 'orange' }}> {node.data.fatigue}</span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.correction > 0 && (<span style={{ color: 'lightgreen' }}> {node.data.correction}</span>)}
                 </span>

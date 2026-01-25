@@ -17,7 +17,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
     const resetModalData = () => setModalData({ equipment: null, open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
 
     const handleEndTurn = () => {
-        const STRESS_RECOVERY_PER_TURN = [1, 2, 5, 8, 13, 19, 27];
+        const STRESS_RECOVERY_PER_TURN = [0.1, 0.2, 0.5, 0.8, 1.3, 1.9, 2.7];
         const effects = [];
 
         const expiringCounters = [];
@@ -134,7 +134,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                 children: player.children?.map(unit => {
                     const newUnit = effects.filter(e => e.id === unit.id)[0];
 
-                    const stress = newUnit?.stress ?? 0;
+                    const stress = newUnit?.stress ?? 0.0;
 
                     const newFatigue = unit.hasMoved && !unit.vehicle
                         ? unit.fatigue

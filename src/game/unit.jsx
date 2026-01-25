@@ -6,7 +6,7 @@ export class unit {
         this.type = "unit";
         this.id = uuidv4();
         this.name = name;
-        this.stress = 0;
+        this.stress = 0.0;
         this.fatigue = 0;
         this.children = soldiers;
         this.vehicle = null;

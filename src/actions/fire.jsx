@@ -219,9 +219,7 @@ function CalculateFireEffect(players, roll, actorData, target, activeConditions)
                                     ap >= 2 && modifiedResult >= 8 ? ap - armor :
                                         ap >= 1 && modifiedResult >= 13 ? ap - armor :
                                             0 : 0;
-        }
-
-        supression = supression * 10;
+        };
 
         const message = hits > 0 ?
             `Стрельба ${actor.name} по ${target.name} (${equipment.name}, видимость ${visData.maxRange + SCALE_PREFIX}): d20=${roll.roll}, результат ${modifiedResult}, транспортное средство уничтожено, требуется рассчёт поражения экипажа/десанта.` :
@@ -264,8 +262,6 @@ function CalculateFireEffect(players, roll, actorData, target, activeConditions)
             hits = modifiedResult >= 19 ? 1 : 0;
             supression = 0;
         }
-
-        supression = supression * 10;
 
         const message = `Стрельба ${actor.name} по ${target.name} (${equipment.name}, видимость ${visData.maxRange + SCALE_PREFIX}): d20=${roll.roll}, результат ${modifiedResult}, ${hits} ранений и ${supression} очков стресса.`;
 

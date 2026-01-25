@@ -274,7 +274,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                     <div className="buttons-panel">
                         <TbFlag />
                         <label className="form-label">
-                            <input min={0} name="stress" type="number" value={data.stress} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
+                            <input min={0} name="stress" type="number" step="0.1" inputmode="decimal" value={data.stress.toFixed(1)} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
                         </label>
                         <button key="toggleIsMarked" title="Переключить пометку завершения действия" onClick={toggleIsMarked}>
                             {data.isMarked ? (<RiCheckboxIndeterminateLine />) : (<RiCheckboxLine />)}
