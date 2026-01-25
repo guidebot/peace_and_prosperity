@@ -99,7 +99,7 @@ function CalculateFireEffect(players, roll, actorData, target, activeConditions)
         return { result: false, actorData: actorData, supression: supression, hits: hits, message: `У ${actor.name} нет боеприпасов для ${equipment.name}.` };
     }
 
-    const wpnSkillPoints = actor.skills[equipment.skill] || 0;
+    const wpnSkillPoints = roll.indirectFire ? (actor.skills.WPN_artillery || 0) : actor.skills[equipment.skill] || 0;
     const wpnSkillLevel = Level(wpnSkillPoints);
 
     if (wpnSkillLevel < 1 && equipment.skill !== "WPN_rifles") {

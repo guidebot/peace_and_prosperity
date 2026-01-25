@@ -22,7 +22,7 @@ export function PersonForm({ players, data, onPropertyChange, onOtherChange, add
         driving: data.vehicle,
         equipment: true,
         wpn: true,
-        mex: true
+        tech: true
     });
 
     const unit = CurrentUnit(players, data);

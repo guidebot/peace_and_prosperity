@@ -56,7 +56,7 @@ export function MedianSkill(unitData, skillKey) {
 export const SkillCategories = {
     char: "Основные навыки",
     wpn: "Оружие",
-    mex: "Техника"
+    tech: "Техника"
 }
 
 export const Skills = [
@@ -65,24 +65,18 @@ export const Skills = [
     new skill("char", "TP", "ТП Тактическая Подготовка"),
     new skill("char", "MED", "МЕД Медицина"),
     new skill("char", "MSK", "МСК Маскировка"),
-    new skill("wpn", "WPN_rifles", "ОРУЖ Лёгкое стрелковое"),
-    new skill("wpn", "WPN_grenades", "ОРУЖ Гранаты"),
-    new skill("wpn", "WPN_sniper", "ОРУЖ Снайперское оружие"),
-    new skill("wpn", "WPN_mg", "ОРУЖ Пулемёты"),
-    new skill("wpn", "WPN_at_launcher", "ОРУЖ Реактивные гранатомёты"),
-    new skill("wpn", "WPN_gl", "ОРУЖ Гранатомёты"),
-    new skill("wpn", "WPN_at_guided", "ОРУЖ ПТРК"),
-    new skill("wpn", "WPN_mortars", "ОРУЖ Миномёты"),
-    new skill("wpn", "WPN_uav", "ОРУЖ БПЛА"),
-    new skill("wpn", "WPN_manpads", "ОРУЖ ПЗРК"),
-    new skill("wpn", "WPN_ac", "ОРУЖ Автопушки"),
-    new skill("wpn", "WPN_tank_guns", "ОРУЖ Танковые пушки"),
-    new skill("wpn", "WPN_howitzers", "ОРУЖ Ствольная артиллерия"),
-    new skill("wpn", "WPN_mlrs", "ОРУЖ РСЗО"),
-    new skill("wpn", "WPN_explosives", "ОРУЖ Взрывные устройства и мины"),
-    new skill("mex", "MEX_trucks", "МЕХ Автомобили"),
-    new skill("mex", "MEX_wheeled", "МЕХ Колёсные БМ"),
-    new skill("mex", "MEX_tracked", "МЕХ Гусеничные БМ")
+    new skill("wpn", "WPN_rifles", "Лёгкое стрелковое"),
+    new skill("wpn", "WPN_grenades", "Гранаты"),
+    new skill("wpn", "WPN_sniper", "Снайперское оружие"),
+    new skill("wpn", "WPN_mg", "Пулемёты"),
+    new skill("wpn", "WPN_heavy", "Тяжёлое вооружение"),
+    new skill("wpn", "WPN_guided", "Управляемые ракеты"),
+    new skill("wpn", "WPN_tank_guns", "Наводчик боевых машин"),
+    new skill("wpn", "WPN_artillery", "Артиллерия"),
+    new skill("tech", "TECH_explosives", "Взрывные устройства и мины"),
+    new skill("tech", "TECH_mechanics", "Механика"),
+    new skill("tech", "TECH_uav", "Управление дронами"),
+    new skill("tech", "TECH_electronics", "Электроника")
 ]
 
 export const SkillsByCategories = Skills.reduce((acc, item) => {

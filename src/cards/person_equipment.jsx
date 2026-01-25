@@ -318,7 +318,7 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                                     })} >
                                         <PiBinocularsFill />
                                     </button>)}
-                                    {item.skill !== "WPN_grenades" && item.skill !== "WPN_explosives" && item.skill !== "WPN_uav"
+                                    {item.skill !== "WPN_grenades" && item.skill !== "WPN_explosives" && item.skill !== "TECH_uav"
                                         && CanFireInfantryEquipment(players, actor, item) && (<button title="Установить основным" onClick={() => toggleDefaultEquipment(item)}>
                                             {actor.defaultEquipment === item.id ? (<CiBookmarkCheck />) : (<CiBookmark />)}
                                         </button>)}

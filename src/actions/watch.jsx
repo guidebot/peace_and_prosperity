@@ -54,12 +54,12 @@ export function CalculateVisibilityDistance(observerUnit, targetUnit, activeCond
     const visData = ModifiedVisibilityData(observerData.equipment, activeConditions);
 
     const observerMSK = Level(observerData.actor.skills["MSK"]) || 0;
-    const observerUAV = Level(observerData.actor.skills["WPN_uav"]) || 0;
+    const observerUAV = Level(observerData.actor.skills["TECH_uav"]) || 0;
 
     const minTargetSkill = MinSkill(targetUnit, "MSK");
     const targetMSK = Level(minTargetSkill) || 0;
 
-    const isUAV = forceUAV || (observerData.equipment?.skill === "WPN_uav");
+    const isUAV = forceUAV || (observerData.equipment?.skill === "TECH_uav");
     const baseMod = isUAV ? (observerUAV + observerMSK) : (2 * observerMSK);
 
     const defMod = isInDef ? 5 : 0;
@@ -101,20 +101,20 @@ export function CalculateWatchEffect(players, rolls, actors, target, activeCondi
     const visData = ModifiedVisibilityData(equipment, activeConditions);
 
     const actorWatchSkillLevel = Level(actor.skills["MSK"]) || 0;
-    const actorUavSkillLevel = Level(actor.skills["WPN_uav"]) || 0;
+    const actorUavSkillLevel = Level(actor.skills["TECH_uav"]) || 0;
 
     const minTargetSkill = MinSkill(target, "MSK");
     const targetSkillLevel = Level(minTargetSkill);
 
     const infantryMod = rolls[0].roll + visData.visibility + actorWatchSkillLevel - 2 * targetSkillLevel - (rolls[0].selectedDef > 0 ? 5 : 0);
 
-    const infantryWatchResult = equipment?.skill === "WPN_uav"
+    const infantryWatchResult = equipment?.skill === "TECH_uav"
         ? infantryMod + actorUavSkillLevel
         : infantryMod + actorWatchSkillLevel;
 
     const vehicleMod = rolls[0].roll + visData.visibility + actorWatchSkillLevel + 6;
 
-    const vehicleWatchResult = equipment?.skill === "WPN_uav"
+    const vehicleWatchResult = equipment?.skill === "TECH_uav"
         ? vehicleMod + actorUavSkillLevel
         : vehicleMod + actorWatchSkillLevel;
 
@@ -132,7 +132,7 @@ export function CalculateWatchEffect(players, rolls, actors, target, activeCondi
                         infantryWatchResult >= 22 && visData.maxRange >= 20 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 20 + SCALE_PREFIX ? `контакт на расстоянии до ${20 + SCALE_PREFIX} см` :
                             infantryWatchResult >= 17 && visData.maxRange >= 10 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 10 + SCALE_PREFIX ? `контакт на расстоянии до ${10 + SCALE_PREFIX} см` : `контакт на расстоянии до ${SCALE_PREFIX} см`;
 
-    const mineResult = equipment?.skill !== "WPN_uav" && (equipment?.minRange ?? 0) < 1 && infantryWatchResult >= 22 ? " (мины обнаружены)" : "";
+    const mineResult = equipment?.skill !== "TECH_uav" && (equipment?.minRange ?? 0) < 1 && infantryWatchResult >= 22 ? " (мины обнаружены)" : "";
 
     const message = `Наблюдение ${actor.name} за ${target.name}${equipment ? " (" + equipment.name + ")" : ""}: d20=${rolls[0].roll}, результат ${infantryWatchResult}, ${distance}${mineResult}.`;
 

@@ -26,9 +26,7 @@ function assignEquipment(skills) {
         equipment.push("h&kg2810x")
     }
     else if (FP >= 1) {
-        const mexSkills = ["MEX_wheeled", "MEX_tracked"];
-        const hasHighMex = mexSkills.some(skillId => (skills[skillId] ?? 0) >= 7);
-        if (hasHighMex) {
+        if ((skills.TECH_mechanics ?? 0) >= 7) {
             equipment.push("aks74u");
         }
         else {
@@ -60,11 +58,11 @@ function assignEquipment(skills) {
         equipment.push("smoke");
     }
 
-    if (MSK >= 3 && FP >= 3 && (skills.WPN_uav ?? 0) >= 7) {
+    if (MSK >= 3 && FP >= 3 && (skills.TECH_uav ?? 0) >= 7) {
         equipment.push("uav");
     }
 
-    if (FP >= 7 && (skills.WPN_uav ?? 0) >= 12) {
+    if (FP >= 7 && (skills.TECH_uav ?? 0) >= 12) {
         equipment.push("uav_grenade");
     }
 

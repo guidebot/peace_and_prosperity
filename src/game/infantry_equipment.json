@@ -398,7 +398,7 @@
     },
     {
         "id": "rpg7",
-        "skill": "WPN_at_launcher",
+        "skill": "WPN_heavy",
         "name": "РПГ-7",
         "weight": 63,
         "ammo": 4,
@@ -415,7 +415,7 @@
     },
     {
         "id": "law",
-        "skill": "WPN_at_launcher",
+        "skill": "WPN_heavy",
         "name": "M72 Law",
         "weight": 0,
         "ammo": 1,
@@ -432,7 +432,7 @@
     },
     {
         "id": "rpg29",
-        "skill": "WPN_at_launcher",
+        "skill": "WPN_heavy",
         "name": "РПГ-29 Вампир",
         "weight": 0,
         "ammo": 1,
@@ -449,7 +449,7 @@
     },
     {
         "id": "spg9",
-        "skill": "WPN_at_launcher",
+        "skill": "WPN_heavy",
         "name": "СПГ-9",
         "weight": 480,
         "ammo": 4,
@@ -466,7 +466,7 @@
     },
     {
         "id": "gp",
-        "skill": "WPN_gl",
+        "skill": "WPN_heavy",
         "name": "M203/ГП-30",
         "weight": 13,
         "ammo": 2,
@@ -483,7 +483,7 @@
     },
     {
         "id": "agl",
-        "skill": "WPN_gl",
+        "skill": "WPN_heavy",
         "name": "Mk19Mod3/АГС-30",
         "weight": 310,
         "ammo": 6,
@@ -500,7 +500,7 @@
     },
     {
         "id": "metis",
-        "skill": "WPN_at_guided",
+        "skill": "WPN_guided",
         "name": "Метис-М",
         "optic": {
             "day": {
@@ -589,7 +589,7 @@
     },
     {
         "id": "mortar60",
-        "skill": "WPN_mortars",
+        "skill": "WPN_artillery",
         "name": "Миномёт 60 мм",
         "weight": 190,
         "ammo": 8,
@@ -606,7 +606,7 @@
     },
     {
         "id": "mortar80",
-        "skill": "WPN_mortars",
+        "skill": "WPN_artillery",
         "name": "Миномёт 80 мм",
         "weight": 480,
         "ammo": 8,
@@ -623,7 +623,7 @@
     },
     {
         "id": "uav",
-        "skill": "WPN_uav",
+        "skill": "TECH_uav",
         "name": "Дрон DJI Mavic",
         "optic": {},
         "weight": 20,
@@ -642,7 +642,7 @@
     },
     {
         "id": "uav_grenade",
-        "skill": "WPN_uav",
+        "skill": "TECH_uav",
         "name": "Дрон со сбросом",
         "optic": {},
         "weight": 20,
@@ -661,7 +661,7 @@
     },
     {
         "id": "ulm",
-        "skill": "WPN_uav",
+        "skill": "TECH_uav",
         "name": "Беспилотный Барражирующий Боеприпас",
         "optic": {},
         "weight": 0,
@@ -680,7 +680,7 @@
     },
     {
         "id": "ulm_opt",
-        "skill": "WPN_uav",
+        "skill": "TECH_uav",
         "name": "Беспилотный Барражирующий Боеприпас (оптоволокно)",
         "optic": {},
         "weight": 0,
@@ -699,7 +699,7 @@
     },
     {
         "id": "manpads",
-        "skill": "WPN_manpads",
+        "skill": "WPN_heavy",
         "name": "Stinger/Верба",
         "weight": 80,
         "ammo": 4,
@@ -805,7 +805,7 @@
     },
     {
         "id": "ap_mine",
-        "skill": "WPN_explosives",
+        "skill": "TECH_explosives",
         "name": "Противопехотная мина ОЗМ",
         "weight": 0,
         "ammo": 1,
@@ -822,7 +822,7 @@
     },
     {
         "id": "at_mine_tm",
-        "skill": "WPN_explosives",
+        "skill": "TECH_explosives",
         "name": "Противотанковая мина ТМ",
         "weight": 0,
         "ammo": 1,
@@ -839,7 +839,7 @@
     },
     {
         "id": "at_mine_tmk",
-        "skill": "WPN_explosives",
+        "skill": "TECH_explosives",
         "name": "Противотанковая мина ТМК",
         "weight": 0,
         "ammo": 1,
@@ -856,7 +856,7 @@
     },
     {
         "id": "explosive_1",
-        "skill": "WPN_explosives",
+        "skill": "TECH_explosives",
         "name": "Взрывчатка 1 кг",
         "weight": 0,
         "ammo": 1,
@@ -873,7 +873,7 @@
     },
     {
         "id": "explosive_2",
-        "skill": "WPN_explosives",
+        "skill": "TECH_explosives",
         "name": "Взрывчатка 2 кг",
         "weight": 0,
         "ammo": 1,
@@ -890,7 +890,7 @@
     },
     {
         "id": "explosive_3",
-        "skill": "WPN_explosives",
+        "skill": "TECH_explosives",
         "name": "Взрывчатка 3 кг",
         "weight": 0,
         "ammo": 1,
@@ -907,7 +907,7 @@
     },
     {
         "id": "explosive_5",
-        "skill": "WPN_explosives",
+        "skill": "TECH_explosives",
         "name": "Взрывчатка 5 кг",
         "weight": 0,
         "ammo": 1,
@@ -924,7 +924,7 @@
     },
     {
         "id": "explosive_10",
-        "skill": "WPN_explosives",
+        "skill": "TECH_explosives",
         "name": "Взрывчатка 10 кг",
         "weight": 0,
         "ammo": 1,
@@ -941,7 +941,7 @@
     },
     {
         "id": "fuze",
-        "skill": "WPN_explosives",
+        "skill": "TECH_explosives",
         "name": "Детонатор (радио, таймер)",
         "weight": 0,
         "ammo": 1,
