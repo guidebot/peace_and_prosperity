@@ -229,7 +229,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
 
             const unitData = getBestActorForUnit(unit, activeConditionIds);
 
-            return { id: roll.id, alertness: roll.roll, message: `Наблюдение ${unit.name}${unitData.equipment ? " (" + unitData.equipment.name + ")" : ""}: d20=${rolls[0].roll}.` };
+            return { id: roll.id, alertness: roll.roll, message: `Наблюдение ${unit.name}: ${unitData.actor.name}${unitData.equipment ? " (" + unitData.equipment.name + ")" : ""}: d20=${rolls[0].roll}.` };
         });
     }
 

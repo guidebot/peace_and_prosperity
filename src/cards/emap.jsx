@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { CalculateVisibilityDistance } from '../actions/watch.jsx';
 import './emap.css';
 
@@ -13,6 +13,8 @@ export const UnitMap = ({
     onOtherChange
 }) => {
     const battlefieldRef = useRef(null);
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [draggingUnitPos, setDraggingUnitPos] = useState(null);
 
     const getAllUnits = () => {
         const units = [];
@@ -134,14 +136,25 @@ export const UnitMap = ({
         return lines;
     };
 
+    const handleMouseMove = useCallback((e) => {
+        if (!battlefieldRef.current) return;
+        const rect = battlefieldRef.current.getBoundingClientRect();
+        const x = Math.max(0, Math.min(e.clientX - rect.left, FIELD_WIDTH));
+        const y = Math.max(0, Math.min(e.clientY - rect.top, FIELD_HEIGHT));
+        setMousePos({ x, y });
+    }, []);
+
+    const handleMouseLeave = useCallback(() => {
+        setMousePos({ x: 0, y: 0 });
+    }, []);
+
     const handleMouseDown = (e, unitId) => {
         if (!battlefieldRef.current) return;
 
         setSelectedNode(unitId);
 
-        if (allUnits.filter(u => u.id === unitId)[0].isDeployed) {
-            return;
-        }
+        const unit = allUnits.find(u => u.id === unitId);
+        if (unit?.isDeployed) return;
 
         const battlefieldRect = battlefieldRef.current.getBoundingClientRect();
         const marker = e.currentTarget;
@@ -159,6 +172,8 @@ export const UnitMap = ({
             const boundedX = Math.max(0, Math.min(currentX, FIELD_WIDTH));
             const boundedY = Math.max(0, Math.min(currentY, FIELD_HEIGHT));
 
+            setDraggingUnitPos({ x: boundedX, y: boundedY });
+
             onOtherChange(unitId, "hasMoved", true);
             onOtherChange(unitId, "isMarked", true);
             onOtherChange(unitId, "position", { x: boundedX, y: boundedY });
@@ -167,6 +182,7 @@ export const UnitMap = ({
         const handleMouseUp = () => {
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseup', handleMouseUp);
+            setDraggingUnitPos(null);
         };
 
         document.addEventListener('mousemove', handleMouseMove);
@@ -177,7 +193,15 @@ export const UnitMap = ({
         e.preventDefault();
     };
 
-    if (!allUnits) return null;
+    let distanceToCursor = null;
+    if (currentUnitId) {
+        const observer = allUnits.find(u => u.id === currentUnitId);
+        if (observer?.position) {
+            const dx = mousePos.x - observer.position.x;
+            const dy = mousePos.y - observer.position.y;
+            distanceToCursor = Math.sqrt(dx * dx + dy * dy).toFixed(1);
+        }
+    }
 
     return (
         <div className="interactive-battlefield-container">
@@ -199,6 +223,8 @@ export const UnitMap = ({
             <div
                 ref={battlefieldRef}
                 className="interactive-battlefield"
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
             >
                 {allUnits.map(unit => {
                     const pos = unit.position || { x: 50, y: 50 };
@@ -222,6 +248,17 @@ export const UnitMap = ({
                     );
                 })}
             </div>
-        </div>
+            <div className="map-info-panel">
+                <div>
+                    {draggingUnitPos
+                        ? (`Позиция: ${Math.round(draggingUnitPos.x / 3)}, ${Math.round(draggingUnitPos.y / 3)}`)
+                        : (`${Math.round(mousePos.x / 3)}, ${Math.round(mousePos.y / 3)}`)}
+                </div>
+                {distanceToCursor !== null && (
+                    <div>Дистанция: {Math.round(distanceToCursor / 3)} см</div>
+                )}
+
+            </div>
+        </div >
     );
 };
