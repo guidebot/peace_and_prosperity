@@ -136,6 +136,15 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
 
                     const stress = newUnit?.stress ?? 0.0;
 
+                    const alivePersons = unit.children?.filter(p => !p.isDead) || [];
+
+                    const sortedPersonsByLid = alivePersons.sort((a, b) => {
+                        const tpA = a.skills?.["LID"] || 0;
+                        const tpB = b.skills?.["LID"] || 0;
+                        if (tpA !== tpB) return tpA - tpB;
+                        return Math.random() - 0.5;
+                    });
+
                     const newFatigue = unit.hasMoved && !unit.vehicle
                         ? unit.fatigue
                         : unit.fatigue > 0
@@ -158,6 +167,12 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                         let updatedSkills = person.skills;
                         let isDead = person.isDead;
 
+                        let isSupressed = false;
+                        if (!person.isDead) {
+                            const index = sortedPersonsByLid.findIndex(p => p.id === person.id);
+                            isSupressed = index !== -1 && index < stress;
+                        }
+
                         if (person.isBleeding && !person.isDead) {
                             const currentFP = person.skills["FP"] ?? 0;
                             const newFP = currentFP - 1;
@@ -177,6 +192,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                             ...person,
                             equipment: updatedEquipment,
                             skills: updatedSkills,
+                            isSupressed: isSupressed,
                             isDead: isDead
                         };
                     }) || [];

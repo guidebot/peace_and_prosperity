@@ -274,7 +274,30 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                     <div className="buttons-panel">
                         <TbFlag />
                         <label className="form-label">
-                            <input min={0} name="stress" type="number" step="0.1" inputmode="decimal" value={data.stress.toFixed(1)} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
+                            <input
+                                name="stress"
+                                min="0"
+                                type="number"
+                                step="0.1"
+                                inputmode="decimal"
+                                value={data.stress.toFixed(1)}
+                                onChange={(e) => {
+                                    const newStress = Number(e.target.value);
+                                    onChange("stress", newStress);
+
+                                    const alivePersons = data.children?.filter(p => !p.isDead) || [];
+                                    const sortedPersonsByLid = alivePersons.sort((a, b) => {
+                                        const lidA = a.skills?.["LID"] || 0;
+                                        const lidB = b.skills?.["LID"] || 0;
+                                        if (lidA !== lidB) return lidA - lidB;
+                                        return Math.random() - 0.5;
+                                    });
+
+                                    sortedPersonsByLid.forEach((person, index) => {
+                                        onOtherChange(person.id, "isSupressed", index < newStress);
+                                    });
+                                }}
+                            />
                         </label>
                         <button key="toggleIsMarked" title="Переключить пометку завершения действия" onClick={toggleIsMarked}>
                             {data.isMarked ? (<RiCheckboxIndeterminateLine />) : (<RiCheckboxLine />)}
