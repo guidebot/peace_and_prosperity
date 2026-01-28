@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Skills } from '../game/skills';
+import { Skills } from '../game/Skill';
 import { Entity } from '../game/Entity';
-import { Titles } from '../game/titles';
+import { Titles } from '../game/Title';
 import { CountriesData, generateNameForCountry, Genders } from '../game/names';
 import { CreateInfantryEquipment } from '../game/Equipment';
 import { GiConfirmed, GiCancel } from 'react-icons/gi';

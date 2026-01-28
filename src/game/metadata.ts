@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { IUnit } from './IUnit';
+import { Unit } from './Unit';
 
 export const SCALE_PREFIX = 4;
 
@@ -19,9 +19,9 @@ export class player {
     type: string;
     id: string;
     name: string;
-    children: IUnit[];
+    children: Unit[];
 
-    constructor(name: string, units: IUnit[]) {
+    constructor(name: string, units: Unit[]) {
         this.type = "player";
         this.id = uuidv4();
         this.name = name;

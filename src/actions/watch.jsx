@@ -1,7 +1,7 @@
-import { Level, MinSkill } from '../game/skills';
+import { Level, MinSkill } from '../game/Skill';
 import { CurrentUnit } from '../cards/utils';
 import { VisibilityConditionsCatalog, ModifiedVisibilityData } from '../game/conditions';
-import { SCALE_PREFIX } from '../game/metadata';
+import { SCALE_PREFIX } from '../game/Constants';
 
 export function BestActorForUnit(unit, activeConditions) {
     const candidates = [];

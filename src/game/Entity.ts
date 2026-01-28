@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { IEntity } from './IEntity';
-import { IEquipment } from './IEquipment';
+import { Equipment } from './Equipment';
 
-export class Entity implements IEntity {
+export class Entity {
   type: string;
   id: string;
   name: string;
@@ -11,10 +10,10 @@ export class Entity implements IEntity {
   isThermal: boolean;
   isBleeding: boolean;
   isSuppressed: boolean;
-  equipment: IEquipment[];
+  equipment: Equipment[];
   defaultEquipment: string | null;
 
-  constructor(name: string, skills: Record<string, number>, equipment: IEquipment[]) {
+  constructor(name: string, skills: Record<string, number>, equipment: Equipment[]) {
     this.type = "entity";
     this.id = uuidv4();
     this.name = name;

@@ -1,11 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
-import { IEquipment } from './IEquipment';
 import { Vehicle } from './Vehicle';
 import { VehicleTemplate } from './VehicleTemplate';
 import infantryEquipment from './infantry_equipment.json';
 import vehicleEquipment from './vehicle_equipment.json';
 
-export class Equipment implements IEquipment {
+export class Equipment {
     id: string;
     originalId: string;
     type: string;
@@ -111,29 +110,29 @@ export const VehicleEquipment = vehicleEquipment.map((item: any) =>
     )
 );
 
-export const InfantryEquipmentCatalog: Record<string, IEquipment> = InfantryEquipment.reduce((acc: Record<string, IEquipment>, item: IEquipment) => {
+export const InfantryEquipmentCatalog: Record<string, Equipment> = InfantryEquipment.reduce((acc: Record<string, Equipment>, item: Equipment) => {
     acc[item.id] = item;
     return acc;
 }, {});
 
-export function CreateInfantryEquipment(ids: string[]): IEquipment[] {
+export function CreateInfantryEquipment(ids: string[]): Equipment[] {
     return ids.map(id => {
         const original = InfantryEquipmentCatalog[id];
         return { ...original, id: uuidv4() };
     });
 }
 
-export function RangeKey(equipment: IEquipment): string {
+export function RangeKey(equipment: Equipment): string {
     const { bestRange, effectiveRange, maxRange } = equipment;
     return `${bestRange}_${effectiveRange}_${maxRange}`;
 }
 
-export const VehicleEquipmentCatalog: Record<string, IEquipment> = VehicleEquipment.reduce((acc: Record<string, IEquipment>, item: IEquipment) => {
+export const VehicleEquipmentCatalog: Record<string, Equipment> = VehicleEquipment.reduce((acc: Record<string, Equipment>, item: Equipment) => {
     acc[item.id] = item;
     return acc;
 }, {});
 
-export function CreateVehicleEquipment(ids: string[]): IEquipment[] {
+export function CreateVehicleEquipment(ids: string[]): Equipment[] {
     return ids.map(id => {
         const original = VehicleEquipmentCatalog[id];
         return { ...original, id: uuidv4() };

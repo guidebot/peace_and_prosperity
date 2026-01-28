@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CreateVehicle, Vehicles, RangeKey } from '../game/Equipment';
-import { Level, MinSkill, MaxSkill } from '../game/skills';
+import { Level, MinSkill, MaxSkill } from '../game/Skill';
 import { RollModal } from '../actions/roll';
 import { GiBullseye, GiGunshot, GiWeight, GiTireTracks, GiFootsteps } from "react-icons/gi";
 import { GiRun } from 'react-icons/gi';

@@ -1,4 +1,4 @@
-import { Level, MaxSkill } from "../game/skills";
+import { Level, MaxSkill } from "../game/Skill";
 
 export function PossibleTargets(players, actor) {
     const allUnits = [];

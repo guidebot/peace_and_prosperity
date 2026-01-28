@@ -1,9 +1,9 @@
 import { useState, useRef } from 'react';
 import { MdDownload, MdUpload, MdTimer } from "react-icons/md";
 import { GiTabletopPlayers } from "react-icons/gi";
-import { player } from './game/metadata';
+import { Player } from './game/Player';
 import { RollModal } from './actions/roll';
-import { MaxSkill, Level } from './game/skills';
+import { MaxSkill, Level } from './game/Skill';
 import { useVisibilityConditions } from './game/conditions';
 import { UpdateSuppressionStatusForPersons } from './cards/utils';
 
@@ -123,7 +123,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
     };
 
     const handleCreatePlayer = () => {
-        const newPlayer = new player("Новая фракция", []);
+        const newPlayer = new Player("Новая фракция", []);
         setPlayers((prev) => [...prev, newPlayer]);
         setSelectedNode({ node: newPlayer.id });
     };

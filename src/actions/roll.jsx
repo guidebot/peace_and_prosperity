@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { useEffect } from 'react';
 import { GiCancel, GiConfirmed } from 'react-icons/gi';
 import { CurrentUnit } from '../cards/utils';
-import { SCALE_PREFIX } from '../game/metadata';
+import { SCALE_PREFIX } from '../game/Constants';
 
 export function RollModal({ players, actors, title, targets = [], isOpen, calculateEffect, onCancel, onConfirm }) {
     const [selectedTargetId, setSelectedTargetId] = useState(targets[0]?.id || '');

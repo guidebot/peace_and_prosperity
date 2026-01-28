@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { SkillCategories, SkillsByCategories } from '../game/skills';
+import { SkillCategories, SkillsByCategories } from '../game/Skill';
 import { CollapsibleEquipmentGroup } from './person_equipment';
 import { CollapsibleDrivingGroup } from './person_driving';
 import { CollapsibleSkillGroup } from './person_skills';

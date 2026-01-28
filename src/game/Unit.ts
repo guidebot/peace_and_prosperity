@@ -1,17 +1,16 @@
 import { v4 as uuidv4 } from 'uuid';
-import { IUnit } from './IUnit';
-import { IEntity } from './IEntity';
-import { IVehicle } from './IVehicle';
+import { Entity } from './Entity';
+import { Vehicle } from './Vehicle';
 
-export class Unit implements IUnit {
+export class Unit {
   isActive: boolean;
   type: string;
   id: string;
   name: string;
   stress: number;
   fatigue: number;
-  children: IEntity[];
-  vehicle: IVehicle | null;
+  children: Entity[];
+  vehicle: Vehicle | null;
   hasMoved: boolean;
   isDeployed: boolean;
   isMarked: boolean;
@@ -20,7 +19,7 @@ export class Unit implements IUnit {
   position: { x: number; y: number } | null;
   alertness: number;
 
-  constructor(name: string, soldiers: IEntity[]) {
+  constructor(name: string, soldiers: Entity[]) {
     this.isActive = true;
     this.type = "unit";
     this.id = uuidv4();

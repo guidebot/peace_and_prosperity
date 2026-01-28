@@ -1,7 +1,7 @@
-import { Level, MinSkill } from "../game/skills";
+import { Level, MinSkill } from "../game/Skill";
 import { CurrentUnit, RemoveEquipmentFromPerson, UpdateSuppressionStatusForPersons } from "../cards/utils";
 import { ModifiedVisibilityData } from "../game/conditions";
-import { SCALE_PREFIX } from "../game/metadata";
+import { SCALE_PREFIX } from "../game/Constants";
 
 function selectSoldiersForHit(unit, count) {
     if (!unit.children) return [];

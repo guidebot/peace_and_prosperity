@@ -1,15 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
-import { IVehicle } from './IVehicle';
-import { IEquipment } from './IEquipment';
+import { Equipment } from './Equipment';
 
-export class Vehicle implements IVehicle {
+export class Vehicle {
   id: string;
   type: string;
   name: string;
   armor: number;
-  equipment: IEquipment[];
+  equipment: Equipment[];
 
-  constructor(type: string, name: string, armor: number, equipment: IEquipment[]) {
+  constructor(type: string, name: string, armor: number, equipment: Equipment[]) {
     this.id = uuidv4();
     this.type = type;
     this.name = name;

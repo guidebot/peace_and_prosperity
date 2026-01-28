@@ -3,14 +3,14 @@ import { useState, useRef, useEffect } from 'react';
 import { MainMenu } from "./main_menu"
 import { ObjectsTree } from './tree/tree';
 import { ObjectCard } from './cards/card'
-import { player } from "./game/metadata";
+import { Player } from "./game/Player";
 import { Unit } from './game/Unit';
 import { GiCheckMark } from 'react-icons/gi';
 import { UpdateCardProperty } from './cards/utils';
 import { GenerateDefaultPerson } from './actions/person_generator';
 import { VisibilityConditionsProvider } from './game/conditions';
-import { Titles } from './game/titles';
-import { MaxSkill } from './game/skills';
+import { Titles } from './game/Title';
+import { MaxSkill } from './game/Skill';
 
 function App() {
   const soldiers = [
@@ -37,9 +37,9 @@ function App() {
   });
 
   const [players, setPlayers] = useState([
-    new player("GM", [units[0], units[1]]),
-    new player("Player1", [units[2]]),
-    new player("Player2", [units[3]])
+    new Player("GM", [units[0], units[1]]),
+    new Player("Player1", [units[2]]),
+    new Player("Player2", [units[3]])
   ]);
 
   const handleOtherPropertyChange = (id, name, value) => {

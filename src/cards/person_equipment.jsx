@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Level } from '../game/skills';
+import { Level } from '../game/Skill';
 import { MdArrowRight, MdArrowDropDown, MdDelete } from "react-icons/md";
 import { EquipmentEditorModal } from '../actions/equipment_editor';
 import { RollModal } from '../actions/roll';
@@ -12,7 +12,7 @@ import { PossibleTargets, RemoveEquipmentFromPerson } from './utils';
 import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from "../game/conditions";
 import { PiBinocularsFill } from 'react-icons/pi';
 import { MdSettingsSuggest, MdOutlineAdd } from 'react-icons/md';
-import { SCALE_PREFIX } from '../game/metadata';
+import { SCALE_PREFIX } from '../game/Constants';
 
 import { RiTimerFlashLine } from 'react-icons/ri';
 import { TbArrowsExchange } from 'react-icons/tb';

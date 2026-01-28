@@ -1,0 +1,1 @@
+export const SCALE_PREFIX = 4;

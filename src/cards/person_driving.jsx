@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Level } from '../game/skills';
+import { Level } from '../game/Skill';
 import { MdArrowRight, MdArrowDropDown } from "react-icons/md";
 import { RollModal } from '../actions/roll';
 import { TfiTarget } from "react-icons/tfi";
@@ -8,7 +8,7 @@ import { PossibleTargets, CurrentUnit } from './utils';
 import { CanWatchEquipment } from '../actions/watch';
 import { PiBinocularsFill } from 'react-icons/pi';
 import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from "../game/conditions";
-import { SCALE_PREFIX } from '../game/metadata';
+import { SCALE_PREFIX } from '../game/Constants';
 
 export function CollapsibleDrivingGroup({ isOpen, toggle, players, actor, onOtherChange, addLogEntry }) {
     const calculateWatchEffect = CalculateWatchEffectWithConditions();
