@@ -1,3 +1,6 @@
+import { Entity } from "./Entity";
+import { Unit } from "./Unit";
+
 export class Skill {
     category: string;
     id: string;
@@ -24,30 +27,30 @@ export function Level(SkillPoints: number) {
     return 0;
 }
 
-export function MaxSkill(unitData: any, SkillKey: string) {
+export function MaxSkill(unitData: Unit, SkillKey: string) {
     if (!unitData.children || unitData.children.length === 0) return 0;
 
-    return unitData.children.filter((s: any) => !s.isDead && !s.isBleeding).reduce((maxPoints: number, soldier: any) => {
-        const points = soldier.Skills?.[SkillKey] || 0;
+    return unitData.children.filter((s: Entity) => !s.isDead && !s.isBleeding).reduce((maxPoints: number, soldier: Entity) => {
+        const points = soldier.skills?.[SkillKey] || 0;
         return Math.max(maxPoints, points);
     }, 0);
 }
 
-export function MinSkill(unitData: any, SkillKey: string) {
+export function MinSkill(unitData: Unit, SkillKey: string) {
     if (!unitData || !unitData.children || unitData.children.length === 0) return 0;
 
-    return unitData.children.filter((s: any) => !s.isDead && !s.isBleeding).reduce((maxPoints: number, soldier: any) => {
-        const points = soldier.Skills?.[SkillKey] || 0;
+    return unitData.children.filter((s: Entity) => !s.isDead && !s.isBleeding).reduce((maxPoints: number, soldier: Entity) => {
+        const points = soldier.skills?.[SkillKey] || 0;
         return Math.min(maxPoints, points);
     }, 999);
 }
 
-export function MedianSkill(unitData: any, SkillKey: string) {
+export function MedianSkill(unitData: Unit, SkillKey: string) {
     if (!unitData.children || unitData.children.length === 0) return 0;
 
     const SkillValues = unitData.children
-        .filter((soldier: any) => !soldier.isDead && !soldier.isBleeding)
-        .map((soldier: any) => soldier.Skills?.[SkillKey] || 0);
+        .filter((soldier: Entity) => !soldier.isDead && !soldier.isBleeding)
+        .map((soldier: Entity) => soldier.skills?.[SkillKey] || 0);
 
     if (SkillValues.length === 0) return 0;
 

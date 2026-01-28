@@ -32,14 +32,16 @@ export function ApplyFireEffects(players, rolls, actors, target, onPropertyChang
 
     const totalHits = effects.reduce((acc, val) => acc + (val.hits || 0), 0);
 
-    if (totalHits > 0) {
-        const hitSoldiers = selectSoldiersForHit(target, totalHits);
-        hitSoldiers.forEach(soldier => {
-            onPropertyChange(soldier.id, "isBleeding", true);
-        });
-    }
+    const hitSoldiers = totalHits > 0 ? selectSoldiersForHit(target, totalHits) : [];
+    hitSoldiers.forEach(soldier => {
+        onPropertyChange(soldier.id, "isBleeding", true);
+    });
 
-    UpdateSuppressionStatusForPersons(target.children, newStress, onPropertyChange);
+    const soldiersEligibleForSuppression = target.children.filter(soldier =>
+        !hitSoldiers.some(hitSoldier => hitSoldier.id === soldier.id)
+    );
+
+    UpdateSuppressionStatusForPersons(soldiersEligibleForSuppression, newStress, onPropertyChange);
 
     effects.filter(ef => ef.result).forEach(ef => {
         if (ef.actorData.equipment.ammo === 1 && ef.actorData.equipment.weight === 0) {
