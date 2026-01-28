@@ -1,5 +1,5 @@
 import { Level, MinSkill } from "../game/skills";
-import { CurrentUnit, RemoveEquipmentFromPerson } from "../cards/utils";
+import { CurrentUnit, RemoveEquipmentFromPerson, UpdateSuppressionStatusForPersons } from "../cards/utils";
 import { ModifiedVisibilityData } from "../game/conditions";
 import { SCALE_PREFIX } from "../game/metadata";
 
@@ -18,20 +18,6 @@ function selectSoldiersForHit(unit, count) {
     return sorted.slice(0, count);
 }
 
-function updateSuppressionStatus(unit, stress, onPropertyChange) {
-    const aliveSoldiers = unit.children?.filter(p => !p.isDead) || [];
-
-    const sorted = aliveSoldiers.sort((a, b) => {
-        const tpA = a.skills?.["LID"] || 0;
-        const tpB = b.skills?.["LID"] || 0;
-        if (tpA !== tpB) return tpA - tpB;
-        return Math.random() - 0.5;
-    });
-
-    sorted.forEach((soldier, index) => {
-        onPropertyChange(soldier.id, "isSupressed", index < stress);
-    });
-}
 
 export function ApplyFireEffects(players, rolls, actors, target, onPropertyChange, activeConditions) {
     const effects = CalculateFireEffects(players, rolls, actors, target, activeConditions);
@@ -53,7 +39,7 @@ export function ApplyFireEffects(players, rolls, actors, target, onPropertyChang
         });
     }
 
-    updateSuppressionStatus(target, newStress, onPropertyChange);
+    UpdateSuppressionStatusForPersons(target.children, newStress, onPropertyChange);
 
     effects.filter(ef => ef.result).forEach(ef => {
         if (ef.actorData.equipment.ammo === 1 && ef.actorData.equipment.weight === 0) {

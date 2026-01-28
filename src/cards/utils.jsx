@@ -122,3 +122,18 @@ export function RemoveEquipmentFromPerson(person, equipment, onPropertyChange) {
 
     onPropertyChange(person.id, "equipment", newEquipment);
 }
+
+export function UpdateSuppressionStatusForPersons(persons, stress, onPropertyChange) {
+    const alivePersons = persons?.filter(p => !p.isDead && !p.isBleeding) || [];
+
+    const sortedPersonsByLid = alivePersons.sort((a, b) => {
+        const lidA = a.skills?.["LID"] || 0;
+        const lidB = b.skills?.["LID"] || 0;
+        if (lidA !== lidB) return lidA - lidB;
+        return Math.random() - 0.5;
+    });
+
+    sortedPersonsByLid.forEach((person, index) => {
+        onPropertyChange(person.id, "isSuppressed", index < stress);
+    });
+}

@@ -5,6 +5,7 @@ import { player } from './game/metadata';
 import { RollModal } from './actions/roll';
 import { MaxSkill, Level } from './game/skills';
 import { useVisibilityConditions } from './game/conditions';
+import { UpdateSuppressionStatusForPersons } from './cards/utils';
 
 export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) {
     const fileInputRef = useRef(null);
@@ -136,15 +137,6 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
 
                     const stress = newUnit?.stress ?? 0.0;
 
-                    const alivePersons = unit.children?.filter(p => !p.isDead) || [];
-
-                    const sortedPersonsByLid = alivePersons.sort((a, b) => {
-                        const tpA = a.skills?.["LID"] || 0;
-                        const tpB = b.skills?.["LID"] || 0;
-                        if (tpA !== tpB) return tpA - tpB;
-                        return Math.random() - 0.5;
-                    });
-
                     const newFatigue = unit.hasMoved && !unit.vehicle
                         ? unit.fatigue
                         : unit.fatigue > 0
@@ -152,6 +144,12 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                             : 0;
 
                     const newHasMoved = unit.hasMoved && !actuallyMoved.has(unit.id) ? false : unit.hasMoved;
+
+                    const suppressionMap = new Map();
+
+                    UpdateSuppressionStatusForPersons(unit.children || [], stress, (personId, property, value) => {
+                        suppressionMap.set(personId, value);
+                    });
 
                     const updatedPersons = unit.children?.map(person => {
                         const updatedEquipment = person.equipment?.map(item => {
@@ -164,36 +162,32 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                             return item;
                         }) || [];
 
-                        let updatedSkills = person.skills;
-                        let isDead = person.isDead;
-
-                        let isSupressed = false;
-                        if (!person.isDead) {
-                            const index = sortedPersonsByLid.findIndex(p => p.id === person.id);
-                            isSupressed = index !== -1 && index < stress;
-                        }
-
-                        if (person.isBleeding && !person.isDead) {
+                        if (!person.isDead && person.isBleeding) {
                             const currentFP = person.skills["FP"] ?? 0;
                             const newFP = currentFP - 1;
 
-                            updatedSkills = {
+                            const updatedSkills = {
                                 ...person.skills,
                                 FP: newFP > 0 ? newFP : 0
                             };
 
                             if (newFP < 0) {
-                                isDead = true;
                                 logMessages.push(`${person.name} умер.`);
                             }
+
+                            return {
+                                ...person,
+                                equipment: updatedEquipment,
+                                skills: updatedSkills,
+                                isSuppressed: suppressionMap.get(person.id) ?? person.isSuppressed,
+                                isDead: newFP < 0 ? true : false
+                            };
                         }
 
                         return {
                             ...person,
                             equipment: updatedEquipment,
-                            skills: updatedSkills,
-                            isSupressed: isSupressed,
-                            isDead: isDead
+                            isSuppressed: suppressionMap.get(person.id) ?? person.isSuppressed
                         };
                     }) || [];
 

@@ -10,7 +10,7 @@ import { TfiTarget } from "react-icons/tfi";
 import { IoIosPersonAdd, IoMdMove } from "react-icons/io";
 import { PersonGenerator } from '../actions/person_generator';
 import { BiSolidShow, BiSolidHide, BiShowAlt, BiPulse } from "react-icons/bi";
-import { PossibleTargets, MovementSpeed, TotalWeight, TotalCapacity } from './utils';
+import { PossibleTargets, MovementSpeed, TotalWeight, TotalCapacity, UpdateSuppressionStatusForPersons } from './utils';
 import { MdDelete } from 'react-icons/md';
 import { CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from '../game/conditions';
 import { UnitMap } from './emap';
@@ -284,18 +284,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                                 onChange={(e) => {
                                     const newStress = Number(e.target.value);
                                     onChange("stress", newStress);
-
-                                    const alivePersons = data.children?.filter(p => !p.isDead) || [];
-                                    const sortedPersonsByLid = alivePersons.sort((a, b) => {
-                                        const lidA = a.skills?.["LID"] || 0;
-                                        const lidB = b.skills?.["LID"] || 0;
-                                        if (lidA !== lidB) return lidA - lidB;
-                                        return Math.random() - 0.5;
-                                    });
-
-                                    sortedPersonsByLid.forEach((person, index) => {
-                                        onOtherChange(person.id, "isSupressed", index < newStress);
-                                    });
+                                    UpdateSuppressionStatusForPersons(data.children, newStress, onOtherChange);
                                 }}
                             />
                         </label>
