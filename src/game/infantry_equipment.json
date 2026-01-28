@@ -527,7 +527,7 @@
     },
     {
         "id": "konkurs",
-        "skill": "WPN_at_guided",
+        "skill": "WPN_guided",
         "name": "Конкурс",
         "optic": {
             "day": {
@@ -554,7 +554,7 @@
     },
     {
         "id": "javelin",
-        "skill": "WPN_at_guided",
+        "skill": "WPN_guided",
         "name": "Javelin",
         "optic": {
             "day": {
