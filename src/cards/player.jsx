@@ -1,9 +1,9 @@
-import { unit } from "../game/unit";
+import { Unit } from "../game/Unit";
 import { RiTeamFill } from "react-icons/ri";
 
 export function PlayerForm({ data, setPlayers, onChange }) {
     const handleCreateUnit = () => {
-        const newUnit = new unit("Новый отряд", []);
+        const newUnit = new Unit("Новый отряд", []);
 
         setPlayers((prevPlayers) => {
             return prevPlayers.map(player => {

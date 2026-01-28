@@ -3,7 +3,7 @@ import { CurrentUnit } from '../cards/utils';
 import { VisibilityConditionsCatalog, ModifiedVisibilityData } from '../game/conditions';
 import { SCALE_PREFIX } from '../game/metadata';
 
-function getBestActorForUnit(unit, activeConditions) {
+export function BestActorForUnit(unit, activeConditions) {
     const candidates = [];
 
     const evaluatePerson = (person) => {
@@ -37,6 +37,8 @@ function getBestActorForUnit(unit, activeConditions) {
         }
     }
 
+    if (candidates.length === 0) return null;
+
     const bestActor = candidates.reduce((best, curr) =>
         curr.totalScore > best.totalScore ? curr : best
     );
@@ -50,7 +52,7 @@ export function ApplyWatchEffect(players, rolls, result, actor, target, activeCo
 };
 
 export function CalculateVisibilityDistance(observerUnit, targetUnit, activeConditions, roll, isInDef, forceUAV = false) {
-    const observerData = getBestActorForUnit(observerUnit, activeConditions);
+    const observerData = BestActorForUnit(observerUnit, activeConditions);
     const visData = ModifiedVisibilityData(observerData.equipment, activeConditions);
 
     const observerMSK = Level(observerData.actor.skills["MSK"]) || 0;
@@ -92,7 +94,7 @@ export function CalculateVisibilityDistance(observerUnit, targetUnit, activeCond
 
 export function CalculateWatchEffect(players, rolls, actors, target, activeConditions) {
     const actorData = actors[0].actor.type === "unit"
-        ? getBestActorForUnit(actors[0].actor, activeConditions)
+        ? BestActorForUnit(actors[0].actor, activeConditions)
         : actors[0];
 
     const actor = actorData.actor;

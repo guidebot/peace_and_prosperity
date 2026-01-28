@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Skills } from '../game/skills';
-import { entity } from '../game/person';
+import { Entity } from '../game/Entity';
 import { Titles } from '../game/titles';
 import { CountriesData, generateNameForCountry, Genders } from '../game/names';
-import { CreateInfantryEquipment } from '../game/equipment';
+import { CreateInfantryEquipment } from '../game/Equipment';
 import { GiConfirmed, GiCancel } from 'react-icons/gi';
 
 function assignEquipment(skills) {
@@ -15,7 +15,7 @@ function assignEquipment(skills) {
 
     const equipment = [];
 
-    if (FP >= 4 && (skills.WPN_at_launcher ?? 0) > 0) {
+    if (FP >= 4 && (skills.WPN_heavy ?? 0) > 0) {
         equipment.push("ak12");
         equipment.push("rpg29");
     }
@@ -178,6 +178,6 @@ export function GeneratePerson(titleName, isMilitary, hasWeapon, name) {
 
     const equipment = hasWeapon ? assignEquipment(skills) : [];
 
-    const newPerson = new entity(name, skills, equipment);
+    const newPerson = new Entity(name, skills, equipment);
     return newPerson;
 }

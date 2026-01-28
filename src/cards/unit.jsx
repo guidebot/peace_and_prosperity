@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CreateVehicle, Vehicles, RangeKey } from '../game/equipment';
+import { CreateVehicle, Vehicles, RangeKey } from '../game/Equipment';
 import { Level, MinSkill, MaxSkill } from '../game/skills';
 import { RollModal } from '../actions/roll';
 import { GiBullseye, GiGunshot, GiWeight, GiTireTracks, GiFootsteps } from "react-icons/gi";
@@ -19,7 +19,8 @@ import { TbFlag } from 'react-icons/tb';
 import { RiCheckboxIndeterminateLine, RiCheckboxLine } from 'react-icons/ri';
 import { CiLocationOff, CiLocationOn } from 'react-icons/ci';
 import { BsArrowsMove, BsSignStop } from 'react-icons/bs';
-import { useVisibilityConditions, ModifiedVisibilityData, VisibilityConditionsCatalog } from '../game/conditions';
+import { useVisibilityConditions } from '../game/conditions';
+import { BestActorForUnit } from '../actions/watch';
 
 export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNode, setPlayers, addLogEntry }) {
     const calculateFireEffect = CalculateFireEffectWithConditions();
@@ -182,54 +183,13 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
     };
 
 
-    function getBestActorForUnit(unit, activeConditions) {
-        const candidates = [];
-
-        const evaluatePerson = (person) => {
-            const baseSkillLevel = Level(person.skills["MSK"]) || 0;
-            const baseVisibility = Math.min(...activeConditions.map(c => VisibilityConditionsCatalog[c].value));
-            candidates.push({
-                actor: person,
-                equipment: null,
-                visibilityValue: baseVisibility,
-                totalScore: baseVisibility + 2 * baseSkillLevel
-            });
-
-            const equipmentList = Array.isArray(person.equipment) ? person.equipment : [];
-            for (const eq of equipmentList.filter(eq => eq.optic)) {
-                if (eq?.optic) {
-                    const visData = ModifiedVisibilityData(eq, activeConditions);
-                    const score = visData.visibility + 2 * baseSkillLevel;
-                    candidates.push({
-                        actor: person,
-                        equipment: eq,
-                        visibilityValue: visData.visibility,
-                        totalScore: score
-                    });
-                }
-            }
-        };
-
-        if (Array.isArray(unit.children)) {
-            for (const child of unit.children) {
-                evaluatePerson(child);
-            }
-        }
-
-        const bestActor = candidates.reduce((best, curr) =>
-            curr.totalScore > best.totalScore ? curr : best
-        );
-
-        return bestActor;
-    }
-
     function getAlertnessRoll(players, rolls, actors, target) {
         return rolls.map(roll => {
             const unit = actors.filter(a => a.actor.id === roll.id)[0].actor;
 
-            const unitData = getBestActorForUnit(unit, activeConditionIds);
+            const unitData = BestActorForUnit(unit, activeConditionIds);
 
-            return { id: roll.id, alertness: roll.roll, message: `Наблюдение ${unit.name}: ${unitData.actor.name}${unitData.equipment ? " (" + unitData.equipment.name + ")" : ""}: d20=${rolls[0].roll}.` };
+            return { id: roll.id, alertness: roll.roll, message: `Наблюдение ${unit.name}: ${unitData?.actor.name}${unitData?.equipment ? " (" + unitData.equipment.name + ")" : ""}: d20=${rolls.roll}.` };
         });
     }
 

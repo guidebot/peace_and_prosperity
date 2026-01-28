@@ -3,8 +3,8 @@ import { useState, useRef, useEffect } from 'react';
 import { MainMenu } from "./main_menu"
 import { ObjectsTree } from './tree/tree';
 import { ObjectCard } from './cards/card'
-import { player } from "./game/metadata"
-import { unit } from './game/unit';
+import { player } from "./game/metadata";
+import { Unit } from './game/Unit';
 import { GiCheckMark } from 'react-icons/gi';
 import { UpdateCardProperty } from './cards/utils';
 import { GenerateDefaultPerson } from './actions/person_generator';
@@ -23,10 +23,10 @@ function App() {
   ];
 
   const units = [
-    new unit("Captain", [soldiers[0]]),
-    new unit("Colonel", [soldiers[1]]),
-    new unit("Player1", [soldiers[2], soldiers[4]]),
-    new unit("Player2", [soldiers[3], soldiers[5]])
+    new Unit("Captain", [soldiers[0]]),
+    new Unit("Colonel", [soldiers[1]]),
+    new Unit("Player1", [soldiers[2], soldiers[4]]),
+    new Unit("Player2", [soldiers[3], soldiers[5]])
   ];
 
   units.forEach((unit, idx) => {

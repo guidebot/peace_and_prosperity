@@ -1,7 +1,7 @@
 import Select from 'react-select';
 import { useState, useEffect } from 'react';
 import { GiCancel, GiConfirmed } from 'react-icons/gi';
-import { InfantryEquipment, CreateInfantryEquipment } from '../game/equipment';
+import { InfantryEquipment, CreateInfantryEquipment } from '../game/Equipment';
 
 export function EquipmentEditorModal({ isOpen, onClose, onSave, initialData }) {
     const [jsonText, setJsonText] = useState("");
