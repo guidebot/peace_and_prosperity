@@ -8,7 +8,7 @@ import { MaxTeamSize, MovementSpeed } from "../cards/utils";
 import { GrUserPolice } from "react-icons/gr";
 import { PiDropFill, PiDropSlashFill } from "react-icons/pi";
 import { TbPlayerPause, TbPlayerPlay } from "react-icons/tb";
-import { BsEmojiDizzyFill } from "react-icons/bs";
+import { BsEmojiDizzy } from "react-icons/bs";
 
 export function TreeNode({ node, style, dragHandle, tree, isSelected, handlePropertyChange }) {
     if (!node) return null;
@@ -20,7 +20,7 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
     }
 
     return (
-        <div className={`node-container ${isSelected ? 'selected' : !node.isEditing && ((node.data.type === "entity" && (node.data.isDead || node.data.isBleeding)) || (node.data.type === 'unit' && !node.data.isActive)) ? 'inactive' : node.data.type === 'unit' && node.data.isHidden && node.data.isActive ? 'hidden' : ''
+        <div className={`node-container ${isSelected ? 'selected' : !node.isEditing && ((node.data.type === "entity" && (node.data.isDead || node.data.isBleeding || node.data.isSupressed)) || (node.data.type === 'unit' && !node.data.isActive)) ? 'inactive' : node.data.type === 'unit' && node.data.isHidden && node.data.isActive ? 'hidden' : ''
             } `} style={style} ref={dragHandle}>
             <div className="node-content">
                 <span>
@@ -51,7 +51,7 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
                     {!node.isEditing && node.data.type === 'unit' && node.data.hasMoved && (<span><IoMdMove /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.isDeployed && (<span><FaLocationPinLock /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.isMarked && (<span><GiCheckMark /></span>)}
-                    {!node.isEditing && node.data.type === 'entity' && !node.data.isDead && node.data.isSupressed && (<span style={{ color: 'red' }}><BsEmojiDizzyFill /></span>)}
+                    {!node.isEditing && node.data.type === 'entity' && !node.data.isDead && node.data.isSupressed && (<span style={{ color: 'red' }}><BsEmojiDizzy /></span>)}
                     {!node.isEditing && node.data.type === 'entity' && !node.data.isDead && node.data.isBleeding && (<span style={{ color: 'red' }}><PiDropFill /></span>)}
                     {!node.isEditing && node.data.type === "entity" && !node.data.isDead && (node.data.skills["MED"] ?? 0) > 0 && (<span><GiHealthNormal /></span>)}
                     {!node.isEditing && (<span>{node.data.name}</span>)}

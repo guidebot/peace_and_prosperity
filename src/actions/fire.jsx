@@ -44,8 +44,6 @@ export function ApplyFireEffects(players, rolls, actors, target, onPropertyChang
 
     onPropertyChange(target.id, "stress", newStress);
 
-    updateSuppressionStatus(target, newStress, onPropertyChange);
-
     const totalHits = effects.reduce((acc, val) => acc + (val.hits || 0), 0);
 
     if (totalHits > 0) {
@@ -54,6 +52,8 @@ export function ApplyFireEffects(players, rolls, actors, target, onPropertyChang
             onPropertyChange(soldier.id, "isBleeding", true);
         });
     }
+
+    updateSuppressionStatus(target, newStress, onPropertyChange);
 
     effects.filter(ef => ef.result).forEach(ef => {
         if (ef.actorData.equipment.ammo === 1 && ef.actorData.equipment.weight === 0) {
