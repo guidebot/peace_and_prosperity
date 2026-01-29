@@ -92,7 +92,7 @@ export const Skills = [
     new Skill("tech", "TECH_electronics", "Электроника")
 ]
 
-export const SkillsByCategories = Skills.reduce((acc: Record<string, any>, item: any) => {
+export const SkillsByCategories: Record<string, Skill[]> = Skills.reduce((acc: Record<string, Skill[]>, item: Skill) => {
     if (!acc[item.category]) {
         acc[item.category] = [];
     }
@@ -102,7 +102,7 @@ export const SkillsByCategories = Skills.reduce((acc: Record<string, any>, item:
     return acc;
 }, {});
 
-export const SkillsCatalog = Skills.reduce((acc: Record<string, any>, item: any) => {
+export const SkillsCatalog: Record<string, Skill> = Skills.reduce((acc: Record<string, Skill>, item: Skill) => {
     acc[item.id] = item;
     return acc;
 }, {});
