@@ -1,4 +1,5 @@
 import { Level, MaxSkill } from "../game/Skill";
+import { SortByPropertyWithRandomTies } from "../utils/sorting";
 
 export function PossibleTargets(players, actor) {
     const allUnits = [];
@@ -126,12 +127,7 @@ export function RemoveEquipmentFromPerson(person, equipment, onPropertyChange) {
 export function UpdateSuppressionStatusForPersons(persons, stress, onPropertyChange) {
     const alivePersons = persons?.filter(p => !p.isDead && !p.isBleeding) || [];
 
-    const sortedPersonsByLid = alivePersons.sort((a, b) => {
-        const lidA = a.skills?.["LID"] || 0;
-        const lidB = b.skills?.["LID"] || 0;
-        if (lidA !== lidB) return lidA - lidB;
-        return Math.random() - 0.5;
-    });
+    const sortedPersonsByLid = SortByPropertyWithRandomTies(alivePersons, (person) => person.skills?.["LID"] || 0);
 
     sortedPersonsByLid.forEach((person, index) => {
         onPropertyChange(person.id, "isSuppressed", index < stress);
