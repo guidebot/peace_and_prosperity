@@ -11,7 +11,7 @@ import { IoIosPersonAdd, IoMdMove } from "react-icons/io";
 import { PersonGenerator } from '../actions/person_generator';
 import { BiSolidShow, BiSolidHide, BiShowAlt, BiPulse } from "react-icons/bi";
 import { PossibleTargets, MovementSpeed, TotalWeight, TotalCapacity, UpdateSuppressionStatusForPersons } from './utils';
-import { MdDelete } from 'react-icons/md';
+import { MdDelete, MdSettingsSuggest } from 'react-icons/md';
 import { CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from '../game/conditions';
 import { UnitMap } from './emap';
 import { GrUserPolice } from "react-icons/gr";
@@ -21,12 +21,14 @@ import { CiLocationOff, CiLocationOn } from 'react-icons/ci';
 import { BsArrowsMove, BsSignStop } from 'react-icons/bs';
 import { useVisibilityConditions } from '../game/conditions';
 import { BestActorForUnit } from '../actions/watch';
+import { VehicleEditorModal } from '../actions/vehicle_editor';
 
 export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNode, setPlayers, addLogEntry }) {
     const calculateFireEffect = CalculateFireEffectWithConditions();
     const applyFireEffectsWithConditions = ApplyFireEffectWithConditions();
     const { activeConditionIds } = useVisibilityConditions();
     const [personGeneratorOpen, setPersonGeneratorOpen] = useState(false);
+    const [vehicleEditorOpen, setVehicleEditorOpen] = useState(false);
     const [modalData, setModalData] = useState({});
     const resetModalData = () => setModalData({ equipment: null, open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
 
@@ -201,6 +203,19 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                 )
             }
             {
+                vehicleEditorOpen && (
+                    <VehicleEditorModal
+                        isOpen={vehicleEditorOpen}
+                        onClose={() => setVehicleEditorOpen(false)}
+                        onSave={(vehicle) => {
+                            onChange("vehicle", vehicle);
+                            setVehicleEditorOpen(false);
+                        }}
+                        initialData={data.vehicle}
+                    />
+                )
+            }
+            {
                 modalData?.open && (
                     <RollModal
                         players={players}
@@ -290,12 +305,6 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                             <select style={{ width: "auto" }} name="vehicle" onChange={onSetVehicle} value="0">
                                 <option key="0" value="0">{data.vehicle ? data.vehicle.name : "Пешком"}</option>
                                 {Vehicles
-                                    // .filter((item) => {
-                                    //     const canUseBySkill = Level(currentSkills[item.skill] || 0) > 0;
-                                    //     const canUseByCategory = item.skill === "WPN_rifles";
-                                    //     const alreadyTaken = currentEquipment.includes(item.id);
-                                    //     return (canUseBySkill || canUseByCategory) && !alreadyTaken;
-                                    // })
                                     .map((item) => (
                                         <option key={item.id} value={item.id}>
                                             {item.name}
@@ -305,6 +314,11 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                             <button title="Бросить" onClick={() => onChange("vehicle", null)}>
                                 <MdDelete />
                             </button>
+                            {data.vehicle && (
+                                <button title="Редактировать транспортное средство" onClick={() => setVehicleEditorOpen(true)}>
+                                    <MdSettingsSuggest />
+                                </button>
+                            )}
                         </label>
                     </div>
                     <div className="buttons-panel">
