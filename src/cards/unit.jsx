@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CreateVehicle, Vehicles, RangeKey } from '../game/Equipment';
+import { RangeKey } from '../game/Equipment';
 import { Level, MinSkill, MaxSkill } from '../game/Skill';
 import { RollModal } from '../actions/roll';
 import { GiBullseye, GiGunshot, GiWeight, GiTireTracks, GiFootsteps } from "react-icons/gi";
@@ -149,11 +149,6 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
         return Object.values(groups);
     }
 
-    function onSetVehicle(e) {
-        const newVehicleId = e.target.value;
-        onChange("vehicle", newVehicleId === 0 ? null : CreateVehicle([newVehicleId])[0]);
-    }
-
     const applyAlertnessRoll = (players, rolls, actors, target) => {
         const effects = getAlertnessRoll(players, rolls, actors, target);
 
@@ -301,25 +296,23 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                         ))}
                     <div className="buttons-panel">
                         {data.vehicle ? (<GiTireTracks />) : (<GiFootsteps />)}
-                        <label className="form-label">
-                            <select style={{ width: "auto" }} name="vehicle" onChange={onSetVehicle} value="0">
-                                <option key="0" value="0">{data.vehicle ? data.vehicle.name : "Пешком"}</option>
-                                {Vehicles
-                                    .map((item) => (
-                                        <option key={item.id} value={item.id}>
-                                            {item.name}
-                                        </option>
-                                    ))}
-                            </select>
-                            <button title="Бросить" onClick={() => onChange("vehicle", null)}>
+                        <span>
+                            {data.vehicle ? data.vehicle.name : "Пешком"}
+                        </span>
+                        <button
+                            title={data.vehicle ? "Редактировать транспорт" : "Выбрать транспорт"}
+                            onClick={() => setVehicleEditorOpen(true)}
+                        >
+                            <MdSettingsSuggest />
+                        </button>
+                        {data.vehicle && (
+                            <button
+                                title="Удалить транспорт"
+                                onClick={() => onChange("vehicle", null)}
+                            >
                                 <MdDelete />
                             </button>
-                            {data.vehicle && (
-                                <button title="Редактировать транспортное средство" onClick={() => setVehicleEditorOpen(true)}>
-                                    <MdSettingsSuggest />
-                                </button>
-                            )}
-                        </label>
+                        )}
                     </div>
                     <div className="buttons-panel">
                         {
