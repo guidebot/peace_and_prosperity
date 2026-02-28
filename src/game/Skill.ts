@@ -79,16 +79,16 @@ export const Skills = [
     new Skill("char", "MED", "МЕД Медицина"),
     new Skill("char", "MSK", "МСК Маскировка"),
     new Skill("wpn", "WPN_rifles", "Лёгкое стрелковое"),
-    new Skill("wpn", "WPN_grenades", "Гранаты"),
-    new Skill("wpn", "WPN_sniper", "Снайперское оружие"),
+    new Skill("wpn", "WPN_grenades", "Гранаты (метательное)"),
+    new Skill("wpn", "WPN_sniper", "Снайперское"),
     new Skill("wpn", "WPN_mg", "Пулемёты"),
     new Skill("wpn", "WPN_heavy", "Тяжёлое вооружение"),
     new Skill("wpn", "WPN_guided", "Управляемые ракеты"),
-    new Skill("wpn", "WPN_tank_guns", "Наводчик боевых машин"),
+    new Skill("wpn", "WPN_tank_guns", "Вооружение боевых машин"),
+    new Skill("wpn", "WPN_uav", "Управление дронами"),
     new Skill("wpn", "WPN_artillery", "Артиллерия"),
     new Skill("tech", "TECH_explosives", "Взрывные устройства и мины"),
     new Skill("tech", "TECH_mechanics", "Механика"),
-    new Skill("tech", "TECH_uav", "Управление дронами"),
     new Skill("tech", "TECH_electronics", "Электроника")
 ]
 
