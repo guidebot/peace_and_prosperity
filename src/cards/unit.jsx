@@ -296,9 +296,6 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                         ))}
                     <div className="buttons-panel">
                         {data.vehicle ? (<GiTireTracks />) : (<GiFootsteps />)}
-                        <span>
-                            {data.vehicle ? data.vehicle.name : "Пешком"}
-                        </span>
                         <button
                             title={data.vehicle ? "Редактировать транспорт" : "Выбрать транспорт"}
                             onClick={() => setVehicleEditorOpen(true)}
@@ -313,6 +310,9 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                                 <MdDelete />
                             </button>
                         )}
+                        <span>
+                            {data.vehicle ? data.vehicle.name : "Пешком"}
+                        </span>
                     </div>
                     <div className="buttons-panel">
                         {

@@ -2,13 +2,13 @@
 A roleplaying wargame.
 
 ## Peace and Prosperity
-A module of 4-5 games, 4 hours each.
+A module of 6-8 games, 4 hours each.
 
 ## Contents
 - [Contract Core Rules](https://github.com/guidebot/peace_and_prosperity/blob/main/doc/contract.docx).
 - [Peace and Prosperity Master's book](https://github.com/guidebot/peace_and_prosperity/blob/main/doc/peace_and_prosperity_masters_book.docx).
 - [Peace and Prosperity Player's book](https://github.com/guidebot/peace_and_prosperity/blob/main/doc/peace_and_prosperity_players_book.docx).
-- Master's automation system developed using React.
+- [Master's application (typescript, react)](https://github.com/guidebot/peace_and_prosperity/tree/main/src).
 
 ## Language
 Only Russian is available.

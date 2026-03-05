@@ -3,6 +3,7 @@
 ## General Instructions:
 - Follow SOLID and DRY principles.
 - Apply TRIZ methodology when solving complex problems.
+- Use serena, sequential-thinking and context7 MCP's when applicable.
 
 ## Coding Style:
 - Do not add comments in generated code or markup.
