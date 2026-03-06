@@ -1,8 +1,35 @@
+import { Entity } from "../game/Entity";
+import { Unit } from "../game/Unit";
+import { Player } from "../game/Player";
+import { Equipment } from "../game/Equipment";
+import { Vehicle } from "../game/Vehicle";
 import { Level, MaxSkill } from "../game/Skill";
 import { SortByPropertyWithRandomTies } from "../utils/sorting";
 
-export function PossibleTargets(players, actor) {
-    const allUnits = [];
+type NodeWithChildren = {
+    id: string;
+    children?: NodeWithChildren[];
+    equipment?: Equipment[];
+    vehicle?: Vehicle | null;
+    [key: string]: any;
+};
+
+type EntityWithSkills = {
+    id: string;
+    skills?: Record<string, number>;
+    isDead?: boolean;
+    isBleeding?: boolean;
+    equipment?: Equipment[];
+    defaultEquipment?: string | null;
+    [key: string]: any;
+};
+
+interface PropertyChangeHandler {
+    (id: string, property: string, value: any): void;
+}
+
+export function PossibleTargets(players: Player[], actor: Entity | Unit): Unit[] {
+    const allUnits: Unit[] = [];
 
     for (const player of players) {
         let skipPlayer = false;
@@ -19,19 +46,19 @@ export function PossibleTargets(players, actor) {
     return allUnits;
 }
 
-export function TotalWeight(unitData) {
+export function TotalWeight(unitData: Unit): number {
     if (!unitData.children || unitData.children.length === 0) return 0;
 
     return unitData.children.filter(s => !s.isDead).reduce((total, soldier) => {
         const soldierWeight = soldier.equipment?.reduce((sum, item) => {
             return sum + (item.weight + item.ammo * item.ammoWeight);
-        }, 0);
+        }, 0) || 0;
 
         return total + soldierWeight;
     }, 0);
 };
 
-export function TotalCapacity(unitData) {
+export function TotalCapacity(unitData: Unit): number {
     if (!unitData.children || unitData.children.length === 0) return 0;
 
     const totalFpLevel = unitData.children.filter(s => !s.isDead).reduce((total, soldier) => {
@@ -44,7 +71,9 @@ export function TotalCapacity(unitData) {
     return totalFpLevel * 120;
 };
 
-export function MovementSpeed(unitData) {
+type MovementSpeedResult = number | { plain: number; road: number };
+
+export function MovementSpeed(unitData: Unit): MovementSpeedResult {
     if (!unitData.children || unitData.children.length === 0) return 2;
 
     if (unitData.vehicle) {
@@ -69,11 +98,11 @@ export function MovementSpeed(unitData) {
     }
 };
 
-export function MaxTeamSize(unitData) {
+export function MaxTeamSize(unitData: Unit): number {
     return 3 * Level(MaxSkill(unitData, "LID"));
 }
 
-export function CurrentUnit(players, actor) {
+export function CurrentUnit(players: Player[], actor: Entity): Unit | undefined {
     for (const player of players) {
         for (const unit of player.children) {
             if (unit.children?.some(person => person.id === actor.id)) { return unit; }
@@ -81,7 +110,7 @@ export function CurrentUnit(players, actor) {
     }
 }
 
-export function UpdateCardProperty(nodes, id, property, value) {
+export function UpdateCardProperty(nodes: NodeWithChildren[], id: string, property: string, value: any): NodeWithChildren[] {
     return nodes.map((node) => {
         if (node.id === id) {
             return { ...node, [property]: value };
@@ -112,8 +141,8 @@ export function UpdateCardProperty(nodes, id, property, value) {
     });
 };
 
-export function RemoveEquipmentFromPerson(person, equipment, onPropertyChange) {
-    const newEquipment = person.equipment.filter(eq => eq.id !== equipment.id);
+export function RemoveEquipmentFromPerson(person: EntityWithSkills, equipment: Equipment, onPropertyChange: PropertyChangeHandler): void {
+    const newEquipment = person.equipment?.filter(eq => eq.id !== equipment.id) || [];
     if (newEquipment.length === 0) {
         onPropertyChange(person.id, "defaultEquipment", null);
     }
@@ -124,7 +153,7 @@ export function RemoveEquipmentFromPerson(person, equipment, onPropertyChange) {
     onPropertyChange(person.id, "equipment", newEquipment);
 }
 
-export function UpdateSuppressionStatusForPersons(persons, stress, onPropertyChange) {
+export function UpdateSuppressionStatusForPersons(persons: EntityWithSkills[], stress: number, onPropertyChange: PropertyChangeHandler): void {
     const alivePersons = persons?.filter(p => !p.isDead && !p.isBleeding) || [];
 
     const sortedPersonsByLid = SortByPropertyWithRandomTies(alivePersons, (person) => person.skills?.["LID"] || 0);

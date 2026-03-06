@@ -5,7 +5,7 @@ This is a gamemaster driven cooperative roleplaying wargame.
 
 ## Project Structure
 - `src/` typescript/react single-page web application
-  - `App.js` main application
+  - `App.jsx` main application
   - `tree/` arborist tree showing sides, units and persons
   - `utils/` common functions
   - `game/` game models, databases (equipment, vehicles, names and so on)
@@ -16,10 +16,11 @@ This is a gamemaster driven cooperative roleplaying wargame.
   - `peace_and_prosperity_masters_book.docx` campagain description
 
 ## General Instructions:
+- Prefer typescript over javascript.
 - Follow SOLID and DRY principles.
-- Apply TRIZ methodology when solving complex problems.
-- Before implementing complex features, confirm the approach with a brief plan and get user approval.
-- When doing complex tasks use sequential-thinking MCP to think the task thoroughly before switching to implementation.
+- Apply TRIZ methodology when thinking.
+- Before making changes, summarize the approach with a brief plan and get user approval.
+- When planning use sequential-thinking.
 - When adding a new library or framework or starting a new project always check context7 for updates about the used libraries and frameworks.
 
 ## Coding Style:
