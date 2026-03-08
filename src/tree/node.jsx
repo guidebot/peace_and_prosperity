@@ -1,4 +1,4 @@
-import { MdArrowRight, MdArrowDropDown } from "react-icons/md";
+import { MdArrowRight, MdArrowDropDown, MdAdd } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { GiStopSign, GiCheckMark, GiTruck, GiApc, GiTank, GiHealthNormal, GiSkullCrossedBones } from 'react-icons/gi';
 import { FaLocationPinLock } from "react-icons/fa6";
@@ -9,9 +9,26 @@ import { GrUserPolice } from "react-icons/gr";
 import { PiDropFill, PiDropSlashFill } from "react-icons/pi";
 import { TbPlayerPause, TbPlayerPlay } from "react-icons/tb";
 import { BsEmojiDizzy } from "react-icons/bs";
+import { RiTeamFill } from "react-icons/ri";
+import { Unit } from "../game/Unit";
 
-export function TreeNode({ node, style, dragHandle, tree, isSelected, handlePropertyChange }) {
+export function TreeNode({ node, style, dragHandle, tree, isSelected, handlePropertyChange, players, setPlayers }) {
     if (!node) return null;
+
+    const handleAddUnit = () => {
+        const newUnit = new Unit("Новый отряд", []);
+        setPlayers((prevPlayers) => {
+            return prevPlayers.map(player => {
+                if (player.id === node.data.id) {
+                    return {
+                        ...player,
+                        children: [...(player.children || []), newUnit]
+                    };
+                }
+                return player;
+            });
+        });
+    };
 
     const renderGlyph = (node) => {
         if (!node.isLeaf) {
@@ -62,6 +79,12 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
             </div>
             <div className="node-actions">
                 <div className="buttons-panel">
+                    <button style={{ display: !node.isEditing && node.data.type === "player" ? 'inline' : 'none' }} onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddUnit();
+                    }} title="Добавить отряд">
+                        <RiTeamFill />
+                    </button>
                     <button style={{ display: !node.isEditing && node.data.type === "unit" ? 'inline' : 'none' }} onClick={(e) => {
                         e.stopPropagation();
                         handlePropertyChange(node.id, "isHidden", !node.data.isHidden);

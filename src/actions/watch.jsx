@@ -53,6 +53,11 @@ export function ApplyWatchEffect(players, rolls, result, actor, target, activeCo
 
 export function CalculateVisibilityDistance(observerUnit, targetUnit, activeConditions, roll, isInDef, forceUAV = false) {
     const observerData = BestActorForUnit(observerUnit, activeConditions);
+    
+    if (!observerData) {
+        return SCALE_PREFIX;
+    }
+    
     const visData = ModifiedVisibilityData(observerData.equipment, activeConditions);
 
     const observerMSK = Level(observerData.actor.skills["MSK"]) || 0;

@@ -149,7 +149,7 @@ export const ObjectsTree = forwardRef(({ players, setPlayers, selectedNode, setS
                 onDelete={onDelete}
                 onMove={onMove}
                 onSelect={onSelect}>
-                {(props) => <TreeNode {...props} isSelected={props.node.id === selectedNode} handlePropertyChange={handlePropertyChange} />}
+                {(props) => <TreeNode {...props} isSelected={props.node.id === selectedNode} handlePropertyChange={handlePropertyChange} players={players} setPlayers={setPlayers} />}
             </Tree>
         </div>
     );

@@ -49,7 +49,7 @@ export function PossibleTargets(players: Player[], actor: Entity | Unit): Unit[]
 export function TotalWeight(unitData: Unit): number {
     if (!unitData.children || unitData.children.length === 0) return 0;
 
-    return unitData.children.filter(s => !s.isDead).reduce((total, soldier) => {
+    return unitData.children.reduce((total, soldier) => {
         const soldierWeight = soldier.equipment?.reduce((sum, item) => {
             return sum + (item.weight + item.ammo * item.ammoWeight);
         }, 0) || 0;
