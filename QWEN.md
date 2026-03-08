@@ -29,3 +29,7 @@ This is a gamemaster driven cooperative roleplaying wargame.
 - Use language-specific naming conventions:
   - C#: PascalCase for public members, camelCase for private fields.
   - JavaScript/TypeScript: PascalCase for exports, camelCase for internal.
+  - File names:
+    - React components (.jsx, .tsx): PascalCase (e.g., `PersonForm.tsx`)
+    - TypeScript classes/models (.ts): PascalCase (e.g., `Entity.ts`)
+    - Utility modules (.ts, .js): camelCase (e.g., `utils.ts`)

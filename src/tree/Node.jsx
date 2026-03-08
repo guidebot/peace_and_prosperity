@@ -11,12 +11,13 @@ import { TbPlayerPause, TbPlayerPlay } from "react-icons/tb";
 import { BsEmojiDizzy } from "react-icons/bs";
 import { RiTeamFill } from "react-icons/ri";
 import { Unit } from "../game/Unit";
+import { generateUnitName } from "../game/callsigns";
 
 export function TreeNode({ node, style, dragHandle, tree, isSelected, handlePropertyChange, players, setPlayers }) {
     if (!node) return null;
 
     const handleAddUnit = () => {
-        const newUnit = new Unit("Новый отряд", []);
+        const newUnit = new Unit(generateUnitName(), []);
         setPlayers((prevPlayers) => {
             return prevPlayers.map(player => {
                 if (player.id === node.data.id) {

@@ -1,5 +1,5 @@
 import { useRef, useState, useCallback } from 'react';
-import { CalculateVisibilityDistance } from '../actions/watch.jsx';
+import { CalculateVisibilityDistance } from '../actions/Watch.jsx';
 import './emap.css';
 
 const FIELD_WIDTH = 540;

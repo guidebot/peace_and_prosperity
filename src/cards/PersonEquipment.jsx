@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { Level } from '../game/Skill';
+import { SCALE_PREFIX } from '../game/Constants';
 import { MdArrowRight, MdArrowDropDown, MdDelete } from "react-icons/md";
-import { EquipmentEditorModal } from '../actions/equipment_editor';
-import { RollModal } from '../actions/roll';
+import { EquipmentEditorModal } from '../actions/EquipmentEditor';
+import { RollModal } from '../actions/Roll';
 import { TfiTarget } from "react-icons/tfi";
-import { CanFireInfantryEquipment } from '../actions/fire';
-import { CanWatchEquipment } from '../actions/watch';
+import { CanFireInfantryEquipment } from '../actions/Fire';
+import { CanWatchEquipment } from '../actions/Watch';
 import { CiBookmark, CiBookmarkCheck } from "react-icons/ci";
 import { GiSmokeBomb, GiConfirmed, GiCancel } from 'react-icons/gi';
 import { PossibleTargets, RemoveEquipmentFromPerson } from './utils';
 import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from "../game/conditions";
 import { PiBinocularsFill } from 'react-icons/pi';
 import { MdSettingsSuggest, MdOutlineAdd } from 'react-icons/md';
-import { SCALE_PREFIX } from '../game/Constants';
 
 import { RiTimerFlashLine } from 'react-icons/ri';
 import { TbArrowsExchange } from 'react-icons/tb';

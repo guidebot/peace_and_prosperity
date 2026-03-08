@@ -1,16 +1,17 @@
 import './App.css';
 import { useState, useRef, useEffect } from 'react';
-import { MainMenu } from "./main_menu"
-import { ObjectsTree } from './tree/tree';
-import { ObjectCard } from './cards/card'
+import { MainMenu } from "./MainMenu"
+import { ObjectsTree } from './tree/Tree';
+import { ObjectCard } from './cards/Card'
 import { Player } from "./game/Player";
 import { Unit } from './game/Unit';
 import { GiCheckMark } from 'react-icons/gi';
 import { UpdateCardProperty } from './cards/utils';
-import { GenerateDefaultPerson } from './actions/person_generator';
+import { GenerateDefaultPerson } from './actions/PersonGenerator';
 import { VisibilityConditionsProvider } from './game/conditions';
 import { Titles } from './game/Title';
 import { MaxSkill } from './game/Skill';
+import { generateUnitName } from './game/callsigns';
 
 function App() {
   const soldiers = [
@@ -23,10 +24,10 @@ function App() {
   ];
 
   const units = [
-    new Unit("Captain", [soldiers[0]]),
-    new Unit("Colonel", [soldiers[1]]),
-    new Unit("Player1", [soldiers[2], soldiers[4]]),
-    new Unit("Player2", [soldiers[3], soldiers[5]])
+    new Unit(generateUnitName(), [soldiers[0]]),
+    new Unit(generateUnitName(), [soldiers[1]]),
+    new Unit(generateUnitName(), [soldiers[2], soldiers[4]]),
+    new Unit(generateUnitName(), [soldiers[3], soldiers[5]])
   ];
 
   units.forEach((unit, idx) => {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { MdArrowRight, MdArrowDropDown } from "react-icons/md";
 import { GiHealing } from 'react-icons/gi';
 import { Level } from '../game/Skill';
-import { RollModal } from '../actions/roll';
+import { RollModal } from '../actions/Roll';
 import { TbFilter, TbFilterOff } from 'react-icons/tb';
 import { PiBinocularsFill } from 'react-icons/pi';
 import { PossibleTargets } from './utils';

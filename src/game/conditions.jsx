@@ -4,8 +4,8 @@ import { PiSunHorizonFill } from 'react-icons/pi';
 import { MdNightlight } from 'react-icons/md';
 import { FaCloudRain } from 'react-icons/fa6';
 import { RiFoggyFill } from 'react-icons/ri';
-import { ApplyWatchEffect, CalculateWatchEffect } from '../actions/watch';
-import { ApplyFireEffects, CalculateFireEffects } from '../actions/fire';
+import { ApplyWatchEffect, CalculateWatchEffect } from '../actions/Watch';
+import { ApplyFireEffects, CalculateFireEffects } from '../actions/Fire';
 
 const VisibilityConditions =
     [

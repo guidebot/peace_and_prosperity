@@ -1,6 +1,6 @@
 import { Tree } from 'react-arborist';
 import { useRef, useState, useLayoutEffect } from 'react';
-import { TreeNode } from './node'
+import { TreeNode } from './Node'
 import useResizeObserver from '@react-hook/resize-observer';
 import { forwardRef } from 'react';
 

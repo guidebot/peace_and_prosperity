@@ -1,27 +1,27 @@
 import { useState } from 'react';
 import { RangeKey } from '../game/Equipment';
 import { Level, MinSkill, MaxSkill } from '../game/Skill';
-import { RollModal } from '../actions/roll';
+import { RollModal } from '../actions/Roll';
 import { GiBullseye, GiGunshot, GiWeight, GiTireTracks, GiFootsteps } from "react-icons/gi";
 import { GiRun } from 'react-icons/gi';
 import { PiBinocularsFill } from 'react-icons/pi';
 import { FaRoad } from "react-icons/fa6";
 import { TfiTarget } from "react-icons/tfi";
 import { IoIosPersonAdd, IoMdMove } from "react-icons/io";
-import { PersonGenerator } from '../actions/person_generator';
+import { PersonGenerator } from '../actions/PersonGenerator';
 import { BiSolidShow, BiSolidHide, BiShowAlt, BiPulse } from "react-icons/bi";
 import { PossibleTargets, MovementSpeed, TotalWeight, TotalCapacity, UpdateSuppressionStatusForPersons } from './utils';
 import { MdDelete, MdSettingsSuggest } from 'react-icons/md';
 import { CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from '../game/conditions';
-import { UnitMap } from './emap';
+import { UnitMap } from './Emap';
 import { GrUserPolice } from "react-icons/gr";
 import { TbFlag } from 'react-icons/tb';
 import { RiCheckboxIndeterminateLine, RiCheckboxLine } from 'react-icons/ri';
 import { CiLocationOff, CiLocationOn } from 'react-icons/ci';
 import { BsArrowsMove, BsSignStop } from 'react-icons/bs';
 import { useVisibilityConditions } from '../game/conditions';
-import { BestActorForUnit } from '../actions/watch';
-import { VehicleEditorModal } from '../actions/vehicle_editor';
+import { BestActorForUnit } from '../actions/Watch';
+import { VehicleEditorModal } from '../actions/VehicleEditor';
 
 export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNode, setPlayers, addLogEntry }) {
     const calculateFireEffect = CalculateFireEffectWithConditions();

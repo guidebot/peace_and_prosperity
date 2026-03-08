@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { MdDownload, MdUpload, MdTimer } from "react-icons/md";
 import { GiTabletopPlayers } from "react-icons/gi";
 import { Player } from './game/Player';
-import { RollModal } from './actions/roll';
+import { RollModal } from './actions/Roll';
 import { MaxSkill, Level } from './game/Skill';
 import { useVisibilityConditions } from './game/conditions';
 import { UpdateSuppressionStatusForPersons } from './cards/utils';

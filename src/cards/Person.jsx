@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import { SkillCategories, SkillsByCategories } from '../game/Skill';
-import { CollapsibleEquipmentGroup } from './person_equipment';
-import { CollapsibleDrivingGroup } from './person_driving';
-import { CollapsibleSkillGroup } from './person_skills';
+import { CollapsibleEquipmentGroup } from './PersonEquipment';
+import { CollapsibleDrivingGroup } from './PersonDriving';
+import { CollapsibleSkillGroup } from './PersonSkills';
 import { CurrentUnit } from './utils';
 
 export function PersonForm({ players, data, onPropertyChange, onOtherChange, addLogEntry }) {

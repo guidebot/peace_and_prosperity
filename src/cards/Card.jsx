@@ -1,6 +1,6 @@
-import { PersonForm } from './person';
-import { UnitForm } from './unit';
-import { PlayerForm } from './player';
+import { PersonForm } from './Person';
+import { UnitForm } from './Unit';
+import { PlayerForm } from './Player';
 import { UpdateCardProperty } from './utils';
 
 export function ObjectCard({ players, node, setSelectedNode, setPlayers, addLogEntry }) {
