@@ -45,6 +45,29 @@ export function MinSkill(unitData: Unit, SkillKey: string) {
     }, 999);
 }
 
+export function EffectiveTP(soldier: Entity): number {
+    const baseTP = soldier.skills["TP"] || 0;
+    return baseTP + GetArmorMod(soldier);
+}
+
+export function GetArmorMod(soldier: Entity): number {
+    if (!soldier.equipment || soldier.equipment.length === 0) return 0;
+    return Math.max(...soldier.equipment.map((item: { armorMod: any; }) => item.armorMod || 0));
+}
+
+export function AverageArmorMod(unitData: Unit): number {
+    if (!unitData || !unitData.children || unitData.children.length === 0) return 0;
+
+    const alive = unitData.children.filter((s: Entity) => !s.isDead && !s.isBleeding);
+    if (alive.length === 0) return 0;
+
+    const totalArmor = alive.reduce((sum, s) => {
+        return sum + GetArmorMod(s);
+    }, 0);
+
+    return Math.round(totalArmor / alive.length);
+}
+
 export function MedianSkill(unitData: Unit, SkillKey: string) {
     if (!unitData.children || unitData.children.length === 0) return 0;
 

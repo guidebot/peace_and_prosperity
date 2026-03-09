@@ -1,4 +1,4 @@
-import { Level, MinSkill } from "../game/Skill";
+import { Level, MinSkill, AverageArmorMod, EffectiveTP } from "../game/Skill";
 import { CurrentUnit, RemoveEquipmentFromPerson, UpdateSuppressionStatusForPersons } from "../cards/utils";
 import { ModifiedVisibilityData } from "../game/conditions";
 import { SCALE_PREFIX } from "../game/Constants";
@@ -43,7 +43,7 @@ function selectSoldiersForHit(unit, count) {
     if (!unit.children) return [];
 
     const candidates = unit.children.filter(p => !p.isDead && !p.isBleeding);
-    const sorted = SortByPropertyWithRandomTies(candidates, (person) => person.skills?.["TP"] || 0);
+    const sorted = SortByPropertyWithRandomTies(candidates, (person) => EffectiveTP(person));
 
     return sorted.slice(0, count);
 }
@@ -118,6 +118,7 @@ function calculateFireEffect(players, roll, actorData, target, activeConditions)
     }
 
     const targetTpSkillLevel = Level(MinSkill(target, "TP"));
+    const armorMod = AverageArmorMod(target);
 
     const reactionFireMod = roll.reactionFire ? 2 : 0;
     const flankFireMod = roll.flankFire ? (target.vehicle && target.vehicle.armor > 0 ? 4 : 2) : 0;
@@ -134,7 +135,7 @@ function calculateFireEffect(players, roll, actorData, target, activeConditions)
 
     const skillMod = target.vehicle
         ? wpnSkillLevel
-        : wpnSkillLevel * 2 - targetTpSkillLevel * 2;
+        : wpnSkillLevel * 2 - targetTpSkillLevel * 2 - armorMod;
 
     const correctionResult = roll.roll + skillMod;
     const unitCorrection = roll.blindFire ? 0 : unit.correction;
@@ -216,6 +217,8 @@ export function CalculateFireEffects(players, rolls, actors, target, activeCondi
 }
 
 export function CanFireInfantryEquipment(players, actor, equipment) {
+    if (equipment.armorMod > 0) return false;
+
     return (Level(actor.skills[equipment.skill] || 0) > 0 || equipment.skill === "WPN_rifles")
         && (!equipment.mustBeDeployed || CurrentUnit(players, actor).isDeployed)
         && equipment.name !== "Дымовая шашка"

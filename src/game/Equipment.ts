@@ -25,6 +25,7 @@ export class Equipment {
     dispersion: number;
     optic?: boolean;
     defaultCounter: number;
+    armorMod: number;
 
     constructor(
         id: string,
@@ -43,7 +44,8 @@ export class Equipment {
         mustBeDeployed: boolean,
         dispersion: number,
         optic?: boolean,
-        defaultCounter?: number
+        defaultCounter?: number,
+        armorMod?: number
     ) {
         this.id = id;
         this.originalId = id;
@@ -65,6 +67,7 @@ export class Equipment {
         this.dispersion = dispersion;
         this.optic = optic;
         this.defaultCounter = defaultCounter ?? 0;
+        this.armorMod = armorMod ?? 0;
     }
 }
 
@@ -86,7 +89,8 @@ export const InfantryEquipment = infantryEquipment.map((item: any) =>
         item.mustBeDeployed,
         item.dispersion,
         item.optic,
-        item.defaultCounter
+        item.defaultCounter,
+        item.armorMod
     ));
 
 export const VehicleEquipment = vehicleEquipment.map((item: any) =>
@@ -106,7 +110,9 @@ export const VehicleEquipment = vehicleEquipment.map((item: any) =>
         item.deployBonus,
         item.mustBeDeployed,
         item.dispersion,
-        item.optic
+        item.optic,
+        undefined,
+        item.armorMod
     )
 );
 
