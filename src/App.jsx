@@ -24,10 +24,10 @@ function App() {
   ];
 
   const units = [
-    new Unit(generateUnitName(), [soldiers[0]]),
-    new Unit(generateUnitName(), [soldiers[1]]),
-    new Unit(generateUnitName(), [soldiers[2], soldiers[4]]),
-    new Unit(generateUnitName(), [soldiers[3], soldiers[5]])
+    new Unit("Волк-1", [soldiers[0]]),
+    new Unit("Ворон-1", [soldiers[1]]),
+    new Unit("Сокол-1", [soldiers[2], soldiers[4]]),
+    new Unit("Гром-1", [soldiers[3], soldiers[5]])
   ];
 
   units.forEach((unit, idx) => {

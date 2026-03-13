@@ -4,9 +4,11 @@ import { generateUnitName } from "../game/callsigns";
 
 export function PlayerForm({ data, setPlayers, onChange }) {
     const handleCreateUnit = () => {
-        const newUnit = new Unit(generateUnitName(), []);
-
         setPlayers((prevPlayers) => {
+            const existingUnitNames = prevPlayers.flatMap(player => 
+                (player.children || []).map(unit => unit.name)
+            );
+            const newUnit = new Unit(generateUnitName(existingUnitNames), []);
             return prevPlayers.map(player => {
                 if (player.id === data.id) {
                     return {

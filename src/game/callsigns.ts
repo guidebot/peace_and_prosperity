@@ -26,8 +26,38 @@ export const UNIT_CALLSIGNS = [
     "Янтарь", "Ярослав", "Ястреб"
 ];
 
-export function generateUnitName(): string {
+function parseCallsignNumber(name: string): number | null {
+    const match = name.match(/^(.+)-(\d+)$/);
+    if (!match) return null;
+    return parseInt(match[2], 10);
+}
+
+function getCallsignWord(name: string): string | null {
+    const match = name.match(/^(.+)-(\d+)$/);
+    if (!match) return null;
+    return match[1];
+}
+
+export function generateUnitName(existingUnitNames: string[]): string {
     const randomCallsign = UNIT_CALLSIGNS[Math.floor(Math.random() * UNIT_CALLSIGNS.length)];
-    const randomNumber = Math.floor(Math.random() * 100) + 1;
-    return `${randomCallsign}-${randomNumber}`;
+    
+    const usedNumbers = existingUnitNames
+        .map(name => {
+            const word = getCallsignWord(name);
+            if (word !== randomCallsign) return null;
+            return parseCallsignNumber(name);
+        })
+        .filter((num): num is number => num !== null)
+        .sort((a, b) => a - b);
+    
+    let nextNumber = 1;
+    for (const num of usedNumbers) {
+        if (num === nextNumber) {
+            nextNumber++;
+        } else if (num > nextNumber) {
+            break;
+        }
+    }
+    
+    return `${randomCallsign}-${nextNumber}`;
 }

@@ -17,7 +17,10 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
     if (!node) return null;
 
     const handleAddUnit = () => {
-        const newUnit = new Unit(generateUnitName(), []);
+        const existingUnitNames = players.flatMap(player => 
+            (player.children || []).map(unit => unit.name)
+        );
+        const newUnit = new Unit(generateUnitName(existingUnitNames), []);
         setPlayers((prevPlayers) => {
             return prevPlayers.map(player => {
                 if (player.id === node.data.id) {
