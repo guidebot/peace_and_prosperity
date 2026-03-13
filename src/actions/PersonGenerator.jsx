@@ -10,16 +10,17 @@ function assignEquipment(skills) {
     const FP = skills.FP ?? 0;
     const TP = skills.TP ?? 0;
     const MSK = skills.MSK ?? 0;
+    const LID = skills.LID ?? 0;
     const grenadeSkill = skills.WPN_grenades ?? 0;
     const sniperSkill = skills.WPN_sniper ?? 0;
 
     const equipment = [];
 
-    if (FP >= 4 && (skills.WPN_heavy ?? 0) > 0) {
+    if (FP >= 7 && (skills.WPN_heavy ?? 0) > 0) {
         equipment.push("ak12");
         equipment.push("rpg29");
     }
-    else if (FP >= 4 && (skills.WPN_mg ?? 0) > (skills.WPN_rifles ?? 0)) {
+    else if (FP >= 7 && (skills.WPN_mg ?? 0) > (skills.WPN_rifles ?? 0)) {
         equipment.push("lmg_pkm")
     }
     else if (FP >= 3 && sniperSkill >= 7 && sniperSkill > (skills.WPN_rifles ?? 0)) {
@@ -47,11 +48,11 @@ function assignEquipment(skills) {
         equipment.push("binoculars");
     }
 
-    if (MSK >= 7 && FP >= 2) {
+    if (MSK >= 7 && FP >= 3) {
         equipment.push("nvg");
     }
 
-    if (grenadeSkill >= 2 && FP >= 1) {
+    if (grenadeSkill >= 3 && FP >= 1) {
         equipment.push("grenades");
         equipment.push("smoke");
     } else if (grenadeSkill >= 1 && FP >= 1) {
@@ -64,6 +65,16 @@ function assignEquipment(skills) {
 
     if (FP >= 7 && (skills.TECH_uav ?? 0) >= 12) {
         equipment.push("uav_grenade");
+    }
+
+    if (FP >= 7 && TP >= 7 && ((skills.TECH_mechanics ?? 0) < 7)) {
+        equipment.push("vest_msv_full");
+    }
+    else if (FP >= 7 && TP >= 3) {
+        equipment.push("vest_msv_plate");
+    }
+    else if (FP >= 1 && (LID >= 12 || TP >= 3)) {
+        equipment.push("vest_msv_base");
     }
 
     equipment.push("baofeng");

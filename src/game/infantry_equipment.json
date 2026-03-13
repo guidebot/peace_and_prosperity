@@ -1045,7 +1045,7 @@
         "id": "vest_msv_base",
         "skill": "TP",
         "name": "MSV (базовая)",
-        "weight": 60,
+        "weight": 25,
         "ammo": 0,
         "ammoWeight": 0,
         "bestRange": 0,
@@ -1063,7 +1063,7 @@
         "id": "vest_msv_plate",
         "skill": "TP",
         "name": "MSV (с плитами)",
-        "weight": 90,
+        "weight": 75,
         "ammo": 0,
         "ammoWeight": 0,
         "bestRange": 0,
@@ -1075,31 +1075,13 @@
         "deployBonus": 0,
         "mustBeDeployed": false,
         "dispersion": 0,
-        "armorMod": 2
-    },
-    {
-        "id": "vest_6b42",
-        "skill": "TP",
-        "name": "6Б42",
-        "weight": 100,
-        "ammo": 0,
-        "ammoWeight": 0,
-        "bestRange": 0,
-        "effectiveRange": 0,
-        "maxRange": 0,
-        "minRange": 0,
-        "ap": 0,
-        "he": 0,
-        "deployBonus": 0,
-        "mustBeDeployed": false,
-        "dispersion": 0,
-        "armorMod": 2
+        "armorMod": 4
     },
     {
         "id": "vest_msv_full",
         "skill": "TP",
         "name": "MSV (полная)",
-        "weight": 130,
+        "weight": 115,
         "ammo": 0,
         "ammoWeight": 0,
         "bestRange": 0,
@@ -1111,13 +1093,13 @@
         "deployBonus": 0,
         "mustBeDeployed": false,
         "dispersion": 0,
-        "armorMod": 3
+        "armorMod": 6
     },
     {
         "id": "vest_6b43",
         "skill": "TP",
         "name": "6Б43",
-        "weight": 150,
+        "weight": 120,
         "ammo": 0,
         "ammoWeight": 0,
         "bestRange": 0,
@@ -1129,7 +1111,7 @@
         "deployBonus": 0,
         "mustBeDeployed": false,
         "dispersion": 0,
-        "armorMod": 3
+        "armorMod": 6
     },
     {
         "id": "vest_eod_kit2",
@@ -1147,6 +1129,6 @@
         "deployBonus": 0,
         "mustBeDeployed": false,
         "dispersion": 0,
-        "armorMod": 5
+        "armorMod": 7
     }
 ]

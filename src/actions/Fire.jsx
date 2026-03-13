@@ -32,11 +32,11 @@ const VEHICLE_SUPPRESSION_TABLE = {
 };
 
 const INFANTRY_HIT_SUPPRESSION_TABLE = {
-    4: { hits: [{ result: 23, wounds: 3 }, { result: 20, wounds: 2 }, { result: 10, wounds: 1 }], suppression: [{ result: 20, stress: 4 }, { result: 19, stress: 3 }, { result: 16, stress: 2 }, { result: 6, stress: 1 }] },
-    3: { hits: [{ result: 21, wounds: 2 }, { result: 12, wounds: 1 }], suppression: [{ result: 20, stress: 3 }, { result: 17, stress: 2 }, { result: 8, stress: 1 }] },
-    2: { hits: [{ result: 23, wounds: 2 }, { result: 15, wounds: 1 }], suppression: [{ result: 20, stress: 2 }, { result: 11, stress: 1 }] },
-    1: { hits: [{ result: 19, wounds: 1 }], suppression: [{ result: 15, stress: 1 }] },
-    0: { hits: [{ result: 19, wounds: 1 }], suppression: [] }
+    4: { hits: [{ result: 22, wounds: 3 }, { result: 19, wounds: 2 }, { result: 9, wounds: 1 }], suppression: [{ result: 20, stress: 4 }, { result: 19, stress: 3 }, { result: 16, stress: 2 }, { result: 6, stress: 1 }] },
+    3: { hits: [{ result: 20, wounds: 2 }, { result: 11, wounds: 1 }], suppression: [{ result: 20, stress: 3 }, { result: 17, stress: 2 }, { result: 8, stress: 1 }] },
+    2: { hits: [{ result: 21, wounds: 2 }, { result: 13, wounds: 1 }], suppression: [{ result: 20, stress: 2 }, { result: 11, stress: 1 }] },
+    1: { hits: [{ result: 16, wounds: 1 }], suppression: [{ result: 15, stress: 1 }] },
+    0: { hits: [{ result: 16, wounds: 1 }], suppression: [] }
 };
 
 function selectSoldiersForHit(unit, count) {
@@ -120,8 +120,14 @@ function calculateFireEffect(players, roll, actorData, target, activeConditions)
     const targetTpSkillLevel = Level(MinSkill(target, "TP"));
     const armorMod = AverageArmorMod(target);
 
+    // Механика пробития брони: AP вычитает из armorMod
+    // Если AP >= armorMod, броня пробита (effectiveArmorMod = 0)
+    // Пример: плиты (armorMod=4) vs M4 (AP=1) → 4-1=3 защиты
+    //         плиты (armorMod=4) vs РПГ (AP=8) → 4-8=0 → Math.max(0, -4) = 0
+    const effectiveArmorMod = Math.max(0, armorMod - equipment.ap);
+
     const reactionFireMod = roll.reactionFire ? 2 : 0;
-    const flankFireMod = roll.flankFire ? (target.vehicle && target.vehicle.armor > 0 ? 4 : 2) : 0;
+    const flankFireMod = roll.flankFire ? 4 : 0;
     const blindFireMod = roll.blindFire ? 6 : 0;
 
     const bestRangeMod = 6;
@@ -135,9 +141,9 @@ function calculateFireEffect(players, roll, actorData, target, activeConditions)
 
     const skillMod = target.vehicle
         ? wpnSkillLevel
-        : wpnSkillLevel * 2 - targetTpSkillLevel * 2 - armorMod;
+        : wpnSkillLevel * 2 - targetTpSkillLevel * 2;
 
-    const correctionResult = roll.roll + skillMod;
+    const correctionResult = roll.roll + skillMod - effectiveArmorMod;
     const unitCorrection = roll.blindFire ? 0 : unit.correction;
     const indirectHit = calculateIndirectHit(unitCorrection, correctionResult);
 

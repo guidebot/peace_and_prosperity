@@ -1,7 +1,7 @@
 # Project: Peace and Prosperity
 
 ## Project Description
-This is a gamemaster driven cooperative roleplaying wargame.
+Gamemaster driven cooperative roleplaying wargame.
 
 ## Project Structure
 - `src/` typescript/react single-page web application
@@ -18,9 +18,9 @@ This is a gamemaster driven cooperative roleplaying wargame.
 ## General Instructions:
 - Prefer typescript over javascript.
 - Follow SOLID and DRY principles.
-- Apply TRIZ methodology when thinking.
 - Before making changes, summarize the approach with a brief plan and get user approval.
-- When planning use sequential-thinking.
+- When planning use sequential-thinking MCP and TRIZ methodology.
+- Use exa MCP for web-search.
 - When adding a new library or framework or starting a new project always check context7 for updates about the used libraries and frameworks.
 
 ## Coding Style:
