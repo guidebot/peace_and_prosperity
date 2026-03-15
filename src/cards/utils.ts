@@ -3,7 +3,7 @@ import { Unit } from "../game/Unit";
 import { Player } from "../game/Player";
 import { Equipment } from "../game/Equipment";
 import { Vehicle } from "../game/Vehicle";
-import { Level, MaxSkill } from "../game/Skill";
+import { Level } from "../game/Skill";
 import { SortByPropertyWithRandomTies } from "../utils/sorting";
 
 type NodeWithChildren = {
@@ -86,6 +86,7 @@ export function MovementSpeed(unitData: Unit): MovementSpeedResult {
                 return { plain: 12, road: 16 };
             default:
                 console.error(`Неизвестный тип транспортного средства ${unitData.vehicle.type}!`);
+                return 2;
         }
     } else {
         const totalWeight = TotalWeight(unitData);
@@ -97,10 +98,6 @@ export function MovementSpeed(unitData: Unit): MovementSpeedResult {
                 loadout <= 0.75 ? 3 : 2;
     }
 };
-
-export function MaxTeamSize(unitData: Unit): number {
-    return 3 * Level(MaxSkill(unitData, "LID"));
-}
 
 export function CurrentUnit(players: Player[], actor: Entity): Unit | undefined {
     for (const player of players) {
