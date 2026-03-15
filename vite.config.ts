@@ -8,4 +8,13 @@ export default defineConfig({
       '@': '/src',
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'ui-libs': ['react-icons', 'react-select', 'react-arborist'],
+        },
+      },
+    },
+  },
 })

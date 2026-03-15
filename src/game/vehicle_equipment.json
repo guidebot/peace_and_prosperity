@@ -35,7 +35,7 @@
     },
     {
         "id": "ac20",
-        "skill": "WPN_tank_guns",
+        "skill": "WPN_heavy",
         "name": "Автопушка 20 мм",
         "weight": 0,
         "ammo": 10,
@@ -62,7 +62,7 @@
     },
     {
         "id": "ac30",
-        "skill": "WPN_tank_guns",
+        "skill": "WPN_heavy",
         "name": "Автопушка 30 мм",
         "optic": {
             "day": {
@@ -93,7 +93,7 @@
     },
     {
         "id": "ac40",
-        "skill": "WPN_tank_guns",
+        "skill": "WPN_heavy",
         "name": "Автопушка 40-57 мм",
         "optic": {
             "day": {
@@ -213,7 +213,7 @@
     },
     {
         "id": "gun",
-        "skill": "WPN_tank_guns",
+        "skill": "WPN_heavy",
         "name": "Танковое орудие 115-125 мм",
         "weight": 0,
         "ammo": 20,
@@ -240,7 +240,7 @@
     },
     {
         "id": "gun_thermal",
-        "skill": "WPN_tank_guns",
+        "skill": "WPN_heavy",
         "name": "Танковое орудие 120-125 мм (с тепловизором)",
         "optic": {
             "day": {

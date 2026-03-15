@@ -4,8 +4,7 @@ import { GiStopSign, GiCheckMark, GiTruck, GiApc, GiTank, GiHealthNormal, GiSkul
 import { FaLocationPinLock } from "react-icons/fa6";
 import { IoMdMove } from "react-icons/io";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
-import { MaxTeamSize, MovementSpeed } from "../cards/utils";
-import { GrUserPolice } from "react-icons/gr";
+import { MovementSpeed } from "../cards/utils";
 import { PiDropFill, PiDropSlashFill } from "react-icons/pi";
 import { TbPlayerPause, TbPlayerPlay } from "react-icons/tb";
 import { BsEmojiDizzy } from "react-icons/bs";
@@ -17,7 +16,7 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
     if (!node) return null;
 
     const handleAddUnit = () => {
-        const existingUnitNames = players.flatMap(player => 
+        const existingUnitNames = players.flatMap(player =>
             (player.children || []).map(unit => unit.name)
         );
         const newUnit = new Unit(generateUnitName(existingUnitNames), []);
@@ -68,7 +67,6 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
                     {!node.isEditing && node.data.type === 'unit' && node.data.vehicle?.type === "wheel" && (<span><GiApc /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.vehicle?.type === "track" && (<span><GiTank /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && !node.data.vehicle && MovementSpeed(node.data) === 0 && (<span style={{ color: 'red' }}><GiStopSign /></span>)}
-                    {!node.isEditing && node.data.type === 'unit' && MaxTeamSize(node.data) + 1 < node.data.children.filter(s => !s.isDead).length && (<span style={{ color: 'red' }}><GrUserPolice /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.hasMoved && (<span><IoMdMove /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.isDeployed && (<span><FaLocationPinLock /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.isMarked && (<span><GiCheckMark /></span>)}
