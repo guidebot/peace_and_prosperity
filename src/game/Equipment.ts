@@ -121,11 +121,18 @@ export const InfantryEquipmentCatalog: Record<string, Equipment> = InfantryEquip
     return acc;
 }, {});
 
-export function CreateInfantryEquipment(ids: string[]): Equipment[] {
-    return ids.map(id => {
-        const original = InfantryEquipmentCatalog[id];
-        return { ...original, id: uuidv4() };
-    });
+export function CreateInfantryEquipment(ids: (string | { id: string; count?: number })[]): Equipment[] {
+    const result: Equipment[] = [];
+    for (const item of ids) {
+        const equipmentId = typeof item === 'string' ? item : item.id;
+        const count = typeof item === 'string' ? 1 : (item.count ?? 1);
+        
+        const original = InfantryEquipmentCatalog[equipmentId];
+        if (original) {
+            result.push({ ...original, id: uuidv4(), ammo: original.ammo * count });
+        }
+    }
+    return result;
 }
 
 export function RangeKey(equipment: Equipment): string {
