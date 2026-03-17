@@ -40,7 +40,7 @@ function getCallsignWord(name: string): string | null {
 
 export function generateUnitName(existingUnitNames: string[]): string {
     const randomCallsign = UNIT_CALLSIGNS[Math.floor(Math.random() * UNIT_CALLSIGNS.length)];
-    
+
     const usedNumbers = existingUnitNames
         .map(name => {
             const word = getCallsignWord(name);
@@ -49,7 +49,7 @@ export function generateUnitName(existingUnitNames: string[]): string {
         })
         .filter((num): num is number => num !== null)
         .sort((a, b) => a - b);
-    
+
     let nextNumber = 1;
     for (const num of usedNumbers) {
         if (num === nextNumber) {
@@ -58,6 +58,6 @@ export function generateUnitName(existingUnitNames: string[]): string {
             break;
         }
     }
-    
+
     return `${randomCallsign}-${nextNumber}`;
 }

@@ -6,7 +6,7 @@ import { CountriesData, generateNameForCountry, Genders } from '../game/names';
 import { CreateInfantryEquipment } from '../game/Equipment';
 import { GiConfirmed, GiCancel } from 'react-icons/gi';
 
-function assignEquipment(skills) {
+function assignEquipment(skills, isMilitary, hasWeapon) {
     const FP = skills.FP ?? 0;
     const TP = skills.TP ?? 0;
     const MSK = skills.MSK ?? 0;
@@ -16,68 +16,82 @@ function assignEquipment(skills) {
 
     const equipment = [];
 
-    if (FP >= 7 && (skills.WPN_heavy ?? 0) > 0) {
-        equipment.push("ak12");
-        equipment.push("rpg29");
-    }
-    else if (FP >= 7 && (skills.WPN_mg ?? 0) > (skills.WPN_rifles ?? 0)) {
-        equipment.push("lmg_pkm")
-    }
-    else if (FP >= 3 && sniperSkill >= 7 && sniperSkill > (skills.WPN_rifles ?? 0)) {
-        equipment.push("h&kg2810x")
-    }
-    else if (FP >= 1) {
-        if ((skills.TECH_mechanics ?? 0) >= 7) {
-            equipment.push("aks74u");
+    if (isMilitary && hasWeapon) {
+        if (FP >= 7 && (skills.WPN_heavy ?? 0) > 0) {
+            equipment.push("ak12");
+            equipment.push("rpg29");
         }
-        else {
-            if (FP >= 3 && (skills.WPN_gl ?? 0) >= 3) {
-                equipment.push("ak12");
-                equipment.push("gp");
-            }
-            else if (TP >= 3 && MSK >= 3) {
-                equipment.push("h&k416_silencer_collimator");
+        else if (FP >= 7 && (skills.WPN_mg ?? 0) > (skills.WPN_rifles ?? 0)) {
+            equipment.push("lmg_pkm")
+        }
+        else if (FP >= 3 && sniperSkill >= 7 && sniperSkill > (skills.WPN_rifles ?? 0)) {
+            equipment.push("h&kg2810x")
+        }
+        else if (FP >= 1) {
+            if ((skills.TECH_mechanics ?? 0) >= 7) {
+                equipment.push("aks74u");
             }
             else {
-                equipment.push("ak12");
+                if (FP >= 3 && (skills.WPN_gl ?? 0) >= 3) {
+                    equipment.push("ak12");
+                    equipment.push("gp");
+                }
+                else if (TP >= 3 && MSK >= 3) {
+                    equipment.push("h&k416_silencer_collimator");
+                }
+                else {
+                    equipment.push("ak12");
+                }
             }
+        }
+
+        if (MSK >= 3 && FP >= 1) {
+            equipment.push("binoculars");
+        }
+
+        if (MSK >= 7 && FP >= 3) {
+            equipment.push("nvg");
+        }
+
+        if (grenadeSkill >= 3 && FP >= 1) {
+            equipment.push({ id: "grenades", count: 2 });
+            equipment.push({ id: "smoke", count: 2 });
+        } else if (grenadeSkill >= 1 && FP >= 1) {
+            equipment.push({ id: "smoke", count: 2 });
+        }
+
+        if (MSK >= 3 && FP >= 3 && (skills.TECH_uav ?? 0) >= 7) {
+            equipment.push("uav");
+        }
+
+        if (FP >= 7 && (skills.TECH_uav ?? 0) >= 12) {
+            equipment.push("uav_grenade");
+        }
+
+        if (FP >= 7 && TP >= 7 && ((skills.TECH_mechanics ?? 0) < 7)) {
+            equipment.push("vest_msv_full");
+        }
+        else if (FP >= 7 && TP >= 3) {
+            equipment.push("vest_msv_plate");
+        }
+        else if (FP >= 1 && (LID >= 12 || TP >= 3)) {
+            equipment.push("vest_msv_base");
         }
     }
 
-    if (MSK >= 3 && FP >= 1) {
-        equipment.push("binoculars");
+    if (!isMilitary && hasWeapon) {
+        if (FP >= 1 && (LID >= 12 || TP >= 3)) {
+            equipment.push("vest_msv_base");
+        }
     }
 
-    if (MSK >= 7 && FP >= 3) {
-        equipment.push("nvg");
+    if (isMilitary) {
+        equipment.push("baofeng");
+        equipment.push("phone");
     }
-
-    if (grenadeSkill >= 3 && FP >= 1) {
-        equipment.push("grenades");
-        equipment.push("smoke");
-    } else if (grenadeSkill >= 1 && FP >= 1) {
-        equipment.push("smoke");
+    else {
+        equipment.push("phone");
     }
-
-    if (MSK >= 3 && FP >= 3 && (skills.TECH_uav ?? 0) >= 7) {
-        equipment.push("uav");
-    }
-
-    if (FP >= 7 && (skills.TECH_uav ?? 0) >= 12) {
-        equipment.push("uav_grenade");
-    }
-
-    if (FP >= 7 && TP >= 7 && ((skills.TECH_mechanics ?? 0) < 7)) {
-        equipment.push("vest_msv_full");
-    }
-    else if (FP >= 7 && TP >= 3) {
-        equipment.push("vest_msv_plate");
-    }
-    else if (FP >= 1 && (LID >= 12 || TP >= 3)) {
-        equipment.push("vest_msv_base");
-    }
-
-    equipment.push("baofeng");
 
     return CreateInfantryEquipment(equipment);
 }
@@ -187,7 +201,7 @@ export function GeneratePerson(titleName, isMilitary, hasWeapon, name) {
         skills[weaponSkillsForRoll[skillRoll].id] = Math.max(skills[weaponSkillsForRoll[skillRoll].id] ?? 0, valueRoll);
     }
 
-    const equipment = hasWeapon ? assignEquipment(skills) : [];
+    const equipment = assignEquipment(skills, isMilitary, hasWeapon);
 
     const newPerson = new Entity(name, skills, equipment);
     return newPerson;
