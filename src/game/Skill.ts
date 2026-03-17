@@ -107,7 +107,6 @@ export const Skills = [
     new Skill("wpn", "WPN_mg", "Пулемёты"),
     new Skill("wpn", "WPN_heavy", "Тяжёлое вооружение"),
     new Skill("wpn", "WPN_guided", "Управляемые ракеты"),
-    new Skill("wpn", "WPN_tank_guns", "Вооружение боевых машин"),
     new Skill("wpn", "WPN_uav", "Управление дронами"),
     new Skill("wpn", "WPN_artillery", "Артиллерия"),
     new Skill("tech", "TECH_explosives", "Взрывные устройства и мины"),
