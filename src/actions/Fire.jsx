@@ -35,8 +35,7 @@ const INFANTRY_HIT_SUPPRESSION_TABLE = {
     4: { hits: [{ result: 22, wounds: 3 }, { result: 19, wounds: 2 }, { result: 9, wounds: 1 }], suppression: [{ result: 20, stress: 4 }, { result: 19, stress: 3 }, { result: 16, stress: 2 }, { result: 6, stress: 1 }] },
     3: { hits: [{ result: 20, wounds: 2 }, { result: 11, wounds: 1 }], suppression: [{ result: 20, stress: 3 }, { result: 17, stress: 2 }, { result: 8, stress: 1 }] },
     2: { hits: [{ result: 21, wounds: 2 }, { result: 13, wounds: 1 }], suppression: [{ result: 20, stress: 2 }, { result: 11, stress: 1 }] },
-    1: { hits: [{ result: 16, wounds: 1 }], suppression: [{ result: 15, stress: 1 }] },
-    0: { hits: [{ result: 16, wounds: 1 }], suppression: [] }
+    1: { hits: [{ result: 16, wounds: 1 }], suppression: [{ result: 15, stress: 1 }] }
 };
 
 function selectSoldiersForHit(unit, count) {
