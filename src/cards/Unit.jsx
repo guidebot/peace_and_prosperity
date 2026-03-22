@@ -58,6 +58,12 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
         if (data.isDeployed) return false;
         if (MovementSpeed(data) === 0) return false;
 
+        if (!data.vehicle) {
+            const bleedingCount = data.children.filter(p => !p.isDead && p.isBleeding).length;
+            const healthyCount = data.children.filter(p => !p.isDead && !p.isBleeding).length;
+            if (bleedingCount > healthyCount) return false;
+        }
+
         return true;
     }
 
