@@ -370,10 +370,6 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                         <label className="form-label">
                             <input name="current_people" readOnly={true} type="number" value={data.children?.length ?? 0} />
                         </label>
-                        /
-                        <label className="form-label">
-                            <input name="max_people" readOnly={true} type="number" value={3 * Level(MaxLeadership(data))} />
-                        </label>
                         <button key="addPerson" title="Добавить персонаж" onClick={() => setPersonGeneratorOpen(true)}>
                             <IoIosPersonAdd />
                         </button>

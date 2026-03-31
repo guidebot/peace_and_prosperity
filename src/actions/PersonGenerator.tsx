@@ -199,6 +199,15 @@ export function GenerateDefaultPerson(isMilitary: boolean, hasWeapon: boolean, t
     return GeneratePerson(titleName, isMilitary, isCharismatic, hasWeapon, name);
 }
 
+function shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
 export function GeneratePerson(titleName: string, isMilitary: boolean, isCharismatic: boolean, hasWeapon: boolean, name: string): Entity {
     const title = Titles.find(title => title.name === titleName);
 
@@ -213,18 +222,19 @@ export function GeneratePerson(titleName: string, isMilitary: boolean, isCharism
         ? { LOG: logic, IFL: influence, END: 8, MNV: 4, STE: 1, WPN_rifles: 5, WPN_grenades: 2 }
         : { LOG: logic, IFL: influence, END: 5 };
 
-    const skillsForRoll = Skills.filter(sk => sk.attribute !== "MRK" && sk.id !== "LOG" && sk.id !== "IFL");
-    for (let sr = 0; sr < title.skillRolls; sr++) {
-        const skillRoll = Math.floor(Math.random() * skillsForRoll.length);
-        const valueRoll = Math.floor(Math.random() * (isMilitary ? title.maxSkillRoll : 4)) + 1;
-        skills[skillsForRoll[skillRoll].id] = Math.max(skills[skillsForRoll[skillRoll].id] ?? 0, valueRoll);
+    const skillsForRoll = shuffleArray(Skills.filter(sk => sk.attribute !== "MRK" && sk.id !== "LOG" && sk.id !== "IFL"));
+    const selectedSkills = skillsForRoll.slice(0, title.skillRolls);
+    for (const skill of selectedSkills) {
+        let valueRoll = Math.floor(Math.random() * (isMilitary ? title.maxSkillRoll : 4)) + 1;
+        if (skill.id === "END") { valueRoll = Math.min(skills[skill.id] + valueRoll, 20); }
+        skills[skill.id] = Math.max(skills[skill.id] ?? 0, valueRoll);
     }
 
-    const weaponSkillsForRoll = Skills.filter(sk => sk.attribute === "MRK");
-    for (let sr = 0; sr < title.weaponSkillRolls; sr++) {
-        const skillRoll = Math.floor(Math.random() * weaponSkillsForRoll.length);
+    const weaponSkillsForRoll = shuffleArray(Skills.filter(sk => sk.attribute === "MRK"));
+    const selectedWeaponSkills = weaponSkillsForRoll.slice(0, title.weaponSkillRolls);
+    for (const skill of selectedWeaponSkills) {
         const valueRoll = Math.floor(Math.random() * (isMilitary ? title.maxSkillRoll : 6)) + 1;
-        skills[weaponSkillsForRoll[skillRoll].id] = Math.max(skills[weaponSkillsForRoll[skillRoll].id] ?? 0, valueRoll);
+        skills[skill.id] = Math.max(skills[skill.id] ?? 0, valueRoll);
     }
 
     const equipment = assignEquipment(skills, isMilitary, hasWeapon);
