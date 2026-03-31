@@ -1,7 +1,7 @@
 [
     {
         "id": "item",
-        "skill": "LID",
+        "skill": "IFL",
         "name": "Предмет",
         "weight": 0,
         "ammo": 0,
@@ -716,7 +716,7 @@
     },
     {
         "id": "binoculars",
-        "skill": "MSK",
+        "skill": "STE",
         "name": "Бинокль",
         "optic": {
             "day": {
@@ -743,7 +743,7 @@
     },
     {
         "id": "nvg",
-        "skill": "MSK",
+        "skill": "STE",
         "name": "Прибор ночного видения",
         "optic": {
             "night": {
@@ -770,7 +770,7 @@
     },
     {
         "id": "thermal",
-        "skill": "MSK",
+        "skill": "STE",
         "name": "Тепловизор",
         "optic": {
             "night": {
@@ -958,7 +958,7 @@
     },
     {
         "id": "phone",
-        "skill": "LID",
+        "skill": "EL",
         "name": "Сотовый телефон",
         "weight": 1,
         "ammo": 0,
@@ -975,7 +975,7 @@
     },
     {
         "id": "baofeng",
-        "skill": "LID",
+        "skill": "EL",
         "name": "Рация гражданская",
         "weight": 5,
         "ammo": 0,
@@ -992,7 +992,7 @@
     },
     {
         "id": "aqueduct_p",
-        "skill": "LID",
+        "skill": "EL",
         "name": "Р-168 Акведук",
         "weight": 10,
         "ammo": 0,
@@ -1009,7 +1009,7 @@
     },
     {
         "id": "azart_p",
-        "skill": "LID",
+        "skill": "EL",
         "name": "Р-187-П1 Азарт",
         "weight": 5,
         "ammo": 0,
@@ -1026,7 +1026,7 @@
     },
     {
         "id": "belozer",
-        "skill": "LID",
+        "skill": "EL",
         "name": "Р-438М Белозер",
         "weight": 160,
         "ammo": 0,
@@ -1043,7 +1043,7 @@
     },
     {
         "id": "vest_msv_base",
-        "skill": "TP",
+        "skill": "MNV",
         "name": "MSV (базовая)",
         "weight": 25,
         "ammo": 0,
@@ -1061,7 +1061,7 @@
     },
     {
         "id": "vest_msv_plate",
-        "skill": "TP",
+        "skill": "MNV",
         "name": "MSV (с плитами)",
         "weight": 75,
         "ammo": 0,
@@ -1079,7 +1079,7 @@
     },
     {
         "id": "vest_msv_full",
-        "skill": "TP",
+        "skill": "MNV",
         "name": "MSV (полная)",
         "weight": 115,
         "ammo": 0,
@@ -1097,7 +1097,7 @@
     },
     {
         "id": "vest_6b43",
-        "skill": "TP",
+        "skill": "MNV",
         "name": "6Б43",
         "weight": 120,
         "ammo": 0,
@@ -1115,7 +1115,7 @@
     },
     {
         "id": "vest_eod_kit2",
-        "skill": "TP",
+        "skill": "MNV",
         "name": "Кит-2",
         "weight": 280,
         "ammo": 0,

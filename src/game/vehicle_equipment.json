@@ -326,7 +326,7 @@
     },
     {
         "id": "aqueduct_v",
-        "skill": "LID",
+        "skill": "EL",
         "name": "Р-168-100У Акведук",
         "weight": 0,
         "ammo": 0,
@@ -343,7 +343,7 @@
     },
     {
         "id": "azart_v",
-        "skill": "LID",
+        "skill": "EL",
         "name": "Р-187ВЕ Азарт",
         "weight": 0,
         "ammo": 0,
@@ -360,7 +360,7 @@
     },
     {
         "id": "auriga",
-        "skill": "LID",
+        "skill": "EL",
         "name": "Р-448 Аурига",
         "weight": 0,
         "ammo": 0,

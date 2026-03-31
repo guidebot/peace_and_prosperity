@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { RangeKey } from '../game/Equipment';
-import { Level, MinSkill, MaxSkill } from '../game/Skill';
+import { Level, MinSkill, MaxLeadership } from '../game/Skill';
 import { RollModal } from '../actions/Roll';
 import { GiBullseye, GiGunshot, GiWeight, GiTireTracks, GiFootsteps } from "react-icons/gi";
 import { GiRun } from 'react-icons/gi';
@@ -48,7 +48,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
 
         if (loadout > 0.75) return false;
 
-        const minFpLevel = Level(MinSkill(data, "FP"));
+        const minFpLevel = Level(MinSkill(data, "END"));
 
         return data.fatigue < minFpLevel;
     }
@@ -352,7 +352,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                     <div className="buttons-panel">
                         <BiPulse />
                         <label className="form-label">
-                            <input min={0} max={MinSkill(data, "FP")} name="fatigue" type="number" value={data.fatigue} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
+                            <input min={0} max={MinSkill(data, "END")} name="fatigue" type="number" value={data.fatigue} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
                         </label>
                         {checkIfCanRun() && (
                             <button key="run" title="Бежать" onClick={run}>
@@ -372,7 +372,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                         </label>
                         /
                         <label className="form-label">
-                            <input name="max_people" readOnly={true} type="number" value={3 * Level(MaxSkill(data, "LID"))} />
+                            <input name="max_people" readOnly={true} type="number" value={3 * Level(MaxLeadership(data))} />
                         </label>
                         <button key="addPerson" title="Добавить персонаж" onClick={() => setPersonGeneratorOpen(true)}>
                             <IoIosPersonAdd />

@@ -62,7 +62,7 @@ export function TotalCapacity(unitData: Unit): number {
     if (!unitData.children || unitData.children.length === 0) return 0;
 
     const totalFpLevel = unitData.children.filter(s => !s.isDead && !s.isBleeding).reduce((total, soldier) => {
-        const fpPoints = soldier.skills["FP"] || 0;
+        const fpPoints = soldier.skills["END"] || 0;
         const level = Level(fpPoints);
 
         return total + level;
@@ -153,9 +153,9 @@ export function RemoveEquipmentFromPerson(person: EntityWithSkills, equipment: E
 export function UpdateSuppressionStatusForPersons(persons: EntityWithSkills[], stress: number, onPropertyChange: PropertyChangeHandler): void {
     const alivePersons = persons?.filter(p => !p.isDead && !p.isBleeding) || [];
 
-    const sortedPersonsByLid = SortByPropertyWithRandomTies(alivePersons, (person) => person.skills?.["LID"] || 0);
+    const sortedPersonsByLeadership = SortByPropertyWithRandomTies(alivePersons, (person) => Math.max(person.skills?.["LOG"] || 0, person.skills?.["IFL"] || 0));
 
-    sortedPersonsByLid.forEach((person, index) => {
+    sortedPersonsByLeadership.forEach((person, index) => {
         onPropertyChange(person.id, "isSuppressed", index < stress);
     });
 }

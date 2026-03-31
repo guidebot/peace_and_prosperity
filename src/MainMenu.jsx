@@ -3,7 +3,7 @@ import { MdDownload, MdUpload, MdTimer } from "react-icons/md";
 import { GiTabletopPlayers } from "react-icons/gi";
 import { Player } from './game/Player';
 import { RollModal } from './actions/Roll';
-import { MaxSkill, Level } from './game/Skill';
+import { Level, MaxLeadership } from './game/Skill';
 import { useVisibilityConditions } from './game/conditions';
 import { UpdateSuppressionStatusForPersons } from './cards/utils';
 
@@ -52,10 +52,10 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
 
                 let stress = Number(unit.stress) || 0;
                 if (stress > 0) {
-                    const lid = MaxSkill(unit, "LID");
-                    const skillLevel = Level(lid);
+                    const leadership = MaxLeadership(unit);
+                    const leadershipLevel = Level(leadership);
 
-                    const recovery = Math.min(stress, STRESS_RECOVERY_PER_TURN[skillLevel]);
+                    const recovery = Math.min(stress, STRESS_RECOVERY_PER_TURN[leadershipLevel]);
                     const newStress = stress - recovery;
 
                     effects.push({
@@ -163,12 +163,12 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                         }) || [];
 
                         if (!person.isDead && person.isBleeding) {
-                            const currentFP = person.skills["FP"] ?? 0;
+                            const currentFP = person.skills["END"] ?? 0;
                             const newFP = currentFP - 1;
 
                             const updatedSkills = {
                                 ...person.skills,
-                                FP: newFP > 0 ? newFP : 0
+                                END: newFP > 0 ? newFP : 0
                             };
 
                             if (newFP < 0) {
