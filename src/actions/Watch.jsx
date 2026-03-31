@@ -7,7 +7,7 @@ export function BestActorForUnit(unit, activeConditions) {
     const candidates = [];
 
     const evaluatePerson = (person) => {
-        const baseSkillLevel = Level(person.skills["MSK"]) || 0;
+        const baseSkillLevel = Level(person.skills["STE"]) || 0;
         const baseVisibility = Math.min(...activeConditions.map(c => VisibilityConditionsCatalog[c].value));
         candidates.push({
             actor: person,
@@ -60,18 +60,18 @@ export function CalculateVisibilityDistance(observerUnit, targetUnit, activeCond
 
     const visData = ModifiedVisibilityData(observerData.equipment, activeConditions);
 
-    const observerMSK = Level(observerData.actor.skills["MSK"]) || 0;
+    const observerStealth = Level(observerData.actor.skills["STE"]) || 0;
     const observerUAV = Level(observerData.actor.skills["TECH_uav"]) || 0;
 
-    const minTargetSkill = MinSkill(targetUnit, "MSK");
-    const targetMSK = Level(minTargetSkill) || 0;
+    const minTargetStealth = MinSkill(targetUnit, "STE");
+    const targetStealthLevel = Level(minTargetStealth) || 0;
 
     const isUAV = forceUAV || (observerData.equipment?.skill === "TECH_uav");
-    const baseMod = isUAV ? (observerUAV + observerMSK) : (2 * observerMSK);
+    const baseMod = isUAV ? (observerUAV + observerStealth) : (2 * observerStealth);
 
     const defMod = isInDef ? 5 : 0;
 
-    const infantryResult = roll + visData.visibility + baseMod - 2 * targetMSK - defMod;
+    const infantryResult = roll + visData.visibility + baseMod - 2 * targetStealthLevel - defMod;
     const vehicleResult = roll + visData.visibility + baseMod + 6;
 
     const isVehicle = targetUnit.vehicle;
@@ -107,13 +107,13 @@ export function CalculateWatchEffect(players, rolls, actors, target, activeCondi
 
     const visData = ModifiedVisibilityData(equipment, activeConditions);
 
-    const actorWatchSkillLevel = Level(actor.skills["MSK"]) || 0;
+    const actorWatchSkillLevel = Level(actor.skills["STE"]) || 0;
     const actorUavSkillLevel = Level(actor.skills["TECH_uav"]) || 0;
 
-    const minTargetSkill = MinSkill(target, "MSK");
-    const targetSkillLevel = Level(minTargetSkill);
+    const minTargetStealth = MinSkill(target, "STE");
+    const targetStealthLevel = Level(minTargetStealth);
 
-    const infantryMod = rolls[0].roll + visData.visibility + actorWatchSkillLevel - 2 * targetSkillLevel - (rolls[0].selectedDef > 0 ? 5 : 0);
+    const infantryMod = rolls[0].roll + visData.visibility + actorWatchSkillLevel - 2 * targetStealthLevel - (rolls[0].selectedDef > 0 ? 5 : 0);
 
     const infantryWatchResult = equipment?.skill === "TECH_uav"
         ? infantryMod + actorUavSkillLevel
@@ -151,7 +151,7 @@ export function CalculateWatchEffect(players, rolls, actors, target, activeCondi
 }
 
 export function CanWatchEquipment(players, actor, equipment) {
-    return (Level(actor.skills[equipment.skill] || 0) > 0 || equipment.skill === "MSK")
+    return (Level(actor.skills[equipment.skill] || 0) > 0 || equipment.skill === "STE")
         && ((equipment.mustBeDeployed && CurrentUnit(players, actor).isDeployed) || !equipment.mustBeDeployed)
         && equipment.optic;
 }

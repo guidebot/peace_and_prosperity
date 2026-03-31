@@ -1,42 +1,49 @@
 import { useState, useEffect } from 'react';
-import { Skills } from '../game/Skill';
+import { Skills, GetLeadershipFromSkills } from '../game/Skill';
 import { Entity } from '../game/Entity';
 import { Titles } from '../game/Title';
 import { CountriesData, generateNameForCountry, Genders } from '../game/names';
-import { CreateInfantryEquipment } from '../game/Equipment';
+import { CreateInfantryEquipment, Equipment } from '../game/Equipment';
 import { GiConfirmed, GiCancel } from 'react-icons/gi';
 
-function assignEquipment(skills, isMilitary, hasWeapon) {
-    const FP = skills.FP ?? 0;
-    const TP = skills.TP ?? 0;
-    const MSK = skills.MSK ?? 0;
-    const LID = skills.LID ?? 0;
+interface PersonGeneratorProps {
+    onCancel: () => void;
+    onConfirm: (person: Entity) => void;
+}
+
+type EquipmentItem = string | { id: string; count: number };
+
+function assignEquipment(skills: Record<string, number>, isMilitary: boolean, hasWeapon: boolean): Equipment[] {
+    const endurance = skills.END ?? 0;
+    const maneuvering = skills.MNV ?? 0;
+    const stealth = skills.STE ?? 0;
+    const leadership = GetLeadershipFromSkills(skills);
     const grenadeSkill = skills.WPN_grenades ?? 0;
     const sniperSkill = skills.WPN_sniper ?? 0;
 
-    const equipment = [];
+    const equipment: EquipmentItem[] = [];
 
     if (isMilitary && hasWeapon) {
-        if (FP >= 7 && (skills.WPN_heavy ?? 0) > 0) {
+        if (endurance >= 7 && (skills.WPN_heavy ?? 0) > 0) {
             equipment.push("ak12");
             equipment.push("rpg29");
         }
-        else if (FP >= 7 && (skills.WPN_mg ?? 0) > (skills.WPN_rifles ?? 0)) {
+        else if (endurance >= 7 && (skills.WPN_mg ?? 0) > (skills.WPN_rifles ?? 0)) {
             equipment.push("lmg_pkm")
         }
-        else if (FP >= 3 && sniperSkill >= 7 && sniperSkill > (skills.WPN_rifles ?? 0)) {
+        else if (endurance >= 3 && sniperSkill >= 7 && sniperSkill > (skills.WPN_rifles ?? 0)) {
             equipment.push("h&kg2810x")
         }
-        else if (FP >= 1) {
+        else if (endurance >= 1) {
             if ((skills.TECH_mechanics ?? 0) >= 7) {
                 equipment.push("aks74u");
             }
             else {
-                if (FP >= 3 && (skills.WPN_gl ?? 0) >= 3) {
+                if (endurance >= 3 && (skills.WPN_gl ?? 0) >= 3) {
                     equipment.push("ak12");
                     equipment.push("gp");
                 }
-                else if (TP >= 3 && MSK >= 3) {
+                else if (maneuvering >= 3 && stealth >= 3) {
                     equipment.push("h&k416_silencer_collimator");
                 }
                 else {
@@ -45,42 +52,42 @@ function assignEquipment(skills, isMilitary, hasWeapon) {
             }
         }
 
-        if (MSK >= 3 && FP >= 1) {
+        if (stealth >= 3 && endurance >= 1) {
             equipment.push("binoculars");
         }
 
-        if (MSK >= 7 && FP >= 3) {
+        if (stealth >= 7 && endurance >= 3) {
             equipment.push("nvg");
         }
 
-        if (grenadeSkill >= 3 && FP >= 1) {
+        if (grenadeSkill >= 3 && endurance >= 1) {
             equipment.push({ id: "grenades", count: 2 });
             equipment.push({ id: "smoke", count: 2 });
-        } else if (grenadeSkill >= 1 && FP >= 1) {
+        } else if (grenadeSkill >= 1 && endurance >= 1) {
             equipment.push({ id: "smoke", count: 2 });
         }
 
-        if (MSK >= 3 && FP >= 3 && (skills.TECH_uav ?? 0) >= 7) {
+        if (stealth >= 3 && endurance >= 3 && (skills.TECH_uav ?? 0) >= 7) {
             equipment.push("uav");
         }
 
-        if (FP >= 7 && (skills.TECH_uav ?? 0) >= 12) {
+        if (endurance >= 7 && (skills.TECH_uav ?? 0) >= 12) {
             equipment.push("uav_grenade");
         }
 
-        if (FP >= 7 && TP >= 7 && ((skills.TECH_mechanics ?? 0) < 7)) {
+        if (endurance >= 12 && maneuvering >= 7 && ((skills.TECH_mechanics ?? 0) < 7)) {
             equipment.push("vest_msv_full");
         }
-        else if (FP >= 7 && TP >= 3) {
+        else if (endurance >= 7 && maneuvering >= 3) {
             equipment.push("vest_msv_plate");
         }
-        else if (FP >= 1 && (LID >= 12 || TP >= 3)) {
+        else if (endurance >= 1 && (leadership >= 12 || maneuvering >= 3)) {
             equipment.push("vest_msv_base");
         }
     }
 
     if (!isMilitary && hasWeapon) {
-        if (FP >= 1 && (LID >= 12 || TP >= 3)) {
+        if (endurance >= 1 && (leadership >= 12 || maneuvering >= 3)) {
             equipment.push("vest_msv_base");
         }
     }
@@ -96,16 +103,18 @@ function assignEquipment(skills, isMilitary, hasWeapon) {
     return CreateInfantryEquipment(equipment);
 }
 
-export function PersonGenerator({ onCancel, onConfirm }) {
-    const [selectedTitle, setSelectedTitle] = useState(Titles[0].name);
-    const [selectedCountry, setSelectedCountry] = useState(CountriesData[0].CountryName);
-    const [selectedGender, setSelectedGender] = useState(Genders[0].id);
-    const [isMilitary, setIsMilitary] = useState(true);
-    const [defaultWeapon, setDefaultWeapon] = useState(true);
-    const [name, setName] = useState(generateNameForCountry(selectedCountry, selectedGender));
+export function PersonGenerator({ onCancel, onConfirm }: PersonGeneratorProps) {
+    const [selectedTitle, setSelectedTitle] = useState<string>(Titles[0].name);
+    const [selectedCountry, setSelectedCountry] = useState<string>(CountriesData[0].CountryName);
+    const [selectedGender, setSelectedGender] = useState<string>(Genders[0].id);
+    const [isCharismatic, setIsCharismatic] = useState<boolean>(Math.random() < 0.5);
+    const [isMilitary, setIsMilitary] = useState<boolean>(true);
+    const [defaultWeapon, setDefaultWeapon] = useState<boolean>(true);
+    const [name, setName] = useState<string>(generateNameForCountry(selectedCountry, selectedGender));
 
     useEffect(() => {
         setName(generateNameForCountry(selectedCountry, selectedGender));
+        setIsCharismatic(Math.random() < 0.5);
     }, [selectedCountry, selectedGender]);
 
     return (
@@ -161,6 +170,10 @@ export function PersonGenerator({ onCancel, onConfirm }) {
                 </select>
             </label>
             <label className="form-label">
+                <span>Харизматичный</span>
+                <input title='Выбор коммуникативной стратегии между логикой и харизматичным влиянием' type="checkbox" checked={isCharismatic} onChange={() => setIsCharismatic(!isCharismatic)} />
+            </label>
+            <label className="form-label">
                 <span>Действующий солдат</span>
                 <input title='Недавно проходил военные сборы или в настоящее время проходит службу' type="checkbox" checked={isMilitary} onChange={() => setIsMilitary(!isMilitary)} />
             </label>
@@ -171,7 +184,7 @@ export function PersonGenerator({ onCancel, onConfirm }) {
 
             <div className="buttons-panel" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <button title="Так точно" onClick={() => {
-                    const newPerson = GeneratePerson(selectedTitle, isMilitary, defaultWeapon, name);
+                    const newPerson = GeneratePerson(selectedTitle, isMilitary, isCharismatic, defaultWeapon, name);
                     onConfirm(newPerson);
                 }}><GiConfirmed /></button>
                 <button title="Никак нет" onClick={onCancel}><GiCancel /></button>
@@ -180,25 +193,48 @@ export function PersonGenerator({ onCancel, onConfirm }) {
     );
 }
 
-export function GenerateDefaultPerson(isMilitary, hasWeapon, titleName) {
+export function GenerateDefaultPerson(isMilitary: boolean, hasWeapon: boolean, titleName: string): Entity {
     const name = generateNameForCountry(CountriesData[0].CountryName, Genders[0].id);
-    return GeneratePerson(titleName, isMilitary, hasWeapon, name);
+    const isCharismatic = Math.random() < 0.5;
+    return GeneratePerson(titleName, isMilitary, isCharismatic, hasWeapon, name);
 }
 
-export function GeneratePerson(titleName, isMilitary, hasWeapon, name) {
-    const title = Titles.find(title => title.name === titleName);
-    const skills = isMilitary ? { LID: title.lid, FP: 8, TP: 4, MSK: 1, WPN_rifles: 5, WPN_grenades: 2 } : { LID: title.lid, FP: 5 };
-    const skillsForRoll = Skills.filter(sk => !sk.id.startsWith("WPN_") && sk.id !== "LID");
-    for (let sr = 0; sr < title.skillRolls; sr++) {
-        const skillRoll = Math.floor(Math.random() * skillsForRoll.length);
-        const valueRoll = Math.floor(Math.random() * (isMilitary ? title.maxSkillRoll : 4)) + 1;
-        skills[skillsForRoll[skillRoll].id] = Math.max(skills[skillsForRoll[skillRoll].id] ?? 0, valueRoll);
+function shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    const weaponSkillsForRoll = Skills.filter(sk => sk.id.startsWith("WPN_"));
-    for (let sr = 0; sr < title.weaponSkillRolls; sr++) {
-        const skillRoll = Math.floor(Math.random() * weaponSkillsForRoll.length);
+    return shuffled;
+}
+
+export function GeneratePerson(titleName: string, isMilitary: boolean, isCharismatic: boolean, hasWeapon: boolean, name: string): Entity {
+    const title = Titles.find(title => title.name === titleName);
+
+    if (!title) {
+        throw new Error(`Title "${titleName}" not found`);
+    }
+
+    const logic = isCharismatic ? 0 : title.leadership;
+    const influence = isCharismatic ? title.leadership : 0;
+
+    const skills: Record<string, number> = isMilitary
+        ? { LOG: logic, IFL: influence, END: 8, MNV: 4, STE: 1, WPN_rifles: 5, WPN_grenades: 2 }
+        : { LOG: logic, IFL: influence, END: 5 };
+
+    const skillsForRoll = shuffleArray(Skills.filter(sk => sk.attribute !== "MRK" && sk.id !== "LOG" && sk.id !== "IFL"));
+    const selectedSkills = skillsForRoll.slice(0, title.skillRolls);
+    for (const skill of selectedSkills) {
+        let valueRoll = Math.floor(Math.random() * (isMilitary ? title.maxSkillRoll : 4)) + 1;
+        if (skill.id === "END") { valueRoll = Math.min(skills[skill.id] + valueRoll, 20); }
+        skills[skill.id] = Math.max(skills[skill.id] ?? 0, valueRoll);
+    }
+
+    const weaponSkillsForRoll = shuffleArray(Skills.filter(sk => sk.attribute === "MRK"));
+    const selectedWeaponSkills = weaponSkillsForRoll.slice(0, title.weaponSkillRolls);
+    for (const skill of selectedWeaponSkills) {
         const valueRoll = Math.floor(Math.random() * (isMilitary ? title.maxSkillRoll : 6)) + 1;
-        skills[weaponSkillsForRoll[skillRoll].id] = Math.max(skills[weaponSkillsForRoll[skillRoll].id] ?? 0, valueRoll);
+        skills[skill.id] = Math.max(skills[skill.id] ?? 0, valueRoll);
     }
 
     const equipment = assignEquipment(skills, isMilitary, hasWeapon);

@@ -106,7 +106,7 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
                                         })} >
                                             <GiHealing />
                                         </button>)}
-                                        {PossibleTargets(players, actor).length > 0 && skill.id === "MSK" && (<button title="Наблюдение" onClick={() => setModalData({
+                                        {PossibleTargets(players, actor).length > 0 && skill.id === "STE" && (<button title="Наблюдение" onClick={() => setModalData({
                                             open: true,
                                             actors: [actor],
                                             targets: PossibleTargets(players, actor),

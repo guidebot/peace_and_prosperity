@@ -2,12 +2,12 @@ import { Entity } from "./Entity";
 import { Unit } from "./Unit";
 
 export class Skill {
-    category: string;
+    attribute: string;
     id: string;
     name: string;
 
-    constructor(category: string, id: string, name: string) {
-        this.category = category;
+    constructor(attribute: string, id: string, name: string) {
+        this.attribute = attribute;
         this.id = id;
         this.name = name;
     }
@@ -45,8 +45,21 @@ export function MinSkill(unitData: Unit, SkillKey: string) {
     }, 999);
 }
 
-export function EffectiveTP(soldier: Entity): number {
-    const baseTP = soldier.skills["TP"] || 0;
+export function MaxLeadership(unitData: Unit) {
+    return Math.max(MaxSkill(unitData, "LOG") ?? 0, MaxSkill(unitData, "IFL") ?? 0);
+}
+
+export function GetLeadershipFromSkills(skills: Record<string, number>): number {
+    return Math.max(skills?.["LOG"] || 0, skills?.["IFL"] || 0);
+}
+
+export function MaxLeadershipFromPersons(persons: Entity[]): number {
+    if (!persons || persons.length === 0) return 0;
+    return Math.max(...persons.map(p => GetLeadershipFromSkills(p.skills || {})));
+}
+
+export function EffectiveManeuvering(soldier: Entity): number {
+    const baseTP = soldier.skills["MNV"] || 0;
     return baseTP + GetArmorMod(soldier);
 }
 
@@ -65,7 +78,7 @@ export function AverageArmorMod(unitData: Unit): number {
         return sum + GetArmorMod(s);
     }, 0);
 
-    return Math.round(totalArmor / alive.length);
+    return Math.floor(totalArmor / alive.length);
 }
 
 export function MedianSkill(unitData: Unit, SkillKey: string) {
@@ -89,37 +102,44 @@ export function MedianSkill(unitData: Unit, SkillKey: string) {
     }
 }
 
-export const SkillCategories = {
-    char: "Основные навыки",
-    wpn: "Оружие",
-    tech: "Техника"
+export const Attributes = {
+    HEL: "Здоровье",
+    AGI: "Ловкость",
+    MRK: "Меткость",
+    INT: "Интеллект",
+    CHR: "Харизма"
 }
 
 export const Skills = [
-    new Skill("char", "LID", "ЛИД Лидерство"),
-    new Skill("char", "FP", "ФП Физическая Подготовка"),
-    new Skill("char", "TP", "ТП Тактическая Подготовка"),
-    new Skill("char", "MED", "МЕД Медицина"),
-    new Skill("char", "MSK", "МСК Маскировка"),
-    new Skill("wpn", "WPN_rifles", "Лёгкое стрелковое"),
-    new Skill("wpn", "WPN_grenades", "Гранаты (метательное)"),
-    new Skill("wpn", "WPN_sniper", "Снайперское"),
-    new Skill("wpn", "WPN_mg", "Пулемёты"),
-    new Skill("wpn", "WPN_heavy", "Тяжёлое вооружение"),
-    new Skill("wpn", "WPN_guided", "Управляемые ракеты"),
-    new Skill("wpn", "WPN_uav", "Управление дронами"),
-    new Skill("wpn", "WPN_artillery", "Артиллерия"),
-    new Skill("tech", "TECH_explosives", "Взрывные устройства и мины"),
-    new Skill("tech", "TECH_mechanics", "Механика"),
-    new Skill("tech", "TECH_electronics", "Электроника")
+    new Skill("HEL", "END", "[ВНС] Выносливость"),
+
+    new Skill("AGI", "MNV", "[МНВ] Маневрирование"),
+    new Skill("AGI", "STE", "[МСК] Маскировка"),
+
+    new Skill("CHR", "IFL", "[ВЛН] Влияние"),
+
+    new Skill("INT", "LOG", "[ЛГК] Логика"),
+    new Skill("INT", "MED", "[МЕД] Медицина"),
+    new Skill("INT", "MCH", "[МЕХ] Механика"),
+    new Skill("INT", "EL", "[ЭЛ] Электроника"),
+    new Skill("INT", "TECH_explosives", "[ВЗР] Взрывчатые вещества"),
+    new Skill("INT", "WPN_artillery", "[ОП] Огневая поддержка"),
+
+    new Skill("MRK", "WPN_grenades", "[ГРН] Метательное оружие (гранаты)"),
+    new Skill("MRK", "WPN_rifles", "[ЛС] Лёгкое стрелковое оружие"),
+    new Skill("MRK", "WPN_sniper", "[СН] Снайперское оружие"),
+    new Skill("MRK", "WPN_mg", "[ПЛМ] Пулемёты"),
+    new Skill("MRK", "WPN_guided", "[УР] Управляемые ракеты"),
+    new Skill("MRK", "TECH_uav", "[ДРН] Управляемые дроны"),
+    new Skill("MRK", "WPN_heavy", "[ТВ] Тяжёлое вооружение")
 ]
 
-export const SkillsByCategories: Record<string, Skill[]> = Skills.reduce((acc: Record<string, Skill[]>, item: Skill) => {
-    if (!acc[item.category]) {
-        acc[item.category] = [];
+export const SkillsByAttributes: Record<string, Skill[]> = Skills.reduce((acc: Record<string, Skill[]>, item: Skill) => {
+    if (!acc[item.attribute]) {
+        acc[item.attribute] = [];
     }
 
-    acc[item.category].push(item);
+    acc[item.attribute].push(item);
 
     return acc;
 }, {});

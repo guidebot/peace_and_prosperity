@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { SkillCategories, SkillsByCategories } from '../game/Skill';
+import { Attributes, SkillsByAttributes } from '../game/Skill';
 import { CollapsibleEquipmentGroup } from './PersonEquipment';
 import { CollapsibleDrivingGroup } from './PersonDriving';
 import { CollapsibleSkillGroup } from './PersonSkills';
@@ -17,13 +17,36 @@ export function PersonForm({ players, data, onPropertyChange, onOtherChange, add
         setTotalWeight(newWeight);
     }, [equipment, data]);
 
-    const [openGroups, setOpenGroups] = useState({
-        char: true,
-        driving: data.vehicle,
-        equipment: true,
-        wpn: true,
-        tech: true
+    const [openGroups, setOpenGroups] = useState(() => {
+        const initial = {
+            equipment: true,
+            HEL: true,
+            AGI: true,
+            CHR: true,
+            INT: true,
+            MRK: true
+        };
+
+        Object.entries(SkillsByAttributes).forEach(([key, group]) => {
+            const hasNonZeroSkill = group.some(skill => (data.skills?.[skill.id] || 0) > 0);
+            initial[key] = hasNonZeroSkill;
+        });
+
+        return initial;
     });
+
+    useEffect(() => {
+        setOpenGroups((prev) => {
+            const updated = { ...prev };
+
+            Object.entries(SkillsByAttributes).forEach(([key, group]) => {
+                const hasNonZeroSkill = group.some(skill => (data.skills?.[skill.id] || 0) > 0);
+                updated[key] = hasNonZeroSkill;
+            });
+
+            return updated;
+        });
+    }, [data]);
 
     const unit = CurrentUnit(players, data);
 
@@ -61,12 +84,12 @@ export function PersonForm({ players, data, onPropertyChange, onOtherChange, add
                 onOtherChange={onOtherChange}
                 addLogEntry={addLogEntry}
             />
-            {Object.entries(SkillsByCategories).map(([key, group]) => (
+            {Object.entries(SkillsByAttributes).map(([key, group]) => (
                 <CollapsibleSkillGroup
                     players={players}
                     actor={data}
                     key={key}
-                    title={SkillCategories[key]}
+                    title={Attributes[key]}
                     skills={group}
                     currentSkills={data.skills}
                     onPropertyChange={onPropertyChange}

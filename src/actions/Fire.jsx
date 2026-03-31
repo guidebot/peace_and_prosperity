@@ -1,4 +1,4 @@
-import { Level, MinSkill, AverageArmorMod, EffectiveTP } from "../game/Skill";
+import { Level, MinSkill, AverageArmorMod, EffectiveManeuvering } from "../game/Skill";
 import { CurrentUnit, RemoveEquipmentFromPerson, UpdateSuppressionStatusForPersons } from "../cards/utils";
 import { ModifiedVisibilityData } from "../game/conditions";
 import { SCALE_PREFIX } from "../game/Constants";
@@ -42,7 +42,7 @@ function selectSoldiersForHit(unit, count) {
     if (!unit.children) return [];
 
     const candidates = unit.children.filter(p => !p.isDead && !p.isBleeding);
-    const sorted = SortByPropertyWithRandomTies(candidates, (person) => EffectiveTP(person));
+    const sorted = SortByPropertyWithRandomTies(candidates, (person) => EffectiveManeuvering(person));
 
     return sorted.slice(0, count);
 }
@@ -116,7 +116,7 @@ function calculateFireEffect(players, roll, actorData, target, activeConditions)
         return { result: false, actorData, supression: 0, hits: 0, message: `${actor.name} не умеет пользоваться ${equipment.name}` };
     }
 
-    const targetTpSkillLevel = Level(MinSkill(target, "TP"));
+    const targetTpSkillLevel = Level(MinSkill(target, "MNV"));
     const armorMod = AverageArmorMod(target);
 
     // Механика пробития брони: AP вычитает из armorMod

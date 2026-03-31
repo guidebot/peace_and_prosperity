@@ -10,8 +10,7 @@ import { UpdateCardProperty } from './cards/utils';
 import { GenerateDefaultPerson } from './actions/PersonGenerator';
 import { VisibilityConditionsProvider } from './game/conditions';
 import { Titles } from './game/Title';
-import { MaxSkill } from './game/Skill';
-import { generateUnitName } from './game/callsigns';
+import { MaxLeadership } from './game/Skill';
 
 function App() {
   const soldiers = [
@@ -110,8 +109,8 @@ function App() {
     });
 
     return order.sort((a, b) => {
-      const aLid = MaxSkill(a, "LID");
-      const bLid = MaxSkill(b, "LID");
+      const aLid = MaxLeadership(a);
+      const bLid = MaxLeadership(b);
       return aLid === bLid ? 0.5 - randomN : bLid - aLid;
     });
   };
@@ -170,7 +169,7 @@ function App() {
                 {getPlayOrder().filter(unit => unit.isActive).map(unit => (
                   <tr key={unit.id}>
                     <td className="clickable_td" onClick={() => handleOtherPropertyChange(unit.id, "isMarked", !unit.isMarked)} >{unit.isMarked && (<GiCheckMark />)}</td>
-                    <td>{MaxSkill(unit, "LID")}</td>
+                    <td>{MaxLeadership(unit)}</td>
                     <td className={`clickable_td ${selectedNode === unit.id ? 'selected' : ''}`} onClick={() => handleInitiativeClick(unit.id)}>{unit.name}</td>
                   </tr>
                 ))}
