@@ -9,6 +9,10 @@ export function PersonForm({ players, data, onPropertyChange, onOtherChange, add
     const equipment = useMemo(() => data.equipment || [], [data.equipment]);
     const [totalWeight, setTotalWeight] = useState(0);
 
+    const totalSkill = useMemo(() =>
+        Object.values(data.skills || {}).reduce((sum, val) => sum + val, 0)
+        , [data.skills]);
+
     useEffect(() => {
         const newWeight = equipment.reduce((sum, item) => {
             return sum + (item.weight + item.ammo * item.ammoWeight);
@@ -65,6 +69,10 @@ export function PersonForm({ players, data, onPropertyChange, onOtherChange, add
             <label className="form-label" >
                 <span>Вес снаряжения:</span>
                 <input name="totalWeight" readOnly={true} type="number" value={totalWeight / 10} />кг
+            </label>
+            <label className="form-label" >
+                <span>Очков навыков:</span>
+                <input name="totalSkill" readOnly={true} type="number" value={totalSkill} />
             </label>
             {unit.vehicle && (<CollapsibleDrivingGroup
                 players={players}

@@ -71,7 +71,7 @@ export const UnitMap = ({
                 const dy = target.position.y - uavClickPos.y;
                 const actualUavDistance = Math.sqrt(dx * dx + dy * dy);
 
-                if (plainUavDistance >= actualUavDistance) {
+                if (plainUavDistance && plainUavDistance >= actualUavDistance) {
                     lines.push(
                         <line
                             key={`vis-uav-plain-${target.id}`}
@@ -85,7 +85,7 @@ export const UnitMap = ({
                     );
                 }
 
-                if (defUavDistance >= actualUavDistance) {
+                if (defUavDistance && defUavDistance >= actualUavDistance) {
                     lines.push(
                         <line
                             key={`vis-uav-def-${target.id}`}
@@ -99,7 +99,7 @@ export const UnitMap = ({
                     );
                 }
 
-                if (maxPlainUavDistance >= actualUavDistance && maxDefUavDistance < actualUavDistance) {
+                if (maxPlainUavDistance && maxPlainUavDistance >= actualUavDistance && maxDefUavDistance < actualUavDistance) {
                     lines.push(
                         <line
                             key={`vis-uav-max-plain-${target.id}`}
@@ -114,7 +114,7 @@ export const UnitMap = ({
                     );
                 }
 
-                if (maxDefUavDistance >= actualUavDistance) {
+                if (maxDefUavDistance && maxDefUavDistance >= actualUavDistance) {
                     lines.push(
                         <line
                             key={`vis-uav-max-def-${target.id}`}
@@ -139,7 +139,7 @@ export const UnitMap = ({
                 const dy = target.position.y - observerPos.y;
                 const actualDistance = Math.sqrt(dx * dx + dy * dy);
 
-                if (plainDistance >= actualDistance) {
+                if (plainDistance && plainDistance >= actualDistance) {
                     lines.push(
                         <line
                             key={`vis-plain-${target.id}`}
@@ -153,7 +153,7 @@ export const UnitMap = ({
                     );
                 }
 
-                if (defDistance >= actualDistance) {
+                if (defDistance && defDistance >= actualDistance) {
                     lines.push(
                         <line
                             key={`vis-def-${target.id}`}
@@ -167,7 +167,7 @@ export const UnitMap = ({
                     );
                 }
 
-                if (maxPlainDistance >= actualDistance && maxDefDistance < actualDistance) {
+                if (maxPlainDistance && maxPlainDistance >= actualDistance && maxDefDistance < actualDistance) {
                     lines.push(
                         <line
                             key={`vis-max-plain-${target.id}`}
@@ -182,7 +182,7 @@ export const UnitMap = ({
                     );
                 }
 
-                if (maxDefDistance >= actualDistance) {
+                if (maxDefDistance && maxDefDistance >= actualDistance) {
                     lines.push(
                         <line
                             key={`vis-max-def-${target.id}`}

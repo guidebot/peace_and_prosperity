@@ -19,8 +19,8 @@ Gamemaster driven cooperative roleplaying wargame.
 - Prefer typescript over javascript.
 - Follow SOLID and DRY principles.
 - Before making changes, summarize the approach with a brief plan and get user approval.
-- When planning use sequential-thinking MCP and TRIZ methodology.
-- Use exa MCP for web-search.
+- When planning use sequentialthinking (mcp__sequential-thinking__sequentialthinking tool) and TRIZ methodology.
+- Use exa MCP (mcp__exa__* tools) for web-search.
 - When adding a new library or framework or starting a new project always check context7 for updates about the used libraries and frameworks.
 
 ## Coding Style:
