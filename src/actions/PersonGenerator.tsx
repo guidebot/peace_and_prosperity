@@ -222,18 +222,21 @@ export function GeneratePerson(titleName: string, isMilitary: boolean, isCharism
         ? { LOG: logic, IFL: influence, END: 8, MNV: 4, STE: 1, WPN_rifles: 5, WPN_grenades: 2 }
         : { LOG: logic, IFL: influence, END: 5 };
 
+    const weaponSkillRolls = isMilitary ? title.weaponSkillRolls : 1;
+    const skillRolls = title.skillRolls + title.weaponSkillRolls - weaponSkillRolls;
+
     const skillsForRoll = shuffleArray(Skills.filter(sk => sk.attribute !== "MRK" && sk.id !== "LOG" && sk.id !== "IFL"));
-    const selectedSkills = skillsForRoll.slice(0, title.skillRolls);
+    const selectedSkills = skillsForRoll.slice(0, skillRolls);
     for (const skill of selectedSkills) {
-        let valueRoll = Math.floor(Math.random() * (isMilitary ? title.maxSkillRoll : 4)) + 1;
+        let valueRoll = Math.floor(Math.random() * title.maxSkillRoll) + 1;
         if (skill.id === "END") { valueRoll = Math.min(skills[skill.id] + valueRoll, 20); }
         skills[skill.id] = Math.max(skills[skill.id] ?? 0, valueRoll);
     }
 
     const weaponSkillsForRoll = shuffleArray(Skills.filter(sk => sk.attribute === "MRK"));
-    const selectedWeaponSkills = weaponSkillsForRoll.slice(0, title.weaponSkillRolls);
+    const selectedWeaponSkills = weaponSkillsForRoll.slice(0, weaponSkillRolls);
     for (const skill of selectedWeaponSkills) {
-        const valueRoll = Math.floor(Math.random() * (isMilitary ? title.maxSkillRoll : 6)) + 1;
+        const valueRoll = Math.floor(Math.random() * title.maxSkillRoll) + 1;
         skills[skill.id] = Math.max(skills[skill.id] ?? 0, valueRoll);
     }
 
