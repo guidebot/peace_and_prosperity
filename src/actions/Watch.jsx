@@ -3,6 +3,42 @@ import { CurrentUnit } from '../cards/utils';
 import { VisibilityConditionsCatalog, ModifiedVisibilityData } from '../game/conditions';
 import { SCALE_PREFIX } from '../game/Constants';
 
+const DETECTION_THRESHOLDS = [
+    { threshold: 42, detectionDistance: 320 },
+    { threshold: 37, detectionDistance: 160 },
+    { threshold: 32, detectionDistance: 80 },
+    { threshold: 27, detectionDistance: 40 },
+    { threshold: 22, detectionDistance: 20 },
+    { threshold: 17, detectionDistance: 10 },
+    { threshold: 10, detectionDistance: 3 }
+];
+
+const VEHICLE_AUTODETECT_DISTANCE = 3;
+
+function calculateDetectionRoll(roll, visibilityModifier, observerStealth, observerUAV, targetStealth, hasCover, isVehicle, isUAV) {
+    const observerBonus = isUAV ? (observerUAV + observerStealth) : (2 * observerStealth);
+    if (isVehicle) {
+        return roll + visibilityModifier + observerBonus;
+    }
+    return roll + visibilityModifier + observerBonus - 2 * targetStealth - (hasCover ? 5 : 0);
+}
+
+function getDistanceByRoll(modifiedRoll, isVehicle, maxVisibilityRange) {
+    for (const { threshold, detectionDistance } of DETECTION_THRESHOLDS) {
+        const distance = isVehicle ? detectionDistance * 2 : detectionDistance;
+        const effectiveMaxRange = isVehicle ? maxVisibilityRange * 2 : maxVisibilityRange;
+        if (modifiedRoll >= threshold) {
+            return Math.min(effectiveMaxRange, distance);
+        }
+    }
+
+    if (isVehicle) {
+        return Math.min(maxVisibilityRange * 2, VEHICLE_AUTODETECT_DISTANCE);
+    }
+
+    return null;
+}
+
 export function BestActorForUnit(unit, activeConditions) {
     const candidates = [];
 
@@ -55,7 +91,7 @@ export function CalculateVisibilityDistance(observerUnit, targetUnit, activeCond
     const observerData = BestActorForUnit(observerUnit, activeConditions);
 
     if (!observerData) {
-        return SCALE_PREFIX;
+        return null;
     }
 
     const visData = ModifiedVisibilityData(observerData.equipment, activeConditions);
@@ -64,37 +100,17 @@ export function CalculateVisibilityDistance(observerUnit, targetUnit, activeCond
     const observerUAV = Level(observerData.actor.skills["TECH_uav"]) || 0;
 
     const minTargetStealth = MinSkill(targetUnit, "STE");
-    const targetStealthLevel = Level(minTargetStealth) || 0;
+    const targetStealthLevel = Level(minTargetStealth);
 
     const isUAV = forceUAV || (observerData.equipment?.skill === "TECH_uav");
-    const baseMod = isUAV ? (observerUAV + observerStealth) : (2 * observerStealth);
-
-    const defMod = isInDef ? 5 : 0;
-
-    const infantryResult = roll + visData.visibility + baseMod - 2 * targetStealthLevel - defMod;
-    const vehicleResult = roll + visData.visibility + baseMod + 6;
-
     const isVehicle = targetUnit.vehicle;
 
-    let maxDistance = SCALE_PREFIX;
+    const modifiedRoll = calculateDetectionRoll(roll, visData.visibility, observerStealth, observerUAV, targetStealthLevel, isInDef, isVehicle, isUAV);
+    const distance = getDistanceByRoll(modifiedRoll, isVehicle, visData.maxRange);
 
-    if (isVehicle) {
-        if (vehicleResult >= 42 && visData.maxRange * 2 >= 640 + SCALE_PREFIX) maxDistance = 640 + SCALE_PREFIX;
-        else if (vehicleResult >= 37 && visData.maxRange * 2 >= 320 + SCALE_PREFIX) maxDistance = 320 + SCALE_PREFIX;
-        else if (vehicleResult >= 32 && visData.maxRange * 2 >= 160 + SCALE_PREFIX) maxDistance = 160 + SCALE_PREFIX;
-        else if (vehicleResult >= 27 && visData.maxRange * 2 >= 80 + SCALE_PREFIX) maxDistance = 80 + SCALE_PREFIX;
-        else if (vehicleResult >= 22 && visData.maxRange * 2 >= 40 + SCALE_PREFIX) maxDistance = 40 + SCALE_PREFIX;
-        else if (vehicleResult >= 17 && visData.maxRange * 2 >= 20 + SCALE_PREFIX) maxDistance = 20 + SCALE_PREFIX;
-    } else {
-        if (infantryResult >= 42 && visData.maxRange >= 320 + SCALE_PREFIX) maxDistance = 320 + SCALE_PREFIX;
-        else if (infantryResult >= 37 && visData.maxRange >= 160 + SCALE_PREFIX) maxDistance = 160 + SCALE_PREFIX;
-        else if (infantryResult >= 32 && visData.maxRange >= 80 + SCALE_PREFIX) maxDistance = 80 + SCALE_PREFIX;
-        else if (infantryResult >= 27 && visData.maxRange >= 40 + SCALE_PREFIX) maxDistance = 40 + SCALE_PREFIX;
-        else if (infantryResult >= 22 && visData.maxRange >= 20 + SCALE_PREFIX) maxDistance = 20 + SCALE_PREFIX;
-        else if (infantryResult >= 17 && visData.maxRange >= 10 + SCALE_PREFIX) maxDistance = 10 + SCALE_PREFIX;
-    }
-
-    return maxDistance * 3;
+    return distance !== null
+        ? (distance + SCALE_PREFIX) * 3 // scale for the schema
+        : null;
 }
 
 export function CalculateWatchEffect(players, rolls, actors, target, activeConditions) {
@@ -113,41 +129,25 @@ export function CalculateWatchEffect(players, rolls, actors, target, activeCondi
     const minTargetStealth = MinSkill(target, "STE");
     const targetStealthLevel = Level(minTargetStealth);
 
-    const infantryMod = rolls[0].roll + visData.visibility + actorWatchSkillLevel - 2 * targetStealthLevel - (rolls[0].selectedDef > 0 ? 5 : 0);
+    const isUAV = equipment?.skill === "TECH_uav";
+    const isVehicle = target.vehicle;
+    const hasCover = rolls[0].selectedDef > 0;
 
-    const infantryWatchResult = equipment?.skill === "TECH_uav"
-        ? infantryMod + actorUavSkillLevel
-        : infantryMod + actorWatchSkillLevel;
+    const modifiedRoll = calculateDetectionRoll(rolls[0].roll, visData.visibility, actorWatchSkillLevel, actorUavSkillLevel, targetStealthLevel, hasCover, isVehicle, isUAV);
+    const detectedDistance = getDistanceByRoll(modifiedRoll, isVehicle, visData.maxRange);
 
-    const vehicleMod = rolls[0].roll + visData.visibility + actorWatchSkillLevel + 6;
+    const modifiedRollForMineDetection = calculateDetectionRoll(rolls[0].roll, visData.visibility, actorWatchSkillLevel, actorUavSkillLevel, 0, false, isVehicle, isUAV);
+    const mineDetected = !isUAV && (equipment?.minRange ?? 0) < 1 && modifiedRollForMineDetection >= 22;
 
-    const vehicleWatchResult = equipment?.skill === "TECH_uav"
-        ? vehicleMod + actorUavSkillLevel
-        : vehicleMod + actorWatchSkillLevel;
+    const distance = detectedDistance !== null
+        ? `контакт на расстоянии до ${detectedDistance + SCALE_PREFIX} см`
+        : `нет контакта`;
 
-    const distance = target.vehicle
-        ? vehicleWatchResult >= 42 && visData.maxRange * 2 >= 640 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 640 + SCALE_PREFIX ? `контакт на расстоянии до ${640 + SCALE_PREFIX} см` :
-            vehicleWatchResult >= 37 && visData.maxRange * 2 >= 320 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 320 + SCALE_PREFIX ? `контакт на расстоянии до ${320 + SCALE_PREFIX} см` :
-                vehicleWatchResult >= 32 && visData.maxRange * 2 >= 160 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 160 + SCALE_PREFIX ? `контакт на расстоянии до ${160 + SCALE_PREFIX} см` :
-                    vehicleWatchResult >= 27 && visData.maxRange * 2 >= 80 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 80 + SCALE_PREFIX ? `контакт на расстоянии до ${80 + SCALE_PREFIX} см` :
-                        vehicleWatchResult >= 22 && visData.maxRange * 2 >= 40 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 40 + SCALE_PREFIX ? `контакт на расстоянии до ${40 + SCALE_PREFIX} см` :
-                            vehicleWatchResult >= 17 && visData.maxRange * 2 >= 20 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 20 + SCALE_PREFIX ? `контакт на расстоянии до ${20 + SCALE_PREFIX} см` :
-                                vehicleWatchResult >= 10 && visData.maxRange * 2 >= 0 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 0 + SCALE_PREFIX ? `контакт на расстоянии до ${0 + SCALE_PREFIX} см` :
-                                    `нет контакта`
-        : infantryWatchResult >= 42 && visData.maxRange >= 320 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 320 + SCALE_PREFIX ? `контакт на расстоянии до ${320 + SCALE_PREFIX} см` :
-            infantryWatchResult >= 37 && visData.maxRange >= 160 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 160 + SCALE_PREFIX ? `контакт на расстоянии до ${160 + SCALE_PREFIX} см` :
-                infantryWatchResult >= 32 && visData.maxRange >= 80 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 80 + SCALE_PREFIX ? `контакт на расстоянии до ${80 + SCALE_PREFIX} см` :
-                    infantryWatchResult >= 27 && visData.maxRange >= 40 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 40 + SCALE_PREFIX ? `контакт на расстоянии до ${40 + SCALE_PREFIX} см` :
-                        infantryWatchResult >= 22 && visData.maxRange >= 20 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 20 + SCALE_PREFIX ? `контакт на расстоянии до ${20 + SCALE_PREFIX} см` :
-                            infantryWatchResult >= 17 && visData.maxRange >= 10 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 10 + SCALE_PREFIX ? `контакт на расстоянии до ${10 + SCALE_PREFIX} см` :
-                                infantryWatchResult >= 10 && visData.maxRange >= 0 + SCALE_PREFIX && (equipment?.minRange ?? 0) < 0 + SCALE_PREFIX ? `контакт на расстоянии до ${0 + SCALE_PREFIX} см` :
-                                    `нет контакта`;
+    const mineResult = mineDetected ? " (мины обнаружены)" : "";
 
-    const mineResult = equipment?.skill !== "TECH_uav" && (equipment?.minRange ?? 0) < 1 && infantryWatchResult >= 22 ? " (мины обнаружены)" : "";
+    const message = `Наблюдение ${actor.name} за ${target.name}${equipment ? " (" + equipment.name + ")" : ""}: d20=${rolls[0].roll}, результат ${modifiedRoll}, ${distance}${mineResult}.`;
 
-    const message = `Наблюдение ${actor.name} за ${target.name}${equipment ? " (" + equipment.name + ")" : ""}: d20=${rolls[0].roll}, результат ${infantryWatchResult}, ${distance}${mineResult}.`;
-
-    return [{ value: infantryWatchResult, message: message }];
+    return [{ value: modifiedRoll, message: message }];
 }
 
 export function CanWatchEquipment(players, actor, equipment) {

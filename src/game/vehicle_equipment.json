@@ -63,7 +63,7 @@
     {
         "id": "ac30",
         "skill": "WPN_heavy",
-        "name": "Автопушка 30 мм",
+        "name": "Автопушка 30 мм (оптика+ПНВ)",
         "optic": {
             "day": {
                 "mod": 3,
@@ -71,11 +71,11 @@
             },
             "dawn": {
                 "mod": 3,
-                "maxRange": 280
+                "maxRange": 80
             },
             "night": {
                 "mod": 9,
-                "maxRange": 160
+                "maxRange": 80
             }
         },
         "weight": 0,
@@ -94,7 +94,7 @@
     {
         "id": "ac40",
         "skill": "WPN_heavy",
-        "name": "Автопушка 40-57 мм",
+        "name": "Автопушка 40-57 мм (тепловизор)",
         "optic": {
             "day": {
                 "mod": 3,
@@ -102,15 +102,19 @@
             },
             "dawn": {
                 "mod": 4,
-                "maxRange": 280
+                "maxRange": 140
             },
             "night": {
                 "mod": 12,
                 "maxRange": 160
             },
+            "rain": {
+                "mod": 4,
+                "maxRange": 20
+            },
             "fog": {
                 "mod": 4,
-                "maxRange": 10
+                "maxRange": 6
             }
         },
         "weight": 0,
@@ -183,7 +187,7 @@
     {
         "id": "milan2",
         "skill": "WPN_guided",
-        "name": "MILAN 2",
+        "name": "MILAN 2 (оптика+ПНВ)",
         "optic": {
             "day": {
                 "mod": 3,
@@ -191,11 +195,11 @@
             },
             "dawn": {
                 "mod": 3,
-                "maxRange": 280
+                "maxRange": 80
             },
             "night": {
                 "mod": 9,
-                "maxRange": 280
+                "maxRange": 80
             }
         },
         "weight": 0,
@@ -241,23 +245,27 @@
     {
         "id": "gun_thermal",
         "skill": "WPN_heavy",
-        "name": "Танковое орудие 120-125 мм (с тепловизором)",
+        "name": "Танковое орудие 120-125 мм (тепловизор)",
         "optic": {
             "day": {
                 "mod": 3,
-                "maxRange": 280
+                "maxRange": 120
             },
             "dawn": {
                 "mod": 4,
-                "maxRange": 280
+                "maxRange": 140
             },
             "night": {
                 "mod": 12,
                 "maxRange": 160
             },
+            "rain": {
+                "mod": 4,
+                "maxRange": 20
+            },
             "fog": {
                 "mod": 4,
-                "maxRange": 10
+                "maxRange": 6
             }
         },
         "weight": 0,
