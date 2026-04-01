@@ -10,10 +10,10 @@ import { ApplyFireEffects, CalculateFireEffects } from '../actions/Fire';
 const VisibilityConditions =
     [
         { id: "day", maxRange: 160, value: 12, pic: <BsFillSunFill />, label: "День" },
-        { id: "dawn", maxRange: 160, value: 7, pic: <PiSunHorizonFill />, label: "Сумерки" },
-        { id: "night", maxRange: 20, value: 2, pic: <MdNightlight />, label: "Ночь" },
-        { id: "rain", maxRange: 80, value: 8, pic: <FaCloudRain />, label: "Осадки" },
-        { id: "fog", maxRange: 10, value: 7, pic: <RiFoggyFill />, label: "Туман" }
+        { id: "dawn", maxRange: 80, value: 7, pic: <PiSunHorizonFill />, label: "Сумерки" },
+        { id: "night", maxRange: 16, value: 2, pic: <MdNightlight />, label: "Ночь" },
+        { id: "rain", maxRange: 40, value: 8, pic: <FaCloudRain />, label: "Осадки" },
+        { id: "fog", maxRange: 6, value: 7, pic: <RiFoggyFill />, label: "Туман" }
     ]
 
 export const VisibilityConditionsCatalog = VisibilityConditions.reduce((acc, item) => {

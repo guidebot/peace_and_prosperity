@@ -576,19 +576,23 @@
         "optic": {
             "day": {
                 "mod": 3,
-                "maxRange": 280
+                "maxRange": 120
             },
             "dawn": {
                 "mod": 4,
-                "maxRange": 280
+                "maxRange": 140
             },
             "night": {
                 "mod": 12,
                 "maxRange": 160
             },
+            "rain": {
+                "mod": 4,
+                "maxRange": 20
+            },
             "fog": {
                 "mod": 4,
-                "maxRange": 10
+                "maxRange": 6
             }
         },
         "weight": 68,
@@ -742,7 +746,7 @@
             },
             "dawn": {
                 "mod": 2,
-                "maxRange": 320
+                "maxRange": 160
             }
         },
         "weight": 3,
@@ -769,7 +773,7 @@
             },
             "dawn": {
                 "mod": 3,
-                "maxRange": 160
+                "maxRange": 80
             }
         },
         "weight": 3,
@@ -796,15 +800,19 @@
             },
             "dawn": {
                 "mod": 4,
-                "maxRange": 160
+                "maxRange": 140
             },
             "day": {
                 "mod": 3,
-                "maxRange": 160
+                "maxRange": 120
+            },
+            "rain": {
+                "mod": 4,
+                "maxRange": 20
             },
             "fog": {
                 "mod": 4,
-                "maxRange": 10
+                "maxRange": 6
             }
         },
         "weight": 3,
