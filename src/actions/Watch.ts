@@ -1,9 +1,35 @@
 import { Level, MinSkill } from '../game/Skill';
 import { CurrentUnit } from '../cards/utils';
-import { VisibilityConditionsCatalog, ModifiedVisibilityData } from '../game/conditions';
+import { VisibilityConditionsCatalog, ModifiedVisibilityData, VisibilityCondition } from '../game/conditions';
 import { SCALE_PREFIX } from '../game/Constants';
+import { Entity } from '../game/Entity';
+import { Equipment } from '../game/Equipment';
+import { Unit } from '../game/Unit';
+import { Player } from '../game/Player';
 
-const DETECTION_THRESHOLDS = [
+export interface DetectionThreshold {
+    threshold: number;
+    detectionDistance: number;
+}
+
+export interface WatchCandidate {
+    actor: Entity;
+    equipment: Equipment | null;
+    visibilityValue: number;
+    totalScore: number;
+}
+
+export interface WatchEffect {
+    value: number;
+    message: string;
+}
+
+export interface RollData {
+    roll: number;
+    selectedDef: number;
+}
+
+const DETECTION_THRESHOLDS: DetectionThreshold[] = [
     { threshold: 42, detectionDistance: 320 },
     { threshold: 37, detectionDistance: 160 },
     { threshold: 32, detectionDistance: 80 },
@@ -15,7 +41,16 @@ const DETECTION_THRESHOLDS = [
 
 const VEHICLE_AUTODETECT_DISTANCE = 3;
 
-function calculateDetectionRoll(roll, visibilityModifier, observerStealth, observerUAV, targetStealth, hasCover, isVehicle, isUAV) {
+function calculateDetectionRoll(
+    roll: number,
+    visibilityModifier: number,
+    observerStealth: number,
+    observerUAV: number,
+    targetStealth: number,
+    hasCover: boolean,
+    isVehicle: boolean,
+    isUAV: boolean
+): number {
     const observerBonus = isUAV ? (observerUAV + observerStealth) : (2 * observerStealth);
     if (isVehicle) {
         return roll + visibilityModifier + observerBonus;
@@ -23,7 +58,11 @@ function calculateDetectionRoll(roll, visibilityModifier, observerStealth, obser
     return roll + visibilityModifier + observerBonus - 2 * targetStealth - (hasCover ? 5 : 0);
 }
 
-function getDistanceByRoll(modifiedRoll, isVehicle, maxVisibilityRange) {
+function getDistanceByRoll(
+    modifiedRoll: number,
+    isVehicle: boolean,
+    maxVisibilityRange: number
+): number | null {
     for (const { threshold, detectionDistance } of DETECTION_THRESHOLDS) {
         const distance = isVehicle ? detectionDistance * 2 : detectionDistance;
         const effectiveMaxRange = isVehicle ? maxVisibilityRange * 2 : maxVisibilityRange;
@@ -39,12 +78,12 @@ function getDistanceByRoll(modifiedRoll, isVehicle, maxVisibilityRange) {
     return null;
 }
 
-export function BestActorForUnit(unit, activeConditions) {
-    const candidates = [];
+export function BestActorForUnit(unit: Unit, activeConditions: string[]): WatchCandidate | null {
+    const candidates: WatchCandidate[] = [];
 
-    const evaluatePerson = (person) => {
+    const evaluatePerson = (person: Entity) => {
         const baseSkillLevel = Level(person.skills["STE"]) || 0;
-        const baseVisibility = Math.min(...activeConditions.map(c => VisibilityConditionsCatalog[c].value));
+        const baseVisibility = Math.min(...activeConditions.map(c => VisibilityConditionsCatalog[c]?.value ?? 0));
         candidates.push({
             actor: person,
             equipment: null,
@@ -82,12 +121,32 @@ export function BestActorForUnit(unit, activeConditions) {
     return bestActor;
 }
 
-export function ApplyWatchEffect(players, rolls, result, actor, target, activeConditions) {
-    const effects = CalculateWatchEffect(players, rolls, result, actor, target, activeConditions);
+export function ApplyWatchEffect(
+    players: Player[],
+    rolls: RollData[],
+    result: any,
+    actor: Entity | Unit,
+    target: Entity | Unit,
+    activeConditions: string[]
+): WatchEffect[] {
+    const actorCandidate: WatchCandidate = {
+        actor: actor as Entity,
+        equipment: null,
+        visibilityValue: 0,
+        totalScore: 0
+    };
+    const effects = CalculateWatchEffect(players, rolls, [actorCandidate], target as Unit, activeConditions);
     return effects;
-};
+}
 
-export function CalculateVisibilityDistance(observerUnit, targetUnit, activeConditions, roll, isInDef, forceUAV = false) {
+export function CalculateVisibilityDistance(
+    observerUnit: Unit,
+    targetUnit: Unit,
+    activeConditions: string[],
+    roll: number,
+    isInDef: boolean,
+    forceUAV = false
+): number | null {
     const observerData = BestActorForUnit(observerUnit, activeConditions);
 
     if (!observerData) {
@@ -103,20 +162,31 @@ export function CalculateVisibilityDistance(observerUnit, targetUnit, activeCond
     const targetStealthLevel = Level(minTargetStealth);
 
     const isUAV = forceUAV || (observerData.equipment?.skill === "TECH_uav");
-    const isVehicle = targetUnit.vehicle;
+    const isVehicle = !!targetUnit.vehicle;
 
     const modifiedRoll = calculateDetectionRoll(roll, visData.visibility, observerStealth, observerUAV, targetStealthLevel, isInDef, isVehicle, isUAV);
     const distance = getDistanceByRoll(modifiedRoll, isVehicle, visData.maxRange);
 
     return distance !== null
-        ? (distance + SCALE_PREFIX) * 3 // scale for the schema
+        ? (distance + SCALE_PREFIX) * 3
         : null;
 }
 
-export function CalculateWatchEffect(players, rolls, actors, target, activeConditions) {
-    const actorData = actors[0].actor.type === "unit"
-        ? BestActorForUnit(actors[0].actor, activeConditions)
-        : actors[0];
+export function CalculateWatchEffect(
+    players: Player[],
+    rolls: RollData[],
+    actors: (WatchCandidate | { actor: Entity | Unit; equipment: Equipment | null })[],
+    target: Unit,
+    activeConditions: string[]
+): WatchEffect[] {
+    const firstActor = actors[0];
+    const actorData = 'actor' in firstActor && firstActor.actor.type === "unit" && 'children' in firstActor.actor
+        ? BestActorForUnit(firstActor.actor as Unit, activeConditions)
+        : firstActor as WatchCandidate;
+
+    if (!actorData) {
+        return [];
+    }
 
     const actor = actorData.actor;
     const equipment = actorData.equipment;
@@ -130,7 +200,7 @@ export function CalculateWatchEffect(players, rolls, actors, target, activeCondi
     const targetStealthLevel = Level(minTargetStealth);
 
     const isUAV = equipment?.skill === "TECH_uav";
-    const isVehicle = target.vehicle;
+    const isVehicle = !!target.vehicle;
     const hasCover = rolls[0].selectedDef > 0;
 
     const modifiedRoll = calculateDetectionRoll(rolls[0].roll, visData.visibility, actorWatchSkillLevel, actorUavSkillLevel, targetStealthLevel, hasCover, isVehicle, isUAV);
@@ -147,11 +217,12 @@ export function CalculateWatchEffect(players, rolls, actors, target, activeCondi
 
     const message = `Наблюдение ${actor.name} за ${target.name}${equipment ? " (" + equipment.name + ")" : ""}: d20=${rolls[0].roll}, результат ${modifiedRoll}, ${distance}${mineResult}.`;
 
-    return [{ value: modifiedRoll, message: message }];
+    return [{ value: modifiedRoll, message }];
 }
 
-export function CanWatchEquipment(players, actor, equipment) {
+export function CanWatchEquipment(players: Player[], actor: Entity, equipment: Equipment): boolean {
+    const currentUnit = CurrentUnit(players, actor);
     return (Level(actor.skills[equipment.skill] || 0) > 0 || equipment.skill === "STE")
-        && ((equipment.mustBeDeployed && CurrentUnit(players, actor).isDeployed) || !equipment.mustBeDeployed)
-        && equipment.optic;
+        && ((equipment.mustBeDeployed && currentUnit?.isDeployed) || !equipment.mustBeDeployed)
+        && !!equipment.optic;
 }
