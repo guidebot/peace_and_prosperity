@@ -1,0 +1,3523 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage[margin=1.5cm, includeheadfoot]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Sans Mono}
+\usepackage[russian]{babel}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{background}
+\usepackage{wallpaper}
+\usepackage{longtable,booktabs,array}
+\usepackage{multirow}
+\usepackage{calc} % for calculating minipage widths
+\usepackage{rotating} % for vertical text
+\usepackage{caption} % for caption formatting
+
+% Style table captions: italic, centered
+\captionsetup{labelfont=it,textfont=it,justification=centering}
+
+% Define column type for vertical text in tables
+\newcolumntype{V}{>{\begin{turn}{90}\centering}c<{\end{turn}}}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\usepackage[outline]{contour}
+\contourlength{1.5pt}
+
+\author{}
+\date{}
+
+\renewcommand{\contentsname}{\centering Содержание}
+
+\begin{document}
+
+% Title page with background image
+\begin{titlepage}
+\backgroundsetup{
+  scale=1,
+  angle=0,
+  opacity=1,
+  position={current page.center},
+  contents={\includegraphics[width=\paperwidth*2,height=\paperheight,clip]{media/image2.jpg}}
+}
+\BgThispage
+
+\begin{center}
+\vspace*{2cm}
+\contour{black}{\color{white}\fontsize{48}{56}\selectfont\textbf{Контракт}}
+
+\vspace{0.5cm}
+
+\contour{black}{\color{white}\fontsize{32}{40}\selectfont\textbf{Ролевая тактическая игра}}
+
+\vfill
+
+\contour{black}{\color{white}\Large\textbf{Никита Макаров}}
+
+\contour{black}{\color{white}\href{HTTPS://VK.COM/PLAYINGWAR}{\textbf{HTTPS://VK.COM/PLAYINGWAR}}}
+
+\contour{black}{\color{white}\textbf{Санкт-Петербург}}
+
+\contour{black}{\color{white}\textbf{Март, 2026}}
+\end{center}
+\end{titlepage}
+\clearpage
+
+% Reset background for subsequent pages with tiling
+\backgroundsetup{
+  scale=1,
+  angle=0,
+  opacity=1,
+  position={current page.center},
+  contents={\TileWallPaper{1cm}{1cm}{media/image1.jpg}}
+}
+\BgThispage
+
+% Start two-column layout
+\begin{multicols}{2}
+
+% Table of contents (in two columns)
+\section*{Содержание}\label{ux441ux43eux434ux435ux440ux436ux430ux43dux438ux435}
+\thispagestyle{empty}
+\addcontentsline{toc}{section}{Содержание}
+
+\hyperref[ux432ux432ux435ux434ux435ux43dux438ux435]{1 Введение
+\hyperref[ux432ux432ux435ux434ux435ux43dux438ux435]{2}}
+
+\hyperref[ux43cux430ux441ux448ux442ux430ux431-ux438-ux43fux435ux440ux438ux43eux434]{2
+Масштаб и период
+\hyperref[ux43cux430ux441ux448ux442ux430ux431-ux438-ux43fux435ux440ux438ux43eux434]{2}}
+
+\hyperref[ux438ux441ux43fux43eux43bux44cux437ux43eux432ux430ux43dux438ux435-ux43cux438ux43dux438ux430ux442ux44eux440]{2.1
+Использование миниатюр
+\hyperref[ux438ux441ux43fux43eux43bux44cux437ux43eux432ux430ux43dux438ux435-ux43cux438ux43dux438ux430ux442ux44eux440]{3}}
+
+\hyperref[ux43eux441ux43dux43eux432ux44b]{3 Основы
+\hyperref[ux43eux441ux43dux43eux432ux44b]{3}}
+
+\hyperref[ux430ux442ux440ux438ux431ux443ux442ux44b-ux438-ux43dux430ux432ux44bux43aux438-ux43fux435ux440ux441ux43eux43dux430ux436ux435ux439]{3.1
+Атрибуты и навыки персонажей
+\hyperref[ux430ux442ux440ux438ux431ux443ux442ux44b-ux438-ux43dux430ux432ux44bux43aux438-ux43fux435ux440ux441ux43eux43dux430ux436ux435ux439]{3}}
+
+\hyperref[ux432ux44bux43dux43eux441ux43bux438ux432ux43eux441ux442ux44c-ux432ux43dux441]{3.1.1
+Выносливость (ВНС)
+\hyperref[ux432ux44bux43dux43eux441ux43bux438ux432ux43eux441ux442ux44c-ux432ux43dux441]{4}}
+
+\hyperref[ux43fux440ux438ux43cux435ux440]{3.1.1.1 Пример
+\hyperref[ux43fux440ux438ux43cux435ux440]{4}}
+
+\hyperref[ux43cux430ux43dux435ux432ux440ux438ux440ux43eux432ux430ux43dux438ux435-ux43cux43dux432]{3.1.2
+Маневрирование (МНВ)
+\hyperref[ux43cux430ux43dux435ux432ux440ux438ux440ux43eux432ux430ux43dux438ux435-ux43cux43dux432]{5}}
+
+\hyperref[ux43cux430ux441ux43aux438ux440ux43eux432ux43aux430-ux43cux441ux43a]{3.1.3
+Маскировка (МСК)
+\hyperref[ux43cux430ux441ux43aux438ux440ux43eux432ux43aux430-ux43cux441ux43a]{5}}
+
+\hyperref[ux43dux430ux432ux44bux43aux438-ux438ux441ux43fux43eux43bux44cux437ux43eux432ux430ux43dux438ux44f-ux43eux440ux443ux436ux438ux44f]{3.1.4
+Навыки использования оружия
+\hyperref[ux43dux430ux432ux44bux43aux438-ux438ux441ux43fux43eux43bux44cux437ux43eux432ux430ux43dux438ux44f-ux43eux440ux443ux436ux438ux44f]{5}}
+
+\hyperref[ux43cux435ux434ux438ux446ux438ux43dux430-ux43cux435ux434]{3.1.5
+Медицина (МЕД)
+\hyperref[ux43cux435ux434ux438ux446ux438ux43dux430-ux43cux435ux434]{5}}
+
+\hyperref[ux43cux435ux445ux430ux43dux438ux43aux430-ux43cux435ux445]{3.1.6
+Механика (МЕХ)
+\hyperref[ux43cux435ux445ux430ux43dux438ux43aux430-ux43cux435ux445]{5}}
+
+\hyperref[ux44dux43bux435ux43aux442ux440ux43eux43dux438ux43aux430-ux44dux43b]{3.1.7
+Электроника (ЭЛ)
+\hyperref[ux44dux43bux435ux43aux442ux440ux43eux43dux438ux43aux430-ux44dux43b]{5}}
+
+\hyperref[ux432ux437ux440ux44bux432ux43dux44bux435-ux443ux441ux442ux440ux43eux439ux441ux442ux432ux430-ux438-ux43cux438ux43dux44b-ux432ux437ux440]{3.1.8
+Взрывные устройства и мины (ВЗР)
+\hyperref[ux432ux437ux440ux44bux432ux43dux44bux435-ux443ux441ux442ux440ux43eux439ux441ux442ux432ux430-ux438-ux43cux438ux43dux44b-ux432ux437ux440]{5}}
+
+\hyperref[ux43eux433ux43dux435ux432ux430ux44f-ux43fux43eux434ux434ux435ux440ux436ux43aux430-ux43eux43f]{3.1.9
+Огневая поддержка (ОП)
+\hyperref[ux43eux433ux43dux435ux432ux430ux44f-ux43fux43eux434ux434ux435ux440ux436ux43aux430-ux43eux43f]{5}}
+
+\hyperref[ux43bux43eux433ux438ux43aux430-ux43bux433ux43a]{3.1.10 Логика
+(ЛГК) \hyperref[ux43bux43eux433ux438ux43aux430-ux43bux433ux43a]{5}}
+
+\hyperref[ux432ux43bux438ux44fux43dux438ux435-ux432ux43bux43d]{3.1.11
+Влияние (ВЛН)
+\hyperref[ux432ux43bux438ux44fux43dux438ux435-ux432ux43bux43d]{6}}
+
+\hyperref[ux441ux43eux437ux434ux430ux43dux438ux435-ux441ux43bux443ux447ux430ux439ux43dux43eux433ux43e-ux43fux435ux440ux441ux43eux43dux430ux436ux430]{3.1.12
+Создание случайного персонажа
+\hyperref[ux441ux43eux437ux434ux430ux43dux438ux435-ux441ux43bux443ux447ux430ux439ux43dux43eux433ux43e-ux43fux435ux440ux441ux43eux43dux430ux436ux430]{6}}
+
+\hyperref[ux440ux43eux43bux435ux432ux44bux435-ux43fux440ux43eux432ux435ux440ux43aux438-ux438-ux441ux43eux441ux442ux44fux437ux430ux43dux438ux44f]{3.1.13
+Ролевые проверки и состязания
+\hyperref[ux440ux43eux43bux435ux432ux44bux435-ux43fux440ux43eux432ux435ux440ux43aux438-ux438-ux441ux43eux441ux442ux44fux437ux430ux43dux438ux44f]{6}}
+
+\hyperref[ux440ux435ux436ux438ux43cux44b-ux438ux433ux440ux44b]{3.2
+Режимы игры
+\hyperref[ux440ux435ux436ux438ux43cux44b-ux438ux433ux440ux44b]{6}}
+
+\hyperref[ux43eux442ux440ux44fux434ux44b-ux431ux43eux435ux432ux44bux435-ux435ux434ux438ux43dux438ux446ux44b]{3.3
+Отряды (боевые единицы)
+\hyperref[ux43eux442ux440ux44fux434ux44b-ux431ux43eux435ux432ux44bux435-ux435ux434ux438ux43dux438ux446ux44b]{7}}
+
+\hyperref[ux43fux43eux43bux43eux436ux435ux43dux438ux435-ux432-ux43fux440ux43eux441ux442ux440ux430ux43dux441ux442ux432ux435]{3.3.1
+Положение в пространстве
+\hyperref[ux43fux43eux43bux43eux436ux435ux43dux438ux435-ux432-ux43fux440ux43eux441ux442ux440ux430ux43dux441ux442ux432ux435]{7}}
+
+\hyperref[ux43bux438ux43dux438ux438-ux432ux438ux434ux438ux43cux43eux441ux442ux438-ux438-ux43eux433ux43dux44f]{3.3.2
+Линии видимости и огня
+\hyperref[ux43bux438ux43dux438ux438-ux432ux438ux434ux438ux43cux43eux441ux442ux438-ux438-ux43eux433ux43dux44f]{7}}
+
+\hyperref[ux43cux430ux441ux43aux438ux440ux43eux432ux43aux430]{3.3.3
+Маскировка
+\hyperref[ux43cux430ux441ux43aux438ux440ux43eux432ux43aux430]{8}}
+
+\hyperref[ux437ux432ux443ux43a-ux438-ux437ux432ux443ux43aux43eux43fux43eux434ux430ux432ux438ux442ux435ux43bux438]{3.3.4
+Звук и звукоподавители
+\hyperref[ux437ux432ux443ux43a-ux438-ux437ux432ux443ux43aux43eux43fux43eux434ux430ux432ux438ux442ux435ux43bux438]{8}}
+
+\hyperref[ux43eux447ux43aux438-ux443ux441ux442ux430ux43bux43eux441ux442ux438]{3.3.5
+Очки усталости
+\hyperref[ux43eux447ux43aux438-ux443ux441ux442ux430ux43bux43eux441ux442ux438]{8}}
+
+\hyperref[ux43eux447ux43aux438-ux441ux442ux440ux435ux441ux441ux430]{3.3.6
+Очки стресса
+\hyperref[ux43eux447ux43aux438-ux441ux442ux440ux435ux441ux441ux430]{8}}
+
+\hyperref[ux43aux440ux43eux432ux43eux442ux435ux447ux435ux43dux438ux435]{3.3.7
+Кровотечение
+\hyperref[ux43aux440ux43eux432ux43eux442ux435ux447ux435ux43dux438ux435]{9}}
+
+\hyperref[ux43bux43eux43aux430ux446ux438ux44f]{4 Локация
+\hyperref[ux43bux43eux43aux430ux446ux438ux44f]{9}}
+
+\hyperref[ux437ux43eux43dux44b-ux43bux43eux43aux430ux446ux438ux438]{4.1
+Зоны локации
+\hyperref[ux437ux43eux43dux44b-ux43bux43eux43aux430ux446ux438ux438]{10}}
+
+\hyperref[ux441ux442ux430ux43dux434ux430ux440ux442ux43dux44bux435-ux437ux43eux43dux44b-ux43bux43eux43aux430ux446ux438ux438]{4.1.1
+Стандартные зоны локации
+\hyperref[ux441ux442ux430ux43dux434ux430ux440ux442ux43dux44bux435-ux437ux43eux43dux44b-ux43bux43eux43aux430ux446ux438ux438]{10}}
+
+\hyperref[ux434ux43eux43fux43eux43bux43dux438ux442ux435ux43bux44cux43dux44bux435-ux44dux43bux435ux43cux435ux43dux442ux44b]{4.1.2
+Дополнительные элементы
+\hyperref[ux434ux43eux43fux43eux43bux43dux438ux442ux435ux43bux44cux43dux44bux435-ux44dux43bux435ux43cux435ux43dux442ux44b]{10}}
+
+\hyperref[ux43fux440ux438ux43cux435ux440ux44b-ux434ux43eux43fux43eux43bux43dux438ux442ux435ux43bux44cux43dux44bux445-ux44dux43bux435ux43cux435ux43dux442ux43eux432]{4.1.2.1
+Примеры дополнительных элементов
+\hyperref[ux43fux440ux438ux43cux435ux440ux44b-ux434ux43eux43fux43eux43bux43dux438ux442ux435ux43bux44cux43dux44bux445-ux44dux43bux435ux43cux435ux43dux442ux43eux432]{10}}
+
+\hyperref[ux441ux438ux43cux443ux43bux44fux446ux438ux44f-ux431ux43eux44f]{5
+Симуляция боя
+\hyperref[ux441ux438ux43cux443ux43bux44fux446ux438ux44f-ux431ux43eux44f]{11}}
+
+\hyperref[ux444ux430ux437ux430-ux434ux435ux439ux441ux442ux432ux438ux439]{5.1
+Фаза действий
+\hyperref[ux444ux430ux437ux430-ux434ux435ux439ux441ux442ux432ux438ux439]{11}}
+
+\hyperref[ux43fux435ux440ux435ux445ux432ux430ux442-ux434ux432ux438ux436ux435ux43dux438ux44f]{5.1.1
+Перехват движения
+\hyperref[ux43fux435ux440ux435ux445ux432ux430ux442-ux434ux432ux438ux436ux435ux43dux438ux44f]{11}}
+
+\hyperref[ux437ux430ux432ux435ux440ux448ux430ux44eux449ux430ux44f-ux444ux430ux437ux430]{5.2
+Завершающая фаза
+\hyperref[ux437ux430ux432ux435ux440ux448ux430ux44eux449ux430ux44f-ux444ux430ux437ux430]{11}}
+
+\hyperref[ux434ux435ux439ux441ux442ux432ux438ux44f]{6 Действия
+\hyperref[ux434ux435ux439ux441ux442ux432ux438ux44f]{12}}
+
+\hyperref[ux440ux430ux437ux434ux435ux43bux435ux43dux438ux435-ux43eux442ux440ux44fux434ux430]{6.1
+Разделение отряда
+\hyperref[ux440ux430ux437ux434ux435ux43bux435ux43dux438ux435-ux43eux442ux440ux44fux434ux430]{12}}
+
+\hyperref[ux434ux432ux438ux436ux435ux43dux438ux435-ux43eux442ux440ux44fux434ux430]{6.2
+Движение отряда
+\hyperref[ux434ux432ux438ux436ux435ux43dux438ux435-ux43eux442ux440ux44fux434ux430]{12}}
+
+\hyperref[ux43eux441ux43eux431ux435ux43dux43dux43eux441ux442ux438-ux434ux432ux438ux436ux435ux43dux438ux44f-ux442ux435ux445ux43dux438ux43aux438]{6.2.1
+Особенности движения техники
+\hyperref[ux43eux441ux43eux431ux435ux43dux43dux43eux441ux442ux438-ux434ux432ux438ux436ux435ux43dux438ux44f-ux442ux435ux445ux43dux438ux43aux438]{12}}
+
+\hyperref[ux43fux440ux43eux432ux435ux440ux43aux430-ux43dux430-ux443ux43fux440ux430ux432ux43bux435ux43dux438ux435]{6.2.1.1
+Проверка на управление
+\hyperref[ux43fux440ux43eux432ux435ux440ux43aux430-ux43dux430-ux443ux43fux440ux430ux432ux43bux435ux43dux438ux435]{13}}
+
+\hyperref[ux442ux430ux440ux430ux43d]{6.2.1.2 Таран
+\hyperref[ux442ux430ux440ux430ux43d]{13}}
+
+\hyperref[ux43fux440ux438ux43cux435ux440-1]{6.2.1.3 Пример
+\hyperref[ux43fux440ux438ux43cux435ux440-1]{13}}
+
+\hyperref[ux43eux441ux43eux431ux435ux43dux43dux43eux441ux442ux438-ux434ux432ux438ux436ux435ux43dux438ux44f-ux43fux435ux445ux43eux442ux44b]{6.2.2
+Особенности движения пехоты
+\hyperref[ux43eux441ux43eux431ux435ux43dux43dux43eux441ux442ux438-ux434ux432ux438ux436ux435ux43dux438ux44f-ux43fux435ux445ux43eux442ux44b]{13}}
+
+\hyperref[ux431ux435ux433]{6.2.2.1 Бег \hyperref[ux431ux435ux433]{13}}
+
+\hyperref[ux43fux440ux435ux43eux434ux43eux43bux435ux43dux438ux435-ux43fux440ux435ux43fux44fux442ux441ux442ux432ux438ux439]{6.2.2.2
+Преодоление препятствий
+\hyperref[ux43fux440ux435ux43eux434ux43eux43bux435ux43dux438ux435-ux43fux440ux435ux43fux44fux442ux441ux442ux432ux438ux439]{13}}
+
+\hyperref[ux43fux43eux441ux430ux434ux43aux430-ux438-ux432ux44bux441ux430ux434ux43aux430]{6.2.2.3
+Посадка и высадка
+\hyperref[ux43fux43eux441ux430ux434ux43aux430-ux438-ux432ux44bux441ux430ux434ux43aux430]{13}}
+
+\hyperref[ux434ux435ux439ux441ux442ux432ux438ux44f-ux43fux435ux440ux441ux43eux43dux430ux436ux435ux439]{6.3
+Действия персонажей
+\hyperref[ux434ux435ux439ux441ux442ux432ux438ux44f-ux43fux435ux440ux441ux43eux43dux430ux436ux435ux439]{13}}
+
+\hyperref[ux43dux430ux431ux43bux44eux434ux435ux43dux438ux435]{6.3.1
+Наблюдение
+\hyperref[ux43dux430ux431ux43bux44eux434ux435ux43dux438ux435]{14}}
+
+\hyperref[ux43fux440ux438ux43cux435ux440-2]{6.3.1.1 Пример
+\hyperref[ux43fux440ux438ux43cux435ux440-2]{15}}
+
+\hyperref[ux441ux442ux440ux435ux43bux44cux431ux430]{6.3.2 Стрельба
+\hyperref[ux441ux442ux440ux435ux43bux44cux431ux430]{15}}
+
+\hyperref[ux43eux441ux43eux431ux435ux43dux43dux43eux441ux442ux438-ux441ux442ux440ux435ux43bux44cux431ux44b-ux43fux43e-ux43fux435ux445ux43eux442ux435]{6.3.2.1
+Особенности стрельбы по пехоте
+\hyperref[ux43eux441ux43eux431ux435ux43dux43dux43eux441ux442ux438-ux441ux442ux440ux435ux43bux44cux431ux44b-ux43fux43e-ux43fux435ux445ux43eux442ux435]{15}}
+
+\hyperref[ux43fux440ux438ux43cux435ux440-3]{6.3.2.1.1 Пример
+\hyperref[ux43fux440ux438ux43cux435ux440-3]{16}}
+
+\hyperref[ux43eux441ux43eux431ux435ux43dux43dux43eux441ux442ux438-ux441ux442ux440ux435ux43bux44cux431ux44b-ux43fux43e-ux442ux435ux445ux43dux438ux43aux435]{6.3.2.2
+Особенности стрельбы по технике
+\hyperref[ux43eux441ux43eux431ux435ux43dux43dux43eux441ux442ux438-ux441ux442ux440ux435ux43bux44cux431ux44b-ux43fux43e-ux442ux435ux445ux43dux438ux43aux435]{17}}
+
+\hyperref[ux43fux43eux440ux430ux436ux435ux43dux438ux435-ux44dux43aux438ux43fux430ux436ux430-ux438-ux434ux435ux441ux430ux43dux442ux430]{6.3.2.2.1
+Поражение экипажа и десанта
+\hyperref[ux43fux43eux440ux430ux436ux435ux43dux438ux435-ux44dux43aux438ux43fux430ux436ux430-ux438-ux434ux435ux441ux430ux43dux442ux430]{17}}
+
+\hyperref[ux43fux440ux438ux43cux435ux440-4]{6.3.2.2.2 Пример
+\hyperref[ux43fux440ux438ux43cux435ux440-4]{17}}
+
+\hyperref[ux441ux442ux430ux446ux438ux43eux43dux430ux440ux43dux43eux435-ux43fux43eux43bux43eux436ux435ux43dux438ux435]{6.3.2.3
+Стационарное положение
+\hyperref[ux441ux442ux430ux446ux438ux43eux43dux430ux440ux43dux43eux435-ux43fux43eux43bux43eux436ux435ux43dux438ux435]{17}}
+
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440ux44b-ux43fux440ux438-ux441ux442ux440ux435ux43bux44cux431ux435]{6.3.2.4
+Модификаторы при стрельбе
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440ux44b-ux43fux440ux438-ux441ux442ux440ux435ux43bux44cux431ux435]{17}}
+
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux43dux430ux432ux44bux43aux430]{6.3.2.4.1
+Модификатор навыка
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux43dux430ux432ux44bux43aux430]{17}}
+
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux440ux430ux441ux441ux442ux43eux44fux43dux438ux44f]{6.3.2.4.2
+Модификатор расстояния
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux440ux430ux441ux441ux442ux43eux44fux43dux438ux44f]{18}}
+
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux441ux442ux430ux446ux438ux43eux43dux430ux440ux43dux43eux433ux43e-ux43fux43eux43bux43eux436ux435ux43dux438ux44f]{6.3.2.4.3
+Модификатор стационарного положения
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux441ux442ux430ux446ux438ux43eux43dux430ux440ux43dux43eux433ux43e-ux43fux43eux43bux43eux436ux435ux43dux438ux44f]{18}}
+
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux444ux43bux430ux43dux433ux43eux432ux43eux433ux43e-ux43eux433ux43dux44f]{6.3.2.4.4
+Модификатор флангового огня
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux444ux43bux430ux43dux433ux43eux432ux43eux433ux43e-ux43eux433ux43dux44f]{18}}
+
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux443ux43aux440ux44bux442ux438ux44f]{6.3.2.4.5
+Модификатор укрытия
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux443ux43aux440ux44bux442ux438ux44f]{18}}
+
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux43eux433ux43dux44f-ux432ux441ux43bux435ux43fux443ux44e]{6.3.2.4.6
+Модификатор огня вслепую
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux43eux433ux43dux44f-ux432ux441ux43bux435ux43fux443ux44e]{18}}
+
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux432ux43dux435ux437ux430ux43fux43dux43eux433ux43e-ux43eux433ux43dux44f]{6.3.2.4.7
+Модификатор внезапного огня
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux432ux43dux435ux437ux430ux43fux43dux43eux433ux43e-ux43eux433ux43dux44f]{18}}
+
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux431ux440ux43eux43dux435ux436ux438ux43bux435ux442ux430]{6.3.2.4.8
+Модификатор бронежилета
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux431ux440ux43eux43dux435ux436ux438ux43bux435ux442ux430]{19}}
+
+\hyperref[ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux434ux44bux43cux43eux432ux43eux439-ux437ux430ux432ux435ux441ux44b]{6.3.3
+Постановка дымовой завесы
+\hyperref[ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux434ux44bux43cux43eux432ux43eux439-ux437ux430ux432ux435ux441ux44b]{19}}
+
+\hyperref[ux43eux43aux430ux437ux430ux43dux438ux435-ux43cux435ux434ux438ux446ux438ux43dux441ux43aux43eux439-ux43fux43eux43cux43eux449ux438]{6.3.4
+Оказание медицинской помощи
+\hyperref[ux43eux43aux430ux437ux430ux43dux438ux435-ux43cux435ux434ux438ux446ux438ux43dux441ux43aux43eux439-ux43fux43eux43cux43eux449ux438]{19}}
+
+\hyperref[ux448ux442ux443ux440ux43c-ux438-ux43fux43bux435ux43dux435ux43dux438ux435]{6.4
+Штурм и пленение
+\hyperref[ux448ux442ux443ux440ux43c-ux438-ux43fux43bux435ux43dux435ux43dux438ux435]{19}}
+
+\hyperref[ux441ux43dux430ux440ux44fux436ux435ux43dux438ux435-ux438-ux432ux43eux43eux440ux443ux436ux435ux43dux438ux435]{7
+Снаряжение и вооружение
+\hyperref[ux441ux43dux430ux440ux44fux436ux435ux43dux438ux435-ux438-ux432ux43eux43eux440ux443ux436ux435ux43dux438ux435]{20}}
+
+\hyperref[ux43fux435ux445ux43eux442ux43dux43eux435-ux432ux43eux43eux440ux443ux436ux435ux43dux438ux435]{7.1
+Пехотное вооружение
+\hyperref[ux43fux435ux445ux43eux442ux43dux43eux435-ux432ux43eux43eux440ux443ux436ux435ux43dux438ux435]{20}}
+
+\hyperref[ux441ux442ux438ux43cux443ux43bux44fux442ux43eux440ux44b]{7.1.1
+Стимуляторы
+\hyperref[ux441ux442ux438ux43cux443ux43bux44fux442ux43eux440ux44b]{21}}
+
+\hyperref[ux431ux440ux43eux43dux435ux436ux438ux43bux435ux442ux44b]{7.1.2
+Бронежилеты
+\hyperref[ux431ux440ux43eux43dux435ux436ux438ux43bux435ux442ux44b]{21}}
+
+\hyperref[ux433ux440ux430ux43dux430ux442ux44b]{7.1.3 Гранаты
+\hyperref[ux433ux440ux430ux43dux430ux442ux44b]{21}}
+
+\hyperref[ux43fux438ux441ux442ux43eux43bux435ux442ux44b]{7.1.4 Пистолеты
+\hyperref[ux43fux438ux441ux442ux43eux43bux435ux442ux44b]{21}}
+
+\hyperref[ux434ux440ux43eux431ux43eux432ux438ux43aux438]{7.1.5 Дробовики
+\hyperref[ux434ux440ux43eux431ux43eux432ux438ux43aux438]{21}}
+
+\hyperref[ux43fux438ux441ux442ux43eux43bux435ux442ux44b-ux43fux443ux43bux435ux43cux451ux442ux44b-ux438-ux443ux43aux43eux440ux43eux447ux435ux43dux43dux44bux435-ux430ux432ux442ux43eux43cux430ux442ux44b]{7.1.6
+Пистолеты-пулемёты и укороченные автоматы
+\hyperref[ux43fux438ux441ux442ux43eux43bux435ux442ux44b-ux43fux443ux43bux435ux43cux451ux442ux44b-ux438-ux443ux43aux43eux440ux43eux447ux435ux43dux43dux44bux435-ux430ux432ux442ux43eux43cux430ux442ux44b]{21}}
+
+\hyperref[ux441ux43dux430ux439ux43fux435ux440ux441ux43aux438ux435-ux432ux438ux43dux442ux43eux432ux43aux438]{7.1.7
+Снайперские винтовки
+\hyperref[ux441ux43dux430ux439ux43fux435ux440ux441ux43aux438ux435-ux432ux438ux43dux442ux43eux432ux43aux438]{21}}
+
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux446ux438ux438-ux441ux442ux440ux435ux43bux43aux43eux432ux43eux433ux43e-ux43eux440ux443ux436ux438ux44f]{7.1.8
+Модификации стрелкового оружия
+\hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux446ux438ux438-ux441ux442ux440ux435ux43bux43aux43eux432ux43eux433ux43e-ux43eux440ux443ux436ux438ux44f]{22}}
+
+\hyperref[ux43fux440ux438ux43cux435ux440-5]{7.1.8.1 Пример
+\hyperref[ux43fux440ux438ux43cux435ux440-5]{22}}
+
+\hyperref[ux434ux440ux43eux43dux44b]{7.1.9 Дроны
+\hyperref[ux434ux440ux43eux43dux44b]{22}}
+
+\hyperref[ux432ux437ux440ux44bux432ux43dux44bux435-ux443ux441ux442ux440ux43eux439ux441ux442ux432ux430-ux438-ux43cux438ux43dux44b]{7.1.10
+Взрывные устройства и мины
+\hyperref[ux432ux437ux440ux44bux432ux43dux44bux435-ux443ux441ux442ux440ux43eux439ux441ux442ux432ux430-ux438-ux43cux438ux43dux44b]{23}}
+
+\hyperref[ux432ux43eux43eux440ux443ux436ux435ux43dux438ux435-ux442ux435ux445ux43dux438ux43aux438]{7.2
+Вооружение техники
+\hyperref[ux432ux43eux43eux440ux443ux436ux435ux43dux438ux435-ux442ux435ux445ux43dux438ux43aux438]{25}}
+
+\hyperref[ux431ux440ux43eux43dux435ux431ux43eux439ux43dux43eux441ux442ux44c-ux438-ux431ux440ux43eux43dux438ux440ux43eux432ux430ux43dux43dux43eux441ux442ux44c]{7.3
+Бронебойность и бронированность
+\hyperref[ux431ux440ux43eux43dux435ux431ux43eux439ux43dux43eux441ux442ux44c-ux438-ux431ux440ux43eux43dux438ux440ux43eux432ux430ux43dux43dux43eux441ux442ux44c]{26}}
+
+\hyperref[ux43eux433ux43dux435ux432ux430ux44f-ux43fux43eux434ux434ux435ux440ux436ux43aux430]{7.4
+Огневая поддержка
+\hyperref[ux43eux433ux43dux435ux432ux430ux44f-ux43fux43eux434ux434ux435ux440ux436ux43aux430]{27}}
+
+\hyperref[ux433ux440ux430ux43dux430ux442ux44b-1]{7.4.1 Гранаты
+\hyperref[ux433ux440ux430ux43dux430ux442ux44b-1]{27}}
+
+\hyperref[ux433ux440ux430ux43dux430ux442ux43eux43cux451ux442ux44b]{7.4.2
+Гранатомёты
+\hyperref[ux433ux440ux430ux43dux430ux442ux43eux43cux451ux442ux44b]{27}}
+
+\hyperref[ux441ux442ux432ux43eux43bux44cux43dux430ux44f-ux430ux440ux442ux438ux43bux43bux435ux440ux438ux44f-ux438-ux43cux438ux43dux43eux43cux451ux442ux44b]{7.4.3
+Ствольная артиллерия и миномёты
+\hyperref[ux441ux442ux432ux43eux43bux44cux43dux430ux44f-ux430ux440ux442ux438ux43bux43bux435ux440ux438ux44f-ux438-ux43cux438ux43dux43eux43cux451ux442ux44b]{27}}
+
+\hyperref[ux440ux430ux43aux435ux442ux43dux44bux435-ux441ux438ux441ux442ux435ux43cux44b-ux437ux430ux43bux43fux43eux432ux43eux433ux43e-ux43eux433ux43dux44f]{7.4.4
+Ракетные системы залпового огня
+\hyperref[ux440ux430ux43aux435ux442ux43dux44bux435-ux441ux438ux441ux442ux435ux43cux44b-ux437ux430ux43bux43fux43eux432ux43eux433ux43e-ux43eux433ux43dux44f]{27}}
+
+\hyperref[ux43fux440ux438ux441ux442ux440ux435ux43bux43aux430]{7.4.5
+Пристрелка
+\hyperref[ux43fux440ux438ux441ux442ux440ux435ux43bux43aux430]{27}}
+
+\hyperref[ux44dux444ux444ux435ux43aux442ux44b-ux43eux442-ux43fux43eux43fux430ux434ux430ux43dux438ux44f]{7.4.6
+Эффекты от попадания
+\hyperref[ux44dux444ux444ux435ux43aux442ux44b-ux43eux442-ux43fux43eux43fux430ux434ux430ux43dux438ux44f]{27}}
+
+\hyperref[ux440ux430ux434ux438ux43eux441ux432ux44fux437ux44c-ux438-ux440ux44dux431]{7.5
+Радиосвязь и РЭБ
+\hyperref[ux440ux430ux434ux438ux43eux441ux432ux44fux437ux44c-ux438-ux440ux44dux431]{28}}
+
+\end{multicols}
+
+\clearpage
+
+% Start two-column layout for main content
+\begin{multicols}{2}
+
+\section{Введение}\label{ux432ux432ux435ux434ux435ux43dux438ux435}
+
+\includegraphics[width=3.38403in,height=2.53819in]{media/image3.png}Когда-то
+в детстве автор любил играть с кубиками и строить города. Однажды, ещё
+совсем ребёнком, автор сидел и крутил в руках миниатюрных солдатиков.
+Один из взрослых спросил автора, почему тот не играет с солдатиками?
+Автор ответил, что не знает как. Тогда взрослый сказал, что для этого
+есть специальные правила, с помощью которых можно организовывать
+сражения, и, хотя сам он их не знает, но об этом можно спросить других
+взрослых. Автор вздохнул и сказал, что это, конечно, очень интересно, но
+ему всё равно не с кем будет играть по таким правилам.
+
+Конечно же, сейчас очевидно, что это было ошибкой. Спустя 30 лет с
+момента того разговора автор вернулся к вопросу и как следует его
+изучил, пользуясь трудами Герберта Уэллса, Джеймса Даннигана, Марка
+Германа, Константина Кривенко и Рори Крэбба.
+
+Вдохновляясь этими людьми и такими их творениями как Art of Tactic,
+Fireteam: Modern и Team Yankee, была спроектирована основа симуляции
+боя, основным отличием которой считалось сочетание высокой динамичности
+и простоты. Выражалось это, в основном, в значительно меньшем количестве
+требуемых бросков кубиков при сохранении и даже увеличении разрешения
+вероятностной модели.
+
+Что автор имеет в виду под разрешением вероятностной модели? Один
+шестигранный кубик (обозначается D6) даёт шаг вероятности в 1/6 (более
+15\%). Чтобы уменьшить шаг, требуется бросать больше кубиков и
+комбинировать результаты. Автор отдал предпочтение стандартному
+двадцатигранному кубику D20, грани которого пронумерованы от 1 до 20, и
+который даёт шаг вероятности 1/20, то есть 5\%.
+
+Автор понимает, что для многих игроков броски кубиков~-- это важная
+часть процесса игры, фактически игра в игре, однако сам воспринимает их
+всего лишь как один из способов получить случайное число и предпочитает
+вместо реальных кубиков использовать цифровое приложение, например, RPG
+Simple Dice для Android.
+
+Далее симуляция развивалась под впечатлением от книги Modern War in
+Miniature 1966 года за авторством Майкла Корнса, который позднее работал
+в главном центре военных игр армии США, расположенном в Форт Ливенворте,
+и занимался исследованием психологии на поле боя, вводя в военные игры
+статистические модели психоэмоциональной устойчивости солдат.
+
+Наконец, автор понял, что ему не хватает смысла, стоящего за механикой
+симуляции, и начал искать способы глубже погрузиться в игру и
+моделировать более комплексные взаимодействия персонажей, рассматривая
+такие примеры как Dungeons and Dragons, GURPS, Only War от компании FFG,
+Modern War от Zozer.
+
+Автор поставил перед собой амбициозную задачу показать каждого персонажа
+крупным планом, и при этом дать им всем возможность поучаствовать в
+довольно масштабных военизированных операциях, включающих десятки
+человек, использующих современное дальнобойное вооружение. Каждый игрок
+имеет персонификацию в игровом мире -- это солдат, офицер или
+гражданский.
+
+Симуляция была провалидирована с использованием документации United
+States Army Field Manuals, в том числе с использованием LLM, а также
+протестирована в игре с реальными людьми.
+
+\section{Масштаб и
+период}\label{ux43cux430ux441ux448ux442ux430ux431-ux438-ux43fux435ux440ux438ux43eux434}
+
+Симуляция обеспечивает воспроизведение боёв сухопутных войск
+численностью уровня до роты с детализацией уровня отдельных солдат и
+единиц техники. Предусмотрены такие виды техники как танки, БМП, ПТРК,
+разведывательные и ударные дроны разных типов, миномёты, артиллерия,
+средства связи и радиоэлектронной борьбы.
+
+Наименьший отрезок времени в бою (ход) соответствует 30 секундам.
+Пространственный масштаб 1/1000, то есть 1 см соответствует 10 м.
+
+Автор рекомендует не воспринимать эти цифры слишком буквально, не
+вымерять миллиметры, и даже допускает измерения «на глаз». По его
+мнению, плюс/минус один сантиметр в этой игре решающего значения не
+имеет.
+
+Боевые единицы могут быть представлены плоскими квадратными фишками с
+длиной стороны 1 см, а элементы локации -- листами бумаги различной
+формы, что, по мнению автора, хорошо подойдёт к пространственному
+масштабу игры.
+
+\subsection{Использование
+миниатюр}\label{ux438ux441ux43fux43eux43bux44cux437ux43eux432ux430ux43dux438ux435-ux43cux438ux43dux438ux430ux442ux44eux440}
+
+\includegraphics[width=3.38403in,height=1.52292in]{media/image4.png}
+
+Автор признаёт, что красивые покрашенные миниатюры могут доставить
+значительное эстетическое удовольствие и повысить вовлечённость в игру.
+Автор и сам практикует использование фигурок масштаба 1/100 или даже
+1/72. Однако, вынужден предупредить, что при использовании фигурок
+придётся смириться с тем, что визуализация будет не вполне
+соответствовать системному масштабу игры, и из-за этого подчас можно
+почувствовать некоторый диссонанс. Здесь выбор остаётся за игроками, но
+автор позволит себе дать несколько советов для тех, кто будет
+организовывать игру с миниатюрами. Важно помнить, что фигурки и фишки не
+обязательно отражают реальные габариты, это просто маркеры, а реальные
+боевые единицы находятся где-то в их пределах, но занимают гораздо
+меньшую площадь.
+
+Итак, при игре миниатюрами предполагается, что элементы локации (здания,
+деревья и так далее) будут соответствующего масштаба. Автору нравится
+использовать листы натурального мха для представления лесных зон, на
+которые выставляется несколько моделей деревьев, которые символически
+отображают принадлежность полигона к лесной зоне, и при этом могут быть
+легко перемещены внутри этой зоны для удобства измерения расстояний или
+размещения миниатюр персонажей.
+
+При использовании миниатюр в масштабе 1/72 какой-нибудь дом может быть
+размером 10×10 см. В масштабе игры это будет огромное здание размером
+100×100 м, целый торговый центр, хотя визуально это будет изба 10×10 м.
+При высоте фигурки человека 2-2,5 см, дистанция броска гранаты в 4 см
+может выглядеть странно. Чтобы уменьшить визуальный диссонанс, автор
+предлагает использовать так называемый метод неравномерного
+пространства. Дистанции переводятся из реального масштаба в игровой не
+по формуле см~=~м~×~0.1, а по формуле см~=~м~×~0.1~+~x, где x -- это
+некоторая константа, в качестве которой рекомендуется выбрать число в
+диапазоне 4-9. Также и при переводе из игрового масштаба в реальный
+используется не м~=~см~×~10, а м~=~(см~--~x)~×~10 (естественно, это
+число не имеет смысла, когда оно отрицательно). Таким образом вокруг
+каждого отряда образуется пятно радиусом x~+~1~см, которое соответствует
+10 м реального масштаба, но каждый 1~см сверх этого радиуса прибавляет
+ещё 10~м к дистанции. Например, при x~=~9: 10~см соответствует 10~м,
+11~см соответствует 20~м, 12~см соответствует 30~м и так далее. Эти
+формулы применяются только к расчётам дистанций для применения оружия и
+экипировки, в том числе наблюдения. Передвижение осуществляется обычно.
+
+При использовании зданий метод неравномерного пространства имеет
+особенности. Для уменьшения диссонанса внутри здания расстояния можно не
+измерять. Вместо этого можно разделить здание на сектора, перекрывающие
+линии видимости и огня (помещения). Отряд пехоты в помещении может
+свободно перемещаться по нему; линии видимости и огня вовне помещения
+проводятся от края помещения, при этом они не учитывают конфигурацию
+окон и дверей -- если в стене помещения есть дверь или окно, считается,
+что это окно во всю стену; при входе и выходе из здания расстояние
+измеряется также от края помещения.
+
+\section{Основы}\label{ux43eux441ux43dux43eux432ux44b}
+
+\subsection{Атрибуты и навыки
+персонажей}\label{ux430ux442ux440ux438ux431ux443ux442ux44b-ux438-ux43dux430ux432ux44bux43aux438-ux43fux435ux440ux441ux43eux43dux430ux436ux435ux439}
+
+Как и во многих других системах ролевых игр, у персонажей есть наборы
+атрибутов и навыков. Навыки привязаны к одному из атрибутов.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2581}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7419}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Атрибут
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Навыки
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Здоровье & Выносливость (ВНС) \\
+\multirow{2}{=}{Ловкость} & Маневрирование (МНВ) \\
+& Маскировка (МСК) \\
+\multirow{7}{=}{Меткость} & Метательное оружие (гранаты) (ГРН) \\
+& Лёгкое стрелковое оружие (ЛС) \\
+& Снайперское оружие (СН) \\
+& Пулемёты (ПЛМ) \\
+& Управляемые ракеты (УР) \\
+& Управляемые дроны (ДРН) \\
+& Тяжёлое вооружение (ТВ) \\
+Интеллект & Медицина (МЕД) \\
+& Механика (МЕХ) \\
+& Электроника (ЭЛ) \\
+& Взрывчатые вещества (ВЗР) \\
+& Огневая поддержка (ОП) \\
+& Логика (ЛГК) \\
+Харизма & Влияние (ВЛН) \\
+\end{longtable}
+
+Таблица 1: атрибуты и навыки
+
+Значения атрибутов используются для ограничения максимального значения
+соответствующих навыков. Допускается игра без указания атрибутов, тогда
+персонажи могут развивать все навыки до максимума -- 20 очков
+тренированности.
+
+Навыки персонажа определяют его эффективность в различных ситуациях и
+являются результатом интенсивных тренировок либо боевого опыта. Однако,
+навыки могут ухудшаться из-за травм или редкого применения, а чтобы
+стать в чём-то экспертом требуются серьёзные усилия. Каждое очко
+тренированности -- это 28 часов интенсивных тренировок.
+
+Для определения эффективности солдата в различных ситуациях могут
+использоваться как сами очки тренированности, так и уровень навыка,
+который напрямую зависит от тренированности и обозначается как Ур(х),
+где х -- очки тренированности в некотором навыке.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5774}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4226}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Очки тренированности, х & Уровень навыка Ур(x) \\
+1-2 & 1 \\
+3-6 & 2 \\
+7-11 & 3 \\
+12-15 & 4 \\
+16-19 & 5 \\
+20 & 6 \\
+\end{longtable}
+
+Таблица 2: очки тренированности и навыка
+
+Навыки ЛГК и ВЛН используются при определении порядка действия отрядов и
+при восстановлении эффективности отряда после полученного
+стресса\footnote{См. стр. 11, 5.1 Фаза действий.}. При этом выбирается
+наибольшее значение из этих двух навыков. Далее в тексте это
+обозначается как Макс(ЛГК/ВЛН).
+
+\includegraphics[width=3.38403in,height=1.52292in]{media/image5.png}
+
+\subsubsection{Выносливость
+(ВНС)}\label{ux432ux44bux43dux43eux441ux43bux438ux432ux43eux441ux442ux44c-ux432ux43dux441}
+
+Навык определяет максимальный вес, который солдат может нести, скорость
+передвижения и возможность преодоления препятствий. В ролевой части
+навык ВНС используется в ситуациях, связанных с применением силы,
+ловкости и выносливости.
+
+Обычный здоровый, но не спортивный человек получает 5 ВНС. Человек,
+регулярно занимающийся спортом 9 ВНС.
+
+Максимальная грузоподъёмность отряда определяется как сумма 12~×~Ур(ВНС)
+кг каждого персонажа в отряде. При ВНС~=~0 грузоподъёмность равна 0, это
+означает серьёзную болезнь и инвалидность персонажа, фактически, полную
+недееспособность.
+
+Скорость пешего передвижения отряда при ненулевой грузоподъёмности
+определяется пропроционально текущей нагрузке.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3212}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2777}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1650}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2362}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Нагрузка в \% от максимальной грузоподъёмности
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Скорость пешего передвижения отряда, см
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Бег
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Преодоление препятствий без остановки
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0\% - 25\% & 5 & + & + \\
+25\% - 50\% & 4 & + & - \\
+50\% - 75\% & 3 & + & - \\
+75\% - 100\% & 2 & - & - \\
+\end{longtable}
+
+\phantomsection\label{_Ref225001006}{}Таблица 3: скорость пешего
+передвижения в зависимости от нагрузки
+
+При нагрузке менее 75\% отряд может двигаться бегом со скоростью в два
+раза выше пешей скорости.
+
+При нагрузке менее 25\% отряд может преодолевать препятствия без
+остановки, но при этом обязан получить 1 очко усталости.
+
+Очков усталости\footnote{См. стр. 8, 3.3.5 Очки усталости.} у отряда не
+может быть больше, чем минимальный Ур(ВНС) среди персонажей отряда.
+
+\paragraph{Пример}\label{ux43fux440ux438ux43cux435ux440}
+
+Отряд из 3 человек с ВНС~=~3 (Ур(ВНС)~=~2) у каждого может нести
+снаряжение общим весом не более 72 кг. Если такой отряд несёт только 3
+штурмовые винтовки (каждая весом 4,7 кг c боезапасом), то у него 14,1 кг
+нагрузки, что составляет менее 20\%. Такой отряд может идти со скоростью
+5 см за ход или бежать на 10 см за ход, а кроме того преодолевать
+препятствия без остановки (см. стр.
+\hyperref[ux43fux440ux435ux43eux434ux43eux43bux435ux43dux438ux435-ux43fux440ux435ux43fux44fux442ux441ux442ux432ux438ux439]{13},
+6.2.2.2 Преодоление препятствий).
+
+Если этот отряд возьмёт ручной противотанковый гранатомёт с боезапасом
+общим весом 12,3 кг, то его нагрузка будет 26,4 кг, что составляет около
+37\%, в результате чего он потеряет возможность преодолевать препятствия
+без остановки, а также будет двигаться пешком со скоростью 4 см за ход
+или бегом со скоростью 8 см за ход.
+
+Если этот отряд возьмёт ещё ПТРК Фагот с двумя ракетами общим весом 44
+кг, то нагрузка станет около 98\%, его скорость будет уже всего 2 см за
+ход и он не сможет двигаться бегом.
+
+\subsubsection{Маневрирование
+(МНВ)}\label{ux43cux430ux43dux435ux432ux440ux438ux440ux43eux432ux430ux43dux438ux435-ux43cux43dux432}
+
+\includegraphics[width=3.38403in,height=1.52292in]{media/image6.png}
+
+Навык определяет отработанные до автоматизма привычки, уменьшающие
+площадь поражения тела до минимума. Человек умеет двигаться так, чтобы
+свести к минимуму риск попадания под обстрел, постоянно оценивает
+местность и держит в голове ближайшие естественные укрытия, своевременно
+и оптимально меняет позы.
+
+Высокий уровень навыка уменьшает вероятность поражения при стрельбе по
+отряду.
+
+При определении навыка маневрирования Ур(МНВ) отряда среди солдат отряда
+выбирается минимальное значение\footnote{См. стр.
+  \hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux43dux430ux432ux44bux43aux430]{17},
+  6.3.2.4.1 Модификатор навыка.}.
+
+\subsubsection{Маскировка
+(МСК)}\label{ux43cux430ux441ux43aux438ux440ux43eux432ux43aux430-ux43cux441ux43a}
+
+Тренировки по маскировке включают в себя собственно маскировку, а также
+обнаружение (демаскировку)\footnote{См. стр.
+  \hyperref[ux43cux430ux441ux43aux438ux440ux43eux432ux43aux430]{8},
+  3.3.3 Маскировка.}. В ролевой части навык МСК используется во
+взаимодействиях, связанных с восприятием и наблюдательностью.
+
+Навык маскировки Ур(МСК) влияет на дальность обнаружения (демаскировки)
+противника при наблюдении (см. стр.
+\hyperref[ux43dux430ux431ux43bux44eux434ux435ux43dux438ux435]{14}, 6.3.1
+Наблюдение).
+
+Игрок самостоятельно выбирает персонажа, который ведёт наблюдение,
+поэтому применяется значение навыка Ур(МСК) конкретного персонажа, а
+также учитывается экипировка, время суток и погодные условия. При
+определении навыка маскировки Ур(МСК) отряда, за которым ведётся
+наблюдение, выбирается минимальное значение среди персонажей этого
+отряда.
+
+\subsubsection{Навыки использования
+оружия}\label{ux43dux430ux432ux44bux43aux438-ux438ux441ux43fux43eux43bux44cux437ux43eux432ux430ux43dux438ux44f-ux43eux440ux443ux436ux438ux44f}
+
+Навыки, связанные с атрибутом меткость используются для определения
+результативности применения оружия прямой наводкой, в том числе бросков
+гранат.
+
+Снаряжение и оружие делится на классы, для каждого из которых необходима
+отдельная тренировка:
+
+\begin{itemize}
+\item
+  метательное оружие (гранаты) (ГРН);
+\item
+  лёгкое стрелковое оружие (ЛС);
+\item
+  снайперское оружие (СН);
+\item
+  пулемёты (ПЛМ);
+\item
+  управляемые ракеты (УР);
+\item
+  управляемые дроны (ДРН);
+\item
+  тяжёлое вооружение (всё остальное оружие, ведущее огонь прямой
+  наводкой) (ТВ).
+\end{itemize}
+
+\subsubsection{Медицина
+(МЕД)}\label{ux43cux435ux434ux438ux446ux438ux43dux430-ux43cux435ux434}
+
+Навык медицины позволяет спасти жизнь смертельно раненого солдата и
+остановить кровотечение. В ролевой части навык медицины используется во
+взаимодействиях, связанных с медициной в целом, анатомией, биологией.
+
+Санитару или медику, то есть персонажу с количеством очков навыка МЕД
+больше 0, доступно специальное действие \textbf{оказание первой
+помощи}\footnote{См. стр.
+  \hyperref[ux43eux43aux430ux437ux430ux43dux438ux435-ux43cux435ux434ux438ux446ux438ux43dux441ux43aux43eux439-ux43fux43eux43cux43eux449ux438]{19},
+  6.3.4 Оказание первой помощи.}.
+
+\subsubsection{Механика
+(МЕХ)}\label{ux43cux435ux445ux430ux43dux438ux43aux430-ux43cux435ux445}
+
+Навык механики определяет возможности по ремонту и созданию различных
+механизмов, а также по управлению ими. Навык может использоваться для
+физического взлома и ремонта замков, автомобилей, а также для проверок
+при управлении автомобилями и боевыми машинами.
+
+\subsubsection{Электроника
+(ЭЛ)}\label{ux44dux43bux435ux43aux442ux440ux43eux43dux438ux43aux430-ux44dux43b}
+
+Навык работы с компьютерами, включающий и программную, и аппаратную
+части: программирование, пайка, электрические схемы. Используется для
+работы со средствами связи, радиооборудованием.
+
+\subsubsection{Взрывные устройства и мины
+(ВЗР)}\label{ux432ux437ux440ux44bux432ux43dux44bux435-ux443ux441ux442ux440ux43eux439ux441ux442ux432ux430-ux438-ux43cux438ux43dux44b-ux432ux437ux440}
+
+Навык работы с взрывчатыми веществами и взрывными устройствами,
+минами\footnote{См. стр. 23, 7.1.9 Взрывные устройства и мины.}.
+Используется для создания и установки взрывных устройств и
+разминирования.
+
+\subsubsection{Огневая поддержка
+(ОП)}\label{ux43eux433ux43dux435ux432ux430ux44f-ux43fux43eux434ux434ux435ux440ux436ux43aux430-ux43eux43f}
+
+Используется для любой навесной стрельбы (стрельбы непрямой наводкой)
+начиная от подствольных гранатомётов и АГС и заканчивая ствольной
+артиллерией и РСЗО\footnote{См. стр. 27, 7.4 Огневая поддержка.}.
+
+\subsubsection{Логика
+(ЛГК)}\label{ux43bux43eux433ux438ux43aux430-ux43bux433ux43a}
+
+Навык логики используется при взаимодействии с другими персонажами.
+
+В ролевой части логика используется для убеждения. Убедить можно только
+в том, что сам персонаж считает правдой и в чём уверен.
+
+Очки навыка ЛГК зависит от образования: 2 для школьника, 6 для среднего
+специального образования, 8 для оконченного высшего, 11 для нескольких
+высших, 15 для кандидата наук, 19 для доктора наук.
+
+\subsubsection{Влияние
+(ВЛН)}\label{ux432ux43bux438ux44fux43dux438ux435-ux432ux43bux43d}
+
+Навык влияния используется при взаимодействии с другими персонажами.
+
+В ролевой части влияние используется для обаяния, запугивания и обмана.
+
+Персонаж имеет характер, который определяет его стиль общения:
+
+\begin{itemize}
+\item
+  Жёсткий: персонаж не может использовать обаяние; получает бонус +5 к
+  влиянию при применении запугивания и обмана.
+\item
+  Гибкий: персонаж гибко подстраивается под ситуацию.
+\item
+  Мягкий: персонаж не может использовать запугивание и обман; получает
+  бонус +5 к влиянию при применении обаяния.
+\end{itemize}
+
+\subsubsection{Создание случайного
+персонажа}\label{ux441ux43eux437ux434ux430ux43dux438ux435-ux441ux43bux443ux447ux430ux439ux43dux43eux433ux43e-ux43fux435ux440ux441ux43eux43dux430ux436ux430}
+
+Определить примерный уровень требуемого персонажа, который определит
+минимальный навык ЛГК/ВЛН. Игрок может выбрать любой из этих навыков в
+зависимости от желаемого отыгрыша. Для гражданских можно представить
+соответствующий уровень исходя из их должности и рода деятельности.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3694}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1662}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1293}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1662}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1689}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Уровень
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Макс(ЛГК/ВЛН)
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Количество навыков
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Количество навыков меткости
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Макс значение навыка
+\end{quote}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Рядовой
+
+Чернорабочий & 2 & 1 & 1 & 10 \\
+Мл. сержант & 4 & 1 & 2 & 20 \\
+Сержант
+
+Прораб & 6 & 2 & 2 & 20 \\
+Лейтенант
+
+Специалист & 8 & 2 & 1 & 14 \\
+Капитан
+
+Руководитель & 11 & 3 & 3 & 14 \\
+Майор & 14 & 4 & 3 & 14 \\
+Полковник
+
+Топ менеджер & 17 & 4 & 3 & 10 \\
+Генерал & 20 & 5 & 3 & 6 \\
+\end{longtable}
+
+Таблица 4: создание случайного персонажа
+
+Прошедшие военные сборы персонажи получают 8 ВНС, 4 МНВ, 1 МСК, 5 ЛС и 2
+ГРН. Для гражданских персонажей максимальное значение навыков, связанных
+с атрибутом меткость, всегда равно 6.
+
+В зависимости от уровня, персонаж получает возможность выбора нескольких
+навыков: отдельно для навыков, связанных с атрибутом меткость и
+остальных навыков. Их можно выбрать случайно или по желанию. Для каждого
+выбранного навыка определяется значение очков тренированности навыка,
+случайно или по желанию.
+
+\subsubsection{Ролевые проверки и
+состязания}\label{ux440ux43eux43bux435ux432ux44bux435-ux43fux440ux43eux432ux435ux440ux43aux438-ux438-ux441ux43eux441ux442ux44fux437ux430ux43dux438ux44f}
+
+В ролевой части проверка тренированности -- это бросок кубика D20 с
+прибавлением очков тренированности. Пороговое значение, которое нужно
+превысить определяется сценарием. Примеры порогов:
+
+\begin{itemize}
+\item
+  Легко: 10;
+\item
+  Средне: 20;
+\item
+  Сложно: 30.
+\end{itemize}
+
+Состязание в ролевой части -- это когда каждый персонаж бросает кубик
+D20, прибавляет к своему броску свой показатель очков тренированности,
+персонажи сортируются по убыванию получившихся значений, а выигравшим
+считается персонаж с самым большим значением. Если результат броска у
+нескольких персонажей одинаковый, то между ними сортировка происходит по
+убыванию очков тренированности выбранного навыка. Если и это значение
+одинаковое, то можно бросить дополнительный кубик D20 и выбрать
+персонажа с большим результатом.
+
+В некоторых случаях игроки могут оказывать помощь друг-другу. В этом
+случае состязающийся игрок может сделать дополнительный бросок и выбрать
+лучший результат или просто добавить себе +5 к броску. Также работает
+помеха, только выбирается худший результат или бросок модифицируется на
+-5.
+
+\subsection{Режимы
+игры}\label{ux440ux435ux436ux438ux43cux44b-ux438ux433ux440ux44b}
+
+В игре предлагается 3 режима:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Ролевой режим, в котором все действия выполняются параллельно в
+  реальном времени. Используется для ситуаций, не требующих визуализации
+  событий. В этом режиме происходит общение игроков, а также могут
+  проходить ролевые состязания и проверки\footnote{Cм. стр.
+    \hyperref[ux440ux43eux43bux435ux432ux44bux435-ux43fux440ux43eux432ux435ux440ux43aux438-ux438-ux441ux43eux441ux442ux44fux437ux430ux43dux438ux44f]{6},
+    3.1.13 Ролевые проверки и состязания.}.
+\item
+  Упрощённый тактический режим, в котором игроки могут делать заявки на
+  произвольные действия, после чего определяется момент, когда действия
+  персонажей могут повлиять друг на друга и заявки исполняются
+  независимо и параллельно вплоть до этого момента.
+\item
+  Детальный тактический режим, в котором время поделено на \textbf{ходы}
+  длительностью 30 секунд. Большинство действий игроков в этом режиме
+  выполняются последовательно в чётко определённом порядке.
+\end{enumerate}
+
+\subsection{Отряды (боевые
+единицы)}\label{ux43eux442ux440ux44fux434ux44b-ux431ux43eux435ux432ux44bux435-ux435ux434ux438ux43dux438ux446ux44b}
+
+Игровые персонажи объединяются в отряды, которые являются важным
+элементом игры. Персонажи в одном отряде всегда перемещаются вместе и
+действуют сообща. Примеры отрядов: отделение пехоты, расчёт тяжелого
+вооружения, экипаж техники, бригада грузчиков.
+
+В контексте игры термины отряд и боевая единица -- это синонимы, просто
+в русском языке отряд относится скорее к пехоте, а боевая единица --
+более широкое понятие.
+
+В каждом отряде есть лидер (командир экипажа, командир отделения,
+командир расчёта) -- это член отряда с наибольшим навыком логики или
+влияния (выбирается навык с наибольшим значением)\footnote{См. стр. 3,
+  3.1 Атрибуты и навыки персонажей.}. Навыки персонажей, входящих в
+отряд, определяют возможности и характеристики отряда.
+
+В процессе игры отряд может разделиться на несколько отрядов, а
+несколько отрядов могут объединиться в один\footnote{См. стр. 12, 6.1
+  Разделение отряда и стр.
+  \hyperref[ux437ux430ux432ux435ux440ux448ux430ux44eux449ux430ux44f-ux444ux430ux437ux430]{11},
+  5.2 Завершающая фаза.}.
+
+У отряда может быть одно транспортное средство. Транспортное средство
+может перевозить другие отряды, но это не считается объединением
+отрядов.
+
+Как бы это странно не звучало, но технически, пустое транспортное
+средство без экипажа можно назвать боевой единицей или отрядом без
+персонажей.
+
+\subsubsection{Положение в
+пространстве}\label{ux43fux43eux43bux43eux436ux435ux43dux438ux435-ux432-ux43fux440ux43eux441ux442ux440ux430ux43dux441ux442ux432ux435}
+
+Каждая боевая единица имеет местоположение, выраженное точкой в
+пространстве с точностью до 1 см. От этой точки измеряются расстояния и
+по этой точке определяется, находится ли отряд в какой-либо зоне локации
+(например, в лесу или в здании).
+
+Если отряд представлен квадратной фишкой, то можно использовать один из
+её углов, отметив его. Если используются миниатюры, можно выбрать одну
+из фигурок. Если используется миниатюра техники, можно использовать
+точку посредине переднего края корпуса или одно из колёс.
+
+Техника с бронёй 2 и больше\footnote{См. стр.
+  \hyperref[_Ref82539353]{26}, Таблица 19: бронебойность оружия (ББ) и
+  броня техники (Бр).} имеет ориентацию, то есть у неё есть фронт,
+фланги и тыл. Пехотные отряды не ориентированы.
+
+Ориентация боевой единицы влияет на ущерб от выстрелов, это отражает
+дифференциацию брони. Учитывается только положение корпуса, положение
+башни игнорируется.
+
+Фронтальная линия -- это линия, перпендикулярная вектору ориентации
+боевой единицы и проходящая через точку, которая выбрана как точка
+отсчёта для боевой единицы (например, середина переднего края корпуса
+при использовании крупных фигурок). Таким образом, фронтальная линия
+делит игровую плоскость на две части: одна часть, на которой стоит сама
+боевая единица, считается находящейся \textbf{за} фронтальной линией, а
+вторая часть -- \textbf{перед} фронтальной линией и перед боевой
+единицей. По этой боевой единице враги, находящиеся перед фронтальной
+линией, ведут фронтальный огонь (атака «в лоб»), а те, что находятся за
+фронтальной линией ведут фланговый огонь (атака во фланг или с тыла).
+
+\includegraphics[width=3.36458in,height=3.61458in]{media/image7.png}
+
+Схема 1: ориентация и фронтальная линия
+
+\subsubsection{Линии видимости и
+огня}\label{ux43bux438ux43dux438ux438-ux432ux438ux434ux438ux43cux43eux441ux442ux438-ux438-ux43eux433ux43dux44f}
+
+В игре используется понятие линии видимости при определении возможностей
+наблюдать вражескую боевую единицу и открывать огонь по ней. Линия
+видимости и линия огня -- это тождественные понятия. Линию видимости
+следует проводить между заранее определёнными точками боевых единиц.
+
+Линия видимости проводится в горизонтальной плоскости и может быть
+прервана зонами локации, в том числе отдельными элементами.
+
+\subsubsection{Маскировка}\label{ux43cux430ux441ux43aux438ux440ux43eux432ux43aux430}
+
+Современный бой отличает большое количество средств разведки,
+применяемых в реальном времени, таких как спутники, стратегические и
+тактические БПЛА, благодаря которым командование может получать картинку
+боя в реальном времени. Это соответствует тому, как командир видит все
+боевые единицы на игровом поле боя, как свои, так и вражеские. Однако,
+сами боевые единицы не всегда получают эту информацию в реальном
+времени. И даже получив информацию о местонахождении противника,
+требуется время на ориентацию по месту действия.
+
+При игре с посредником (мастером игры) последний может создавать для
+игроков туман войны: не выставлять на игровое поле фигурки, которые в
+настоящее время не видны персонажам игроков. Для этого ему нужно иметь
+отдельное поле, где можно было бы отслеживать позиции всех отрядов.
+Автор предлагает использовать для этой цели разработанное им
+веб-приложение, находящееся в свободном доступе в интернете по адресу:
+
+https://github.com/guidebot/peace\_and\_prosperity
+
+Боевая единица может быть \textbf{замаскированной}, и это означает, что
+её не видят вражеские отряды и не могут открыть по ней прицельный
+огонь\footnote{См. стр.
+  \hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux43eux433ux43dux44f-ux432ux441ux43bux435ux43fux443ux44e]{18},
+  6.3.2.4.6 Модификатор огня вслепую.}.
+
+Для того, чтобы боевая единица могла стать \textbf{замаскированной},
+необходимо выполнение одного из следующих условий:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  полное отсутствие линии видимости до всех вражеских боевых единиц;
+\item
+  прохождение всех линий видимости до вражеских боевых единиц через
+  дымовую завесу.
+\end{enumerate}
+
+Маскировка сохраняется, в том числе и при передвижении боевой единицы.
+
+\textbf{Замаскированная} боевая единица считается
+\textbf{демаскированной} (обнаруженной) в следующих случаях:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{замаскированная} боевая единица вела огонь без использования
+  звукоподавителей и пламегасителей;
+\item
+  \textbf{замаскированная} боевая единица успешно \textbf{демаскирована}
+  вражеской боевой единицей в результате \textbf{наблюдения}\footnote{См.
+    стр.
+    \hyperref[ux43dux430ux431ux43bux44eux434ux435ux43dux438ux435]{14},
+    6.3.1 Наблюдение.}.
+\end{enumerate}
+
+\subsubsection{Звук и
+звукоподавители}\label{ux437ux432ux443ux43a-ux438-ux437ux432ux443ux43aux43eux43fux43eux434ux430ux432ux438ux442ux435ux43bux438}
+
+Пехота вне городской локации может слышать звук вражеской техники, звуки
+выстрелов и взрывов на дистанции до 150 см.
+
+В городской локации звуки выстрелов и взрывов слышны на дистанции до 100
+см, звук техники не учитывается.
+
+Звукоподавители могут устанавливаться на некоторое пехотное оружие и
+обеспечивают невозможность определение позиции замаскированного стрелка.
+
+\subsubsection{Очки
+усталости}\label{ux43eux447ux43aux438-ux443ux441ux442ux430ux43bux43eux441ux442ux438}
+
+У пехотных отрядов есть показатель усталости, который в начале игры
+равен нулю. Пехота получает по одному очку усталости при передвижении
+бегом и при преодолении препятствий. Очки усталости накапливаются, но не
+могут быть больше уровня физической подготовки Ур(ВНС)\footnote{См. стр.
+  \hyperref[ux432ux44bux43dux43eux441ux43bux438ux432ux43eux441ux442ux44c-ux432ux43dux441]{4},
+  3.1.1 Выносливость (ВНС).} персонажа с самым маленьким Ур(ВНС) в
+отряде. Это означает, что если в отряде есть персонаж, у которого
+Ур(ВНС)~=~0, весь отряд не может передвигаться бегом.
+
+Очки усталости уменьшаются на 1 в завершающую фазу хода\footnote{См.
+  стр.
+  \hyperref[ux437ux430ux432ux435ux440ux448ux430ux44eux449ux430ux44f-ux444ux430ux437ux430]{11},
+  5.2 Завершающая фаза.}, если отряд не передвигался или передвигался в
+транспорте.
+
+Если очки усталости отряда больше 0, при стрельбе персонажи отряда
+должны использовать модификатор внезапного огня\footnote{См. стр.
+  \hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux432ux43dux435ux437ux430ux43fux43dux43eux433ux43e-ux43eux433ux43dux44f]{18},
+  6.3.2.4.7 Модификатор внезапного огня.}.
+
+\subsubsection{Очки
+стресса}\label{ux43eux447ux43aux438-ux441ux442ux440ux435ux441ux441ux430}
+
+\includegraphics[width=3.38403in,height=1.52292in]{media/image8.png}
+
+У отрядов есть показатель стресса, который в начале игры равен нулю.
+Отряды получают очки стресса при обстреле. В пехотных отрядах очки
+стресса распределяются равномерно по всем персонажам отряда. Они
+накапливаются и в дальнейшем используются для определения возможности
+исполнения \textbf{действий}.
+
+Для пехотных отрядов каждое очко стресса (с округлением в большую
+сторону) делает неэффективным одного солдата, но очки стресса могут
+накапливаться свыше количества солдат в отряде. Это приводит к следующим
+эффектам:
+
+\begin{itemize}
+\item
+  неэффективные солдаты не могут участвовать в \textbf{стрельбе} и не
+  могут выполнять \textbf{наблюдение}; неэффективными солдаты становятся
+  по возрастанию Макс(ЛГК/ВЛН) начиная от самого меньшего; если у
+  нескольких солдат одинаковый Макс(ЛГК/ВЛН), солдат выбирается
+  случайно;
+\item
+  отряд, в котором неэффективны больше половины солдат, может двигаться
+  только в сторону от врага, исключая \textbf{замаскированные} вражеские
+  боевые единицы и не может выполнять штурм.
+\end{itemize}
+
+Стресс не влияет на возможность постановки дымовой завесы, на
+возможность оказывать медицинскую помощь и на возможность использовать
+средства связи.
+
+Для отрядов на технике превышение количества очков стресса над значением
+бронированности\footnote{См. стр. \hyperref[_Ref82539353]{26}, Таблица
+  19: бронебойность оружия (ББ) и броня техники (Бр).} приводит к тому,
+что боевая единица может только двигаться на максимальной скорости в
+сторону от врага, исключая \textbf{замаскированные} вражеские боевые
+единицы. Если это действие выполнить невозможно, экипаж покидает
+технику, но количество очков стресса у покинувшего технику отряда при
+этом сохраняется.
+
+\subsubsection{Кровотечение}\label{ux43aux440ux43eux432ux43eux442ux435ux447ux435ux43dux438ux435}
+
+Раненый персонаж не может действовать, в том числе его навыки не
+используются в игре. Например, его навык Макс(ЛГК/ВЛН) не может быть
+использован для восстановления очков стресса отряда. Единственное, что
+может делать раненый персонаж -- это оказывать себе медицинскую помощь.
+
+В завершающую фазу хода персонаж с кровотечением теряет 1 очко навыка
+ВНС. Когда очки ВНС персонажа в завершающую фазу хода равны 0 и
+кровотечение всё ещё действует, он умирает. Пока персонаж не умер,
+кровотечение можно попытаться остановить с помощью навыка
+МЕД\footnote{См стр.
+  \hyperref[ux43cux435ux434ux438ux446ux438ux43dux430-ux43cux435ux434]{5},
+  3.1.5 Медицина (МЕД).}.
+
+\section{Локация}\label{ux43bux43eux43aux430ux446ux438ux44f}
+
+\includegraphics[width=3.38403in,height=1.52292in]{media/image9.jpeg}
+
+Игра происходит в определённой локации, представляющей из себя
+плоскость, разделённую на зоны разных форм и размеров. Сценарий игры
+должен подробно описывать локацию и все зоны, которые в ней
+используются, включая их расположение и все их характеристики.
+
+Автор использует стандартный размер игрового поля для игры с
+миниатюрами: 180 см в длину и 120 см в ширину. Такое поле можно
+разместить на столе в небольшой комнате.
+
+Масштаб игры таков, что зона поражения артиллерии и даже миномётов может
+покрыть всю игровую область, поэтому в большинстве сценариев артиллерия
+может быть расположена за игровой областью. В некоторых сценариях игрок
+как командир тоже может действовать за игровой областью. Это означает,
+что он управляет боем дистанционно из другого места.
+
+Даже танки были бы способны вести огонь через всю локацию, если бы она
+представляла собой ровное поле. По этой причине, если, конечно, ваш
+сценарий не предполагает масштабного танкового боя, наподобие битвы на
+73 истинг, необходимо обеспечить высокое насыщение игрового поля
+различными элементами локации и стараться не оставлять без особой
+необходимости пустых пространств более 10 см. При недостатке элементов
+локации можно использовать лесные зоны, задаваемые полигонами.
+
+Следует избегать ситуаций, когда одна из боевых единиц, находящаяся в
+локации, вынуждена вести прямой бой с боевой единицей, находящейся за
+пределами локации. Это неудобно и может сильно испортить впечатление от
+игры, потому что игроки могут неправильно представлять контекст вне
+локации. Для этого очень важно располагать цели сценария ближе к
+середине локации и обеспечить отсутствие линий видимости и хорошей
+проходимости (по крайней мере для техники) непосредственно от края
+локации по направлению к целям сценария. При создании локации следует
+явно оговорить, что происходит, когда боевые единицы достигают границы
+или выходят за неё.
+
+Например, танк и ПТРК могут перестреливаться на дистанции более 200 см в
+игровом масштабе. Если ПТРК занимает позицию на прямой дороге недалеко
+от края локации, например в 50 см, и эта дорога продолжается по прямой
+за границей локации, то фактически танку не будет смысла приближаться к
+цели настолько, чтобы его можно было отобразить в локации. Следует
+договориться, что, например, на границе локации дороги делают поворот, а
+вокруг густые джунгли или плотная городская застройка, или локация
+находится на плато, поэтому танку необходимо преодолеть склон, чтобы
+иметь возможность вести огонь прямой наводкой. Таким образом, участники
+договариваются, что прямой бой невозможен, если одна из боевых единиц не
+находится в пределах локации.
+
+\subsection{Зоны
+локации}\label{ux437ux43eux43dux44b-ux43bux43eux43aux430ux446ux438ux438}
+
+\includegraphics[width=3.38403in,height=1.69236in]{media/image10.png}
+
+\subsubsection{Стандартные зоны
+локации}\label{ux441ux442ux430ux43dux434ux430ux440ux442ux43dux44bux435-ux437ux43eux43dux44b-ux43bux43eux43aux430ux446ux438ux438}
+
+\begin{itemize}
+\item
+  Открытая местность. По умолчанию всё является открытой местностью.
+\item
+  Водные зоны. Не прерывают линию видимости. Непроходимы для техники и
+  пехоты. Примеры: реки, озёра, болота.
+\item
+  Дороги. Позволяют технике быстрее передвигаться, никак не влияют на
+  пехоту. Мост считается дорогой. Брод считается открытой местностью с
+  \textbf{препятствием}. Ни то, ни другое не влияет на линию видимости.
+\item
+  Лес. Не разрушаем. Прохождение линии огня по зоне леса 3 см и менее
+  приравнивается к \textbf{среднему} \textbf{укрытию}. Прохождение линии
+  видимости по зоне леса непрерывно 3 см и более приводит к отсутствию
+  видимости. Техника не может двигаться сквозь лес, но может быть
+  \textbf{замаскирована} на кромке леса (прямо на границе лесной зоны).
+  Техника может двигаться по границе лесной зоны, сохраняя
+  \textbf{маскировку}.
+\item
+  Возвышение (холм). Считается открытой местностью, кроме случая, когда
+  линия видимости пересекает границу одной зоны два раза (то есть боевые
+  единицы находятся по разные стороны холма). В таком случае линии
+  видимости нет. Граница холма или часть границы может быть совершенно
+  непроходимой (скала, утёс).
+\end{itemize}
+
+\subsubsection{Дополнительные
+элементы}\label{ux434ux43eux43fux43eux43bux43dux438ux442ux435ux43bux44cux43dux44bux435-ux44dux43bux435ux43cux435ux43dux442ux44b}
+
+\begin{quote}
+Дополнительные элементы -- это своего рода небольшие зоны сложной
+геометрической формы, которые могут быть описаны в сценарии. Должны
+иметь следующие свойства:
+\end{quote}
+
+\begin{itemize}
+\item
+  разрушаемость: можно задать минимальную \textbf{ББ} оружия для
+  разрушения\footnote{См. стр.
+    \hyperref[ux43fux435ux445ux43eux442ux43dux43eux435-ux432ux43eux43eux440ux443ux436ux435ux43dux438ux435]{20},
+    7.1 Пехотное вооружение.};
+\item
+  прерывает ли линию видимости;
+\item
+  отдельный элемент, не прерывающий линию видимости, как правило
+  является \textbf{укрытием}, \textbf{маскирует} боевые единицы и может
+  влиять на вероятность поражения. \textbf{Укрытия}\footnote{См. стр.
+    \hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux443ux43aux440ux44bux442ux438ux44f]{18},
+    6.3.2.4.5 Модификатор укрытия.} бывают нескольких видов:
+  \textbf{маскирующие}, \textbf{средние} и \textbf{надёжные}, они
+  отличаются степенью защиты.
+\item
+  проходимость отдельно для техники и пехоты (не проходимо,
+  \textbf{препятствие} или легко проходимо); обычно,
+  \textbf{препятствия} для техники легко проходимы для пехоты, а
+  \textbf{препятствия} для пехоты могут быть как легко проходимыми для
+  техники (например, колючая проволока), так и быть непроходимыми для
+  неё (например, руины здания).
+\end{itemize}
+
+\paragraph{Примеры дополнительных
+элементов}\label{ux43fux440ux438ux43cux435ux440ux44b-ux434ux43eux43fux43eux43bux43dux438ux442ux435ux43bux44cux43dux44bux445-ux44dux43bux435ux43cux435ux43dux442ux43eux432}
+
+Окоп. Не разрушаем, является препятствием для техники, не прерывает
+линию видимости, является \textbf{надёжным укрытием} для полностью
+находящихся внутри контура. Техника тоже может получить \textbf{надёжное
+укрытие}, если полностью помещается в окоп.
+
+Глухой высокий бетонный или кирпичный забор: прерывает линию видимости,
+не разрушаем, не проходим для техники, \textbf{препятствие} для пехоты.
+
+Мешки с песком: не прерывают линию видимости, не разрушаемы, являются
+\textbf{препятствием} для техники, легко проходимы для пехоты, являются
+\textbf{средним} \textbf{укрытием}.
+
+Толстый невысокий кирпичный забор или оконный проём здания: не
+разрушаемы, не прерывают линию видимости, не проходимы для техники,
+легко проходимы для пехоты, являются \textbf{средним укрытием}.
+
+Здания определяются своим профилем в горизонтальной плоскости, состоящим
+из сегментов разных элементов: глухие стены (прерывают линию видимости,
+неразрушаемы, непроходимы, но могут быть \textbf{препятствием} для
+пехоты если нет крыши), окна, двери, проломы в стенах (не прерывают
+линию видимости, не разрушаемы, непроходимы для техники, легко проходимы
+для пехоты, являются \textbf{средним} \textbf{укрытием}), амбразуры (то
+же самое, что окна, но непроходимы и являются \textbf{надёжным
+укрытием}).
+
+\section{Симуляция
+боя}\label{ux441ux438ux43cux443ux43bux44fux446ux438ux44f-ux431ux43eux44f}
+
+В бою участвуют две стороны или более. На каждой стороне в бою могут
+участвовать один или несколько игроков-командиров, у каждого из которых
+в подчинении свои отряды.
+
+Сценарий игры должен определять стороны, локацию, количество командиров
+и состав подчинённых им отрядов, их начальное расположение, максимальное
+количество ходов и прочие вводные. При создании сценария рекомендуется
+ограничивать десятью количество боевых единиц у одного командира и
+максимальное количество ходов.
+
+\includegraphics[width=3.38403in,height=1.52292in]{media/image11.png}
+
+Пошаговый тактический режим разделяется на \textbf{ходы}, каждый из
+которых разделён на фазы:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Фаза действий.
+\item
+  Завершающая фаза.
+\end{enumerate}
+
+После того, как все фазы завершены, ход завершается и начинается
+следующий.
+
+Бой начинается с устройства локации и расстановки отрядов. После этого
+игроки могут заявлять действия в рамках упрощённого тактического
+режима\footnote{См. стр.
+  \hyperref[ux440ux435ux436ux438ux43cux44b-ux438ux433ux440ux44b]{6}, 3.2
+  Режимы .}. Учитывая заявки игроков, определяется момент, с которого
+потребуется переключиться на пошаговый тактический режим и время,
+которое пройдёт до этого момента с начала игры. Игроки могут параллельно
+выполнить озвученные заявки длительностью не более рассчитанного
+времени, после чего игра переходит в пошаговый тактический режим и
+начинается новый \textbf{ход}.
+
+Бой завершается по условию сценария или по соглашению игроков.
+
+\subsection{Фаза
+действий}\label{ux444ux430ux437ux430-ux434ux435ux439ux441ux442ux432ux438ux439}
+
+В фазе действий игроки осуществляют действие по одной боевой единице в
+порядке, определённом Макс(ЛГК/ВЛН) одного из персонажей отряда начиная
+с наибольшего к наименьшему. Среди отрядов с одинаковым Макс(ЛГК/ВЛН)
+порядок определяется случайно.
+
+\subsubsection{Перехват
+движения}\label{ux43fux435ux440ux435ux445ux432ux430ux442-ux434ux432ux438ux436ux435ux43dux438ux44f}
+
+Когда в течение текущего хода вражеская боевая единица двигается в зоне
+видимости дружественной боевой единицы, которая в этом ходу не выполняла
+никаких действий, это движение может быть остановлено игроком в
+произвольном месте. Один из персонажей этой дружественной единицы должен
+провести наблюдение и, если оно будет успешно, другие персонажи смогут
+осуществить стрельбу. После этого прерванное действие вражеской боевой
+единицы может быть продолжено. При продолжении прерванного действия
+следует учесть изменение очков стресса.
+
+При стрельбе во время перехвата действия должен быть применён
+модификатор внезапного огня\footnote{См. стр. 18, 6.3.2.4.7 Модификатор
+  внезапного огня.}.
+
+Перехват движения может выполняться боевой единицей только один раз за
+ход. Перехват движения считается действием отряда, то есть отряд уже не
+будет действовать в свою очередь в порядке инициативы.
+
+\subsection{Завершающая
+фаза}\label{ux437ux430ux432ux435ux440ux448ux430ux44eux449ux430ux44f-ux444ux430ux437ux430}
+
+Происходит объединение отрядов, если отряды к этому моменту находятся в
+одной точке и объединение заявлено игроком. При этом очки стресса
+суммируются, а очки усталости берутся равными максимальному значению у
+разделённых отрядов.
+
+В завершающей фазе дымовые завесы проходят проверку на рассеивание. Для
+каждой дымовой завесы сделать бросок D20, на 14+ дымовая завеса
+рассеивается.
+
+Каждый отряд восстанавливает некоторое количество очков стресса, в
+соответствии с уровнем навыка лидерства Ур(Макс(ЛГК/ВЛН)).
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5147}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4853}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Восстановление очков стресса & Уровень навыка Ур(Макс(ЛГК/ВЛН)) \\
+0,1 & 0 \\
+0,2 & 1 \\
+0,5 & 2 \\
+0,8 & 3 \\
+1,3 & 4 \\
+1,9 & 5 \\
+2,7 & 6 \\
+\end{longtable}
+
+Таблица 5: восстановление очков стресса
+
+Персонажи с кровотечением теряют 1 очко навыка ВНС, а если количество
+очков ВНС персонажа уже 0 к этому времени, такой персонаж умирает.
+
+\section{Действия}\label{ux434ux435ux439ux441ux442ux432ux438ux44f}
+
+\subsection{Разделение
+отряда}\label{ux440ux430ux437ux434ux435ux43bux435ux43dux438ux435-ux43eux442ux440ux44fux434ux430}
+
+Разделение отряда может произойти перед его действием. При разделении
+отряда очки стресса должны быть разделены между новыми отрядами
+пропорционально количеству персонажей в отрядах, так, чтобы их сумма
+осталась неизменной. Очки усталости отрядов равны очкам усталости
+исходного отряда. После разделения отряды сразу же могут действовать
+раздельно.
+
+\subsection{Движение
+отряда}\label{ux434ux432ux438ux436ux435ux43dux438ux435-ux43eux442ux440ux44fux434ux430}
+
+\includegraphics[width=3.38403in,height=1.52292in]{media/image12.png}
+
+Отряд двигается как единое целое.
+
+Некоторые действия персонажей совместимы с движением отряда в том же
+ходу, а некоторые возможны только при отсутствии движения в том же ходу.
+
+Боевая единица с маркером стационарного положения не может двигаться.
+
+Техника и пехота двигается на расстояние, зависящее от типа местности.
+При прохождении маршрута через разную местность для расчёта расстояния
+выбирается худший случай.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3800}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2400}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& Открытая местность & Дорога & Препятствия \\
+Пехота &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3800} + 2\tabcolsep}}{%
+2-5 см\footnote{См. стр. \hyperref[_Ref225001006]{4}, Таблица 3:
+  скорость пешего передвижения в зависимости от нагрузки.}} & - \\
+Гусеничные БМ & 12 см & 16 см & 10+ \\
+Колёсные БМ & 12 см & 16 см & 20+ \\
+Автомобиль & 6 см & 20 см & 30+ \\
+\end{longtable}
+
+Таблица 6: дальность движения за ход и значения для броска кубиков при
+преодолении препятствий
+
+При выполнении действия следует положить рядом с боевой единицей маркер
+движения, его можно будет убрать при следующей активации боевой единицы.
+
+\subsubsection{Особенности движения
+техники}\label{ux43eux441ux43eux431ux435ux43dux43dux43eux441ux442ux438-ux434ux432ux438ux436ux435ux43dux438ux44f-ux442ux435ux445ux43dux438ux43aux438}
+
+\includegraphics[width=3.38403in,height=4.55417in]{media/image13.png}
+
+Гусеничная техника в рамках одного действия двигается только по прямой,
+а колёсная может изменять направления до 45° относительно направления
+начала движения. После передвижения должна быть ориентирована по
+направлению движения. В начале любого действия техника может
+поворачиваться на любой угол.
+
+Если у экипажа техники, выполняющей движение, количество очков стресса
+больше показателя брони\footnote{См. стр. \hyperref[_Ref82539353]{26},
+  Таблица 19: бронебойность оружия (ББ) и броня техники (Бр).}, она не
+может приближаться к \textbf{демаскированным} вражеским отрядам, но
+может отдаляться от них. Если это условие выполнить невозможно, то
+экипаж покидает технику.
+
+Техника может максимально ускориться и двигаться в два раза быстрее, чем
+обычно, но только на идеальной дороге при движении по прямой. При любом
+изменении направления относительно направления начала движения или при
+движении не по дороге водитель должен пройти проверку на управление.
+
+При движении через \textbf{препятствия} техника движется как по открытой
+местности, но должна пройти проверку на управление.
+
+\paragraph{Проверка на
+управление}\label{ux43fux440ux43eux432ux435ux440ux43aux430-ux43dux430-ux443ux43fux440ux430ux432ux43bux435ux43dux438ux435}
+
+Бросить кубик D20, к результату броска прибавить уровень навыка вождения
+Ур(МЕХ)\footnote{Cм. стр.
+  \hyperref[ux43cux435ux445ux430ux43dux438ux43aux430-ux43cux435ux445]{5},
+  3.1.6 Механика (МЕХ).}, итоговый результат сравнить со значением из
+таблицы (Таблица 6). Если выпало меньше -- машина обездвижена и на
+следующий ход должна повторить проверку на управление.
+
+Рядом с машиной необходимо положить маркер обездвиженности.
+
+\paragraph{Таран}\label{ux442ux430ux440ux430ux43d}
+
+Водитель, желающий осуществить таран, должен пройти проверку на
+управление. При успехе, смоделировать обоюдные удары по технике по
+правилам выстрела, используя в качестве значения Бронебойности (ББ)
+увеличенное на 1 значение Бронированности. Обе единицы техники считаются
+обездвиженными (если не были уничтожены), в следующий ход они должны
+пройти проверку на управление, чтобы продолжить движение.
+
+\paragraph{Пример}\label{ux43fux440ux438ux43cux435ux440-1}
+
+БТР-82А пытается прорваться через баррикаду. Прорыв успешен при
+выбрасывании 20 и выше. Мехвод БТР имеет 7 очков тренированности МЕХ.
+Это уменьшает требуемый порог: 20 -- 7 = 13. При выбрасывании меньше 13
+БТР останавливается перед баррикадой. В следующий ход десант,
+находящийся в БТР, может высадиться из него, при этом передвинуться на
+соответствующее расстояние от БТР. В этот же момент другой отряд пехоты
+может осуществить посадку в этот же БТР, если расстояние до него не
+более максимальной дальности движения.
+
+\subsubsection{Особенности движения
+пехоты}\label{ux43eux441ux43eux431ux435ux43dux43dux43eux441ux442ux438-ux434ux432ux438ux436ux435ux43dux438ux44f-ux43fux435ux445ux43eux442ux44b}
+
+Если у пехотного отряда, выполняющего движение, количество очков
+\textbf{стресса} больше половины численности отряда, он не может
+приближаться к \textbf{демаскированным} вражеским отрядам, но может
+отдаляться от них. Если это условие выполнить невозможно, то отряд не
+может двигаться.
+
+Для передвижения отряда с ранеными персонажами с кровотечением на
+каждого раненого персонажа в отряде должен приходиться здоровый
+персонаж, так как раненым требуется помощь.
+
+\paragraph{Бег}\label{ux431ux435ux433}
+
+При беге отряд пехоты может двигаться в два раза быстрее, чем обычно,
+после чего получит по 1 очко усталости.
+
+Бег возможен только если количество очков усталости в отряде меньше, чем
+минимальное значение Ур(ВНС) у персонажей этого отряда.
+
+\paragraph{Преодоление
+препятствий}\label{ux43fux440ux435ux43eux434ux43eux43bux435ux43dux438ux435-ux43fux440ux435ux43fux44fux442ux441ux442ux432ux438ux439}
+
+Преодоление препятствия для отряда пехоты возможно только если
+количество очков усталости в отряде меньше, чем минимальное значение
+Ур(ВНС) у персонажей этого отряда.
+
+Для преодоления \textbf{препятствия} отряд должен начинать действие
+непосредственно при соприкосновении с препятствием. Отряд перемещается
+на другую сторону препятствия так, чтобы обеспечить минимально возможную
+дистанцию перемещения. Кубик бросать не требуется, отряд автоматически
+получает 1 очко усталости.
+
+Следует помнить, что то, что является \textbf{препятствием} для техники
+может быть легко проходимо для пехоты (например, противотанковые ежи),
+такие элементы не влияют на движение пехоты.
+
+\paragraph{Посадка и
+высадка}\label{ux43fux43eux441ux430ux434ux43aux430-ux438-ux432ux44bux441ux430ux434ux43aux430}
+
+При движении пехотные отряды могут осуществлять посадку в технику и
+высадку из неё. Для посадки точка назначения для движения должна быть на
+технике, при высадке точка назначения может быть где угодно в пределах
+дальности движения. Посадка и высадка несовместима с движением техники в
+том же ходу. Это же правило применяется для экипажа техники.
+
+\subsection{Действия
+персонажей}\label{ux434ux435ux439ux441ux442ux432ux438ux44f-ux43fux435ux440ux441ux43eux43dux430ux436ux435ux439}
+
+Персонажи в отряде могут действовать раздельно: наблюдать, вести огонь
+по разным целям, оказывать помощь раненым.
+
+\subsubsection{Наблюдение}\label{ux43dux430ux431ux43bux44eux434ux435ux43dux438ux435}
+
+\includegraphics[width=3.38403in,height=2.53733in]{media/image14.png}
+
+Для того, чтобы обнаружить \textbf{замаскированную} боевую единицу
+необходимо пройти проверку, учитывая условия видимости.
+
+В рамках одного хода и одного отряда наблюдение за выбранной целью может
+вести только один персонаж. Другие персонажи отряда могут вести
+наблюдение за другими боевыми единицами. Наблюдение может быть выполнено
+до движения или после движения.
+
+Базовое значение видимости и максимальная дальность видимости выбираются
+по таблице исходя из текущих условий в сценарии (см. Таблица 7). Если
+одновременно действует несколько условий, выбираются минимальные
+значения отдельно по дальности, отдельно по видимости.
+
+Ночью боевые единицы, находящиеся в освещённых местах, видны как днём.
+
+Если для наблюдения используется снаряжение, то следует применить
+модификатор видимости от снаряжения (см. Таблица 8) по всем условиям.
+Максимальная дальность для каждого условия должна быть использована от
+снаряжения. Из нескольких условий всё равно должны быть выбраны
+минимальные значения отдельно по дальности, отдельно по видимости.
+
+Технику заметить гораздо проще, чем пехоту, поэтому при наблюдении
+техники максимальная дальность удваивается, удваивается дальность
+обнаружения в таблице пороговых значений (см. Таблица 9), а на
+расстоянии до 3 см техника обнаруживается автоматически.
+
+Если цель находится в укрытии любого типа, от выбранного
+модифицированного значения видимости необходимо отнять 5.
+
+К модифицированному значению следует прибавить навык маскировки
+наблюдателя Ур(МСК)\textbf{.}
+
+Если для наблюдения используется дрон, к модифицированному значению
+следует прибавить уровень навыка управления дронами наблюдателя Ур(ДРН),
+в противном случае прибавить навык маскировки наблюдателя Ур(МСК) второй
+раз.
+
+При наблюдении за отрядом пехоты нужно отнять удвоенный навык маскировки
+цели Ур(МСК)\footnote{См. стр.
+  \hyperref[ux43cux430ux441ux43aux438ux440ux43eux432ux43aux430-ux43cux441ux43a]{5},
+  3.1.3 Маскировка (МСК).} (выбирается минимальный МСК из персонажей
+отряда)\textbf{.}
+
+После этого к модифицированному значению прибавить результат броска D20
+и получившееся значение сравнить с пороговыми значениями (см. Таблица
+9).
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3324}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3509}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3166}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Условия
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Базовое значение видимости
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Макс. дальность видимости, см
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Ясный день & 12 & 160 \\
+Сумерки & 7 & 80 \\
+Ночь & 2 & 16 \\
+Сильные осадки & 8 & 40 \\
+Туман & 7 & 6 \\
+\end{longtable}
+
+Таблица 7: базовое значение видимости и дальность видимости
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2850}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1656}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2424}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3070}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Предмет
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Условие
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Модификатор видимости
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Макс. дальность видимости, см
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\multirow{2}{=}{Бинокль} & День & +5 & 320 \\
+& Сумерки & +2 & 160 \\
+\multirow{2}{=}{Прибор ночного видения} & Сумерки & +3 & 80 \\
+& Ночь & +9 & 80 \\
+\multirow{5}{=}{Тепловизионный прицел} & День & +3 & 120 \\
+& Сумерки & +4 & 140 \\
+& Ночь & +12 & 160 \\
+& Осадки & +4 & 20 \\
+& Туман & +4 & 6 \\
+\end{longtable}
+
+\phantomsection\label{_Ref213449133}{}Таблица 8: модификатор видимости
+от снаряжения
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4800}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5200}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Дистанция обнаружения, см & Модифицированный результат \\
+3 & 10+ \\
+10 & 17+ \\
+20 & 22+ \\
+40 & 27+ \\
+80 & 32+ \\
+160 & 37+ \\
+320 & 42+ \\
+Поиск мин (0 -- 1) & 22+ \\
+\end{longtable}
+
+Таблица 9: пороговые значения для броска кубика при проведении разведки
+
+Если противник находится под крышей, то его невозможно обнаружить БПЛА с
+радиоуправлением, только БПЛА с оптоволоконным каналом связи.
+
+При поиске ловушек и мин не применяется модификатор укрытия. Ловушки и
+мины невозможно обнаружить с воздуха.
+
+\paragraph{Пример}\label{ux43fux440ux438ux43cux435ux440-2}
+
+\includegraphics[width=3.38403in,height=1.52292in]{media/image15.png}
+
+Отделение панцергренадёров днём ведёт разведку населённого пункта, где в
+здании укрылись солдаты противника.
+
+Наблюдатель использует бинокль. Параметры при этом: видимость
+12~+~5~=~17, максимальная дальность видимости 320. У наблюдателя
+Ур(МСК)~=~3, поэтому итоговый модификатор наблюдателя 17~+~2~×~3~=~23.
+Это значение, которое нужно прибавить к результату броска.
+
+У цели Ур(МСК)~=~1, кроме того, линия видимости пересекает стену с
+окном. В игре по соглашению применяется метод неравномерного
+пространства\footnote{См. стр.
+  \hyperref[ux438ux441ux43fux43eux43bux44cux437ux43eux432ux430ux43dux438ux435-ux43cux438ux43dux438ux430ux442ux44eux440]{3},
+  2.1 Использование миниатюр.}, поэтому стена считается \textbf{средним
+укрытием}\footnote{См. стр.
+  \hyperref[ux43fux440ux438ux43cux435ux440ux44b-ux434ux43eux43fux43eux43bux43dux438ux442ux435ux43bux44cux43dux44bux445-ux44dux43bux435ux43cux435ux43dux442ux43eux432]{10},
+  4.1.2.1 Примеры дополнительных элементов.}, следовательно, применяется
+модификатор -5. Итого модификатор цели (-5)~-~1~×~2~=~-7. Это значение,
+которое нужно будет вычесть из результата броска.
+
+Наблюдатель делает бросок D20. Допустим, выпадает 10. Итоговый результат
+10~+~23~--~7~=~26. Дистанция 20 см, на этой дистанции результат должен
+быть 22+. Можно объявить, что цель \textbf{демаскирована}.
+
+В худшем случае, при выбрасывании 1, результат будет 1~+~23~--~7~=~17.
+То есть в данных условиях этот наблюдатель может автоматически
+обнаружить такую цель на дистанции до 10 см. В лучшем случае, при
+выбрасывании 20, результат будет 20~+~23~--~7~=~36. Это означает, что в
+данных условиях этот наблюдатель не сможет обнаружить такую цель на
+дистанции свыше 80 см.
+
+Если бы при этом шёл дождь, то бинокль невозможно было бы использовать
+(для него не заданы модификаторы для дождя). Значение видимости было бы
+8~+~2~×~3~--~5~--~2~×~1~=~7. В лучшем случае наблюдатель заметит
+противника на дистанции до 40 см, а в худшем -- вообще не заметит.
+
+\subsubsection{Стрельба}\label{ux441ux442ux440ux435ux43bux44cux431ux430}
+
+Каждый персонаж может вести огонь по отдельной цели. Примеры:
+гранатомётчик отделения ведёт огонь по бронетранспортёру, а остальные
+солдаты по вражескому пехотному отряду; один из пулемётов на
+бронетранспортёре стреляет по одному отряду, а второй~-- по второму.
+
+Если у отряда есть очки стресса, то часть персонажей не может вести
+огонь\footnote{См. стр.
+  \hyperref[ux43eux447ux43aux438-ux441ux442ux440ux435ux441ux441ux430]{8},
+  3.3.6 Очки стресса.}.
+
+Оружие, стреляющее прямой наводкой, можно применять только при наличии
+линии видимости от атакующего отряда к атакуемому\footnote{Cм. стр. 7,
+  3.3.2 Линии видимости и огня.}.
+
+Расстояние от атакующей боевой единицы до цели не должно превышать
+максимальной дальности стрельбы оружия и максимальной дальности
+видимости персонажа с учётом времени суток, погодных условий и
+используемой экипировки и прицельных приспособлений. Например, несмотря
+на то, что снайперская винтовка с оптическим прицелом позволила бы
+стрелять на расстояние до 150~см и обнаруживать противника на расстоянии
+до 320~см, ночью по неосвещённой цели из неё можно выстрелить только на
+20 см. Однако, освещённую цель и ночью можно обнаружить на дистанции до
+320 см, а цель, ведшую стрельбу с текущей позиции без пламегасителей
+также видно на максимальном расстоянии, при этом она
+\textbf{демаскируется} автоматически и проводить \textbf{наблюдение} не
+требуется.
+
+Результат стрельбы определяется броском кубика D20 отдельно для каждого
+используемого оружия, но по-разному при стрельбе по отрядам пехоты и по
+технике.
+
+\paragraph{Особенности стрельбы по
+пехоте}\label{ux43eux441ux43eux431ux435ux43dux43dux43eux441ux442ux438-ux441ux442ux440ux435ux43bux44cux431ux44b-ux43fux43e-ux43fux435ux445ux43eux442ux435}
+
+Сначала необходимо определить интенсивность огня (\textbf{ИО})
+используемого оружия\footnote{См. стр. \hyperref[_Ref31797173]{20},
+  Таблица 13, стр. 25, Таблица 18.}.
+
+Затем, используя параметр \textbf{ИО} и, если уместно, применив к
+результату броска D20 модификатор флангового огня, определить количество
+очков стресса, которые получит цель (см. Таблица 10).
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3267}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3505}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3228}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Интенсивность Огня (ИО) оружия
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Модифицированный результат броска
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Количество очков стресса
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & 15+ & 1 \\
+2 & 11+ & 1 \\
+2 & 20+ & 2 \\
+3 & 8+ & 1 \\
+3 & 17+ & 2 \\
+3 & 20+ & 3 \\
+4 & 6+ & 1 \\
+4 & 16+ & 2 \\
+4 & 19+ & 3 \\
+4 & 20+ & 4 \\
+\end{longtable}
+
+Таблица 10: количество очков стресса при стрельбе
+
+Затем также определяется количество поражённых солдат, но к результату
+броска D20 применяются все модификаторы\footnote{\subsubsection*{\texorpdfstring{
+  Cм. стр.
+  \hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440ux44b-ux43fux440ux438-ux441ux442ux440ux435ux43bux44cux431ux435]{17},
+  6.3.2.4 Модификаторы при
+  стрельбе.}{ Cм. стр. 17, 6.3.2.4 Модификаторы при стрельбе.}}\label{cux43c.-ux441ux442ux440.-17-6.3.2.4-ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440ux44b-ux43fux440ux438-ux441ux442ux440ux435ux43bux44cux431ux435.}
+  \addcontentsline{toc}{subsubsection}{ Cм. стр.
+  \hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440ux44b-ux43fux440ux438-ux441ux442ux440ux435ux43bux44cux431ux435]{17},
+  6.3.2.4 Модификаторы при стрельбе.}}.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3267}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3505}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3228}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Интенсивность Огня (ИО) оружия
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Модифицированный результат броска D20
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Количество раненых
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & 16+ & 1 \\
+2 & 13+ & 1 \\
+2 & 21+ & 2 \\
+3 & 11+ & 1 \\
+3 & 20+ & 2 \\
+4 & 9+ & 1 \\
+4 & 19+ & 2 \\
+4 & 22+ & 3 \\
+\end{longtable}
+
+Таблица 11: количество раненых при стрельбе
+
+Распределение ран по персонажам отряда происходит среди персонажей, у
+которых ещё нет кровотечения, в порядке возрастания очков
+тренированности навыка МНВ с учётом наличия бронежилетов. Среди
+персонажей с одинаковыми значениями выбор происходит случайно. Раненый
+персонаж получает кровотечение, это нужно запомнить или записать.
+
+\subparagraph{Пример}\label{ux43fux440ux438ux43cux435ux440-3}
+
+\includegraphics[width=3.38403in,height=1.52292in]{media/image16.png}
+
+Отделение панцергренадёров ведёт огонь по отделению мотострелков. В
+отделении панцергренадёров 6 солдат, один из которых вооружён ручным
+пулемётом (\textbf{ИО} = 2), а остальные -- штурмовыми винтовками
+(\textbf{ИО~}=~1).
+
+Панцергренадёры имеют 5 очков тренированности ЛС, следовательно Ур(ЛС) =
+2, а пулемётчик 7 очков тренированности ПЛМ, следовательно Ур(ПЛМ) = 3.
+Среди мотострелков минимальное значение очков тренированности МНВ 4,
+следовательно Ур(МНВ) = 2. Модификатор навыка для автоматчиков
+2~*~(2~--~2)~=~0. Модификатор навыка для пулемётчика 2~*~(3~--~2)~=~2.
+
+Расстояние до цели 25 см. Это максимальная дальность для штурмовых
+винтовок и эффективная дальность для пулемёта, поэтому автоматчики
+получают модификатор расстояния -4.
+
+Все панцергренадёры заняли удобную позицию для стрельбы и отряд имеет
+модификатор стационарного положения. Но для автоматов он равен нулю, а
+вот у пулемёта есть сошки, поэтому он получает +1.
+
+В течение \textbf{хода} (30 секунд) отряд мотострелков не обстреливается
+с других сторон, поэтому модификатор флангового огня не применяется.
+
+Мотострелки находятся в здании с окнами, поэтому модификатор укрытия -2.
+
+Отряд мотострелков был замечен панцергренадёрами ранее, поэтому
+модификатор огня вслепую не применяется.
+
+Панцергренадёры не уставшие, не запыхавшиеся, не были застигнуты
+врасплох, поэтому модификатор внезапного огня не применяется.
+
+Командир панцергренадёров бросает 6 кубиков D20, по одному за каждого
+солдата.
+
+Бросок 20+ за пулемётчика принесёт 2 очка стресса мотострелкам, а 11+
+одно очко стресса. Бросок 15+ за каждого автоматчика принесёт ещё по
+одному очку стресса мотострелкам.
+
+Итоговый модификатор для определения количества ран для пулемётчика
+будет +1, для автоматчиков -5. Следовательно, для пулемётчика бросок 20+
+принесёт 2 раны отряду мотострелков, 12+ одну рану. Для автоматчика
+такой огонь никогда не принесёт ран: даже если выпадет 20, с учётом
+модификатора будет 15, а для нанесения раны нужно 16+. Однако, огонь
+имеет смысл, потому что автоматчиков много и каждый из них имеет шанс в
+30\% подавить мотострелков, чтобы затем, например, приблизиться ближе и
+взять здание штурмом или забросать гранатами.
+
+При нанесении ран выбираются мотострелки с минимальным значением очков
+тренированности МНВ и у них начинается кровотечение.
+
+\paragraph{Особенности стрельбы по
+технике}\label{ux43eux441ux43eux431ux435ux43dux43dux43eux441ux442ux438-ux441ux442ux440ux435ux43bux44cux431ux44b-ux43fux43e-ux442ux435ux445ux43dux438ux43aux435}
+
+\includegraphics[width=3.36875in,height=2.36944in]{media/image17.png}
+
+Сначала необходимо определить показатель бронебойности оружия
+(\textbf{ББ}) (Таблица 13) и показатель бронированности цели
+(\textbf{Бр}) (Таблица 20: бронебойность оружия (ББ) и броня техники
+(Бр)). По таблице определяются два пороговых значения: для уничтожения и
+для увеличения очков стресса. Отсутствие значения в соответствующей
+ячейке означает, что данный тип оружия не может уничтожить данную цель
+или не может оказать воздействия на её экипаж -- такая стрельба не
+приносит никакого результата.
+
+К результату броска D20 необходимо применить модификаторы при
+стрельбе\footnote{\subsubsection*{\texorpdfstring{ Cм. стр.
+  \hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440ux44b-ux43fux440ux438-ux441ux442ux440ux435ux43bux44cux431ux435]{17},
+  6.3.2.4 Модификаторы при
+  стрельбе.}{ Cм. стр. 17, 6.3.2.4 Модификаторы при стрельбе.}}\label{cux43c.-ux441ux442ux440.-17-6.3.2.4-ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440ux44b-ux43fux440ux438-ux441ux442ux440ux435ux43bux44cux431ux435.-1}
+  \addcontentsline{toc}{subsubsection}{ Cм. стр.
+  \hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440ux44b-ux43fux440ux438-ux441ux442ux440ux435ux43bux44cux431ux435]{17},
+  6.3.2.4 Модификаторы при стрельбе.}} и сравнить результат с пороговым
+значением.
+
+Если результат равен или превышает порог уничтожения, техника считается
+уничтоженной и немедленно выходит из строя.
+
+Если результат ниже порога уничтожения, но равен или превышает порог
+стресса, экипаж техники получает очки стресса, равные разнице между ББ и
+Бр.
+
+\subparagraph{Поражение экипажа и
+десанта}\label{ux43fux43eux440ux430ux436ux435ux43dux438ux435-ux44dux43aux438ux43fux430ux436ux430-ux438-ux434ux435ux441ux430ux43dux442ux430}
+
+В случае уничтожения единицы техники, экипаж и десант немедленно
+выгружается. За каждого персонажа бросается кубик, у персонажа
+начинается кровотечение на 14+, в противном случае добавляется +1 к
+очкам стресса отряда.
+
+\subparagraph{Пример}\label{ux43fux440ux438ux43cux435ux440-4}
+
+Танк M1A2 ведёт огонь по БМП M2A2. Бронированность БМП Бр = 4,
+бронебойность танковой пушки ББ = 11. Базовые пороговые значения: на 7+
+стресс, на 9+ уничтожение.
+
+Наводчик пушки имеет 8 очков тренированности ТВ, следовательно
+Ур(ТВ)~=~3, это и будет модификатором навыка.
+
+Расстояние 100 см, для пушки это эффективная дальность.
+
+Танк стреляет после движения, так что модификатор стационарного
+положения не применяется.
+
+Попадание потенциально придёт с фронта БМП, поэтому модификатор
+флангового огня не применяется.
+
+БМП находится в окопе, применяется модификатор укрытия -4.
+
+Наводчик танка наблюдает БМП, поэтому модификаторы огня вслепую и
+внезапного огня не применяются.
+
+Итого, БМП будет уничтожена при выбрасывании 10+. Если же результат
+окажется меньше, но 8+, БМП получит 7 очков стресса. Это означает, что
+при следующей активации БМП её экипаж либо покинет машину, либо
+попытается отступить с позиции на машине, либо будет сидеть следующие 30
+секунд в машине, не в силах пошевелиться, но эффективно отбиваться уже
+не сможет.
+
+\paragraph{Стационарное
+положение}\label{ux441ux442ux430ux446ux438ux43eux43dux430ux440ux43dux43eux435-ux43fux43eux43bux43eux436ux435ux43dux438ux435}
+
+Стационарное положение означает подготовку позиции и оружия к стрельбе и
+позволяет вести огонь с большей эффективностью, но требует некоторого
+времени для этой подготовки.
+
+Боевая единица может считаться находящейся в стационарном положении если
+она \textbf{не двигалась} в предыдущем \textbf{ходу}. При осуществлении
+стрельбы из стационарного положения у боевой единицы не должно быть
+маркера движения, а также следует положить рядом с боевой единицей
+маркер стационарного положения, его можно будет убрать при следующей
+активации этой боевой единицы. Таким образом, боевая единица,
+находящаяся в стационарном положении, не сможет \textbf{двигаться} в
+следующем \textbf{ходу}.
+
+\paragraph{Модификаторы при
+стрельбе}\label{ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440ux44b-ux43fux440ux438-ux441ux442ux440ux435ux43bux44cux431ux435}
+
+Модификаторы прибавляются к результату броска кубика. Они нужны для
+того, чтобы учесть больше условий в вероятности возникновения события.
+Одновременно могут применяться несколько модификаторов.
+
+\subparagraph{Модификатор
+навыка}\label{ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux43dux430ux432ux44bux43aux430}
+
+Модификатор навыка применяется по-разному для обстрела техники и пехоты.
+
+При обстреле пехоты вычисляется удвоенная разница между навыком владения
+используемым оружием атакующего Ур(X) и навыком маневрирования Ур(МНВ)
+цели, эта разница прибавляется к результату броска. При определении
+Ур(МНВ) цели выбирается минимальное значение Ур(МНВ) среди персонажей
+отряда.
+
+При обстреле техники используется только навык владения используемым
+оружием атакующего Ур(X), он прибавляется к результату броска.
+
+\subparagraph{Модификатор
+расстояния}\label{ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux440ux430ux441ux441ux442ux43eux44fux43dux438ux44f}
+
+У некоторого оружия помимо максимальной дальности есть ещё идеальная и
+эффективная дальность. Для такого оружия вероятность попадания
+увеличивается с уменьшением расстояния до цели.
+
+При расстоянии до цели в пределах идеальной дальности при броске кубика
+нужно добавить 6 к результату броска, тем самым увеличив вероятность
+попадания.
+
+При расстоянии до цели свыше эффективной дальности нужно отнять 4 от
+результата броска, тем самым уменьшив вероятность попадания.
+
+Если у оружия обозначена только максимальная дальность, то это означает,
+что модификатор расстояния можно не применять. Это, например,
+снайперские винтовки и управляемые ракеты.
+
+\subparagraph{Модификатор стационарного
+положения}\label{ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux441ux442ux430ux446ux438ux43eux43dux430ux440ux43dux43eux433ux43e-ux43fux43eux43bux43eux436ux435ux43dux438ux44f}
+
+При стрельбе из стационарного положения на эффективной дальности оружия
+вероятность попадания увеличивается на значение, определяемое
+конфигурацией самого оружия. Модификаторы стационарного положения разных
+частей оружия суммируются.
+
+\subparagraph{Модификатор флангового
+огня}\label{ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux444ux43bux430ux43dux433ux43eux432ux43eux433ux43e-ux43eux433ux43dux44f}
+
+При обстреле техники c бронированностью Бр~\textgreater~2, если
+атакующий отряд хотя бы частично находится за фронтальной линией
+атакуемого\footnote{См. стр.
+  \hyperref[ux43fux43eux43bux43eux436ux435ux43dux438ux435-ux432-ux43fux440ux43eux441ux442ux440ux430ux43dux441ux442ux432ux435]{7},
+  3.3.1 Положение в пространстве.}, то вероятность поражения
+увеличивается. Необходимо прибавить 4 к результату броска.
+
+Отряды пехоты не ориентированы, и фронтальная линия для них не
+существует. Тем не менее, можно получить дополнительное преимущество,
+обстреливая отряд пехоты с разных сторон. Если угол между линией огня и
+любой другой линией огня, по которой обстреливался этот же отряд в этот
+же ход, превышает 90°, то вероятность поражения увеличивается.
+Необходимо прибавить 2 к результату броска.
+
+\subparagraph{Модификатор
+укрытия}\label{ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux443ux43aux440ux44bux442ux438ux44f}
+
+\includegraphics[width=3.38403in,height=4.51111in]{media/image18.png}
+
+Если линия огня пересекает \textbf{укрытие} (отдельный элемент или зону
+леса шириной меньше 3 см), но не прерывается им, а атакующий находится
+дальше 3 см от этого \textbf{укрытия}, то вероятность попадания
+уменьшается.
+
+От результата броска нужно отнять значение модификатора в соответствии с
+типом \textbf{укрытия} (см. Таблица 12).
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4849}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5151}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Тип укрытия & Значение модификатора \\
+Среднее & -2 \\
+Надёжное & -4 \\
+\end{longtable}
+
+Таблица 12: значения модификаторов для типов укрытий
+
+\subparagraph{Модификатор огня
+вслепую}\label{ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux43eux433ux43dux44f-ux432ux441ux43bux435ux43fux443ux44e}
+
+При стрельбе по необнаруженной\footnote{См. стр.
+  \hyperref[ux43dux430ux431ux43bux44eux434ux435ux43dux438ux435]{14},
+  6.3.1 Наблюдение.} \textbf{замаскированной} боевой единице вероятность
+попадания существенно уменьшается. От результата броска нужно отнять 6.
+Этот модификатор суммируется с модификатором укрытия.
+
+\subparagraph{Модификатор внезапного
+огня}\label{ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux432ux43dux435ux437ux430ux43fux43dux43eux433ux43e-ux43eux433ux43dux44f}
+
+При ведении внезапного огня при перехвате действия (см. стр.
+\hyperref[ux43fux435ux440ux435ux445ux432ux430ux442-ux434ux432ux438ux436ux435ux43dux438ux44f]{11}),
+а также при наличии у отряда очков усталости, вероятность попадания
+уменьшается. От результата броска нужно отнять 2.
+
+\subparagraph{Модификатор
+бронежилета}\label{ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux431ux440ux43eux43dux435ux436ux438ux43bux435ux442ux430}
+
+Применяется только для пехотных отрядов.
+
+Вычисляется средняя защита персонажей отряда: определяется сумма защиты
+бронежилетов\footnote{См. стр.
+  \hyperref[ux431ux440ux43eux43dux435ux436ux438ux43bux435ux442ux44b]{21},
+  7.1.2 Бронежилеты.}, используемых каждым персонажем отряда, и делится
+на количество не раненых членов отряда. Округление в меньшую сторону.
+
+Модификатор определяется как положительная разница между средней защитой
+и параметра бронебойности ББ оружия. Этот модификатор вычитается из
+результата броска.
+
+Пример: из пулемёта обстреливается снайперская двойка. Снайпер имеет MSV
+с плитами, а его напарник, наблюдатель -- полный MSV. Средняя защита
+отряда (4~+~6)~÷~2~=~5. ББ пулемёта M240 2, поэтому модификатор
+5~--~2~=~3. Результат броска следует уменьшить на 3.
+
+\subsubsection{Постановка дымовой
+завесы}\label{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux434ux44bux43cux43eux432ux43eux439-ux437ux430ux432ux435ux441ux44b}
+
+Если у боевой единицы есть соответствующее вооружение (дымовые шашки у
+персонажей или система запуска дымовых гранат на технике), то она может
+поставить одну дымовую завесу с центром в пределах 4 см от точки своего
+положения.
+
+Диаметр дымовой завесы 5 см.
+
+Дымовые завесы проходят проверку на рассеивание в завершающую фазу.
+
+\subsubsection{Оказание медицинской
+помощи}\label{ux43eux43aux430ux437ux430ux43dux438ux435-ux43cux435ux434ux438ux446ux438ux43dux441ux43aux43eux439-ux43fux43eux43cux43eux449ux438}
+
+Остановка кровотечения у персонажа возможна, если в отряде с ним есть
+санитар или медик, то есть персонаж со значением навыка полевой медицины
+больше 0. Медику необходимо пройти проверку навыка МЕД, бросив кубик D20
+и к результату прибавив своё значение навыка полевой медицины Ур(МЕД).
+Оказание помощи будет признано успешным, если итоговый результат 12+.
+При успешном броске у раненого солдата останавливается кровотечение, и
+он может вернуться в игру с текущим значением очков навыка ВНС.
+
+Один солдат с навыком полевой медицины может оказать помощь только
+одному раненому за ход. Раненый с навыком медицины может попытаться
+оказать помощь самому себе. Это действие не совместимо ни с каким
+другим.
+
+\subsection{Штурм и
+пленение}\label{ux448ux442ux443ux440ux43c-ux438-ux43fux43bux435ux43dux435ux43dux438ux435}
+
+Штурм применяется только для схватки между двумя пехотными отрядами, а
+также для пленения солдат отряда с большим количеством очков стресса.
+
+Штурм может быть объявлен только если отряд противника
+обнаружен\footnote{См. стр.
+  \hyperref[ux43dux430ux431ux43bux44eux434ux435ux43dux438ux435]{14},
+  6.3.1 Наблюдение.} и расстояние до него равно 3 см и менее, при этом
+отряды сближаются вплотную.
+
+Штурм -- это одновременные удары отрядов, то есть потери применяются
+после того, как ударили оба отряда. Однако, если штурм выполняет
+замаскированный отряд, который до последнего не был обнаружен, он
+нанесёт первый удар и потери необходимо применить до расчёта ответного
+удара.
+
+Удары -- это выстрелы оружием, но с ограничениями:
+
+\begin{itemize}
+\item
+  применяются только лёгкое стрелковое оружие, пулемёты, дробовики и
+  гранаты;
+\item
+  применяются только модификаторы навыка и расстояния.
+\end{itemize}
+
+Когда в одном отряде не остаётся солдат, которые могут участвовать в
+бою, а во втором отряде такие ещё есть, оставшиеся солдаты первого
+отряда сдаются в плен. Победивший отряд может принять сдачу в плен или
+выбрать полное уничтожение проигравшего отряда. Если в обоих отрядах не
+осталось участвующих солдат, штурм заканчивается ничьей, а отряды
+остаются на местах.
+
+\section{Снаряжение и
+вооружение}\label{ux441ux43dux430ux440ux44fux436ux435ux43dux438ux435-ux438-ux432ux43eux43eux440ux443ux436ux435ux43dux438ux435}
+
+\subsection{Пехотное
+вооружение}\label{ux43fux435ux445ux43eux442ux43dux43eux435-ux432ux43eux43eux440ux443ux436ux435ux43dux438ux435}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.1531}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.2245}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0816}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0816}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0714}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0714}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0714}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0612}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0918}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0918}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Навык & Название & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Вес, кг
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Вес боеприпасов, кг
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Идеальная дальность, см
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Эффективная дальность, см
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Максимальная дальность, см
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Бронебойность (\textbf{ББ})
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Интенсивность огня (\textbf{ИО})
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Свойства\footnote{Свойства оружия:\\
+  С -- применение только из стационарного положения.\\
+  В -- возможна стрельба по воздушным целям.
+
+  А -- возможна стрельба непрямой наводкой.
+
+  ÂX -- только стрельба непрямой наводкой, стрельба прямой наводкой
+  невозможна. Х -- радиус отклонения в см. Если не указан, значит 0.}
+\end{quote}\strut
+\end{minipage} \\
+\multirow{2}{=}{Гранаты} & Осколочные гранаты &
+\begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+-
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+0.6
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+2
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+3
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+4
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+2
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+2
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Â
+\end{quote}
+\end{minipage} \\
+& Дымовые шашки & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+-
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+0.6
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+2
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+3
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+4
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+-
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+-
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Â
+\end{quote}
+\end{minipage} \\
+& Химические гранаты & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+-
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+0.6
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+2
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+3
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+4
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+-
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+(2)\footnote{Химическая граната не приносит урон, приносит только очки
+  стресса по стандартным правилам.}
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Â
+\end{quote}
+\end{minipage} \\
+\multirow{5}{=}{Лёгкое стрелковое} & Пистолеты & 0.8-1.4 & 0.1 & 2 & 3 &
+4 & - & 1 & - \\
+& Пистолеты-пулемёты & 1.3-3.3 & 0.1 & 6 & 10 & 20 & - & 1 & - \\
+& Укороченные автоматы & 2.0-3.2 & 0.1 & 6 & 10 & 20 & 1 & 1 & - \\
+& Штурмовые винтовки & 2.9-4.0 & 0.1 & 12 & 20 & 40 & 1 & 1 & - \\
+& Дробовики & 2.7-4.0 & 0.1 & 1 & 2 & 3 & - & 1 & - \\
+\multicolumn{10}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{1.0000} + 18\tabcolsep}@{}}{%
+Снайперские винтовки (см. Таблица 15: характеристики снайперских
+винтовок)} \\
+\multirow{5}{=}{Пулемёты} & ПКМ & 8.2 & 1.6 & 24 & 50 & 100 & 2 & 2 &
+В \\
+& M240 & 12.2 & 1.6 & 24 & 50 & 100 & 2 & 2 & В \\
+& ПКМС & 12 & 1.6 & 40 & 80 & 160 & 2 & 3 & С \\
+& M240B & 21 & 1.6 & 40 & 80 & 160 & 2 & 3 & СВ \\
+& Утёс, M2 Browning, КПВ & 41 & 3.8 & 50 & 100 & 200 & 3 & 3 & СВ \\
+\multirow{4}{=}{Реактивные гранатомёты} & РПГ-7 & 6.3 & 3 & 15 & 30 & 50
+& 8 & 3 & - \\
+& M-72 LAW & - & 2.5 & 6 & 10 & 20 & 8 & 1 & - \\
+& РПГ-29 Вампир & - & 2.6 & 15 & 30 & 50 & 9 & 1 & - \\
+& СПГ-9 & 48 & 4.5 & 40 & 80 & 160 & 8 & 3 & С \\
+\multirow{2}{=}{Гранатомёты} & M203, ГП-30 & 1.3 & 0.3 & 10 & 20 & 30 &
+2 & 2 & СА \\
+& Mk 19 Mod 3, АГС-30 & 31 & 7 & 60 & 120 & 240 & 2 & 3 & СА \\
+\multirow{4}{=}{ПТРК\footnote{Противотанковый Ракетный Комплекс}} &
+Метис-М & 6.2 & 6.8 & - & - & 200 & 10 & 1 & С \\
+& Фагот & 22.5 & 12.9 & - & - & 200 & 10 & 1 & С \\
+& Конкурс & 22.5 & 14.6 & - & - & 300 & 11 & 1 & С \\
+& FGM-148 Javelin & 6.8 & 15.5 & - & - & 300 & 11 & 1 & С \\
+\multirow{2}{=}{Миномёты} & Миномёт 60 мм & 19 & 3 & - & - & 340 & 3 & 3
+& СÂ2 \\
+& Миномёт 80 мм & 48 & 7 & - & - & 590 & 5 & 3 & СÂ3 \\
+ПЗРК\footnote{Переносной Зенитно-Ракетный Комплекс} & Стингер, Верба & 8
+& 10 & - & - & 200 & 2 & - & СВ \\
+\multicolumn{10}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{1.0000} + 18\tabcolsep}@{}}{%
+Беспилотные летательные аппараты (см. Таблица 17: характеристики
+беспилотных летательных аппаратов)} \\
+\multicolumn{10}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{1.0000} + 18\tabcolsep}@{}}{%
+Взрывные устройства и мины (см. Таблица 18: характеристики взрывных
+устройств и мин)} \\
+\end{longtable}
+
+\phantomsection\label{_Ref31797173}{}Таблица 13: характеристики
+пехотного вооружения
+
+\subsubsection{Стимуляторы}\label{ux441ux442ux438ux43cux443ux43bux44fux442ux43eux440ux44b}
+
+Наркотики могут снять 3 очка стресса с отряда при приёме 1 дозы 1
+персонажем, но этот персонаж потеряет 1 ВНС.
+
+Стимуляторы могут снять 1 очко стресса с отряда при приёме 1 дозы 1
+персонажем.
+
+\subsubsection{Бронежилеты}\label{ux431ux440ux43eux43dux435ux436ux438ux43bux435ux442ux44b}
+
+Бронежилеты представляют собой индивидуальное средство защиты пехоты,
+которое снижает вероятность поражения персонажа.
+
+Бронежилеты характеризуются весом и предоставляемой защитой.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.6799}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1535}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1666}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Бронежилет
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Вес, кг
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Защита
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+MSV без плит\footnote{Может быть спрятан под одеждой.} & 2.5 & 1 \\
+MSV с плитами & 7.5 & 4 \\
+MSV с плитами и модулями для шеи и паха & 11.5 & 6 \\
+Кит-2 & 28 & 7 \\
+\end{longtable}
+
+Таблица 14: характеристики бронежилетов
+
+Персонаж может использовать только один бронежилет. При наличии
+нескольких бронежилетов в инвентаре учитывается бронежилет с
+максимальным показателем защиты.
+
+\subsubsection{Гранаты}\label{ux433ux440ux430ux43dux430ux442ux44b}
+
+Броски гранат не демаскируют при использовании.
+
+Гранату можно метнуть до, после или во время движения.
+
+При броске гранаты не применяется модификатор внезапного огня.
+
+\subsubsection{Пистолеты}\label{ux43fux438ux441ux442ux43eux43bux435ux442ux44b}
+
+Пистолеты можно спрятать так, что со стороны не будет видно, что
+персонаж вооружён.
+
+Выстрел из пистолета можно сделать в любой момент независимо от других
+действий персонажа во время хода отряда: до, после или во время
+движения, наблюдения или использования другой экипировки. Это правило
+применяется только к одному пистолету. Персонаж может стрелять из двух
+пистолетов в течение одного хода, но при этом первый выстрел будет
+считаться стандартным использованием экипировки, а второй -- бонусным
+выстрелом из пистолета. Таким образом, выстрелить дополнительно из
+третьего пистолета или сделать что-то ещё уже не получится.
+
+При выстреле из пистолета не применяется модификатор внезапного
+огня\footnote{См. стр.
+  \hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux432ux43dux435ux437ux430ux43fux43dux43eux433ux43e-ux43eux433ux43dux44f]{18},
+  6.3.2.4.7 Модификатор внезапного огня.}.
+
+\subsubsection{Дробовики}\label{ux434ux440ux43eux431ux43eux432ux438ux43aux438}
+
+Выстрел из дробовика можно сделать до, после или во время движения. При
+этом модификатор внезапного огня не применяется.
+
+Дробовики позволяют уничтожить атакующие дроны, при этом расходуется их
+боезапас.
+
+\subsubsection{Пистолеты-пулемёты и укороченные
+автоматы}\label{ux43fux438ux441ux442ux43eux43bux435ux442ux44b-ux43fux443ux43bux435ux43cux451ux442ux44b-ux438-ux443ux43aux43eux440ux43eux447ux435ux43dux43dux44bux435-ux430ux432ux442ux43eux43cux430ux442ux44b}
+
+Пистолет-пулемёт и укороченный автомат можно спрятать так, что со
+стороны не будет видно, что персонаж вооружён.
+
+Выстрел из пистолета-пулемёта и укороченного автомата можно сделать до,
+после или во время движения. При этом применяется модификатор внезапного
+огня.
+
+\subsubsection{Снайперские
+винтовки}\label{ux441ux43dux430ux439ux43fux435ux440ux441ux43aux438ux435-ux432ux438ux43dux442ux43eux432ux43aux438}
+
+\includegraphics[width=3.38403in,height=1.52292in]{media/image19.png}
+
+Снайперские винтовки создаются специально для ведения огня на длинные
+расстояния и не предназначаются для ведения ближнего боя.
+
+В их конструкцию изначально закладывается модификатор стационарного
+положения +4, но идеальная дальность для них отсутствует, таким образом
+на идеальной дальности стандартный бонус +6 не применяется.
+
+Модификатор стационарного положения самой снайперской винтовки
+суммируется с модификаторами от дополнений типа сошек и оптических
+прицелов. На снайперских винтовках обычно всегда имеются сошки и
+оптический прицел от 10x, таким образом модификатор стационарного
+положения может быть даже +9.
+
+При стрельбе из снайперского оружия стрелок может самостоятельно выбрать
+поражённых персонажей при успехе.
+
+Стрельба из тяжёлых снайперских винтовок требует стационарного положения
+(подготовки в течение 1 хода или 30 секунд). Стрельба из лёгких
+снайперских винтовок возможна без подготовки, но по факту неэффективна.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.2545}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0909}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0727}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0545}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0909}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Название & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Вес, кг
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Вес боеприпасов, кг
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Максимальная дальность, см
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Бронебойность (\textbf{ББ})
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Интенсивность оня (\textbf{ИО})
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Прицел
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Только стационарное положение
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Модификатор стационарного положения
+\end{quote}
+\end{minipage} \\
+H\&K G28 & 5.7 & 0.1 & 80 & 1 & 1 & 10x & - & +8 \\
+СВЧ-308 7,62 & 5.3 & 0.1 & 120 & 1 & 1 & 12x & - & +8 \\
+Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
+\end{longtable}
+
+Таблица 15: характеристики снайперских винтовок
+
+\subsubsection{Модификации стрелкового
+оружия}\label{ux43cux43eux434ux438ux444ux438ux43aux430ux446ux438ux438-ux441ux442ux440ux435ux43bux43aux43eux432ux43eux433ux43e-ux43eux440ux443ux436ux438ux44f}
+
+На стрелковое оружие можно установить различные приспособления.
+Существенно они не меняют показатели вооружения, но, всё же, могут
+давать некоторые преимущества.
+
+Лазерные прицелы видимого спектра устанавливаются на пистолеты и
+увеличивают идеальную дальность стрельбы до 2 см.
+
+Лазерные прицелы ИК спектра устанавливаются на пистолеты,
+пистолеты-пулемёты, штурмовые винтовки и увеличивают идеальную дальность
+стрельбы на 20\% с округлением вверх, но этот бонус доступен только при
+использовании ПНВ.
+
+Коллиматорные прицелы устанавливается на пистолеты, пистолеты-пулемёты и
+штурмовые винтовки и увеличивают идеальную дальность стрельбы на 30\% с
+округлением вверх.
+
+Оптические прицелы устанавливаются на снайперские винтовки и другое
+оружие и увеличивают модификатор стационарного положения в зависимости
+от кратности, а также позволяют вести наблюдение\footnote{См. стр.
+  \hyperref[ux43dux430ux431ux43bux44eux434ux435ux43dux438ux435]{14},
+  6.3.1 Наблюдение.}, однако у оптических прицелов обычно меньше угол
+обзора, чем у бинокля, поэтому их оптические характеристики несколько
+ниже \footnote{См. стр.
+  \hyperref[ux43dux430ux431ux43bux44eux434ux435ux43dux438ux435]{14},
+  6.3.1 Наблюдение, стр. \hyperref[_Ref213449133]{14}, Таблица 8.}.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2147}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3042}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4811}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Кратность
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Модификатор стационарного положения\footnote{См. стр.
+  \hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux441ux442ux430ux446ux438ux43eux43dux430ux440ux43dux43eux433ux43e-ux43fux43eux43bux43eux436ux435ux43dux438ux44f]{18},
+  6.3.2.4.3 Модификатор стационарного положения.}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Оптические характеристики (модификатор днём/в сумерки/макс. дальность,
+см)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+2x -- 4x & +1 & - / - / 200 \\
+5x -- 8x & +2 & +2 / - / 240 \\
+9x -- 23x & +3 & +3 / +1 / 280 \\
+24x -- 32x & +4 & +4 / +2 / 320 \\
+\end{longtable}
+
+Таблица 16: характеристики оптических прицелов
+
+Приборы ночного видения и тепловизоры можно использовать только
+совместно с коллиматорами, лазерными прицелами и открытыми прицельными
+приспособлениями, но нельзя использовать с оптическими прицелами.
+
+Оптические прицелы ночного видения и прицелы с тепловизорами,
+устанавливаемые на оружие, имеют такие же модификаторы и дальности как
+приборы соответствующие приборы наблюдения\footnote{См. стр. 14, Таблица
+  8: модификатор видимости от снаряжения.}.
+
+Сошки устанавливаются на пулемёты и снайперские винтовки и дают оружию
+модификатор стационарного положения +1.
+
+Модификатор стационарного положения для сошек и прицелов суммируется.
+
+Приборы бесшумной стрельбы (глушители, звукоподавители) устанавливаются
+на пистолеты, пистолеты-пулемёты, штурмовые и снайперские винтовки и
+отменяют автоматическую демаскировку при стрельбе, сокращая при этом
+эффективную и максимальную дистанции на 20\%. Для пистолета дальности не
+меняются.
+
+\paragraph{Пример}\label{ux43fux440ux438ux43cux435ux440-5}
+
+Снайперская винтовка СВЧ-308 с сошками и оптическим прицелом кратностью
+12x будет иметь идеальную дальность 0 (нет огня очередями), эффективную
+дальность 80, максимальную дальность 80, возможность наблюдения днём с
+модификатором видимости +3 с максимальной дальностью 280 и модификатором
+стационарного положения +9.
+
+\subsubsection{Дроны}\label{ux434ux440ux43eux43dux44b}
+
+Дроны -- это малые Беспилотные Летательные Аппараты (БПЛА), запускаемые
+и управляемые оператором.
+
+Все беспилотные летательные аппараты требуют сохранения стационарного
+положения запускающего персонажа в процессе работы. При потере
+стационарного положения управляющего персонажа БПЛА разрушается.
+
+Все дроны позволяют осуществлять наблюдение\footnote{Cм. стр.
+  \hyperref[ux43dux430ux431ux43bux44eux434ux435ux43dux438ux435]{14},
+  6.3.1 Наблюдение.} с воздуха в радиусе своей скорости при отсутствии
+линии видимости до цели. При успешном обнаружении цель остаётся
+обнаруженной, пока находится в радиусе скорости дрона от его текущего
+положения.
+
+Разведывательный дрон не имеет вооружения.
+
+Дрон с гранатой -- это разведывательный дрон, способный осуществить
+сброс гранаты на цель сверху. После этого он продолжает работать как
+обычный разведывательный дрон. Персонаж, обладающий навыком ЭЛ может
+переделать разведывательный дрон в дрон с возможностью сброса (проверка
+ЭЛ со сложностью 20, при неудаче дрон перестаёт функционировать; ремонт
+дрона -- проверка ЭЛ со сложностью 20, при неудаче дрон превращается в
+запчасти для дрона, с помощью которых можно снизить сложность ремонта
+других дронов). На дрон со сбросом можно подвешивать одну любую гранату.
+Прицеливание и сброс занимают весь ход (30 секунд).
+
+Ударные дроны, также называемые барражирующими боеприпасами, тоже
+способны осуществлять наблюдение, а также способны атаковать цель, но
+при этом они разрушаются.
+
+В любом случае, атака выполняется с использованием навыка ДРН в радиусе
+скорости дрона от его текущего положения.
+
+Обычно дроны используют радиоканал связи, поэтому не могут обнаружить
+людей и технику под крышей в здании, но бывают также дроны на
+оптоволоконном канале, и тогда у них нет ограничений.
+
+При атаке барражирующим боеприпасом атакованный пехотный отряд может
+защититься от такой атаки, если хотя бы у одного из солдат в этом отряде
+есть дробовик, при этом расходуется его боезапас.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.4490}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0855}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1271}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1271}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1057}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1057}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Вес, кг
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Скорость, см
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Количество ходов в игре
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Бронебойность (ББ)
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Интенсивность огня (ИО)
+\end{quote}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Разведывательный дрон & 2 & 50 & 50 & - & - \\
+Дрон со сбросом & 3 & 50 & 30 & 2 & 2 \\
+Ударный дрон c радиоканалом & 12 & 60 & 40 & 8 & 3 \\
+Ударный дрон с оптоволоконным каналом & 12 & 60 & 40 & 8 & 3 \\
+\end{longtable}
+
+Таблица 17: характеристики беспилотных летательных аппаратов
+
+\subsubsection{Взрывные устройства и
+мины}\label{ux432ux437ux440ux44bux432ux43dux44bux435-ux443ux441ux442ux440ux43eux439ux441ux442ux432ux430-ux438-ux43cux438ux43dux44b}
+
+Пластичные взрывчатые вещества (например, C-4 или пластит) обычно бывают
+в брикетах по ½ кг или по 1 кг. Эти вещества стабильны и безопасны, они
+не взрываются из-за механического воздействия. Для взрыва используются
+различные детонаторы:
+
+\begin{itemize}
+\item
+  таймер, который можно установить на определённое время;
+\item
+  радиоприёмник, способный принять сигнал на расстоянии до 300 см;
+\item
+  различные датчики, которые срабатывают при приближении целей --
+  используются в минах.
+\end{itemize}
+
+В противопехотных минах взрывчатка комбинируется с поражающими
+элементами, например, металлическими шариками, что увеличивает радиус
+поражения.
+
+Противопехотные мины типа ПФМ или Dragontooth не предназначены для
+установки вручную, такие минные поля создаются сбросом кассет с
+самолётов или ракет. При этом образуется минное поле, где мина будет
+срабатывать при передвижении пехотных отрядов каждый 1 см.
+
+В современных противотанковых минах, таких как ТМК, используются
+специальные металлические формы, в которые помещается взрывчатка, для
+создания направленной кумулятивной струи.
+
+К взрывчатке и минам можно подключать дополнительные детонаторы, чтобы
+обеспечить дистанционный или отложенный подрыв.
+
+При установке мины сохраняются очки тренированности навыков МСК и ВЗР
+устанавливающего её персонажа (для дистанционного минирование эти
+значение всегда 0 и 1 соответственно).
+
+Отряд пехоты способен обнаружить мины и взрывные устройства при
+передвижении, если не используется бег. Когда отряд проходит в пределах
+1 см от мины или минного поля, он обнаруживает мину автоматически. При
+этом отряд останавливается и необходимо сделать бросок на
+наблюдение\footnote{См. стр.
+  \hyperref[ux43dux430ux431ux43bux44eux434ux435ux43dux438ux435]{14},
+  6.3.1 Наблюдение.}. Если бросок успешен, то отряд обнаруживает мину.
+Если бросок неуспешен, то отряд подрывается на мине.
+
+Мины и взрывные устройства может обезвредить персонаж с ненулевым
+навыком ВЗР. Сложность рассчитывается как удвоенный ВЗР минёра минус
+удвоенный ВЗР сапёра. Для успешного обезвреживания нужно выбросить на
+кубике D20 значение больше получившейся сложности. Это значит, что
+делать бросок имеет смысл только если ВЗР сапёра меньше ВЗР минёра.
+
+При взрыве устройства расчёт эффекта применяется как при стрельбе. При
+этом применяется модификатор навыка (используется сохранённое значение
+ВЗР для взрывного устройства). Всегда применяется модификатор флангового
+огня, и для пехоты, и для техники. Остальные модификаторы не
+применяются.
+
+При использовании взрывных устройств в помещении показатель
+интенсивности огня удваивается.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.6607}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1164}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1101}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1128}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Вес
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Бронебойность (ББ)
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Интенсивность огня (ИО)
+\end{quote}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Противопехотная мина ПФМ & - & - & 1 \\
+Противопехотная мина ОЗМ & 5 & - & 4 \\
+Противотанковая мина ТМ & 11 & 6 & 4\footnote{Для поражения пехоты
+  требует установки дополнительного детонатора, т.к. встроенный
+  срабатывает только на технику.} \\
+Противотанковая мина ТМК & 11.5 & 10 & 2 \\
+Взрывчатка & 1 & 1 & 1 \\
+Взрывчатка & 2 & 2 & 2 \\
+Взрывчатка & 3 & 3 & 2 \\
+Взрывчатка & 5 & 4 & 3 \\
+Взрывчатка & 10 & 6 & 4 \\
+\end{longtable}
+
+Таблица 18: характеристики взрывных устройств и мин
+
+\subsection{Вооружение
+техники}\label{ux432ux43eux43eux440ux443ux436ux435ux43dux438ux435-ux442ux435ux445ux43dux438ux43aux438}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0725}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.3434}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0723}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0732}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0751}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0720}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0723}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0723}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0723}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0745}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
+} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Идеальная дальность, см
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Эффективная дальность, см
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Максимальная дальность, см
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Радиус отклонения, см
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Бронебойность (\textbf{ББ})
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Интенсивность огня (\textbf{ИО})
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Осколочно-фугасное действие (\textbf{ОФ})
+\end{quote}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Свойства\footnote{Свойства оружия:\\
+  С -- только стрельба из стационарного положения.\\
+  В -- возможна стрельба по воздушным целям.
+
+  А-- стрельба непрямой наводкой.}
+\end{quote}\strut
+\end{minipage} \\
+&
+\multicolumn{9}{>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.9275} + 16\tabcolsep}@{}}{%
+Пулемёты} \\
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
+Пулемёт} & 40 & 80 & 160 & - & 2 & 3 & - & В \\
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
+Крупнокалиберный пулемёт 12,7--14,5 мм} & 50 & 100 & 200 & - & 3 & 3 & -
+& В \\
+&
+\multicolumn{9}{>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.9275} + 16\tabcolsep}@{}}{%
+Автоматические пушки} \\
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
+Автоматическая пушка 20 мм} & 50 & 100 & 200 & - & 4 & 3 & - & В \\
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
+Автоматическая пушка 30 мм} & 50 & 100 & 200 & - & 6 & 3 & - & В \\
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
+Автоматическая пушка 40, 57 мм} & 50 & 100 & 200 & - & 7 & 3 & - & В \\
+&
+\multicolumn{9}{>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.9275} + 16\tabcolsep}@{}}{%
+Реактивные гранатомёты} \\
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
+Безоткатное орудие 73 мм} & 40 & 80 & 160 & - & 8 & 3 & - & - \\
+\multicolumn{10}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{1.0000} + 18\tabcolsep}@{}}{%
+ПТРК} \\
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
+MILAN} & 240 & 240 & 240 & - & 10 & - & - & С \\
+&
+\multicolumn{9}{>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.9275} + 16\tabcolsep}@{}}{%
+Танковые орудия} \\
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
+Танковое орудие 125 мм} & 60 & 120 & 240 & - & 11 & 4 & - & - \\
+&
+\multicolumn{9}{>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.9275} + 16\tabcolsep}@{}}{%
+Артиллерийские системы} \\
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
+Гаубица 122 мм} & - & - & 1000 & 5 & 8 & 4 & - & СА \\
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
+Гаубица 155 мм} & - & - & 2000 & 6 & 8 & 4 & - & СА \\
+&
+\multicolumn{9}{>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.9275} + 16\tabcolsep}@{}}{%
+Ракетные системы залпового огня} \\
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
+БМ 21 Град} & - & - & 1200 & 15 & 8 & 4 & - & СА \\
+\end{longtable}
+
+Таблица 19: характеристики вооружения техники
+
+\subsection{Бронебойность и
+бронированность}\label{ux431ux440ux43eux43dux435ux431ux43eux439ux43dux43eux441ux442ux44c-ux438-ux431ux440ux43eux43dux438ux440ux43eux432ux430ux43dux43dux43eux441ux442ux44c}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0708}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.2330}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0632}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\multirow{3}{=}{\begin{minipage}[t]{\linewidth}\raggedright
+\begin{quote}
+Броня (\textbf{Бр})
+\end{quote}
+\end{minipage}} & \multirow{3}{=}{} &
+\multicolumn{11}{>{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.6962} + 20\tabcolsep}@{}}{%
+Бронебойность оружия (\textbf{ББ})} \\
+& &
+\multicolumn{3}{>{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.1898} + 4\tabcolsep}}{%
+ОФ\footnote{ОФ -- Осколочно-Фугасные гранаты, мины, снаряды.} гранаты,
+БП\footnote{БП -- Бронебойные Пули.}} &
+\multicolumn{4}{>{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.2532} + 6\tabcolsep}}{%
+БС\footnote{БС -- кинетический Бронебойный Снаряд, в том числе,
+  например, БОПС -- Бронебойный Оперённый Подкалиберный Снаряд.}
+автопушек, ОФ мины} &
+\multicolumn{4}{>{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.2532} + 6\tabcolsep}@{}}{%
+БС большого калибра, БК\footnote{БК -- Бронебойный Кумулятивный
+  боеприпас (снаряд, ракета, мина).}} \\
+& & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\
+0 & Небронированная & & & & & & & & & & & \\
+& Уничтожена & 20+ & 14+ & 11+ & 8+ & 7+ & 7+ & 7+ & 7+ & 7+ & 7+ &
+7+ \\
+& Стресс & 13+ & 8+ & 5+ & 3+ & 3+ & 4+ & 5+ & & & & \\
+2 & Легкобронированная & & & & & & & & & & & \\
+& Уничтожена & & & 19+ & 18+ & 15+ & 14+ & 13+ & 11+ & 10+ & 8+ & 7+ \\
+& Стресс & & & 13+ & 12+ & 11+ & 10+ & 9+ & 9+ & 8+ & 6+ & \\
+4 & Тяж. бронированная & & & & & & & & & & & \\
+& Уничтожена & & & & & 21+ & 19+ & 17+ & 15+ & 13+ & 11+ & 9+ \\
+& Стресс & & & & & 16+ & 14+ & 12+ & 13+ & 11+ & 9+ & 7+ \\
+5 & Танк 1 поколения & & & & & & & & & & & \\
+& Уничтожен & & & & & & 24+ & 22+ & 20+ & 19+ & 17+ & 15+ \\
+& Стресс & & & & & & 20+ & 18+ & 18+ & 17+ & 15+ & 13+ \\
+6 & Танк 2 поколения & & & & & & & & & & & \\
+& Уничтожен & & & & & & & 25+ & 23+ & 21+ & 19+ & 17+ \\
+& Стресс & & & & & & & 21+ & 20+ & 19+ & 17+ & 15+ \\
+7 & Танк 3 поколения & & & & & & & & & & & \\
+& Уничтожен & & & & & & & & 26+ & 23+ & 21+ & 19+ \\
+& Стресс & & & & & & & & 23+ & 21+ & 19+ & 17+ \\
+\end{longtable}
+
+\phantomsection\label{_Ref82539353}{}Таблица 20: бронебойность оружия
+(ББ) и броня техники (Бр)
+
+\subsection{Огневая
+поддержка}\label{ux43eux433ux43dux435ux432ux430ux44f-ux43fux43eux434ux434ux435ux440ux436ux43aux430}
+
+Огневая поддержка -- это навесная стрельба или стрельба непрямой
+наводкой.
+
+Для гранат, подствольных и автоматических гранатомётов, миномётов,
+гаубиц, систем залпового огня и тактических ракет не обязательно наличие
+линии видимости.
+
+Стрельба непрямой наводкой, кроме ручных гранат, требует стационарного
+положения боевой единицы.
+
+\subsubsection{Гранаты}\label{ux433ux440ux430ux43dux430ux442ux44b-1}
+
+Гранаты можно метать без наличия линии видимости, например, перекидывать
+через высокий забор. Это не требует пристрелки и корректировки.
+
+\subsubsection{Гранатомёты}\label{ux433ux440ux430ux43dux430ux442ux43eux43cux451ux442ux44b}
+
+Стрельба из гранатомётов при отсутствии линии видимости требует
+пристрелки и корректировки.
+
+\subsubsection{Ствольная артиллерия и
+миномёты}\label{ux441ux442ux432ux43eux43bux44cux43dux430ux44f-ux430ux440ux442ux438ux43bux43bux435ux440ux438ux44f-ux438-ux43cux438ux43dux43eux43cux451ux442ux44b}
+
+\includegraphics[width=3.5in,height=1.575in]{media/image20.png}
+
+Стрельба из ствольной артиллерии может вестись корректируемыми или
+обычными боеприпасами.
+
+Стрельба корректируемыми боеприпасами ведётся по обычным правилам и не
+требует пристрелки (далее см.
+\hyperref[ux44dux444ux444ux435ux43aux442ux44b-ux43eux442-ux43fux43eux43fux430ux434ux430ux43dux438ux44f]{27},
+7.4.6 Эффекты от попадания), но не может вестись «по карте», без
+корректировки.
+
+Стрельба обычными боеприпасами требует пристрелки и корректировки, а
+также может вестись «по карте», без корректировки. Такой огонь может
+вестись только по определённому ориентиру: перекрёстку, дому, мосту. В
+этом случае применяется модификатор огня вслепую\footnote{См. стр.
+  \hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux43eux433ux43dux44f-ux432ux441ux43bux435ux43fux443ux44e]{18},
+  6.3.2.4.6 Модификатор огня вслепую.}, а очки корректировки всегда
+считаются равными 0 независимо от того, сколько выстрелов делалось в
+одну и ту же точку.
+
+\subsubsection{Ракетные системы залпового
+огня}\label{ux440ux430ux43aux435ux442ux43dux44bux435-ux441ux438ux441ux442ux435ux43cux44b-ux437ux430ux43bux43fux43eux432ux43eux433ux43e-ux43eux433ux43dux44f}
+
+РСЗО не требуют пристрелки. При выстреле для всех боевых единиц
+противника в радиусе отклонения можно отдельно провести расчёт эффектов
+от попадания по обычной схеме.
+
+\subsubsection{Пристрелка}\label{ux43fux440ux438ux441ux442ux440ux435ux43bux43aux430}
+
+Изначально при стрельбе по какой-либо цели орудие имеет 0 очков
+корректировки. Каждый последовательный выстрел этого орудия по той же
+цели увеличивает очки корректировки этого орудия на 1, при условии, что
+цель демаскирована на момент выстрела (корректировщик наблюдает цель).
+
+Очки корректировки уменьшаются при необходимости перенести огонь: как
+минимум на 1 плюс ещё на 1 очко за каждые полные 10 см переноса.
+
+Очки корректировки сбрасываются на 0, если орудие теряет стационарное
+положение, сдвигается или переключается на огонь вслепую.
+
+Максимально у орудия может быть 5 очков корректировки.
+
+При выстреле по цели производится бросок кубика D20, к результату
+применяется модификатор навыка\footnote{См. стр.
+  \hyperref[ux43cux43eux434ux438ux444ux438ux43aux430ux442ux43eux440-ux43dux430ux432ux44bux43aux430]{17},
+  6.3.2.4.1 Модификатор навыка.} Ур(X) и оценивается по таблице исходя
+из текущих очков корректировки орудия (см. Таблица 21).
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4877}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5123}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Очки корректировки
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Результат броска D20 с учётом навыка
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 22+ \\
+1 & 19+ \\
+2 & 14+ \\
+3 & 8+ \\
+4 & 4+ \\
+5 & 1+ \\
+\end{longtable}
+
+Таблица 21: пристрелка и корректировка при стрельбе непрямой наводкой
+
+В случае успеха тот же самый результат кубика снова используется для
+определения эффекта от попадания по цели.
+
+Если пехотные отряды стоят вплотную друг к другу (например, происходит
+штурм), то они все считаются поражёнными, к каждому следует применить
+эффект от попадания отдельно.
+
+В случае промаха, если в радиусе, определяемом как
+(5~--~Очки\textsubscript{Корректировки})~×~Радиус\textsubscript{Отклонения},
+есть другие отряды, то нужно последовательно провести дополнительную
+проверку на попадание по каждому из них с такими же параметрами, что по
+искомой цели, до получения первого попадания.
+
+\subsubsection{Эффекты от
+попадания}\label{ux44dux444ux444ux435ux43aux442ux44b-ux43eux442-ux43fux43eux43fux430ux434ux430ux43dux438ux44f}
+
+Эффекты от попадания определяются как при обычной стрельбе: используется
+результат броска кубика, применяются модификаторы при стрельбе, а также
+показатель интенсивности огня орудия.
+
+При попадании непрямой наводкой всегда применяется модификатор
+флангового огня\footnote{См. стр. 18, 6.3.2.4.4 Модификатор флангового
+  огня.}. Если укрытие не защищает боевую единицу со всех сторон, то
+модификатор укрытия не применяется.
+
+\subsection[Радиосвязь и РЭБ]{\texorpdfstring{Радиосвязь и
+РЭБ\footnote{РадиоЭлектронная Борьба}}{Радиосвязь и РЭБ}}\label{ux440ux430ux434ux438ux43eux441ux432ux44fux437ux44c-ux438-ux440ux44dux431}
+
+Персонажи могут общаться знаками или голосом в пределах одного отряда
+или между отрядами на дистанции до 4 см. Для передачи данных и команд на
+большие расстояния используется радиосвязь. Радиосвязь необходима для
+корректировки огня артиллерии, передачи информации о демаскированных
+боевых единицах другим отрядам, управления дронами с радиоканалом,
+дистанционного подрыва мин.
+
+Сотовые телефоны работают не везде, но там, где работают, позволяют
+связаться на любое расстояние посредством сети базовых станций.
+Переносные и возимые радиостанции позволяют не зависеть от
+инфраструктуры. Радиостанции могут работать как ретрансляторы, позволяя
+увеличивать зону устойчивой связи, а размещение радиостанции на высоте
+позволяет вдвое увеличить дальность её действия. Наконец, терминал
+спутниковой связи позволяет выходить на связь с другим обладателем
+терминала на любом расстоянии. Терминалы спутниковой связи требуют
+настройки и стационарного положения во время использования.
+
+Радиостанции могут быть трёх уровней защищённости: 0 уровень
+соответствует сотовой связи, гражданским и устаревшим военным
+радиостанциям, 1 уровень соответствует военным радиостанциям 5
+поколения, 2 уровень соответствует военным радиостанциям 6 поколения.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2157}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0980}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1373}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2941}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2549}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Тип
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Уровень
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Вес, кг
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Название
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Радиус передачи, см
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Сотовый & 0 & 0.5 & \begin{minipage}[t]{\linewidth}\raggedright
+Apple\\
+Samsung\strut
+\end{minipage} & $\infty$ (в зоне покрытия) \\
+Радио & 0 & 0.5 & Baofeng Motorola & 200 \\
+Радио & 1 & 1.0 & Р-168 Акведук & 200 \\
+Радио & 2 & 0.5 & Р-187-П1 Азарт & 200 \\
+Спутник & 1 & 16.0 & Р-438М Белозер & $\infty$ \\
+& & & & \\
+\end{longtable}
+
+Таблица 22: переносные средства связи
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1794}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0940}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4961}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2305}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Тип
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Уровень
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Название
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Радиус передачи, км
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Радио & 1 & Р-168-100У Акведук & 200 \\
+Радио & 1 & Зоопарк & 200 \\
+Радио & 2 & Р-187ВЕ Азарт & 200 \\
+Спутник & 1 & Р-448 Аурига & $\infty$ \\
+& & & \\
+\end{longtable}
+
+Таблица 23: возимые средства связи
+
+Для подавления радиосвязи, в том числе для выведения из строя дронов с
+радиоканалом управления, существуют станции РЭП\footnote{РадиоЭлектронное
+  Подавление}. Станции РЭП могут быть 1 или 2 уровней и подавлять,
+соответственно, радиостанции 0 и 1 уровней. Станции РЭП могут подавить
+разведывательные дроны, дроны со сбросом, а также барражирующие
+боеприпасы с радиоканалом.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0938}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1133}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5367}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2562}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Уровень
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Вес, кг
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Название
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Радиус подавления, см
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & 3.8 & Капюшон & 20 \\
+2 & 20.0 & Гарпия Периметр & 60 \\
+& & & \\
+\end{longtable}
+
+Таблица 24: переносные средства РЭП
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0938}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.6500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2562}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Уровень
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Название
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Радиус подавления, см
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & Капюшон & 40 \\
+2 & Ромашка & 100 \\
+2 & Чистюля & 300 \\
+\end{longtable}
+
+Таблица 25: возимые и стационарные средства РЭП
+
+Отряды, попадающие в зону действия РЭП, не могут корректировать огонь
+артиллерии, не могут управлять дронами, не могут дистанционно подрывать
+мины, не могут передавать информацию другим отрядам и принимать
+информацию. Дроны на радиоуправлении, попавшие в зону действия РЭП,
+немедленно выходят из строя. Мины с радиовзрывателем, попавшие в зону
+действия РЭП, не срабатывают.
+
+Если отряд без связи демаскирует вражескую боевую единицу, он делает это
+только в рамках своего действия (например, другие персонажи отряда могут
+вести огонь без модификатора огня вслепую), но фактически состояние
+маскировки сохраняется.
+
+Помимо РЭП, существуют станции РЭР\footnote{РадиоЭлектронная Разведка},
+предназначенные для анализа радиосигналов противника. Они позволяют
+перехватывать и подделывать сообщения. Станции РЭР могут быть 1 или 2
+уровней и работать с радиостанциями 0 и 1 уровней, соответственно.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0938}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4349}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2562}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2151}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\begin{quote}
+Уровень
+\end{quote}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Название
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Радиус подавления, см
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Радиус передачи, км
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & Леер-2 & 100 & 200 \\
+2 & Леер-3 & 150 & 200 \\
+2 & Монолит & 300 & 200 \\
+\end{longtable}
+
+Таблица 26: возимые и стационарные средства РЭР
+
+Любые боевые единицы, использующие радиосвязь, регистрируемую РЭР,
+демаскируются, в том числе и другие станции РЭР, которые передают
+сообщения, а не только принимают, и станции РЭП того же уровня или
+уровнем ниже. Если отряд находится за пределами игровой области,
+считается, что известны его точные координаты, которые можно
+использовать, например, для возможности организации артиллерийского
+удара.
+
+Отряд, использующий станцию РЭР получает возможность попытаться отдать
+фальшивую команду любому вражескому отряду или дрону, находящемуся в
+радиусе действия станции РЭР.
+
+При отдаче команды вражескому отряду этом необходимо пройти состязание с
+использованием навыка ЛИД с командиром вражеского отряда. В случае
+успеха, в следующий ход он будет обязан попытаться выполнить эту
+команду.
+
+При отдаче команды вражескому дрону дополнительных проверок не
+требуется.
+
+РЭР может перехватывать и подделывать сообщения радиостанций такого же
+уровня и ниже, даже если те находятся в зоне действия РЭП того же или
+более низкого уровня. Однако РЭР не может работать в зоне РЭП более
+высокого уровня.
+
+Получение радиостанции, настроенной на вражескую частоту, позволяет
+выполнять те же самые действия, что и РЭР до изменения частоты (если это
+запланировано).
+
+Иерархия взаимодействия на одном уровне следующая:
+радиостанция~\textless~РЭП~\textless~РЭР. Это означает, что РЭП
+подавляет связь, но РЭР того же уровня может работать поверх подавления
+для разведки и обмана. Это также означает, что две станции РЭР могут
+передавать данные друг другу поверх РЭП того же уровня. Станция РЭР
+может работать как радиостанция или как станция РЭП того же радиуса и
+такого же уровня.
+
+Для определения координат артиллерии существуют станции радиолокационной
+разведки. Такие станции могут определять координаты артиллерии и
+миномётов, ведущих огонь, для нанесения по ним артиллерийского удара.
+Кроме того, они могут обнаруживать боевые единицы в радиусе своего
+действия независимо от времени суток и погодных условий. Станция
+радиолокационной разведки неуязвима к РЭП.
+
+\begin{center}
+\begin{tabular}{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.6591}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1133}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2276}}@{}}
+\toprule
+Название & Вес, кг & Радиус, см \\
+\midrule
+Соболятник & 36.0 & 600 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Таблица 27: переносные РЛС
+
+\begin{center}
+\begin{tabular}{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7679}}
+  >{\centering\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2321}}@{}}
+\toprule
+Название & Радиус, см \\
+\midrule
+Зоопарк & 3000 \\
+AN/TPQ-53 & 3000 \\
+& \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Таблица 28: возимые РЛС
+
+\end{multicols}
+
+\end{document}
