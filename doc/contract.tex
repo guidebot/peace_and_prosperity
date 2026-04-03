@@ -24,7 +24,8 @@
 \usepackage{multicol}
 \usepackage{background}
 \usepackage{wallpaper}
-\usepackage{longtable,booktabs,array}
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs}
 \usepackage{multirow}
 \usepackage{calc} % for calculating minipage widths
 \usepackage{rotating} % for vertical text
@@ -33,16 +34,6 @@
 % Style table captions: italic, centered
 \captionsetup{labelfont=it,textfont=it,justification=centering}
 
-% Define column type for vertical text in tables
-\newcolumntype{V}{>{\begin{turn}{90}\centering}c<{\end{turn}}}
-% Correct order of tables after \paragraph or \subparagraph
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
-\makeatother
-% Allow footnotes in longtable head/foot
-\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
-\makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -278,23 +269,21 @@ States Army Field Manuals, в том числе с использованием 
 Как и во многих других системах ролевых игр, у персонажей есть наборы
 атрибутов и навыков. Навыки привязаны к одному из атрибутов.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2581}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7419}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.2581] X[l, co=0.7419] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 Атрибут
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Навыки
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 Здоровье & Выносливость (ВНС) \\
-\multirow{2}{=}{Ловкость} & Маневрирование (МНВ) \\
+\SetCell[r=2]{l} Ловкость & Маневрирование (МНВ) \\
 & Маскировка (МСК) \\
-\multirow{7}{=}{Меткость} & Метательное оружие (гранаты) (ГРН) \\
+\SetCell[r=7]{l} Меткость & Метательное оружие (гранаты) (ГРН) \\
 & Лёгкое стрелковое оружие (ЛС) \\
 & Снайперское оружие (СН) \\
 & Пулемёты (ПЛМ) \\
@@ -308,7 +297,8 @@ States Army Field Manuals, в том числе с использованием 
 & Огневая поддержка (ОП) \\
 & Логика (ЛГК) \\
 Харизма & Влияние (ВЛН) \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 1: атрибуты и навыки
 
@@ -328,13 +318,12 @@ States Army Field Manuals, в том числе с использованием 
 который напрямую зависит от тренированности и обозначается как Ур(х),
 где х -- очки тренированности в некотором навыке.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5774}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4226}}@{}}
-\toprule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.5774] X[l, co=0.4226] @{}},
+}
 Очки тренированности, х & Уровень навыка Ур(x) \\
 1-2 & 1 \\
 3-6 & 2 \\
@@ -342,7 +331,8 @@ States Army Field Manuals, в том числе с использованием 
 12-15 & 4 \\
 16-19 & 5 \\
 20 & 6 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 2: очки тренированности и навыка
 
@@ -373,12 +363,12 @@ States Army Field Manuals, в том числе с использованием 
 Скорость пешего передвижения отряда при ненулевой грузоподъёмности
 определяется пропроционально текущей нагрузке.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3212}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2777}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1650}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2362}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.3212] X[l, co=0.2777] X[l, co=0.1650] X[l, co=0.2362] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 Нагрузка в \% от максимальной грузоподъёмности
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -388,15 +378,12 @@ States Army Field Manuals, в том числе с использованием 
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Преодоление препятствий без остановки
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 0\% - 25\% & 5 & + & + \\
 25\% - 50\% & 4 & + & - \\
 50\% - 75\% & 3 & + & - \\
 75\% - 100\% & 2 & - & - \\
-\end{longtable}
+
+\end{tblr}
 
 \phantomsection\label{table-movement}{}Таблица 3: скорость пешего
 передвижения в зависимости от нагрузки
@@ -582,13 +569,12 @@ States Army Field Manuals, в том числе с использованием 
 зависимости от желаемого отыгрыша. Для гражданских можно представить
 соответствующий уровень исходя из их должности и рода деятельности.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3694}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1662}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1293}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1662}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1689}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.3694] X[l, co=0.1662] X[l, co=0.1293] X[l, co=0.1662] X[l, co=0.1689] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 Уровень
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -608,10 +594,6 @@ States Army Field Manuals, в том числе с использованием 
 Макс значение навыка
 \end{quote}
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 Рядовой
 
 Чернорабочий & 2 & 1 & 1 & 10 \\
@@ -630,7 +612,8 @@ States Army Field Manuals, в том числе с использованием 
 
 Топ менеджер & 17 & 4 & 3 & 10 \\
 Генерал & 20 & 5 & 3 & 6 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 4: создание случайного персонажа
 
@@ -1159,13 +1142,12 @@ https://github.com/guidebot/peace\_and\_prosperity
 Каждый отряд восстанавливает некоторое количество очков стресса, в
 соответствии с уровнем навыка лидерства Ур(Макс(ЛГК/ВЛН)).
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5147}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4853}}@{}}
-\toprule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.5147] X[l, co=0.4853] @{}},
+}
 Восстановление очков стресса & Уровень навыка Ур(Макс(ЛГК/ВЛН)) \\
 0,1 & 0 \\
 0,2 & 1 \\
@@ -1174,7 +1156,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 1,3 & 4 \\
 1,9 & 5 \\
 2,7 & 6 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 5: восстановление очков стресса
 
@@ -1209,15 +1192,12 @@ https://github.com/guidebot/peace\_and\_prosperity
 При прохождении маршрута через разную местность для расчёта расстояния
 выбирается худший случай.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3800}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2200}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1600}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2400}}@{}}
-\toprule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.3800] X[l, co=0.2200] X[l, co=0.1600] X[l, co=0.2400] @{}},
+}
 & Открытая местность & Дорога & Препятствия \\
 Пехота &
 \multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3800} + 2\tabcolsep}}{%
@@ -1226,7 +1206,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 Гусеничные БМ & 12 см & 16 см & 10+ \\
 Колёсные БМ & 12 см & 16 см & 20+ \\
 Автомобиль & 6 см & 20 см & 30+ \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 6: дальность движения за ход и значения для броска кубиков при
 преодолении препятствий
@@ -1396,11 +1377,12 @@ https://github.com/guidebot/peace\_and\_prosperity
 и получившееся значение сравнить с пороговыми значениями (см. Таблица
 9).
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3324}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3509}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3166}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.3324] X[l, co=0.3509] X[l, co=0.3166] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 Условия
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -1408,25 +1390,22 @@ https://github.com/guidebot/peace\_and\_prosperity
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Макс. дальность видимости, см
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 Ясный день & 12 & 160 \\
 Сумерки & 7 & 80 \\
 Ночь & 2 & 16 \\
 Сильные осадки & 8 & 40 \\
 Туман & 7 & 6 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 7: базовое значение видимости и дальность видимости
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2850}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1656}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2424}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3070}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.2850] X[l, co=0.1656] X[l, co=0.2424] X[l, co=0.3070] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 Предмет
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -1436,31 +1415,27 @@ https://github.com/guidebot/peace\_and\_prosperity
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Макс. дальность видимости, см
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-\multirow{2}{=}{Бинокль} & День & +5 & 320 \\
+\SetCell[r=2]{l} Бинокль & День & +5 & 320 \\
 & Сумерки & +2 & 160 \\
-\multirow{2}{=}{Прибор ночного видения} & Сумерки & +3 & 80 \\
+\SetCell[r=2]{l} Прибор ночного видения & Сумерки & +3 & 80 \\
 & Ночь & +9 & 80 \\
-\multirow{5}{=}{Тепловизионный прицел} & День & +3 & 120 \\
+\SetCell[r=5]{l} Тепловизионный прицел & День & +3 & 120 \\
 & Сумерки & +4 & 140 \\
 & Ночь & +12 & 160 \\
 & Осадки & +4 & 20 \\
 & Туман & +4 & 6 \\
-\end{longtable}
+
+\end{tblr}
 
 \phantomsection\label{_Ref213449133}{}Таблица 8: модификатор видимости
 от снаряжения
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4800}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5200}}@{}}
-\toprule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.4800] X[l, co=0.5200] @{}},
+}
 Дистанция обнаружения, см & Модифицированный результат \\
 3 & 10+ \\
 10 & 17+ \\
@@ -1470,7 +1445,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 160 & 37+ \\
 320 & 42+ \\
 Поиск мин (0 -- 1) & 22+ \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 9: пороговые значения для броска кубика при проведении разведки
 
@@ -1563,11 +1539,12 @@ https://github.com/guidebot/peace\_and\_prosperity
 результату броска D20 модификатор флангового огня, определить количество
 очков стресса, которые получит цель (см. Таблица 10).
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3267}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3505}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3228}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.3267] X[l, co=0.3505] X[l, co=0.3228] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 Интенсивность Огня (ИО) оружия
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -1575,10 +1552,6 @@ https://github.com/guidebot/peace\_and\_prosperity
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Количество очков стресса
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 1 & 15+ & 1 \\
 2 & 11+ & 1 \\
 2 & 20+ & 2 \\
@@ -1589,7 +1562,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 4 & 16+ & 2 \\
 4 & 19+ & 3 \\
 4 & 20+ & 4 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 10: количество очков стресса при стрельбе
 
@@ -1600,11 +1574,12 @@ https://github.com/guidebot/peace\_and\_prosperity
   6.3.2.4 Модификаторы при
   стрельбе.}{ Cм. стр. 17, 6.3.2.4 Модификаторы при стрельбе.}}\label{see-p17-shooting-modifiers}}.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3267}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3505}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3228}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.3267] X[l, co=0.3505] X[l, co=0.3228] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 Интенсивность Огня (ИО) оружия
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -1612,10 +1587,6 @@ https://github.com/guidebot/peace\_and\_prosperity
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Количество раненых
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 1 & 16+ & 1 \\
 2 & 13+ & 1 \\
 2 & 21+ & 2 \\
@@ -1624,7 +1595,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 4 & 9+ & 1 \\
 4 & 19+ & 2 \\
 4 & 22+ & 3 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 11: количество раненых при стрельбе
 
@@ -1845,17 +1817,17 @@ https://github.com/guidebot/peace\_and\_prosperity
 От результата броска нужно отнять значение модификатора в соответствии с
 типом \textbf{укрытия} (см. Таблица 12).
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4849}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5151}}@{}}
-\toprule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.4849] X[l, co=0.5151] @{}},
+}
 Тип укрытия & Значение модификатора \\
 Среднее & -2 \\
 Надёжное & -4 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 12: значения модификаторов для типов укрытий
 
@@ -1965,21 +1937,12 @@ https://github.com/guidebot/peace\_and\_prosperity
 \subsection{Пехотное
 вооружение}\label{infantry-weapons}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.1531}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.2245}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0816}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0816}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0714}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0714}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0714}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0612}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0918}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0918}}@{}}
-\toprule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.1531] X[l, co=0.2245] X[l, co=0.0816] X[l, co=0.0816] X[l, co=0.0714] X[l, co=0.0714] X[l, co=0.0714] X[l, co=0.0612] X[l, co=0.0918] X[l, co=0.0918] @{}},
+}
 Навык & Название & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{quote}
 Вес, кг
@@ -2020,7 +1983,7 @@ https://github.com/guidebot/peace\_and\_prosperity
   невозможна. Х -- радиус отклонения в см. Если не указан, значит 0.}
 \end{quote}\strut
 \end{minipage} \\
-\multirow{2}{=}{Гранаты} & Осколочные гранаты &
+\SetCell[r=2]{l} Гранаты & Осколочные гранаты &
 \begin{minipage}[t]{\linewidth}\raggedright
 \begin{quote}
 -
@@ -2121,7 +2084,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 Â
 \end{quote}
 \end{minipage} \\
-\multirow{5}{=}{Лёгкое стрелковое} & Пистолеты & 0.8-1.4 & 0.1 & 2 & 3 &
+\SetCell[r=5]{l} Лёгкое стрелковое & Пистолеты & 0.8-1.4 & 0.1 & 2 & 3 &
 4 & - & 1 & - \\
 & Пистолеты-пулемёты & 1.3-3.3 & 0.1 & 6 & 10 & 20 & - & 1 & - \\
 & Укороченные автоматы & 2.0-3.2 & 0.1 & 6 & 10 & 20 & 1 & 1 & - \\
@@ -2130,26 +2093,26 @@ https://github.com/guidebot/peace\_and\_prosperity
 \multicolumn{10}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{1.0000} + 18\tabcolsep}@{}}{%
 Снайперские винтовки (см. Таблица 15: характеристики снайперских
 винтовок)} \\
-\multirow{5}{=}{Пулемёты} & ПКМ & 8.2 & 1.6 & 24 & 50 & 100 & 2 & 2 &
+\SetCell[r=5]{l} Пулемёты & ПКМ & 8.2 & 1.6 & 24 & 50 & 100 & 2 & 2 &
 В \\
 & M240 & 12.2 & 1.6 & 24 & 50 & 100 & 2 & 2 & В \\
 & ПКМС & 12 & 1.6 & 40 & 80 & 160 & 2 & 3 & С \\
 & M240B & 21 & 1.6 & 40 & 80 & 160 & 2 & 3 & СВ \\
 & Утёс, M2 Browning, КПВ & 41 & 3.8 & 50 & 100 & 200 & 3 & 3 & СВ \\
-\multirow{4}{=}{Реактивные гранатомёты} & РПГ-7 & 6.3 & 3 & 15 & 30 & 50
+\SetCell[r=4]{l} Реактивные гранатомёты & РПГ-7 & 6.3 & 3 & 15 & 30 & 50
 & 8 & 3 & - \\
 & M-72 LAW & - & 2.5 & 6 & 10 & 20 & 8 & 1 & - \\
 & РПГ-29 Вампир & - & 2.6 & 15 & 30 & 50 & 9 & 1 & - \\
 & СПГ-9 & 48 & 4.5 & 40 & 80 & 160 & 8 & 3 & С \\
-\multirow{2}{=}{Гранатомёты} & M203, ГП-30 & 1.3 & 0.3 & 10 & 20 & 30 &
+\SetCell[r=2]{l} Гранатомёты & M203, ГП-30 & 1.3 & 0.3 & 10 & 20 & 30 &
 2 & 2 & СА \\
 & Mk 19 Mod 3, АГС-30 & 31 & 7 & 60 & 120 & 240 & 2 & 3 & СА \\
-\multirow{4}{=}{ПТРК\footnote{Противотанковый Ракетный Комплекс}} &
+\SetCell[r=4]{l} ПТРК\footnote{Противотанковый Ракетный Комплекс} &
 Метис-М & 6.2 & 6.8 & - & - & 200 & 10 & 1 & С \\
 & Фагот & 22.5 & 12.9 & - & - & 200 & 10 & 1 & С \\
 & Конкурс & 22.5 & 14.6 & - & - & 300 & 11 & 1 & С \\
 & FGM-148 Javelin & 6.8 & 15.5 & - & - & 300 & 11 & 1 & С \\
-\multirow{2}{=}{Миномёты} & Миномёт 60 мм & 19 & 3 & - & - & 340 & 3 & 3
+\SetCell[r=2]{l} Миномёты & Миномёт 60 мм & 19 & 3 & - & - & 340 & 3 & 3
 & СÂ2 \\
 & Миномёт 80 мм & 48 & 7 & - & - & 590 & 5 & 3 & СÂ3 \\
 ПЗРК\footnote{Переносной Зенитно-Ракетный Комплекс} & Стингер, Верба & 8
@@ -2160,7 +2123,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 \multicolumn{10}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{1.0000} + 18\tabcolsep}@{}}{%
 Взрывные устройства и мины (см. Таблица 18: характеристики взрывных
 устройств и мин)} \\
-\end{longtable}
+
+\end{tblr}
 
 \phantomsection\label{_Ref31797173}{}Таблица 13: характеристики
 пехотного вооружения
@@ -2180,11 +2144,12 @@ https://github.com/guidebot/peace\_and\_prosperity
 
 Бронежилеты характеризуются весом и предоставляемой защитой.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.6799}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1535}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1666}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.6799] X[l, co=0.1535] X[l, co=0.1666] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 Бронежилет
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -2192,15 +2157,12 @@ https://github.com/guidebot/peace\_and\_prosperity
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Защита
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 MSV без плит\footnote{Может быть спрятан под одеждой.} & 2.5 & 1 \\
 MSV с плитами & 7.5 & 4 \\
 MSV с плитами и модулями для шеи и паха & 11.5 & 6 \\
 Кит-2 & 28 & 7 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 14: характеристики бронежилетов
 
@@ -2278,20 +2240,12 @@ MSV с плитами и модулями для шеи и паха & 11.5 & 6 \
 (подготовки в течение 1 хода или 30 секунд). Стрельба из лёгких
 снайперских винтовок возможна без подготовки, но по факту неэффективна.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.2545}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0909}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0727}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0545}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0909}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1091}}@{}}
-\toprule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.2545] X[l, co=0.1091] X[l, co=0.0909] X[l, co=0.1091] X[l, co=0.0727] X[l, co=0.0545] X[l, co=0.0909] X[l, co=0.1091] X[l, co=0.1091] @{}},
+}
 Название & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{quote}
 Вес, кг
@@ -2328,7 +2282,8 @@ MSV с плитами и модулями для шеи и паха & 11.5 & 6 \
 H\&K G28 & 5.7 & 0.1 & 80 & 1 & 1 & 10x & - & +8 \\
 СВЧ-308 7,62 & 5.3 & 0.1 & 120 & 1 & 1 & 12x & - & +8 \\
 Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 15: характеристики снайперских винтовок
 
@@ -2361,11 +2316,12 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
   \hyperref[observation]{14},
   6.3.1 Наблюдение, стр. \hyperref[_Ref213449133]{14}, Таблица 8.}.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2147}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3042}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4811}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.2147] X[l, co=0.3042] X[l, co=0.4811] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 Кратность
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -2376,15 +2332,12 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 Оптические характеристики (модификатор днём/в сумерки/макс. дальность,
 см)
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 2x -- 4x & +1 & - / - / 200 \\
 5x -- 8x & +2 & +2 / - / 240 \\
 9x -- 23x & +3 & +3 / +1 / 280 \\
 24x -- 32x & +4 & +4 / +2 / 320 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 16: характеристики оптических прицелов
 
@@ -2459,14 +2412,12 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 защититься от такой атаки, если хотя бы у одного из солдат в этом отряде
 есть дробовик, при этом расходуется его боезапас.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.4490}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0855}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1271}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1271}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1057}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1057}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.4490] X[l, co=0.0855] X[l, co=0.1271] X[l, co=0.1271] X[l, co=0.1057] X[l, co=0.1057] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \begin{quote}
@@ -2489,15 +2440,12 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 Интенсивность огня (ИО)
 \end{quote}
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 Разведывательный дрон & 2 & 50 & 50 & - & - \\
 Дрон со сбросом & 3 & 50 & 30 & 2 & 2 \\
 Ударный дрон c радиоканалом & 12 & 60 & 40 & 8 & 3 \\
 Ударный дрон с оптоволоконным каналом & 12 & 60 & 40 & 8 & 3 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 17: характеристики беспилотных летательных аппаратов
 
@@ -2563,12 +2511,12 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 При использовании взрывных устройств в помещении показатель
 интенсивности огня удваивается.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.6607}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1164}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1101}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1128}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.6607] X[l, co=0.1164] X[l, co=0.1101] X[l, co=0.1128] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \begin{quote}
@@ -2583,10 +2531,6 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 Интенсивность огня (ИО)
 \end{quote}
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 Противопехотная мина ПФМ & - & - & 1 \\
 Противопехотная мина ОЗМ & 5 & - & 4 \\
 Противотанковая мина ТМ & 11 & 6 & 4\footnote{Для поражения пехоты
@@ -2598,28 +2542,20 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 Взрывчатка & 3 & 3 & 2 \\
 Взрывчатка & 5 & 4 & 3 \\
 Взрывчатка & 10 & 6 & 4 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 18: характеристики взрывных устройств и мин
 
 \subsection{Вооружение
 техники}\label{vehicle-weapons}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0725}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.3434}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0723}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0732}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0751}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0720}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0723}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0723}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0723}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0745}}@{}}
-\toprule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.0725] X[l, co=0.3434] X[l, co=0.0723] X[l, co=0.0732] X[l, co=0.0751] X[l, co=0.0720] X[l, co=0.0723] X[l, co=0.0723] X[l, co=0.0723] X[l, co=0.0745] @{}},
+}
 \multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
 } & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{quote}
@@ -2701,53 +2637,25 @@ MILAN} & 240 & 240 & 240 & - & 10 & - & - & С \\
 Ракетные системы залпового огня} \\
 \multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.4159} + 2\tabcolsep}}{%
 БМ 21 Град} & - & - & 1200 & 15 & 8 & 4 & - & СА \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 19: характеристики вооружения техники
 
 \subsection{Бронебойность и
 бронированность}\label{armor}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0708}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.2330}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0632}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.0633}}@{}}
-\toprule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-\multirow{3}{=}{\begin{minipage}[t]{\linewidth}\raggedright
-\begin{quote}
-Броня (\textbf{Бр})
-\end{quote}
-\end{minipage}} & \multirow{3}{=}{} &
-\multicolumn{11}{>{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.6962} + 20\tabcolsep}@{}}{%
-Бронебойность оружия (\textbf{ББ})} \\
-& &
-\multicolumn{3}{>{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.1898} + 4\tabcolsep}}{%
-ОФ\footnote{ОФ -- Осколочно-Фугасные гранаты, мины, снаряды.} гранаты,
-БП\footnote{БП -- Бронебойные Пули.}} &
-\multicolumn{4}{>{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.2532} + 6\tabcolsep}}{%
-БС\footnote{БС -- кинетический Бронебойный Снаряд, в том числе,
-  например, БОПС -- Бронебойный Оперённый Подкалиберный Снаряд.}
-автопушек, ОФ мины} &
-\multicolumn{4}{>{\raggedright\arraybackslash}p{(\columnwidth - 24\tabcolsep) * \real{0.2532} + 6\tabcolsep}@{}}{%
-БС большого калибра, БК\footnote{БК -- Бронебойный Кумулятивный
-  боеприпас (снаряд, ракета, мина).}} \\
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} Q[l, wd=0.0708\linewidth] Q[l, wd=0.2330\linewidth] Q[c, wd=0.0632\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] @{}},
+}
+\SetCell[r=3]{l} Броня (\textbf{Бр}) & \SetCell[r=3]{l} {} & \SetCell[c=11]{l} Бронебойность оружия (\textbf{ББ}) & & & & & & & & & & \\
+& & \SetCell[c=3]{l} ОФ\footnote{ОФ -- Осколочно-Фугасные гранаты, мины, снаряды.} гранаты, БП\footnote{БП -- Бронебойные Пули.} & & & \SetCell[c=4]{l} БС\footnote{БС -- кинетический Бронебойный Снаряд, в том числе, например, БОПС -- Бронебойный Оперённый Подкалиберный Снаряд.} автопушек, ОФ мины & & & & \SetCell[c=4]{l} БС большого калибра, БК\footnote{БК -- Бронебойный Кумулятивный боеприпас (снаряд, ракета, мина).} & & & \\
 & & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\
 0 & Небронированная & & & & & & & & & & & \\
-& Уничтожена & 20+ & 14+ & 11+ & 8+ & 7+ & 7+ & 7+ & 7+ & 7+ & 7+ &
-7+ \\
+& Уничтожена & 20+ & 14+ & 11+ & 8+ & 7+ & 7+ & 7+ & 7+ & 7+ & 7+ & 7+ \\
 & Стресс & 13+ & 8+ & 5+ & 3+ & 3+ & 4+ & 5+ & & & & \\
 2 & Легкобронированная & & & & & & & & & & & \\
 & Уничтожена & & & 19+ & 18+ & 15+ & 14+ & 13+ & 11+ & 10+ & 8+ & 7+ \\
@@ -2764,7 +2672,7 @@ MILAN} & 240 & 240 & 240 & - & 10 & - & - & С \\
 7 & Танк 3 поколения & & & & & & & & & & & \\
 & Уничтожен & & & & & & & & 26+ & 23+ & 21+ & 19+ \\
 & Стресс & & & & & & & & 23+ & 21+ & 19+ & 17+ \\
-\end{longtable}
+\end{tblr}
 
 \phantomsection\label{table-armor}{}Таблица 20: бронебойность оружия
 (ББ) и броня техники (Бр)
@@ -2843,26 +2751,24 @@ MILAN} & 240 & 240 & 240 & - & 10 & - & - & С \\
   6.3.2.4.1 Модификатор навыка.} Ур(X) и оценивается по таблице исходя
 из текущих очков корректировки орудия (см. Таблица 21).
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4877}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5123}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.4877] X[l, co=0.5123] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 Очки корректировки
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Результат броска D20 с учётом навыка
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 0 & 22+ \\
 1 & 19+ \\
 2 & 14+ \\
 3 & 8+ \\
 4 & 4+ \\
 5 & 1+ \\
-\end{longtable}
+\end{tblr}
 
 Таблица 21: пристрелка и корректировка при стрельбе непрямой наводкой
 
@@ -2916,13 +2822,12 @@ MILAN} & 240 & 240 & 240 & - & 10 & - & - & С \\
 радиостанциям, 1 уровень соответствует военным радиостанциям 5
 поколения, 2 уровень соответствует военным радиостанциям 6 поколения.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2157}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0980}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1373}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2941}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2549}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.2157] X[l, co=0.0980] X[l, co=0.1373] X[l, co=0.2941] X[l, co=0.2549] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 Тип
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -2938,10 +2843,6 @@ MILAN} & 240 & 240 & 240 & - & 10 & - & - & С \\
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Радиус передачи, см
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 Сотовый & 0 & 0.5 & \begin{minipage}[t]{\linewidth}\raggedright
 Apple\\
 Samsung\strut
@@ -2951,16 +2852,17 @@ Samsung\strut
 Радио & 2 & 0.5 & Р-187-П1 Азарт & 200 \\
 Спутник & 1 & 16.0 & Р-438М Белозер & $\infty$ \\
 & & & & \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 22: переносные средства связи
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1794}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0940}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4961}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2305}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.1794] X[l, co=0.0940] X[l, co=0.4961] X[l, co=0.2305] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 Тип
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -2972,16 +2874,13 @@ Samsung\strut
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Радиус передачи, км
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 Радио & 1 & Р-168-100У Акведук & 200 \\
 Радио & 1 & Зоопарк & 200 \\
 Радио & 2 & Р-187ВЕ Азарт & 200 \\
 Спутник & 1 & Р-448 Аурига & $\infty$ \\
 & & & \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 23: возимые средства связи
 
@@ -2992,12 +2891,12 @@ Samsung\strut
 разведывательные дроны, дроны со сбросом, а также барражирующие
 боеприпасы с радиоканалом.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0938}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1133}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5367}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2562}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.0938] X[l, co=0.1133] X[l, co=0.5367] X[l, co=0.2562] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 \begin{quote}
 Уровень
@@ -3011,22 +2910,20 @@ Samsung\strut
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Радиус подавления, см
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 1 & 3.8 & Капюшон & 20 \\
 2 & 20.0 & Гарпия Периметр & 60 \\
 & & & \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 24: переносные средства РЭП
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0938}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.6500}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2562}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.0938] X[l, co=0.6500] X[l, co=0.2562] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 \begin{quote}
 Уровень
@@ -3036,14 +2933,11 @@ Samsung\strut
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Радиус подавления, см
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 1 & Капюшон & 40 \\
 2 & Ромашка & 100 \\
 2 & Чистюля & 300 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 25: возимые и стационарные средства РЭП
 
@@ -3064,12 +2958,12 @@ Samsung\strut
 перехватывать и подделывать сообщения. Станции РЭР могут быть 1 или 2
 уровней и работать с радиостанциями 0 и 1 уровней, соответственно.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0938}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4349}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2562}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2151}}@{}}
-\toprule\noalign{}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={@{} X[l, co=0.0938] X[l, co=0.4349] X[l, co=0.2562] X[l, co=0.2151] @{}},
+}
 \begin{minipage}[b]{\linewidth}\raggedright
 \begin{quote}
 Уровень
@@ -3081,14 +2975,11 @@ Samsung\strut
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Радиус передачи, км
 \end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
 1 & Леер-2 & 100 & 200 \\
 2 & Леер-3 & 150 & 200 \\
 2 & Монолит & 300 & 200 \\
-\end{longtable}
+
+\end{tblr}
 
 Таблица 26: возимые и стационарные средства РЭР
 
