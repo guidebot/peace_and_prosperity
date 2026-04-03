@@ -14,6 +14,13 @@
 \usepackage{microtype}
 \usepackage{parskip}
 \usepackage{xcolor}
+\definecolor{navy}{RGB}{0,0,128}
+\usepackage{titlesec}
+\titleformat{\section}{\color{navy}\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\color{navy}\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\color{navy}\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titleformat{\paragraph}{\color{navy}\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titleformat{\subparagraph}{\color{navy}\normalfont\normalsize\itshape}{\thesubparagraph}{1em}{}
 \usepackage{multicol}
 \usepackage{background}
 \usepackage{wallpaper}
@@ -52,7 +59,7 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\setcounter{secnumdepth}{5} % enable section numbering up to subsubparagraph
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
@@ -117,6 +124,7 @@
 % Table of contents (automatic)
 \renewcommand{\contentsname}{Содержание}
 \tableofcontents
+\thispagestyle{empty}
 
 \end{multicols}
 
@@ -1590,10 +1598,7 @@ https://github.com/guidebot/peace\_and\_prosperity
   Cм. стр.
   \hyperref[shooting-modifiers]{17},
   6.3.2.4 Модификаторы при
-  стрельбе.}{ Cм. стр. 17, 6.3.2.4 Модификаторы при стрельбе.}}\label{see-p17-shooting-modifiers}
-  \addcontentsline{toc}{subsubsection}{ Cм. стр.
-  \hyperref[shooting-modifiers]{17},
-  6.3.2.4 Модификаторы при стрельбе.}}.
+  стрельбе.}{ Cм. стр. 17, 6.3.2.4 Модификаторы при стрельбе.}}\label{see-p17-shooting-modifiers}}.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3267}}
@@ -1700,10 +1705,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 стрельбе\footnote{\subsubsection*{\texorpdfstring{ Cм. стр.
   \hyperref[shooting-modifiers]{17},
   6.3.2.4 Модификаторы при
-  стрельбе.}{ Cм. стр. 17, 6.3.2.4 Модификаторы при стрельбе.}}\label{see-p17-shooting-modifiers-1}
-  \addcontentsline{toc}{subsubsection}{ Cм. стр.
-  \hyperref[shooting-modifiers]{17},
-  6.3.2.4 Модификаторы при стрельбе.}} и сравнить результат с пороговым
+  стрельбе.}{ Cм. стр. 17, 6.3.2.4 Модификаторы при стрельбе.}}\label{see-p17-shooting-modifiers-1}} и сравнить результат с пороговым
 значением.
 
 Если результат равен или превышает порог уничтожения, техника считается
