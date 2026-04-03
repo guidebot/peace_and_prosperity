@@ -31,9 +31,13 @@
 \usepackage{calc} % for calculating minipage widths
 \usepackage{rotating} % for vertical text
 \usepackage{caption} % for caption formatting
+\usepackage{capt-of} % for \captionof outside floats
 
-% Style table captions: italic, centered
-\captionsetup{labelfont=it,textfont=it,justification=centering}
+% Style table/figure captions: navy, italic, centered
+\captionsetup{labelfont={it,color=navy},textfont={it,color=navy},justification=centering}
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[name={Схема}]{scheme}
+\captionsetup[scheme]{labelfont={it,color=navy},textfont={it,color=navy},justification=centering}
 
 \usepackage{graphicx}
 \makeatletter
@@ -61,8 +65,13 @@
 \usepackage[outline]{contour}
 \contourlength{1.5pt}
 
-\author{}
-\date{}
+\newcommand{\authorname}{Никита Макаров}
+\newcommand{\docdate}{Март 2026}
+\newcommand{\siteurl}{https://vk.com/playingwar}
+\newcommand{\doccity}{Санкт-Петербург}
+
+\author{\authorname}
+\date{\docdate}
 
 \renewcommand{\contentsname}{\centering Содержание}
 
@@ -89,13 +98,13 @@
 
 \vfill
 
-\contour{black}{\color{white}\Large\textbf{Никита Макаров}}
+\contour{black}{\color{white}\Large\textbf{\authorname}}
 
-\contour{black}{\color{white}\href{HTTPS://VK.COM/PLAYINGWAR}{\textbf{HTTPS://VK.COM/PLAYINGWAR}}}
+\contour{black}{\color{white}\href{\siteurl}{\textbf{\MakeUppercase{\siteurl}}}}
 
-\contour{black}{\color{white}\textbf{Санкт-Петербург}}
+\contour{black}{\color{white}\textbf{\doccity}}
 
-\contour{black}{\color{white}\textbf{Март, 2026}}
+\contour{black}{\color{white}\textbf{\docdate}}
 \end{center}
 \end{titlepage}
 \clearpage
@@ -110,20 +119,13 @@
 }
 \BgThispage
 
-% Start two-column layout
 \begin{multicols}{2}
 
-% Table of contents (automatic)
 \renewcommand{\contentsname}{Содержание}
 \tableofcontents
 \thispagestyle{empty}
 
-\end{multicols}
-
 \clearpage
-
-% Start two-column layout for main content
-\begin{multicols}{2}
 
 \section{Введение}\label{intro}
 
@@ -300,8 +302,8 @@ States Army Field Manuals, в том числе с использованием 
 Харизма & Влияние (ВЛН) \\
 
 \end{tblr}
-
-Таблица 1: атрибуты и навыки
+\captionof{table}{атрибуты и навыки}
+\label{table-attributes}
 
 Значения атрибутов используются для ограничения максимального значения
 соответствующих навыков. Допускается игра без указания атрибутов, тогда
@@ -334,8 +336,8 @@ States Army Field Manuals, в том числе с использованием 
 20 & 6 \\
 
 \end{tblr}
-
-Таблица 2: очки тренированности и навыка
+\captionof{table}{очки тренированности и навыка}
+\label{table-skill-levels}
 
 Навыки ЛГК и ВЛН используются при определении порядка действия отрядов и
 при восстановлении эффективности отряда после полученного
@@ -385,9 +387,8 @@ States Army Field Manuals, в том числе с использованием 
 75\% - 100\% & 2 & - & - \\
 
 \end{tblr}
-
-\phantomsection\label{table-movement}{}Таблица 3: скорость пешего
-передвижения в зависимости от нагрузки
+\captionof{table}{скорость пешего передвижения в зависимости от нагрузки}
+\label{table-movement}
 
 При нагрузке менее 75\% отряд может двигаться бегом со скоростью в два
 раза выше пешей скорости.
@@ -615,8 +616,8 @@ States Army Field Manuals, в том числе с использованием 
 Генерал & 20 & 5 & 3 & 6 \\
 
 \end{tblr}
-
-Таблица 4: создание случайного персонажа
+\captionof{table}{создание случайного персонажа}
+\label{table-char-gen}
 
 Прошедшие военные сборы персонажи получают 8 ВНС, 4 МНВ, 1 МСК, 5 ЛС и 2
 ГРН. Для гражданских персонажей максимальное значение навыков, связанных
@@ -729,9 +730,7 @@ D20, прибавляет к своему броску свой показате
 из фигурок. Если используется миниатюра техники, можно использовать
 точку посредине переднего края корпуса или одно из колёс.
 
-Техника с бронёй 2 и больше\footnote{См. стр.
-  \hyperref[table-armor]{26}, Таблица 19: бронебойность оружия (ББ) и
-  броня техники (Бр).} имеет ориентацию, то есть у неё есть фронт,
+Техника с бронёй 2 и больше\footnote{См. Таблицу~\ref{table-armor}.} имеет ориентацию, то есть у неё есть фронт,
 фланги и тыл. Пехотные отряды не ориентированы.
 
 Ориентация боевой единицы влияет на ущерб от выстрелов, это отражает
@@ -750,8 +749,7 @@ D20, прибавляет к своему броску свой показате
 фронтальной линией ведут фланговый огонь (атака во фланг или с тыла).
 
 \includegraphics[width=\linewidth]{media/image7.png}
-
-Схема 1: ориентация и фронтальная линия
+\captionof{scheme}{ориентация и фронтальная линия}
 
 \subsubsection{Линии видимости и
 огня}\label{los}
@@ -1159,8 +1157,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 2,7 & 6 \\
 
 \end{tblr}
-
-Таблица 5: восстановление очков стресса
+\captionof{table}{восстановление очков стресса}
+\label{table-stress-recovery}
 
 Персонажи с кровотечением теряют 1 очко навыка ВНС, а если количество
 очков ВНС персонажа уже 0 к этому времени, такой персонаж умирает.
@@ -1209,9 +1207,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 Автомобиль & 6 см & 20 см & 30+ \\
 
 \end{tblr}
-
-Таблица 6: дальность движения за ход и значения для броска кубиков при
-преодолении препятствий
+\captionof{table}{дальность движения за ход и значения для броска кубиков при преодолении препятствий}
+\label{table-vehicle-movement}
 
 При выполнении действия следует положить рядом с боевой единицей маркер
 движения, его можно будет убрать при следующей активации боевой единицы.
@@ -1398,8 +1395,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 Туман & 7 & 6 \\
 
 \end{tblr}
-
-Таблица 7: базовое значение видимости и дальность видимости
+\captionof{table}{базовое значение видимости и дальность видимости}
+\label{table-visibility}
 
 \begin{tblr}{
   hlines,
@@ -1427,9 +1424,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 & Туман & +4 & 6 \\
 
 \end{tblr}
-
-\phantomsection\label{_Ref213449133}{}Таблица 8: модификатор видимости
-от снаряжения
+\captionof{table}{модификатор видимости от снаряжения}
+\label{table-visibility-equipment}
 
 \begin{tblr}{
   hlines,
@@ -1448,8 +1444,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 Поиск мин (0 -- 1) & 22+ \\
 
 \end{tblr}
-
-Таблица 9: пороговые значения для броска кубика при проведении разведки
+\captionof{table}{пороговые значения для броска кубика при проведении разведки}
+\label{table-recon-thresholds}
 
 Если противник находится под крышей, то его невозможно обнаружить БПЛА с
 радиоуправлением, только БПЛА с оптоволоконным каналом связи.
@@ -1565,8 +1561,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 4 & 20+ & 4 \\
 
 \end{tblr}
-
-Таблица 10: количество очков стресса при стрельбе
+\captionof{table}{количество очков стресса при стрельбе}
+\label{table-stress-from-fire}
 
 Затем также определяется количество поражённых солдат, но к результату
 броска D20 применяются все модификаторы\footnote{\subsubsection*{\texorpdfstring{
@@ -1598,8 +1594,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 4 & 22+ & 3 \\
 
 \end{tblr}
-
-Таблица 11: количество раненых при стрельбе
+\captionof{table}{количество раненых при стрельбе}
+\label{table-wounds-from-fire}
 
 Распределение ран по персонажам отряда происходит среди персонажей, у
 которых ещё нет кровотечения, в порядке возрастания очков
@@ -1829,8 +1825,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 Надёжное & -4 \\
 
 \end{tblr}
-
-Таблица 12: значения модификаторов для типов укрытий
+\captionof{table}{значения модификаторов для типов укрытий}
+\label{table-cover-modifiers}
 
 \subparagraph{Модификатор огня
 вслепую}\label{mod-blind}
@@ -2126,9 +2122,8 @@ https://github.com/guidebot/peace\_and\_prosperity
 устройств и мин)} \\
 
 \end{tblr}
-
-\phantomsection\label{_Ref31797173}{}Таблица 13: характеристики
-пехотного вооружения
+\phantomsection\label{_Ref31797173}{}\captionof{table}{характеристики пехотного вооружения}
+\label{table-infantry-weapons}
 
 \subsubsection{Стимуляторы}\label{stimulants}
 
@@ -2164,8 +2159,8 @@ MSV с плитами и модулями для шеи и паха & 11.5 & 6 \
 Кит-2 & 28 & 7 \\
 
 \end{tblr}
-
-Таблица 14: характеристики бронежилетов
+\captionof{table}{характеристики бронежилетов}
+\label{table-body-armor}
 
 Персонаж может использовать только один бронежилет. При наличии
 нескольких бронежилетов в инвентаре учитывается бронежилет с
@@ -2285,8 +2280,8 @@ H\&K G28 & 5.7 & 0.1 & 80 & 1 & 1 & 10x & - & +8 \\
 Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 
 \end{tblr}
-
-Таблица 15: характеристики снайперских винтовок
+\captionof{table}{характеристики снайперских винтовок}
+\label{table-sniper-rifles}
 
 \subsubsection{Модификации стрелкового
 оружия}\label{weapon-mods}
@@ -2339,8 +2334,8 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 24x -- 32x & +4 & +4 / +2 / 320 \\
 
 \end{tblr}
-
-Таблица 16: характеристики оптических прицелов
+\captionof{table}{характеристики оптических прицелов}
+\label{table-optics}
 
 Приборы ночного видения и тепловизоры можно использовать только
 совместно с коллиматорами, лазерными прицелами и открытыми прицельными
@@ -2447,8 +2442,8 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 Ударный дрон с оптоволоконным каналом & 12 & 60 & 40 & 8 & 3 \\
 
 \end{tblr}
-
-Таблица 17: характеристики беспилотных летательных аппаратов
+\captionof{table}{характеристики беспилотных летательных аппаратов}
+\label{table-drones}
 
 \subsubsection{Взрывные устройства и
 мины}\label{explosives-mines}
@@ -2545,8 +2540,8 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 Взрывчатка & 10 & 6 & 4 \\
 
 \end{tblr}
-
-Таблица 18: характеристики взрывных устройств и мин
+\captionof{table}{характеристики взрывных устройств и мин}
+\label{table-explosives}
 
 \subsection{Вооружение
 техники}\label{vehicle-weapons}
@@ -2582,8 +2577,8 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 БМ 21 Град & - & - & 1200 & 15 & 8 & 4 & - & СА \\
 
 \end{tblr}
-
-Таблица 19: характеристики вооружения техники
+\captionof{table}{характеристики вооружения техники}
+\label{table-vehicle-weapons}
 
 \subsection{Бронебойность и
 бронированность}\label{armor}
@@ -2616,9 +2611,8 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 & Уничтожен & & & & & & & & 26+ & 23+ & 21+ & 19+ \\
 & Стресс & & & & & & & & 23+ & 21+ & 19+ & 17+ \\
 \end{tblr}
-
-\phantomsection\label{table-armor}{}Таблица 20: бронебойность оружия
-(ББ) и броня техники (Бр)
+\captionof{table}{бронебойность оружия (ББ) и броня техники (Бр)}
+\label{table-armor}
 
 \subsection{Огневая
 поддержка}\label{fire-support-section}
@@ -2712,8 +2706,8 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 4 & 4+ \\
 5 & 1+ \\
 \end{tblr}
-
-Таблица 21: пристрелка и корректировка при стрельбе непрямой наводкой
+\captionof{table}{пристрелка и корректировка при стрельбе непрямой наводкой}
+\label{table-fire-correction}
 
 В случае успеха тот же самый результат кубика снова используется для
 определения эффекта от попадания по цели.
@@ -2797,8 +2791,8 @@ Samsung\strut
 & & & & \\
 
 \end{tblr}
-
-Таблица 22: переносные средства связи
+\captionof{table}{переносные средства связи}
+\label{table-portable-comms}
 
 \begin{tblr}{
   hlines,
@@ -2824,8 +2818,8 @@ Samsung\strut
 & & & \\
 
 \end{tblr}
-
-Таблица 23: возимые средства связи
+\captionof{table}{возимые средства связи}
+\label{table-vehicle-comms}
 
 Для подавления радиосвязи, в том числе для выведения из строя дронов с
 радиоканалом управления, существуют станции РЭП\footnote{РадиоЭлектронное
@@ -2858,8 +2852,8 @@ Samsung\strut
 & & & \\
 
 \end{tblr}
-
-Таблица 24: переносные средства РЭП
+\captionof{table}{переносные средства РЭП}
+\label{table-portable-ew}
 
 \begin{tblr}{
   hlines,
@@ -2881,8 +2875,8 @@ Samsung\strut
 2 & Чистюля & 300 \\
 
 \end{tblr}
-
-Таблица 25: возимые и стационарные средства РЭП
+\captionof{table}{возимые и стационарные средства РЭП}
+\label{table-vehicle-ew}
 
 Отряды, попадающие в зону действия РЭП, не могут корректировать огонь
 артиллерии, не могут управлять дронами, не могут дистанционно подрывать
@@ -2923,8 +2917,8 @@ Samsung\strut
 2 & Монолит & 300 & 200 \\
 
 \end{tblr}
-
-Таблица 26: возимые и стационарные средства РЭР
+\captionof{table}{возимые и стационарные средства РЭР}
+\label{table-vehicle-esm}
 
 Любые боевые единицы, использующие радиосвязь, регистрируемую РЭР,
 демаскируются, в том числе и другие станции РЭР, которые передают
@@ -2981,9 +2975,9 @@ Samsung\strut
 Соболятник & 36.0 & 600 \\
 \bottomrule
 \end{tabular}
+\captionof{table}{переносные РЛС}
+\label{table-portable-radar}
 \end{center}
-
-Таблица 27: переносные РЛС
 
 \begin{center}
 \begin{tabular}{@{}
@@ -2997,9 +2991,9 @@ AN/TPQ-53 & 3000 \\
 & \\
 \bottomrule
 \end{tabular}
+\captionof{table}{возимые РЛС}
+\label{table-vehicle-radar}
 \end{center}
-
-Таблица 28: возимые РЛС
 
 \end{multicols}
 
