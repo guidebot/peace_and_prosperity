@@ -1,5 +1,5 @@
 % Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{unicode,pdfusetitle}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
@@ -35,6 +35,15 @@
 
 % Style table/figure captions: navy, italic, centered
 \captionsetup{labelfont={it,color=navy},textfont={it,color=navy},justification=centering}
+
+% Prevent page/column breaks between tables and captions
+\newcommand{\tblcaption}[2]{%
+  \par\vspace{0.5ex}%
+  \noindent\begin{minipage}{\linewidth}%
+    \captionof{table}{#1}\label{#2}%
+  \end{minipage}%
+  \par\medskip%
+}
 \usepackage{newfloat}
 \DeclareFloatingEnvironment[name={Схема}]{scheme}
 \captionsetup[scheme]{labelfont={it,color=navy},textfont={it,color=navy},justification=centering}
@@ -51,29 +60,25 @@
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5} % enable section numbering up to subsubparagraph
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
+  hidelinks
+}
 \usepackage[outline]{contour}
 \contourlength{1.5pt}
 
-\newcommand{\authorname}{Никита Макаров}
-\newcommand{\docdate}{Март 2026}
+\title{Контракт}
 \newcommand{\siteurl}{https://vk.com/playingwar}
-\newcommand{\doccity}{Санкт-Петербург}
-
-\author{\authorname}
-\date{\docdate}
+\author{Никита Макаров}
 
 \renewcommand{\contentsname}{\centering Содержание}
 
 \begin{document}
 
-% Title page with background image
 \begin{titlepage}
 \backgroundsetup{
   scale=1,
@@ -82,30 +87,30 @@
   position={current page.center},
   contents={\includegraphics[width=\paperwidth*2,height=\paperheight,clip]{media/image2.jpg}}
 }
-\BgThispage
 
 \begin{center}
 \vspace*{2cm}
+
 \contour{black}{\color{white}\fontsize{48}{56}\selectfont\textbf{Контракт}}
 
 \vspace{0.5cm}
 
 \contour{black}{\color{white}\fontsize{32}{40}\selectfont\textbf{Ролевая тактическая игра}}
 
+%\maketitle
+
 \vfill
 
-\contour{black}{\color{white}\Large\textbf{\authorname}}
+\contour{black}{\color{white}\Large\textbf{Никита Макаров}}
 
 \contour{black}{\color{white}\href{\siteurl}{\textbf{\MakeUppercase{\siteurl}}}}
 
-\contour{black}{\color{white}\textbf{\doccity}}
+\contour{black}{\color{white}\textbf{Санкт-Петербург}}
 
-\contour{black}{\color{white}\textbf{\docdate}}
 \end{center}
 \end{titlepage}
 \clearpage
 
-% Reset background for subsequent pages with tiling
 \backgroundsetup{
   scale=1,
   angle=0,
@@ -113,7 +118,6 @@
   position={current page.center},
   contents={\TileWallPaper{1cm}{1cm}{media/image1.jpg}}
 }
-\BgThispage
 
 \begin{multicols}{2}
 \raggedcolumns
@@ -155,7 +159,10 @@ Fireteam: Modern и Team Yankee, была спроектирована осно�
 15\%). Чтобы уменьшить шаг, требуется бросать больше кубиков и
 комбинировать результаты. Автор отдал предпочтение стандартному
 двадцатигранному кубику D20, грани которого пронумерованы от 1 до 20, и
-который даёт шаг вероятности 1/20, то есть 5\%.
+который даёт шаг вероятности 1/20, то есть 5\%. При необходимости,
+кривое (в том числе нормальное) распределение вероятностей, которое
+при использовании нескольких кубиков одновременно получается само по
+себе, автор достигает таблицами эффектов.
 
 Автор понимает, что для многих игроков броски кубиков~-- это важная
 часть процесса игры, фактически игра в игре, однако сам воспринимает их
@@ -271,38 +278,7 @@ States Army Field Manuals, в том числе с использованием 
 Как и во многих других системах ролевых игр, у персонажей есть наборы
 атрибутов и навыков. Навыки привязаны к одному из атрибутов.
 
-\begin{tblr}{
-  hlines,
-  row{odd}={fg=black},
-  row{even}={fg=navy},
-  colspec={@{} X[l, co=0.2581] X[l, co=0.7419] @{}},
-}
-\begin{minipage}[b]{\linewidth}\raggedright
-Атрибут
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Навыки
-\end{minipage} \\
-Здоровье & Выносливость (ВНС) \\
-\SetCell[r=2]{l} Ловкость & Маневрирование (МНВ) \\
-& Маскировка (МСК) \\
-\SetCell[r=7]{l} Меткость & Метательное оружие (гранаты) (ГРН) \\
-& Лёгкое стрелковое оружие (ЛС) \\
-& Снайперское оружие (СН) \\
-& Пулемёты (ПЛМ) \\
-& Управляемые ракеты (УР) \\
-& Управляемые дроны (ДРН) \\
-& Тяжёлое вооружение (ТВ) \\
-Интеллект & Медицина (МЕД) \\
-& Механика (МЕХ) \\
-& Электроника (ЭЛ) \\
-& Взрывчатые вещества (ВЗР) \\
-& Огневая поддержка (ОП) \\
-& Логика (ЛГК) \\
-Харизма & Влияние (ВЛН) \\
-
-\end{tblr}
-\captionof{table}{атрибуты и навыки}
-\label{table-attributes}
+\\begin\{tblr\}\{\n  hlines,\n  row\{1\}=\{halign=c\},\n  row\{odd\}=\{fg=black\},\n  row\{even\}=\{fg=navy\},\n  colspec=\{@{} X\[l, co=0.2581\] X\[l, co=0.7419\] @{}\},\n\}\nАтрибут & Навыки \\\\\nЗдоровье & Выносливость \(ВНС\) \\\\\n\\SetCell\[r=2\]\{l\} Ловкость & Маневрирование \(МНВ\) \\\\\n& Маскировка \(МСК\) \\\\\n\\SetCell\[r=7\]\{l\} Меткость & Метательное оружие \(гранаты\) \(ГРН\) \\\\\n& Лёгкое стрелковое оружие \(ЛС\) \\\\\n& Снайперское оружие \(СН\) \\\\\n& Пулемёты \(ПЛМ\) \\\\\n& Управляемые ракеты \(УР\) \\\\\n& Управляемые дроны \(ДРН\) \\\\\n& Тяжёлое вооружение \(ТВ\) \\\\\nИнтеллект & Медицина \(МЕД\) \\\\\n& Механика \(МЕХ\) \\\\\n& Электроника \(ЭЛ\) \\\\\n& Взрывчатые вещества \(ВЗР\) \\\\\n& Огневая поддержка \(ОП\) \\\\\n& Логика \(ЛГК\) \\\\\nХаризма & Влияние \(ВЛН\) \\\\\n\n\\end\{tblr\}\n\\captionof\{table\}\{атрибуты и навыки\}\n\\label\{table-attributes\}
 
 Значения атрибутов используются для ограничения максимального значения
 соответствующих навыков. Допускается игра без указания атрибутов, тогда
@@ -322,6 +298,7 @@ States Army Field Manuals, в том числе с использованием 
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.5774] X[l, co=0.4226] @{}},
@@ -335,7 +312,7 @@ States Army Field Manuals, в том числе с использованием 
 20 & 6 \\
 
 \end{tblr}
-\captionof{table}{очки тренированности и навыка}
+\nopagebreak\captionof{table}{очки тренированности и навыка}
 \label{table-skill-levels}
 
 Навыки ЛГК и ВЛН используются при определении порядка действия отрядов и
@@ -367,6 +344,7 @@ States Army Field Manuals, в том числе с использованием 
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.3212] X[l, co=0.2777] X[l, co=0.1650] X[l, co=0.2362] @{}},
@@ -386,7 +364,7 @@ States Army Field Manuals, в том числе с использованием 
 75\% - 100\% & 2 & - & - \\
 
 \end{tblr}
-\captionof{table}{скорость пешего передвижения в зависимости от нагрузки}
+\captionof{table}{скорость пешего передвижения в зависимости от нагрузки}\nopagebreak
 \label{table-movement}
 
 При нагрузке менее 75\% отряд может двигаться бегом со скоростью в два
@@ -572,6 +550,7 @@ States Army Field Manuals, в том числе с использованием 
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.3694] X[l, co=0.1662] X[l, co=0.1293] X[l, co=0.1662] X[l, co=0.1689] @{}},
@@ -615,7 +594,7 @@ States Army Field Manuals, в том числе с использованием 
 Генерал & 20 & 5 & 3 & 6 \\
 
 \end{tblr}
-\captionof{table}{создание случайного персонажа}
+\captionof{table}{создание случайного персонажа}\nopagebreak
 \label{table-char-gen}
 
 Прошедшие военные сборы персонажи получают 8 ВНС, 4 МНВ, 1 МСК, 5 ЛС и 2
@@ -779,7 +758,9 @@ D20, прибавляет к своему броску свой показате
 Автор предлагает использовать для этой цели разработанное им
 веб-приложение, находящееся в свободном доступе в интернете по адресу:
 
+\begin{quote}
 https://github.com/guidebot/peace\_and\_prosperity
+\end{quote}
 
 Боевая единица может быть \textbf{замаскированной}, и это означает, что
 её не видят вражеские отряды и не могут открыть по ней прицельный
@@ -1142,6 +1123,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.5147] X[l, co=0.4853] @{}},
@@ -1156,7 +1138,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 2,7 & 6 \\
 
 \end{tblr}
-\captionof{table}{восстановление очков стресса}
+\captionof{table}{восстановление очков стресса}\nopagebreak
 \label{table-stress-recovery}
 
 Персонажи с кровотечением теряют 1 очко навыка ВНС, а если количество
@@ -1192,6 +1174,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={Q[l, wd=0.18\linewidth] Q[l, wd=0.28\linewidth] Q[l, wd=0.18\linewidth] Q[l, wd=0.22\linewidth]},
@@ -1206,7 +1189,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 Автомобиль & 6 см & 20 см & 30+ \\
 
 \end{tblr}
-\captionof{table}{дальность движения за ход и значения для броска кубиков при преодолении препятствий}
+\captionof{table}{дальность движения за ход и значения для броска кубиков при преодолении препятствий}\nopagebreak
 \label{table-vehicle-movement}
 
 При выполнении действия следует положить рядом с боевой единицей маркер
@@ -1376,6 +1359,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.3324] X[l, co=0.3509] X[l, co=0.3166] @{}},
@@ -1394,11 +1378,12 @@ https://github.com/guidebot/peace\_and\_prosperity
 Туман & 7 & 6 \\
 
 \end{tblr}
-\captionof{table}{базовое значение видимости и дальность видимости}
+\captionof{table}{базовое значение видимости и дальность видимости}\nopagebreak
 \label{table-visibility}
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.2850] X[l, co=0.1656] X[l, co=0.2424] X[l, co=0.3070] @{}},
@@ -1423,11 +1408,12 @@ https://github.com/guidebot/peace\_and\_prosperity
 & Туман & +4 & 6 \\
 
 \end{tblr}
-\captionof{table}{модификатор видимости от снаряжения}
+\captionof{table}{модификатор видимости от снаряжения}\nopagebreak
 \label{table-visibility-equipment}
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.4800] X[l, co=0.5200] @{}},
@@ -1443,7 +1429,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 Поиск мин (0 -- 1) & 22+ \\
 
 \end{tblr}
-\captionof{table}{пороговые значения для броска кубика при проведении разведки}
+\captionof{table}{пороговые значения для броска кубика при проведении разведки}\nopagebreak
 \label{table-recon-thresholds}
 
 Если противник находится под крышей, то его невозможно обнаружить БПЛА с
@@ -1537,6 +1523,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.3267] X[l, co=0.3505] X[l, co=0.3228] @{}},
@@ -1560,7 +1547,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 4 & 20+ & 4 \\
 
 \end{tblr}
-\captionof{table}{количество очков стресса при стрельбе}
+\captionof{table}{количество очков стресса при стрельбе}\nopagebreak
 \label{table-stress-from-fire}
 
 Затем также определяется количество поражённых солдат, но к результату
@@ -1572,6 +1559,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.3267] X[l, co=0.3505] X[l, co=0.3228] @{}},
@@ -1593,7 +1581,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 4 & 22+ & 3 \\
 
 \end{tblr}
-\captionof{table}{количество раненых при стрельбе}
+\captionof{table}{количество раненых при стрельбе}\nopagebreak
 \label{table-wounds-from-fire}
 
 Распределение ран по персонажам отряда происходит среди персонажей, у
@@ -1815,6 +1803,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.4849] X[l, co=0.5151] @{}},
@@ -1824,7 +1813,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 Надёжное & -4 \\
 
 \end{tblr}
-\captionof{table}{значения модификаторов для типов укрытий}
+\captionof{table}{значения модификаторов для типов укрытий}\nopagebreak
 \label{table-cover-modifiers}
 
 \subparagraph{Модификатор огня
@@ -1930,9 +1919,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 \end{multicols}
 \clearpage
 \begingroup
-\tiny
-\clearpage
-
+\footnotesize
 \section{Снаряжение и
 вооружение}\label{equipment}
 
@@ -1943,9 +1930,10 @@ https://github.com/guidebot/peace\_and\_prosperity
   hlines,
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={X[l, wd=0.15\linewidth] X[l, wd=0.22\linewidth] *{8}{X[c, wd=0.08\linewidth]}},
+  row{1}={h=2.5cm, halign=c},
+  colspec={X[l] Q[l, wd=0.2\linewidth] *{8}{Q[c, wd=0.04\linewidth]}},
 }
-Навык & Название & Вес, кг & Вес боеприпасов, кг & Идеальная дальность, см & Эффективная дальность, см & Максимальная дальность, см & Бронебойность (\textbf{ББ}) & Интенсивность огня (\textbf{ИО}) & Свойства\footnotemark[1] \\
+Навык & Название & \rotatebox{90}{Вес, кг} & \rotatebox{90}{Вес боеприпасов, кг} & \rotatebox{90}{Идеальная дальность, см} & \rotatebox{90}{Эффективная дальность, см} & \rotatebox{90}{Максимальная дальность, см} & \rotatebox{90}{Бронебойность (\textbf{ББ})} & \rotatebox{90}{Интенсивность огня (\textbf{ИО})} & \rotatebox{90}{Свойства\footnotemark[1]} \\
 \SetCell[r=2]{l} Гранаты & Осколочные гранаты & - & 0.6 & 2 & 3 & 4 & 2 & 2 & Â \\
 & Дымовые шашки & - & 0.6 & 2 & 3 & 4 & - & - & Â \\
 & Химические гранаты & - & 0.6 & 2 & 3 & 4 & - & (2)\footnotemark[2] & Â \\
@@ -1982,7 +1970,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 Взрывные устройства и мины (см. Таблица 18: характеристики взрывных
 устройств и мин)} \\
 \end{tblr}
-\phantomsection\label{_Ref31797173}{}\captionof{table}{характеристики пехотного вооружения}
+\phantomsection\label{_Ref31797173}{}\captionof{table}{характеристики пехотного вооружения}\nopagebreak
 \label{table-infantry-weapons}
 
 \begin{itemize}
@@ -2015,6 +2003,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.6799] X[l, co=0.1535] X[l, co=0.1666] @{}},
@@ -2032,7 +2021,7 @@ MSV с плитами и модулями для шеи и паха & 11.5 & 6 \
 Кит-2 & 28 & 7 \\
 
 \end{tblr}
-\captionof{table}{характеристики бронежилетов}
+\captionof{table}{характеристики бронежилетов}\nopagebreak
 \label{table-body-armor}
 
 Персонаж может использовать только один бронежилет. При наличии
@@ -2111,6 +2100,7 @@ MSV с плитами и модулями для шеи и паха & 11.5 & 6 \
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.2545] X[l, co=0.1091] X[l, co=0.0909] X[l, co=0.1091] X[l, co=0.0727] X[l, co=0.0545] X[l, co=0.0909] X[l, co=0.1091] X[l, co=0.1091] @{}},
@@ -2153,7 +2143,7 @@ H\&K G28 & 5.7 & 0.1 & 80 & 1 & 1 & 10x & - & +8 \\
 Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 
 \end{tblr}
-\captionof{table}{характеристики снайперских винтовок}
+\captionof{table}{характеристики снайперских винтовок}\nopagebreak
 \label{table-sniper-rifles}
 
 \subsubsection{Модификации стрелкового
@@ -2183,10 +2173,11 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 обзора, чем у бинокля, поэтому их оптические характеристики несколько
 ниже \footnote{См. стр.
   \hyperref[observation]{14},
-  6.3.1 Наблюдение, стр. \hyperref[_Ref213449133]{14}, Таблица 8.}.
+  6.3.1 Наблюдение, стр. \hyperref[table-visibility-equipment]{14}, Таблица 8.}.
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.2147] X[l, co=0.3042] X[l, co=0.4811] @{}},
@@ -2207,7 +2198,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 24x -- 32x & +4 & +4 / +2 / 320 \\
 
 \end{tblr}
-\captionof{table}{характеристики оптических прицелов}
+\captionof{table}{характеристики оптических прицелов}\nopagebreak
 \label{table-optics}
 
 Приборы ночного видения и тепловизоры можно использовать только
@@ -2283,6 +2274,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.4490] X[l, co=0.0855] X[l, co=0.1271] X[l, co=0.1271] X[l, co=0.1057] X[l, co=0.1057] @{}},
@@ -2315,7 +2307,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 Ударный дрон с оптоволоконным каналом & 12 & 60 & 40 & 8 & 3 \\
 
 \end{tblr}
-\captionof{table}{характеристики беспилотных летательных аппаратов}
+\captionof{table}{характеристики беспилотных летательных аппаратов}\nopagebreak
 \label{table-drones}
 
 \subsubsection{Взрывные устройства и
@@ -2382,6 +2374,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.6607] X[l, co=0.1164] X[l, co=0.1101] X[l, co=0.1128] @{}},
@@ -2413,7 +2406,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 Взрывчатка & 10 & 6 & 4 \\
 
 \end{tblr}
-\captionof{table}{характеристики взрывных устройств и мин}
+\captionof{table}{характеристики взрывных устройств и мин}\nopagebreak
 \label{table-explosives}
 
 \subsection{Вооружение
@@ -2421,6 +2414,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={Q[l, wd=0.40\linewidth] *{8}{Q[c, wd=0.075\linewidth]}},
@@ -2450,7 +2444,7 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 БМ 21 Град & - & - & 1200 & 15 & 8 & 4 & - & СА \\
 
 \end{tblr}
-\captionof{table}{характеристики вооружения техники}
+\captionof{table}{характеристики вооружения техники}\nopagebreak
 \label{table-vehicle-weapons}
 
 \subsection{Бронебойность и
@@ -2458,6 +2452,7 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} Q[l, wd=0.0708\linewidth] Q[l, wd=0.2330\linewidth] Q[c, wd=0.0632\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] Q[c, wd=0.0633\linewidth] @{}},
@@ -2484,7 +2479,7 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 & Уничтожен & & & & & & & & 26+ & 23+ & 21+ & 19+ \\
 & Стресс & & & & & & & & 23+ & 21+ & 19+ & 17+ \\
 \end{tblr}
-\captionof{table}{бронебойность оружия (ББ) и броня техники (Бр)}
+\captionof{table}{бронебойность оружия (ББ) и броня техники (Бр)}\nopagebreak
 \label{table-armor}
 
 \subsection{Огневая
@@ -2563,6 +2558,7 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.4877] X[l, co=0.5123] @{}},
@@ -2579,7 +2575,7 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 4 & 4+ \\
 5 & 1+ \\
 \end{tblr}
-\captionof{table}{пристрелка и корректировка при стрельбе непрямой наводкой}
+\captionof{table}{пристрелка и корректировка при стрельбе непрямой наводкой}\nopagebreak
 \label{table-fire-correction}
 
 В случае успеха тот же самый результат кубика снова используется для
@@ -2634,6 +2630,7 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.2157] X[l, co=0.0980] X[l, co=0.1373] X[l, co=0.2941] X[l, co=0.2549] @{}},
@@ -2664,11 +2661,12 @@ Samsung\strut
 & & & & \\
 
 \end{tblr}
-\captionof{table}{переносные средства связи}
+\captionof{table}{переносные средства связи}\nopagebreak
 \label{table-portable-comms}
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.1794] X[l, co=0.0940] X[l, co=0.4961] X[l, co=0.2305] @{}},
@@ -2691,7 +2689,7 @@ Samsung\strut
 & & & \\
 
 \end{tblr}
-\captionof{table}{возимые средства связи}
+\captionof{table}{возимые средства связи}\nopagebreak
 \label{table-vehicle-comms}
 
 Для подавления радиосвязи, в том числе для выведения из строя дронов с
@@ -2703,6 +2701,7 @@ Samsung\strut
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.0938] X[l, co=0.1133] X[l, co=0.5367] X[l, co=0.2562] @{}},
@@ -2725,11 +2724,12 @@ Samsung\strut
 & & & \\
 
 \end{tblr}
-\captionof{table}{переносные средства РЭП}
+\captionof{table}{переносные средства РЭП}\nopagebreak
 \label{table-portable-ew}
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.0938] X[l, co=0.6500] X[l, co=0.2562] @{}},
@@ -2748,7 +2748,7 @@ Samsung\strut
 2 & Чистюля & 300 \\
 
 \end{tblr}
-\captionof{table}{возимые и стационарные средства РЭП}
+\captionof{table}{возимые и стационарные средства РЭП}\nopagebreak
 \label{table-vehicle-ew}
 
 Отряды, попадающие в зону действия РЭП, не могут корректировать огонь
@@ -2770,6 +2770,7 @@ Samsung\strut
 
 \begin{tblr}{
   hlines,
+  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.0938] X[l, co=0.4349] X[l, co=0.2562] X[l, co=0.2151] @{}},
@@ -2790,7 +2791,7 @@ Samsung\strut
 2 & Монолит & 300 & 200 \\
 
 \end{tblr}
-\captionof{table}{возимые и стационарные средства РЭР}
+\captionof{table}{возимые и стационарные средства РЭР}\nopagebreak
 \label{table-vehicle-esm}
 
 Любые боевые единицы, использующие радиосвязь, регистрируемую РЭР,
@@ -2848,7 +2849,7 @@ Samsung\strut
 Соболятник & 36.0 & 600 \\
 \bottomrule
 \end{tabular}
-\captionof{table}{переносные РЛС}
+\captionof{table}{переносные РЛС}\nopagebreak
 \label{table-portable-radar}
 \end{center}
 
@@ -2864,7 +2865,7 @@ AN/TPQ-53 & 3000 \\
 & \\
 \bottomrule
 \end{tabular}
-\captionof{table}{возимые РЛС}
+\captionof{table}{возимые РЛС}\nopagebreak
 \label{table-vehicle-radar}
 \end{center}
 
