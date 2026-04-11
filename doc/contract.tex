@@ -13,9 +13,9 @@
 \usepackage{xcolor}
 \definecolor{navy}{RGB}{0,0,128}
 \setmainfont{Noto Serif}
-\setsansfont{Noto Sans}
+\setsansfont{Monitorica}
 \setmonofont{Noto Sans Mono}
-\newfontfamily\headingfont{Operation Napalm}[Script=Cyrillic]
+\newfontfamily\headingfont{Operation Napalm}
 \usepackage{titlesec}
 \titleformat{\section}{\headingfont\color{navy}\Large}{\thesection}{1em}{}
 \titleformat{\subsection}{\headingfont\color{navy}\large}{\thesubsection}{1em}{}
@@ -29,6 +29,7 @@
 \usepackage{tabularray}
 \UseTblrLibrary{booktabs}
 \usepackage{multirow}
+\usepackage{makecell}
 \usepackage{calc} % for calculating minipage widths
 \usepackage{rotating} % for vertical text
 \usepackage{caption} % for caption formatting
@@ -59,13 +60,25 @@
 \titlecontents{section}[0em]{}{\Large\makebox[1.3em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
 \titlecontents{subsection}[0em]{}{\large\makebox[2.1em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
 \titlecontents{subsubsection}[0em]{}{\makebox[2.9em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{paragraph}[0em]{}{\small\makebox[3.9em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{subparagraph}[0em]{}{\footnotesize\makebox[4.7em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{paragraph}[0em]{}{\small\makebox[4.1em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{subparagraph}[0em]{}{\footnotesize\makebox[4.9em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
   hidelinks
+}
+
+% Autorefname definitions for Russian
+\addto\extrasrussian{%
+  \def\tableautorefname{Таблица}%
+  \def\figureautorefname{Рисунок}%
+  \def\sectionautorefname{Раздел}%
+  \def\subsectionautorefname{Подраздел}%
+  \def\subsubsectionautorefname{Параграф}%
+  \def\paragraphautorefname{Абзац}%
+  \def\pageautorefname{Страница}%
+  \def\equationautorefname{Формула}%
 }
 
 \title{Контракт}
@@ -485,7 +498,7 @@ States Army Field Manuals, в том числе с использованием 
 
 Используется для любой навесной стрельбы (стрельбы непрямой наводкой)
 начиная от подствольных гранатомётов и АГС и заканчивая ствольной
-артиллерией и РСЗО\footnote{См. стр. 27, 7.4 Огневая поддержка.}.
+артиллерией и РСЗО\footnote{См. стр.~\pageref{fire-support-section}, \ref{fire-support-section}~\nameref{fire-support-section}.}.
 
 \subsubsection{Логика (ЛГК)}\label{logic}
 
@@ -524,6 +537,7 @@ States Army Field Manuals, в том числе с использованием 
 зависимости от желаемого отыгрыша. Для гражданских можно представить
 соответствующий уровень исходя из их должности и рода деятельности.
 
+\setlength\rotheadsize{2cm}
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
@@ -531,7 +545,7 @@ States Army Field Manuals, в том числе с использованием 
   row{even}={fg=black},
   colspec={Q[c,m,co=3]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]}
 }
-Уровень & \rotatebox{90}{Макс(ЛГК/ВЛН)} & \rotatebox{90}{Количество\\навыков} & \rotatebox{90}{Количество\\навыков\\меткости} & \rotatebox{90}{Макс\\значение\\навыка} \\
+Уровень & \rothead{Макс(ЛГК/ВЛН)} & \rothead{Количество\\навыков} & \rothead{Количество\\навыков\\меткости} & \rothead{Макс\\значение\\навыка} \\
 {Рядовой\\Чернорабочий} & 2 & 1 & 1 & 10 \\
 {Мл. сержант\\Сержант} & 4 & 1 & 2 & 20 \\
 {Прораб\\Лейтенант} & 6 & 2 & 2 & 20 \\
@@ -606,8 +620,7 @@ D20, прибавляет к своему броску свой показате
   выполняются последовательно в чётко определённом порядке.
 \end{enumerate}
 
-\subsection{Отряды (боевые
-единицы)}\label{squads}
+\subsection{Отряды (боевые единицы)}\label{squads}
 
 Игровые персонажи объединяются в отряды, которые являются важным
 элементом игры. Персонажи в одном отряде всегда перемещаются вместе и
@@ -646,8 +659,9 @@ D20, прибавляет к своему броску свой показате
 из фигурок. Если используется миниатюра техники, можно использовать
 точку посредине переднего края корпуса или одно из колёс.
 
-Техника с бронёй 2 и больше\footnote{См. Таблицу~\ref{table-armor}.} имеет ориентацию, то есть у неё есть фронт,
-фланги и тыл. Пехотные отряды не ориентированы.
+Техника с бронёй 2 и больше\footnote{См. стр.~\pageref{table-armor}, \ref{table-armor}~\nameref{table-armor}.} имеет ориентацию, то есть у неё есть фронт,
+фланги и тыл. Пехотные отряды не ориентированы, но при одновременном обстреле отряда пехоты с разных сторон атакующий получает бонус
+\footnote{См. стр.~\pageref{mod-flank}, \ref{mod-flank}~\nameref{mod-flank}.}.
 
 Ориентация боевой единицы влияет на ущерб от выстрелов, это отражает
 дифференциацию брони. Учитывается только положение корпуса, положение
@@ -697,7 +711,9 @@ D20, прибавляет к своему броску свой показате
 Автор предлагает использовать для этой цели разработанное им
 веб-приложение, находящееся в свободном доступе в интернете по адресу:
 
+\begin{center}
 https://github.com/guidebot/peace\_and\_prosperity
+\end{center}
 
 Боевая единица может быть \textbf{замаскированной}, и это означает, что
 её не видят вражеские отряды и не могут открыть по ней прицельный
@@ -742,8 +758,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 Звукоподавители могут устанавливаться на некоторое пехотное оружие и
 обеспечивают невозможность определение позиции замаскированного стрелка.
 
-\subsubsection{Очки
-усталости}\label{fatigue}
+\subsubsection{Очки усталости}\label{fatigue}
 
 У пехотных отрядов есть показатель усталости, который в начале игры
 равен нулю. Пехота получает по одному очку усталости при передвижении
@@ -758,8 +773,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 Если очки усталости отряда больше 0, при стрельбе персонажи отряда
 должны использовать модификатор внезапного огня\footnote{См. стр.~\pageref{mod-sudden}, \ref{mod-sudden}~\nameref{mod-sudden}.}
 
-\subsubsection{Очки
-стресса}\label{stress}
+\subsubsection{Очки стресса}\label{stress}
 
 \includegraphics[width=\linewidth]{media/image8.png}
 
@@ -792,7 +806,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 средства связи.
 
 Для отрядов на технике превышение количества очков стресса над значением
-бронированности\footnote{См. Таблицу~\ref{table-armor}.} приводит к тому,
+бронированности\footnote{См. стр.~\pageref{table-armor}, \ref{table-armor}~\nameref{table-armor}.} приводит к тому,
 что боевая единица может только двигаться на максимальной скорости в
 сторону от врага, исключая \textbf{замаскированные} вражеские боевые
 единицы. Если это действие выполнить невозможно, экипаж покидает
@@ -862,13 +876,11 @@ https://github.com/guidebot/peace\_and\_prosperity
 договариваются, что прямой бой невозможен, если одна из боевых единиц не
 находится в пределах локации.
 
-\subsection{Зоны
-локации}\label{zones}
+\subsection{Зоны локации}\label{zones}
 
 \includegraphics[width=\linewidth]{media/image10.png}
 
-\subsubsection{Стандартные зоны
-локации}\label{std-zones}
+\subsubsection{Стандартные зоны локации}\label{std-zones}
 
 \begin{itemize}
 \item
@@ -896,8 +908,7 @@ https://github.com/guidebot/peace\_and\_prosperity
   непроходимой (скала, утёс).
 \end{itemize}
 
-\subsubsection{Дополнительные
-элементы}\label{elements}
+\subsubsection{Дополнительные элементы}\label{elements}
 
 Дополнительные элементы --- это своего рода небольшие зоны сложной
 геометрической формы, которые могут быть описаны в сценарии. Должны
@@ -1034,7 +1045,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 соответствии с уровнем навыка лидерства Ур(Макс(ЛГК/ВЛН)).
 
 \begin{center}
-\begin{minipage}{0.8\columnwidth}
+\begin{minipage}{0.7\columnwidth}
 \begin{tblr}{
   hlines,
   row{odd}={fg=navy},
@@ -1068,8 +1079,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 исходного отряда. После разделения отряды сразу же могут действовать
 раздельно.
 
-\subsection{Движение
-отряда}\label{movement}
+\subsection{Движение отряда}\label{movement}
 
 \includegraphics[width=\linewidth]{media/image12.png}
 
@@ -1115,7 +1125,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 поворачиваться на любой угол.
 
 Если у экипажа техники, выполняющей движение, количество очков стресса
-больше показателя брони\footnote{См. стр.~\pageref{table-armor}, \ref{table-armor}~\nameref{table-armor}.} она не
+больше показателя брони\footnote{См. стр.~\pageref{table-armor}, \autoref{table-armor}~\nameref{table-armor}.} она не
 может приближаться к \textbf{демаскированным} вражеским отрядам, но
 может отдаляться от них. Если это условие выполнить невозможно, то
 экипаж покидает технику.
@@ -1219,21 +1229,21 @@ https://github.com/guidebot/peace\_and\_prosperity
 до движения или после движения.
 
 Базовое значение видимости и максимальная дальность видимости выбираются
-по таблице исходя из текущих условий в сценарии (см. Таблица 7). Если
+по таблице исходя из текущих условий в сценарии (см.~\ref{table-visibility}). Если
 одновременно действует несколько условий, выбираются минимальные
 значения отдельно по дальности, отдельно по видимости.
 
 Ночью боевые единицы, находящиеся в освещённых местах, видны как днём.
 
 Если для наблюдения используется снаряжение, то следует применить
-модификатор видимости от снаряжения (см. Таблица 8) по всем условиям.
+модификатор видимости от снаряжения (см.~\ref{table-visibility-equipment}) по всем условиям.
 Максимальная дальность для каждого условия должна быть использована от
 снаряжения. Из нескольких условий всё равно должны быть выбраны
 минимальные значения отдельно по дальности, отдельно по видимости.
 
 Технику заметить гораздо проще, чем пехоту, поэтому при наблюдении
 техники максимальная дальность удваивается, удваивается дальность
-обнаружения в таблице пороговых значений (см. Таблица 9), а на
+обнаружения в таблице пороговых значений (см.~\ref{table-recon-thresholds}), а на
 расстоянии до 3 см техника обнаруживается автоматически.
 
 Если цель находится в укрытии любого типа, от выбранного
@@ -1277,9 +1287,9 @@ https://github.com/guidebot/peace\_and\_prosperity
   hlines,
   row{odd}={fg=navy},
   row{even}={fg=black},
-  colspec={ Q[c,m,co=2]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1] },
+  colspec={ Q[c,m,co=3]Q[c,m,co=2]Q[c,m,co=1]Q[c,m,co=1] },
 }
-Предмет & Условие & \rotatebox{90}{Модификатор\\видимости} & \rotatebox{90}{Макс.\\дальность\\видимости,\\см} \\
+Предмет & Условие & \rothead{Модификатор\\видимости} & \rothead{Макс.\\дальность\\видимости,\\см} \\
 \SetCell[r=2]{l} Бинокль & День & +5 & 320 \\
 & Сумерки & +2 & 160 \\
 \SetCell[r=2]{l} Прибор ночного видения & Сумерки & +3 & 80 \\
@@ -1293,12 +1303,12 @@ https://github.com/guidebot/peace\_and\_prosperity
 \captionof{table}{модификатор видимости от снаряжения}\label{table-visibility-equipment}
 \end{minipage}
 
-\begin{minipage}{\columnwidth}
+\begin{minipage}{0.7\columnwidth}
 \begin{tblr}{
   hlines,
   row{odd}={fg=navy},
   row{even}={fg=black},
-  colspec={ Q[c,m, co=0.4800] Q[c,m, co=0.5200] },
+  colspec={ Q[c,m,co=1] Q[c,m,co=1] },
 }
 \SetRow{font=\footnotesize}Дистанция обнаружения, см & Модифицированный результат \\
 3 & 10+ \\
@@ -1309,7 +1319,6 @@ https://github.com/guidebot/peace\_and\_prosperity
 160 & 37+ \\
 320 & 42+ \\
 Поиск мин (0--1) & 22+ \\
-
 \end{tblr}
 \captionof{table}{пороговые значения для броска кубика при проведении разведки}\label{table-recon-thresholds}
 \end{minipage}
@@ -1388,7 +1397,7 @@ $8+2×3-5-2×1=7$. В лучшем случае наблюдатель заме�
 \paragraph{Особенности стрельбы по пехоте}\label{infantry-shooting}
 
 Сначала необходимо определить интенсивность огня (\textbf{ИО})
-используемого оружия\footnote{См. Таблицу~\ref{table-infantry-weapons} и Таблицу~\ref{table-vehicle-weapons}.}
+используемого оружия\footnote{См. \autoref{table-infantry-weapons} \nameref{table-infantry-weapons} и \autoref{table-vehicle-weapons} \nameref{table-vehicle-weapons}.}
 
 Затем, используя параметр \textbf{ИО} и, если уместно, применив к
 результату броска D20 модификатор флангового огня, определить количество
@@ -1401,7 +1410,7 @@ $8+2×3-5-2×1=7$. В лучшем случае наблюдатель заме�
   row{even}={fg=black},
   colspec={ Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1] },
 }
-Интенсивность Огня (ИО) оружия & Модифицированный результат броска & Количество очков стресса \\
+\SetRow{font=\footnotesize}Интенсивность Огня (ИО) оружия & Модифицированный результат броска & Количество очков стресса \\
 1 & 15+ & 1 \\
 2 & 11+ & 1 \\
 2 & 20+ & 2 \\
@@ -1426,7 +1435,7 @@ $8+2×3-5-2×1=7$. В лучшем случае наблюдатель заме�
   row{even}={fg=black},
   colspec={ Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1] },
 }
-Интенсивность Огня (ИО) оружия & Модифицированный результат броска D20 & Количество раненых \\
+\SetRow{font=\footnotesize}Интенсивность Огня (ИО) оружия & Модифицированный результат броска D20 & Количество раненых \\
 1 & 16+ & 1 \\
 2 & 13+ & 1 \\
 2 & 21+ & 2 \\
@@ -1560,8 +1569,7 @@ $8+2×3-5-2×1=7$. В лучшем случае наблюдатель заме�
 секунд в машине, не в силах пошевелиться, но эффективно отбиваться уже
 не сможет.
 
-\paragraph{Стационарное
-положение}\label{stationary-position}
+\paragraph{Стационарное положение}\label{stationary-position}
 
 Стационарное положение означает подготовку позиции и оружия к стрельбе и
 позволяет вести огонь с большей эффективностью, но требует некоторого
@@ -1576,15 +1584,13 @@ $8+2×3-5-2×1=7$. В лучшем случае наблюдатель заме�
 находящаяся в стационарном положении, не сможет \textbf{двигаться} в
 следующем \textbf{ходу}.
 
-\paragraph{Модификаторы при
-стрельбе}\label{shooting-modifiers}
+\paragraph{Модификаторы при стрельбе}\label{shooting-modifiers}
 
 Модификаторы прибавляются к результату броска кубика. Они нужны для
 того, чтобы учесть больше условий в вероятности возникновения события.
 Одновременно могут применяться несколько модификаторов.
 
-\subparagraph{Модификатор
-навыка}\label{mod-skill}
+\subparagraph{Модификатор навыка}\label{mod-skill}
 
 Модификатор навыка применяется по-разному для обстрела техники и пехоты.
 
@@ -1597,8 +1603,7 @@ $8+2×3-5-2×1=7$. В лучшем случае наблюдатель заме�
 При обстреле техники используется только навык владения используемым
 оружием атакующего Ур(X), он прибавляется к результату броска.
 
-\subparagraph{Модификатор
-расстояния}\label{mod-range}
+\subparagraph{Модификатор расстояния}\label{mod-range}
 
 У некоторого оружия помимо максимальной дальности есть ещё идеальная и
 эффективная дальность. Для такого оружия вероятность попадания
@@ -1615,16 +1620,14 @@ $8+2×3-5-2×1=7$. В лучшем случае наблюдатель заме�
 что модификатор расстояния можно не применять. Это, например,
 снайперские винтовки и управляемые ракеты.
 
-\subparagraph{Модификатор стационарного
-положения}\label{mod-stationary}
+\subparagraph{Модификатор стационарного положения}\label{mod-stationary}
 
 При стрельбе из стационарного положения на эффективной дальности оружия
 вероятность попадания увеличивается на значение, определяемое
 конфигурацией самого оружия. Модификаторы стационарного положения разных
 частей оружия суммируются.
 
-\subparagraph{Модификатор флангового
-огня}\label{mod-flank}
+\subparagraph{Модификатор флангового огня}\label{mod-flank}
 
 При обстреле техники c бронированностью Бр~\textgreater~2, если
 атакующий отряд хотя бы частично находится за фронтальной линией
@@ -1638,8 +1641,7 @@ $8+2×3-5-2×1=7$. В лучшем случае наблюдатель заме�
 же ход, превышает 90°, то вероятность поражения увеличивается.
 Необходимо прибавить 2 к результату броска.
 
-\subparagraph{Модификатор
-укрытия}\label{mod-cover}
+\subparagraph{Модификатор укрытия}\label{mod-cover}
 
 \includegraphics[width=\linewidth]{media/image18.png}
 
@@ -1651,7 +1653,8 @@ $8+2×3-5-2×1=7$. В лучшем случае наблюдатель заме�
 От результата броска нужно отнять значение модификатора в соответствии с
 типом \textbf{укрытия} (см. Таблица 12).
 
-\begin{minipage}{\columnwidth}
+\begin{center}
+\begin{minipage}{0.6\columnwidth}
 \begin{tblr}{
   hlines,
   row{odd}={fg=navy},
@@ -1661,28 +1664,24 @@ $8+2×3-5-2×1=7$. В лучшем случае наблюдатель заме�
 Тип укрытия & Значение модификатора \\
 Среднее & -2 \\
 Надёжное & -4 \\
-
 \end{tblr}
 \captionof{table}{значения модификаторов для типов укрытий}\label{table-cover-modifiers}
 \end{minipage}
+\end{center}
 
-\subparagraph{Модификатор огня
-вслепую}\label{mod-blind}
+\subparagraph{Модификатор огня вслепую}\label{mod-blind}
 
 При стрельбе по необнаруженной\footnote{См. стр.~\pageref{observation}, \ref{observation}~\nameref{observation}.} \textbf{замаскированной} боевой единице вероятность
 попадания существенно уменьшается. От результата броска нужно отнять 6.
 Этот модификатор суммируется с модификатором укрытия.
 
-\subparagraph{Модификатор внезапного
-огня}\label{mod-sudden}
+\subparagraph{Модификатор внезапного огня}\label{mod-sudden}
 
-При ведении внезапного огня при перехвате действия (см. стр.
-\hyperref[intercept]{11}),
+При ведении внезапного огня при перехвате действия\footnote{См. стр.~\pageref{intercept}, \ref{intercept}~\nameref{intercept}.},
 а также при наличии у отряда очков усталости, вероятность попадания
 уменьшается. От результата броска нужно отнять 2.
 
-\subparagraph{Модификатор
-бронежилета}\label{mod-bodyarmor}
+\subparagraph{Модификатор бронежилета}\label{mod-bodyarmor}
 
 Применяется только для пехотных отрядов.
 
@@ -1846,11 +1845,10 @@ $5-2=3$. Результат броска следует уменьшить на 
   colspec={ Q[c,m, co=0.6799] Q[c,m, co=0.1535] Q[c,m, co=0.1666] },
 }
 Бронежилет & Вес, кг & Защита \\
-MSV без плит\footnote{Может быть спрятан под одеждой.} & 2.5 & 1 \\
+MSV без плит & 2.5 & 1 \\ % \footnote{Может быть спрятан под одеждой.}
 MSV с плитами & 7.5 & 4 \\
 MSV с плитами и модулями для шеи и паха & 11.5 & 6 \\
 Кит-2 & 28 & 7 \\
-
 \end{tblr}
 \captionof{table}{характеристики бронежилетов}\label{table-body-armor}
 \end{minipage}
@@ -1934,17 +1932,15 @@ MSV с плитами и модулями для шеи и паха & 11.5 & 6 \
   row{even}={fg=black},
   colspec={ Q[c,m, co=0.2545] Q[c,m, co=0.1091] Q[c,m, co=0.0909] Q[c,m, co=0.1091] Q[c,m, co=0.0727] Q[c,m, co=0.0545] Q[c,m, co=0.0909] Q[c,m, co=0.1091] Q[c,m, co=0.1091] },
 }
-Название & Вес, кг & Вес боеприпасов, кг & Максимальная дальность, см & Бронебойность (\textbf{ББ}) & Интенсивность оня (\textbf{ИО}) & Прицел & Только стационарное положение & Модификатор стационарного положения \\
+Название & \rothead{Вес, кг} & \rothead{Вес\\боеприпасов, кг} & \rothead{Максимальная\\дальность, см} & \rothead{Бронебойность (\textbf{ББ})} & \rothead{Интенсивность\\огня (\textbf{ИО})} & \rothead{Прицел} & \rothead{Только\\стационарное\\положение} & \rothead{Модификатор\\стационарного\\положения} \\
 H\&K G28 & 5.7 & 0.1 & 80 & 1 & 1 & 10x & - & +8 \\
 СВЧ-308 7,62 & 5.3 & 0.1 & 120 & 1 & 1 & 12x & - & +8 \\
 Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
-
 \end{tblr}
 \captionof{table}{характеристики снайперских винтовок}\label{table-sniper-rifles}
 \end{minipage}
 
-\subsubsection{Модификации стрелкового
-оружия}\label{weapon-mods}
+\subsubsection{Модификации стрелкового оружия}\label{weapon-mods}
 
 На стрелковое оружие можно установить различные приспособления.
 Существенно они не меняют показатели вооружения, но, всё же, могут
@@ -1964,7 +1960,8 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 
 Оптические прицелы устанавливаются на снайперские винтовки и другое
 оружие и увеличивают модификатор стационарного положения в зависимости
-от кратности, а также позволяют вести наблюдение\footnote{См. стр.~\pageref{observation}, \ref{observation}~\nameref{observation}.}, однако у оптических прицелов обычно меньше угол
+от кратности, а также позволяют вести наблюдение\footnote{См. стр.~\pageref{observation}, \ref{observation}~\nameref{observation}.},
+однако у оптических прицелов обычно меньше угол
 обзора, чем у бинокля, поэтому их оптические характеристики несколько
 ниже \footnote{См. стр.~\pageref{observation}, \ref{observation}~\nameref{observation} и Таблицу~\ref{table-visibility-equipment}.}
 
@@ -1975,13 +1972,11 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
   row{even}={fg=black},
   colspec={ Q[c,m, co=0.2147] Q[c,m, co=0.3042] Q[c,m, co=0.4811] },
 }
-Кратность & Модификатор стационарного положения\footnote{См. стр.~\pageref{mod-stationary}, \ref{mod-stationary}~\nameref{mod-stationary}.} & Оптические характеристики (модификатор днём/в сумерки/макс. дальность,
-см) \\
-2x -- 4x & +1 & - / - / 200 \\
-5x -- 8x & +2 & +2 / - / 240 \\
-9x -- 23x & +3 & +3 / +1 / 280 \\
-24x -- 32x & +4 & +4 / +2 / 320 \\
-
+\SetRow{font=\footnotesize}Кратность & Модификатор стационарного положения & Оптические характеристики (модификатор днём/в сумерки/макс. дальность, см) \\ % \footnote{См. стр.~\pageref{mod-stationary}, \ref{mod-stationary}~\nameref{mod-stationary}.}
+2x--4x & +1 & $-$ / $-$ / 200 \\
+5x--8x & +2 & +2 / $-$ / 240 \\
+9x--23x & +3 & +3 / +1 / 280 \\
+24x--32x & +4 & +4 / +2 / 320 \\
 \end{tblr}
 \captionof{table}{характеристики оптических прицелов}\label{table-optics}
 \end{minipage}
@@ -1992,7 +1987,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 
 Оптические прицелы ночного видения и прицелы с тепловизорами,
 устанавливаемые на оружие, имеют такие же модификаторы и дальности как
-приборы соответствующие приборы наблюдения\footnote{См. Таблицу~\ref{table-visibility-equipment}.}
+приборы соответствующие приборы наблюдения\footnote{См. стр.~\pageref{table-visibility-equipment}, \autoref{table-visibility-equipment}~\nameref{table-visibility-equipment}.}
 
 Сошки устанавливаются на пулемёты и снайперские винтовки и дают оружию
 модификатор стационарного положения +1.
@@ -2015,7 +2010,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 
 \subsubsection{Дроны}\label{drones}
 
-Дроны -- это малые Беспилотные Летательные Аппараты (БПЛА), запускаемые
+Дроны --- это малые Беспилотные Летательные Аппараты (БПЛА), запускаемые
 и управляемые оператором.
 
 Все беспилотные летательные аппараты требуют сохранения стационарного
@@ -2059,20 +2054,18 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
   hlines,
   row{odd}={fg=navy},
   row{even}={fg=black},
-  colspec={ Q[c,m, co=0.4490] Q[c,m, co=0.0855] Q[c,m, co=0.1271] Q[c,m, co=0.1271] Q[c,m, co=0.1057] Q[c,m, co=0.1057] },
+  colspec={ Q[c,m,co=4] Q[c,m,co=1] Q[c,m,co=1] Q[c,m,co=1] Q[c,m,co=1] Q[c,m,co=1] },
 }
- & Вес, кг & Скорость, см & Количество ходов в игре & Бронебойность (ББ) & Интенсивность огня (ИО) \\
+ & \rothead{Вес, кг} & \rothead{Скорость, см} & \rothead{Количество\\ходов в игре} & \rothead{Бронебойность (ББ)} & \rothead{Интенсивность\\огня (ИО)} \\
 Разведывательный дрон & 2 & 50 & 50 & - & - \\
 Дрон со сбросом & 3 & 50 & 30 & 2 & 2 \\
 Ударный дрон c радиоканалом & 12 & 60 & 40 & 8 & 3 \\
 Ударный дрон с оптоволоконным каналом & 12 & 60 & 40 & 8 & 3 \\
-
 \end{tblr}
 \captionof{table}{характеристики беспилотных летательных аппаратов}\label{table-drones}
 \end{minipage}
 
-\subsubsection{Взрывные устройства и
-мины}\label{explosives-mines}
+\subsubsection{Взрывные устройства и мины}\label{explosives-mines}
 
 Пластичные взрывчатые вещества (например, C-4 или пластит) обычно бывают
 в брикетах по ½ кг или по 1 кг. Эти вещества стабильны и безопасны, они
@@ -2085,7 +2078,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 \item
   радиоприёмник, способный принять сигнал на расстоянии до 300 см;
 \item
-  различные датчики, которые срабатывают при приближении целей --
+  различные датчики, которые срабатывают при приближении целей ---
   используются в минах.
 \end{itemize}
 
@@ -2136,32 +2129,32 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
   hlines,
   row{odd}={fg=navy},
   row{even}={fg=black},
-  colspec={ Q[c,m, co=0.6607] Q[c,m, co=0.1164] Q[c,m, co=0.1101] Q[c,m, co=0.1128] },
+  colspec={ Q[c,m,co=6] Q[c,m,co=1] Q[c,m,co=1] Q[c,m,co=1] },
 }
- & Вес & Бронебойность (ББ) & Интенсивность огня (ИО) \\
-Противопехотная мина ПФМ & - & - & 1 \\
-Противопехотная мина ОЗМ & 5 & - & 4 \\
-Противотанковая мина ТМ & 11 & 6 & 4\footnote{Для поражения пехоты
-  требует установки дополнительного детонатора, т.к. встроенный
-  срабатывает только на технику.} \\
+ & Вес & \rothead{Бронебойность (ББ)} & \rothead{Интенсивность\\огня (ИО)} \\
+Противопехотная мина ПФМ & $-$ & $-$ & 1 \\
+Противопехотная мина ОЗМ & 5 & $-$ & 4 \\
+Противотанковая мина ТМ & 11 & 6 & 4 \\ % \footnote{Для поражения пехоты требует установки дополнительного детонатора, т.к. встроенный срабатывает только на технику.}
 Противотанковая мина ТМК & 11.5 & 10 & 2 \\
 Взрывчатка & 1 & 1 & 1 \\
 Взрывчатка & 2 & 2 & 2 \\
 Взрывчатка & 3 & 3 & 2 \\
 Взрывчатка & 5 & 4 & 3 \\
 Взрывчатка & 10 & 6 & 4 \\
-
 \end{tblr}
 \captionof{table}{характеристики взрывных устройств и мин}\label{table-explosives}
 \end{minipage}
 
-\subsection{Вооружение
-техники}\label{vehicle-weapons}
+\end{multicols}
+\clearpage
+\begingroup
+\footnotesize
+
+\subsection{Вооружение техники}\label{vehicle-weapons}
 
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=navy},
   row{even}={fg=black},
   colspec={Q[l, wd=0.40\linewidth] *{8}{Q[c, wd=0.075\linewidth]}},
@@ -2188,7 +2181,6 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 Гаубица 155 мм & - & - & 2000 & 6 & 8 & 4 & - & СА \\
 \SetCell[c=9]{c}{Ракетные системы залпового огня} \\
 БМ 21 Град & - & - & 1200 & 15 & 8 & 4 & - & СА \\
-
 \end{tblr}
 \captionof{table}{характеристики вооружения техники}\label{table-vehicle-weapons}
 \end{minipage}
@@ -2228,6 +2220,12 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 \end{tblr}
 \captionof{table}{бронебойность оружия (ББ) и броня техники (Бр)}\label{table-armor}
 \end{minipage}
+
+\clearpage
+\endgroup
+
+\begin{multicols}{2}
+\raggedcolumns
 
 \subsection{Огневая поддержка}\label{fire-support-section}
 
