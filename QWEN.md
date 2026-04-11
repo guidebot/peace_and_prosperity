@@ -13,6 +13,7 @@ Gamemaster driven cooperative roleplaying wargame.
   - `actions/` modal windows
 - `doc/` game documentation
   - `contract.docx` core rules
+  - `contract.tex` core rules in tex format, use xelatex for compilation
   - `peace_and_prosperity_masters_book.docx` campagain description
 
 ## General Instructions:

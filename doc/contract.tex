@@ -1,7 +1,7 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode,pdfusetitle}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
+
 \documentclass[
 ]{article}
 \usepackage[margin=1cm, includeheadfoot]{geometry}
@@ -32,18 +32,11 @@
 \usepackage{rotating} % for vertical text
 \usepackage{caption} % for caption formatting
 \usepackage{capt-of} % for \captionof outside floats
+\usepackage{titletoc}
 
 % Style table/figure captions: navy, italic, centered
 \captionsetup{labelfont={it,color=navy},textfont={it,color=navy},justification=centering}
 
-% Prevent page/column breaks between tables and captions
-\newcommand{\tblcaption}[2]{%
-  \par\vspace{0.5ex}%
-  \noindent\begin{minipage}{\linewidth}%
-    \captionof{table}{#1}\label{#2}%
-  \end{minipage}%
-  \par\medskip%
-}
 \usepackage{newfloat}
 \DeclareFloatingEnvironment[name={Схема}]{scheme}
 \captionsetup[scheme]{labelfont={it,color=navy},textfont={it,color=navy},justification=centering}
@@ -57,19 +50,22 @@
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\providecommand{\tightlist}{%
+\setlength{\emergencystretch}{3em}
+\providecommand{\tightlist}{
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{5}
+\setcounter{tocdepth}{4}
+\setlength{\cftsecindent}{0pt}
+\setlength{\cftsubsecindent}{0pt}
+\setlength{\cftsubsubsecindent}{0pt}
+\setlength{\cftparagraph}{0pt}
+\setlength{\cftsubparagraph}{0pt}
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
   hidelinks
 }
-\usepackage[outline]{contour}
-\contourlength{1.5pt}
 
 \title{Контракт}
 \newcommand{\siteurl}{https://vk.com/playingwar}
@@ -91,21 +87,21 @@
 \begin{center}
 \vspace*{2cm}
 
-\contour{black}{\color{white}\fontsize{48}{56}\selectfont\textbf{Контракт}}
+{\color{white}\fontsize{48}{56}\selectfont\textbf{Контракт}}
 
 \vspace{0.5cm}
 
-\contour{black}{\color{white}\fontsize{32}{40}\selectfont\textbf{Ролевая тактическая игра}}
+{\color{white}\fontsize{32}{40}\selectfont\textbf{Ролевая тактическая игра}}
 
 %\maketitle
 
 \vfill
 
-\contour{black}{\color{white}\Large\textbf{Никита Макаров}}
+{\color{white}\Large\textbf{Никита Макаров}}
 
-\contour{black}{\color{white}\href{\siteurl}{\textbf{\MakeUppercase{\siteurl}}}}
+{\color{white}\href{\siteurl}{\textbf{\MakeUppercase{\siteurl}}}}
 
-\contour{black}{\color{white}\textbf{Санкт-Петербург}}
+{\color{white}\textbf{Санкт-Петербург}}
 
 \end{center}
 \end{titlepage}
@@ -120,7 +116,7 @@
 }
 
 \begin{multicols}{2}
-\raggedcolumns
+\raggedcolumns{}
 
 \renewcommand{\contentsname}{Содержание}
 \tableofcontents
@@ -186,15 +182,14 @@ Modern War от Zozer.
 крупным планом, и при этом дать им всем возможность поучаствовать в
 довольно масштабных военизированных операциях, включающих десятки
 человек, использующих современное дальнобойное вооружение. Каждый игрок
-имеет персонификацию в игровом мире -- это солдат, офицер или
+имеет персонификацию в игровом мире --- это солдат, офицер или
 гражданский.
 
 Симуляция была провалидирована с использованием документации United
 States Army Field Manuals, в том числе с использованием LLM, а также
 протестирована в игре с реальными людьми.
 
-\section{Масштаб и
-период}\label{scale-period}
+\section{Масштаб и период}\label{scale-period}
 
 Симуляция обеспечивает воспроизведение боёв сухопутных войск
 численностью уровня до роты с детализацией уровня отдельных солдат и
@@ -211,7 +206,7 @@ States Army Field Manuals, в том числе с использованием 
 имеет.
 
 Боевые единицы могут быть представлены плоскими квадратными фишками с
-длиной стороны 1 см, а элементы локации -- листами бумаги различной
+длиной стороны 1 см, а элементы локации --- листами бумаги различной
 формы, что, по мнению автора, хорошо подойдёт к пространственному
 масштабу игры.
 
@@ -244,13 +239,13 @@ States Army Field Manuals, в том числе с использованием 
 При использовании миниатюр в масштабе 1/72 какой-нибудь дом может быть
 размером 10×10 см. В масштабе игры это будет огромное здание размером
 100×100 м, целый торговый центр, хотя визуально это будет изба 10×10 м.
-При высоте фигурки человека 2-2,5 см, дистанция броска гранаты в 4 см
+При высоте фигурки человека 2--2,5 см, дистанция броска гранаты в 4 см
 может выглядеть странно. Чтобы уменьшить визуальный диссонанс, автор
 предлагает использовать так называемый метод неравномерного
 пространства. Дистанции переводятся из реального масштаба в игровой не
-по формуле см~=~м~×~0.1, а по формуле см~=~м~×~0.1~+~x, где x -- это
+по формуле см~=~м~×~0.1, а по формуле см~=~м~×~0.1~+~x, где x --- это
 некоторая константа, в качестве которой рекомендуется выбрать число в
-диапазоне 4-9. Также и при переводе из игрового масштаба в реальный
+диапазоне 4--9. Также и при переводе из игрового масштаба в реальный
 используется не м~=~см~×~10, а м~=~(см~--~x)~×~10 (естественно, это
 число не имеет смысла, когда оно отрицательно). Таким образом вокруг
 каждого отряда образуется пятно радиусом x~+~1~см, которое соответствует
@@ -266,7 +261,7 @@ States Army Field Manuals, в том числе с использованием 
 линии видимости и огня (помещения). Отряд пехоты в помещении может
 свободно перемещаться по нему; линии видимости и огня вовне помещения
 проводятся от края помещения, при этом они не учитывают конфигурацию
-окон и дверей -- если в стене помещения есть дверь или окно, считается,
+окон и дверей --- если в стене помещения есть дверь или окно, считается,
 что это окно во всю стену; при входе и выходе из здания расстояние
 измеряется также от края помещения.
 
@@ -278,53 +273,81 @@ States Army Field Manuals, в том числе с использованием 
 Как и во многих других системах ролевых игр, у персонажей есть наборы
 атрибутов и навыков. Навыки привязаны к одному из атрибутов.
 
-\\begin\{tblr\}\{\n  hlines,\n  row\{1\}=\{halign=c\},\n  row\{odd\}=\{fg=black\},\n  row\{even\}=\{fg=navy\},\n  colspec=\{@{} X\[l, co=0.2581\] X\[l, co=0.7419\] @{}\},\n\}\nАтрибут & Навыки \\\\\nЗдоровье & Выносливость \(ВНС\) \\\\\n\\SetCell\[r=2\]\{l\} Ловкость & Маневрирование \(МНВ\) \\\\\n& Маскировка \(МСК\) \\\\\n\\SetCell\[r=7\]\{l\} Меткость & Метательное оружие \(гранаты\) \(ГРН\) \\\\\n& Лёгкое стрелковое оружие \(ЛС\) \\\\\n& Снайперское оружие \(СН\) \\\\\n& Пулемёты \(ПЛМ\) \\\\\n& Управляемые ракеты \(УР\) \\\\\n& Управляемые дроны \(ДРН\) \\\\\n& Тяжёлое вооружение \(ТВ\) \\\\\nИнтеллект & Медицина \(МЕД\) \\\\\n& Механика \(МЕХ\) \\\\\n& Электроника \(ЭЛ\) \\\\\n& Взрывчатые вещества \(ВЗР\) \\\\\n& Огневая поддержка \(ОП\) \\\\\n& Логика \(ЛГК\) \\\\\nХаризма & Влияние \(ВЛН\) \\\\\n\n\\end\{tblr\}\n\\captionof\{table\}\{атрибуты и навыки\}\n\\label\{table-attributes\}
+\begin{minipage}{\columnwidth}
+\begin{tblr}{
+  hlines,
+  row{even}={fg=black},
+  row{odd}={fg=navy},
+  colspec={Q[l,m,co=2]Q[c,m,co=4]Q[r,m,co=1]}
+}
+\SetCell{c,m} Атрибут & \SetCell[c=2]{c,m} Навыки \\
+Здоровье & Выносливость & ВНС \\
+\SetCell[r=2]{l,m} Ловкость & Маневрирование & МНВ \\
+& Маскировка & МСК \\
+\SetCell[r=7]{l,m} Меткость & Метательное оружие (гранаты) & ГРН \\
+& Лёгкое стрелковое оружие & ЛС \\
+& Снайперское оружие & СН \\
+& Пулемёты & ПЛМ \\
+& Управляемые ракеты & УР \\
+& Управляемые дроны & ДРН \\
+& Тяжёлое вооружение & ТВ \\
+Интеллект & Медицина & МЕД \\
+& Механика & МЕХ \\
+& Электроника & ЭЛ \\
+& Взрывчатые вещества & ВЗР \\
+& Огневая поддержка & ОП \\
+& Логика & ЛГК \\
+Харизма & Влияние & ВЛН \\
+\end{tblr}
+\captionof{table}{атрибуты и навыки}\label{table-attributes}
+\end{minipage}
 
 Значения атрибутов используются для ограничения максимального значения
 соответствующих навыков. Допускается игра без указания атрибутов, тогда
-персонажи могут развивать все навыки до максимума -- 20 очков
+персонажи могут развивать все навыки до максимума --- 20 очков
 тренированности.
 
 Навыки персонажа определяют его эффективность в различных ситуациях и
 являются результатом интенсивных тренировок либо боевого опыта. Однако,
 навыки могут ухудшаться из-за травм или редкого применения, а чтобы
 стать в чём-то экспертом требуются серьёзные усилия. Каждое очко
-тренированности -- это 28 часов интенсивных тренировок.
+тренированности --- это 28 часов интенсивных тренировок.
 
 Для определения эффективности солдата в различных ситуациях могут
 использоваться как сами очки тренированности, так и уровень навыка,
 который напрямую зависит от тренированности и обозначается как Ур(х),
-где х -- очки тренированности в некотором навыке.
+где х --- очки тренированности в некотором навыке.
 
+\begin{minipage}
+\begin{center}
 \begin{tblr}{
+  0.6\columnwidth,
   hlines,
-  row{1}={halign=c},
-  row{odd}={fg=black},
-  row{even}={fg=navy},
-  colspec={@{} X[l, co=0.5774] X[l, co=0.4226] @{}},
+  row{even}={fg=black},
+  row{odd}={fg=navy},
+  colspec={Q[c,m,co=1]Q[c,m,co=1]},
 }
-Очки тренированности, х & Уровень навыка Ур(x) \\
-1-2 & 1 \\
-3-6 & 2 \\
-7-11 & 3 \\
-12-15 & 4 \\
-16-19 & 5 \\
+Очки тренированности х & Уровень навыка Ур(x) \\
+1--2 & 1 \\
+3--6 & 2 \\
+7--11 & 3 \\
+12--15 & 4 \\
+16--19 & 5 \\
 20 & 6 \\
-
 \end{tblr}
-\nopagebreak\captionof{table}{очки тренированности и навыка}
-\label{table-skill-levels}
+\end{center}
+\captionof{table}{очки тренированности и навыка}\label{table-skill-levels}
+\end{minipage}
 
 Навыки ЛГК и ВЛН используются при определении порядка действия отрядов и
 при восстановлении эффективности отряда после полученного
-стресса\footnote{См. стр. 11, 5.1 Фаза действий.}. При этом выбирается
+стресса\footnote{См. стр.~\pageref{action-phase}, \ref{action-phase} \nameref{action-phase}}. При этом выбирается
 наибольшее значение из этих двух навыков. Далее в тексте это
 обозначается как Макс(ЛГК/ВЛН).
 
 \includegraphics[width=\linewidth]{media/image5.png}
 
-\subsubsection{Выносливость
-(ВНС)}\label{endurance}
+\subsubsection{Выносливость (ВНС)}\label{endurance}
 
 Навык определяет максимальный вес, который солдат может нести, скорость
 передвижения и возможность преодоления препятствий. В ролевой части
@@ -342,6 +365,7 @@ States Army Field Manuals, в том числе с использованием 
 Скорость пешего передвижения отряда при ненулевой грузоподъёмности
 определяется пропроционально текущей нагрузке.
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -349,23 +373,15 @@ States Army Field Manuals, в том числе с использованием 
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.3212] X[l, co=0.2777] X[l, co=0.1650] X[l, co=0.2362] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-Нагрузка в \% от максимальной грузоподъёмности
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Скорость пешего передвижения отряда, см
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Бег
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Преодоление препятствий без остановки
-\end{minipage} \\
-0\% - 25\% & 5 & + & + \\
-25\% - 50\% & 4 & + & - \\
-50\% - 75\% & 3 & + & - \\
-75\% - 100\% & 2 & - & - \\
+Нагрузка в \% от максимальной грузоподъёмности & Скорость пешего передвижения отряда, см & Бег & Преодоление препятствий без остановки \\
+0\%--25\% & 5 & $+$ & $+$ \\
+25\%--50\% & 4 & $+$ & $-$ \\
+50\%--75\% & 3 & $+$ & $-$ \\
+75\%--100\% & 2 & $-$ & $-$ \\
 
 \end{tblr}
-\captionof{table}{скорость пешего передвижения в зависимости от нагрузки}\nopagebreak
-\label{table-movement}
+\captionof{table}{скорость пешего передвижения в зависимости от нагрузки}\label{table-movement}
+\end{minipage}
 
 При нагрузке менее 75\% отряд может двигаться бегом со скоростью в два
 раза выше пешей скорости.
@@ -548,6 +564,7 @@ States Army Field Manuals, в том числе с использованием 
 зависимости от желаемого отыгрыша. Для гражданских можно представить
 соответствующий уровень исходя из их должности и рода деятельности.
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -555,25 +572,7 @@ States Army Field Manuals, в том числе с использованием 
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.3694] X[l, co=0.1662] X[l, co=0.1293] X[l, co=0.1662] X[l, co=0.1689] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-Уровень
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Макс(ЛГК/ВЛН)
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Количество навыков
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Количество навыков меткости
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Макс значение навыка
-\end{quote}
-\end{minipage} \\
+Уровень & Макс(ЛГК/ВЛН) & Количество навыков & Количество навыков меткости & Макс значение навыка \\
 Рядовой
 
 Чернорабочий & 2 & 1 & 1 & 10 \\
@@ -594,8 +593,8 @@ States Army Field Manuals, в том числе с использованием 
 Генерал & 20 & 5 & 3 & 6 \\
 
 \end{tblr}
-\captionof{table}{создание случайного персонажа}\nopagebreak
-\label{table-char-gen}
+\captionof{table}{создание случайного персонажа}\label{table-char-gen}
+\end{minipage}
 
 Прошедшие военные сборы персонажи получают 8 ВНС, 4 МНВ, 1 МСК, 5 ЛС и 2
 ГРН. Для гражданских персонажей максимальное значение навыков, связанных
@@ -610,7 +609,7 @@ States Army Field Manuals, в том числе с использованием 
 \subsubsection{Ролевые проверки и
 состязания}\label{role-checks}
 
-В ролевой части проверка тренированности -- это бросок кубика D20 с
+В ролевой части проверка тренированности --- это бросок кубика D20 с
 прибавлением очков тренированности. Пороговое значение, которое нужно
 превысить определяется сценарием. Примеры порогов:
 
@@ -623,7 +622,7 @@ States Army Field Manuals, в том числе с использованием 
   Сложно: 30.
 \end{itemize}
 
-Состязание в ролевой части -- это когда каждый персонаж бросает кубик
+Состязание в ролевой части --- это когда каждый персонаж бросает кубик
 D20, прибавляет к своему броску свой показатель очков тренированности,
 персонажи сортируются по убыванию получившихся значений, а выигравшим
 считается персонаж с самым большим значением. Если результат броска у
@@ -671,12 +670,12 @@ D20, прибавляет к своему броску свой показате
 действуют сообща. Примеры отрядов: отделение пехоты, расчёт тяжелого
 вооружения, экипаж техники, бригада грузчиков.
 
-В контексте игры термины отряд и боевая единица -- это синонимы, просто
-в русском языке отряд относится скорее к пехоте, а боевая единица --
+В контексте игры термины отряд и боевая единица --- это синонимы, просто
+в русском языке отряд относится скорее к пехоте, а боевая единица ---
 более широкое понятие.
 
 В каждом отряде есть лидер (командир экипажа, командир отделения,
-командир расчёта) -- это член отряда с наибольшим навыком логики или
+командир расчёта) --- это член отряда с наибольшим навыком логики или
 влияния (выбирается навык с наибольшим значением)\footnote{См. стр. 3,
   3.1 Атрибуты и навыки персонажей.}. Навыки персонажей, входящих в
 отряд, определяют возможности и характеристики отряда.
@@ -715,13 +714,13 @@ D20, прибавляет к своему броску свой показате
 дифференциацию брони. Учитывается только положение корпуса, положение
 башни игнорируется.
 
-Фронтальная линия -- это линия, перпендикулярная вектору ориентации
+Фронтальная линия --- это линия, перпендикулярная вектору ориентации
 боевой единицы и проходящая через точку, которая выбрана как точка
 отсчёта для боевой единицы (например, середина переднего края корпуса
 при использовании крупных фигурок). Таким образом, фронтальная линия
 делит игровую плоскость на две части: одна часть, на которой стоит сама
 боевая единица, считается находящейся \textbf{за} фронтальной линией, а
-вторая часть -- \textbf{перед} фронтальной линией и перед боевой
+вторая часть --- \textbf{перед} фронтальной линией и перед боевой
 единицей. По этой боевой единице враги, находящиеся перед фронтальной
 линией, ведут фронтальный огонь (атака «в лоб»), а те, что находятся за
 фронтальной линией ведут фланговый огонь (атака во фланг или с тыла).
@@ -734,7 +733,7 @@ D20, прибавляет к своему броску свой показате
 
 В игре используется понятие линии видимости при определении возможностей
 наблюдать вражескую боевую единицу и открывать огонь по ней. Линия
-видимости и линия огня -- это тождественные понятия. Линию видимости
+видимости и линия огня --- это тождественные понятия. Линию видимости
 следует проводить между заранее определёнными точками боевых единиц.
 
 Линия видимости проводится в горизонтальной плоскости и может быть
@@ -758,9 +757,7 @@ D20, прибавляет к своему броску свой показате
 Автор предлагает использовать для этой цели разработанное им
 веб-приложение, находящееся в свободном доступе в интернете по адресу:
 
-\begin{quote}
 https://github.com/guidebot/peace\_and\_prosperity
-\end{quote}
 
 Боевая единица может быть \textbf{замаскированной}, и это означает, что
 её не видят вражеские отряды и не могут открыть по ней прицельный
@@ -880,7 +877,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 Раненый персонаж не может действовать, в том числе его навыки не
 используются в игре. Например, его навык Макс(ЛГК/ВЛН) не может быть
 использован для восстановления очков стресса отряда. Единственное, что
-может делать раненый персонаж -- это оказывать себе медицинскую помощь.
+может делать раненый персонаж --- это оказывать себе медицинскую помощь.
 
 В завершающую фазу хода персонаж с кровотечением теряет 1 очко навыка
 ВНС. Когда очки ВНС персонажа в завершающую фазу хода равны 0 и
@@ -977,11 +974,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 \subsubsection{Дополнительные
 элементы}\label{elements}
 
-\begin{quote}
-Дополнительные элементы -- это своего рода небольшие зоны сложной
+Дополнительные элементы --- это своего рода небольшие зоны сложной
 геометрической формы, которые могут быть описаны в сценарии. Должны
 иметь следующие свойства:
-\end{quote}
 
 \begin{itemize}
 \item
@@ -1121,6 +1116,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 Каждый отряд восстанавливает некоторое количество очков стресса, в
 соответствии с уровнем навыка лидерства Ур(Макс(ЛГК/ВЛН)).
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -1138,8 +1134,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 2,7 & 6 \\
 
 \end{tblr}
-\captionof{table}{восстановление очков стресса}\nopagebreak
+\captionof{table}{восстановление очков стресса}
 \label{table-stress-recovery}
+\end{minipage}
 
 Персонажи с кровотечением теряют 1 очко навыка ВНС, а если количество
 очков ВНС персонажа уже 0 к этому времени, такой персонаж умирает.
@@ -1172,6 +1169,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 При прохождении маршрута через разную местность для расчёта расстояния
 выбирается худший случай.
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -1189,8 +1187,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 Автомобиль & 6 см & 20 см & 30+ \\
 
 \end{tblr}
-\captionof{table}{дальность движения за ход и значения для броска кубиков при преодолении препятствий}\nopagebreak
+\captionof{table}{дальность движения за ход и значения для броска кубиков при преодолении препятствий}
 \label{table-vehicle-movement}
+\end{minipage}
 
 При выполнении действия следует положить рядом с боевой единицей маркер
 движения, его можно будет убрать при следующей активации боевой единицы.
@@ -1357,6 +1356,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 и получившееся значение сравнить с пороговыми значениями (см. Таблица
 9).
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -1364,13 +1364,7 @@ https://github.com/guidebot/peace\_and\_prosperity
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.3324] X[l, co=0.3509] X[l, co=0.3166] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-Условия
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Базовое значение видимости
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Макс. дальность видимости, см
-\end{minipage} \\
+Условия & Базовое значение видимости & Макс. дальность видимости, см \\
 Ясный день & 12 & 160 \\
 Сумерки & 7 & 80 \\
 Ночь & 2 & 16 \\
@@ -1378,9 +1372,11 @@ https://github.com/guidebot/peace\_and\_prosperity
 Туман & 7 & 6 \\
 
 \end{tblr}
-\captionof{table}{базовое значение видимости и дальность видимости}\nopagebreak
+\captionof{table}{базовое значение видимости и дальность видимости}
 \label{table-visibility}
+\end{minipage}
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -1388,15 +1384,7 @@ https://github.com/guidebot/peace\_and\_prosperity
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.2850] X[l, co=0.1656] X[l, co=0.2424] X[l, co=0.3070] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-Предмет
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Условие
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Модификатор видимости
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Макс. дальность видимости, см
-\end{minipage} \\
+Предмет & Условие & Модификатор видимости & Макс. дальность видимости, см \\
 \SetCell[r=2]{l} Бинокль & День & +5 & 320 \\
 & Сумерки & +2 & 160 \\
 \SetCell[r=2]{l} Прибор ночного видения & Сумерки & +3 & 80 \\
@@ -1408,9 +1396,11 @@ https://github.com/guidebot/peace\_and\_prosperity
 & Туман & +4 & 6 \\
 
 \end{tblr}
-\captionof{table}{модификатор видимости от снаряжения}\nopagebreak
+\captionof{table}{модификатор видимости от снаряжения}
 \label{table-visibility-equipment}
+\end{minipage}
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -1429,8 +1419,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 Поиск мин (0 -- 1) & 22+ \\
 
 \end{tblr}
-\captionof{table}{пороговые значения для броска кубика при проведении разведки}\nopagebreak
+\captionof{table}{пороговые значения для броска кубика при проведении разведки}
 \label{table-recon-thresholds}
+\end{minipage}
 
 Если противник находится под крышей, то его невозможно обнаружить БПЛА с
 радиоуправлением, только БПЛА с оптоволоконным каналом связи.
@@ -1521,6 +1512,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 результату броска D20 модификатор флангового огня, определить количество
 очков стресса, которые получит цель (см. Таблица 10).
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -1528,13 +1520,7 @@ https://github.com/guidebot/peace\_and\_prosperity
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.3267] X[l, co=0.3505] X[l, co=0.3228] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-Интенсивность Огня (ИО) оружия
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Модифицированный результат броска
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Количество очков стресса
-\end{minipage} \\
+Интенсивность Огня (ИО) оружия & Модифицированный результат броска & Количество очков стресса \\
 1 & 15+ & 1 \\
 2 & 11+ & 1 \\
 2 & 20+ & 2 \\
@@ -1547,8 +1533,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 4 & 20+ & 4 \\
 
 \end{tblr}
-\captionof{table}{количество очков стресса при стрельбе}\nopagebreak
+\captionof{table}{количество очков стресса при стрельбе}
 \label{table-stress-from-fire}
+\end{minipage}
 
 Затем также определяется количество поражённых солдат, но к результату
 броска D20 применяются все модификаторы\footnote{\subsubsection*{\texorpdfstring{
@@ -1557,6 +1544,7 @@ https://github.com/guidebot/peace\_and\_prosperity
   6.3.2.4 Модификаторы при
   стрельбе.}{ Cм. стр. 17, 6.3.2.4 Модификаторы при стрельбе.}}\label{see-p17-shooting-modifiers}}.
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -1564,13 +1552,7 @@ https://github.com/guidebot/peace\_and\_prosperity
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.3267] X[l, co=0.3505] X[l, co=0.3228] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-Интенсивность Огня (ИО) оружия
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Модифицированный результат броска D20
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Количество раненых
-\end{minipage} \\
+Интенсивность Огня (ИО) оружия & Модифицированный результат броска D20 & Количество раненых \\
 1 & 16+ & 1 \\
 2 & 13+ & 1 \\
 2 & 21+ & 2 \\
@@ -1581,8 +1563,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 4 & 22+ & 3 \\
 
 \end{tblr}
-\captionof{table}{количество раненых при стрельбе}\nopagebreak
+\captionof{table}{количество раненых при стрельбе}
 \label{table-wounds-from-fire}
+\end{minipage}
 
 Распределение ран по персонажам отряда происходит среди персонажей, у
 которых ещё нет кровотечения, в порядке возрастания очков
@@ -1801,6 +1784,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 От результата броска нужно отнять значение модификатора в соответствии с
 типом \textbf{укрытия} (см. Таблица 12).
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -1813,8 +1797,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 Надёжное & -4 \\
 
 \end{tblr}
-\captionof{table}{значения модификаторов для типов укрытий}\nopagebreak
+\captionof{table}{значения модификаторов для типов укрытий}
 \label{table-cover-modifiers}
+\end{minipage}
 
 \subparagraph{Модификатор огня
 вслепую}\label{mod-blind}
@@ -1926,12 +1911,13 @@ https://github.com/guidebot/peace\_and\_prosperity
 \subsection{Пехотное
 вооружение}\label{infantry-weapons}
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{odd}={fg=black},
-  row{even}={fg=navy},
-  row{1}={h=2.5cm, halign=c},
-  colspec={X[l] Q[l, wd=0.2\linewidth] *{8}{Q[c, wd=0.04\linewidth]}},
+  row{even}={fg=black},
+  row{odd}={fg=navy},
+  colspec={Q[l,m,co=6]Q[c,m,co=7] *{8}Q[c,m,co=1]}
+  %colspec={X[l] Q[l, wd=0.2\linewidth] *{8}{Q[c, wd=0.04\linewidth]}},
 }
 Навык & Название & \rotatebox{90}{Вес, кг} & \rotatebox{90}{Вес боеприпасов, кг} & \rotatebox{90}{Идеальная дальность, см} & \rotatebox{90}{Эффективная дальность, см} & \rotatebox{90}{Максимальная дальность, см} & \rotatebox{90}{Бронебойность (\textbf{ББ})} & \rotatebox{90}{Интенсивность огня (\textbf{ИО})} & \rotatebox{90}{Свойства\footnotemark[1]} \\
 \SetCell[r=2]{l} Гранаты & Осколочные гранаты & - & 0.6 & 2 & 3 & 4 & 2 & 2 & Â \\
@@ -1942,7 +1928,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 & Укороченные автоматы & 2.0-3.2 & 0.1 & 6 & 10 & 20 & 1 & 1 & - \\
 & Штурмовые винтовки & 2.9-4.0 & 0.1 & 12 & 20 & 40 & 1 & 1 & - \\
 & Дробовики & 2.7-4.0 & 0.1 & 1 & 2 & 3 & - & 1 & - \\
-\SetCell[c=10]{l}{%
+\SetCell[c=10]{l}{
 Снайперские винтовки (см. Таблица 15: характеристики снайперских
 винтовок)} \\
 \SetCell[r=5]{l} Пулемёты & ПКМ & 8.2 & 1.6 & 24 & 50 & 100 & 2 & 2 & В \\
@@ -1963,22 +1949,21 @@ https://github.com/guidebot/peace\_and\_prosperity
 \SetCell[r=2]{l} Миномёты & Миномёт 60 мм & 19 & 3 & - & - & 340 & 3 & 3 & СÂ2 \\
 & Миномёт 80 мм & 48 & 7 & - & - & 590 & 5 & 3 & СÂ3 \\
 ПЗРК\footnotemark[4] & Стингер, Верба & 8 & 10 & - & - & 200 & 2 & - & СВ \\
-\SetCell[c=10]{l}{%
+\SetCell[c=10]{l}{
 Беспилотные летательные аппараты (см. Таблица 17: характеристики
 беспилотных летательных аппаратов)} \\
-\SetCell[c=10]{l}{%
+\SetCell[c=10]{l}{
 Взрывные устройства и мины (см. Таблица 18: характеристики взрывных
 устройств и мин)} \\
 \end{tblr}
-\phantomsection\label{_Ref31797173}{}\captionof{table}{характеристики пехотного вооружения}\nopagebreak
-\label{table-infantry-weapons}
-
+\captionof{table}{характеристики пехотного вооружения}\label{table-infantry-weapons}
 \begin{itemize}
-\item[\textsuperscript{1}] Свойства оружия: С -- применение только из стационарного положения. В -- возможна стрельба по воздушным целям. А -- возможна стрельба непрямой наводкой. ÂX -- только стрельба непрямой наводкой, стрельба прямой наводкой невозможна. Х -- радиус отклонения в см. Если не указан, значит 0.
+\item[\textsuperscript{1}] Свойства оружия: С --- применение только из стационарного положения. В --- возможна стрельба по воздушным целям. А --- возможна стрельба непрямой наводкой. ÂX --- только стрельба непрямой наводкой, стрельба прямой наводкой невозможна. Х --- радиус отклонения в см. Если не указан, значит 0.
 \item[\textsuperscript{2}] Химическая граната не приносит урон, приносит только очки стресса по стандартным правилам.
 \item[\textsuperscript{3}] Противотанковый Ракетный Комплекс
 \item[\textsuperscript{4}] Переносной Зенитно-Ракетный Комплекс
 \end{itemize}
+\end{minipage}
 
 \clearpage
 \endgroup
@@ -2001,6 +1986,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 
 Бронежилеты характеризуются весом и предоставляемой защитой.
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2008,21 +1994,16 @@ https://github.com/guidebot/peace\_and\_prosperity
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.6799] X[l, co=0.1535] X[l, co=0.1666] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-Бронежилет
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Вес, кг
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Защита
-\end{minipage} \\
+Бронежилет & Вес, кг & Защита \\
 MSV без плит\footnote{Может быть спрятан под одеждой.} & 2.5 & 1 \\
 MSV с плитами & 7.5 & 4 \\
 MSV с плитами и модулями для шеи и паха & 11.5 & 6 \\
 Кит-2 & 28 & 7 \\
 
 \end{tblr}
-\captionof{table}{характеристики бронежилетов}\nopagebreak
+\captionof{table}{характеристики бронежилетов}
 \label{table-body-armor}
+\end{minipage}
 
 Персонаж может использовать только один бронежилет. При наличии
 нескольких бронежилетов в инвентаре учитывается бронежилет с
@@ -2098,6 +2079,7 @@ MSV с плитами и модулями для шеи и паха & 11.5 & 6 \
 (подготовки в течение 1 хода или 30 секунд). Стрельба из лёгких
 снайперских винтовок возможна без подготовки, но по факту неэффективна.
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2105,46 +2087,15 @@ MSV с плитами и модулями для шеи и паха & 11.5 & 6 \
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.2545] X[l, co=0.1091] X[l, co=0.0909] X[l, co=0.1091] X[l, co=0.0727] X[l, co=0.0545] X[l, co=0.0909] X[l, co=0.1091] X[l, co=0.1091] @{}},
 }
-Название & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{quote}
-Вес, кг
-\end{quote}
-\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{quote}
-Вес боеприпасов, кг
-\end{quote}
-\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{quote}
-Максимальная дальность, см
-\end{quote}
-\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{quote}
-Бронебойность (\textbf{ББ})
-\end{quote}
-\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{quote}
-Интенсивность оня (\textbf{ИО})
-\end{quote}
-\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{quote}
-Прицел
-\end{quote}
-\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{quote}
-Только стационарное положение
-\end{quote}
-\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{quote}
-Модификатор стационарного положения
-\end{quote}
-\end{minipage} \\
+Название & Вес, кг & Вес боеприпасов, кг & Максимальная дальность, см & Бронебойность (\textbf{ББ}) & Интенсивность оня (\textbf{ИО}) & Прицел & Только стационарное положение & Модификатор стационарного положения \\
 H\&K G28 & 5.7 & 0.1 & 80 & 1 & 1 & 10x & - & +8 \\
 СВЧ-308 7,62 & 5.3 & 0.1 & 120 & 1 & 1 & 12x & - & +8 \\
 Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 
 \end{tblr}
-\captionof{table}{характеристики снайперских винтовок}\nopagebreak
+\captionof{table}{характеристики снайперских винтовок}
 \label{table-sniper-rifles}
+\end{minipage}
 
 \subsubsection{Модификации стрелкового
 оружия}\label{weapon-mods}
@@ -2175,6 +2126,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
   \hyperref[observation]{14},
   6.3.1 Наблюдение, стр. \hyperref[table-visibility-equipment]{14}, Таблица 8.}.
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2182,24 +2134,19 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.2147] X[l, co=0.3042] X[l, co=0.4811] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-Кратность
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Модификатор стационарного положения\footnote{См. стр.
+Кратность & Модификатор стационарного положения\footnote{См. стр.
   \hyperref[mod-stationary]{18},
-  6.3.2.4.3 Модификатор стационарного положения.}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Оптические характеристики (модификатор днём/в сумерки/макс. дальность,
-см)
-\end{minipage} \\
+  6.3.2.4.3 Модификатор стационарного положения.} & Оптические характеристики (модификатор днём/в сумерки/макс. дальность,
+см) \\
 2x -- 4x & +1 & - / - / 200 \\
 5x -- 8x & +2 & +2 / - / 240 \\
 9x -- 23x & +3 & +3 / +1 / 280 \\
 24x -- 32x & +4 & +4 / +2 / 320 \\
 
 \end{tblr}
-\captionof{table}{характеристики оптических прицелов}\nopagebreak
+\captionof{table}{характеристики оптических прицелов}
 \label{table-optics}
+\end{minipage}
 
 Приборы ночного видения и тепловизоры можно использовать только
 совместно с коллиматорами, лазерными прицелами и открытыми прицельными
@@ -2272,6 +2219,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 защититься от такой атаки, если хотя бы у одного из солдат в этом отряде
 есть дробовик, при этом расходуется его боезапас.
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2279,36 +2227,16 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.4490] X[l, co=0.0855] X[l, co=0.1271] X[l, co=0.1271] X[l, co=0.1057] X[l, co=0.1057] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Вес, кг
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Скорость, см
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Количество ходов в игре
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Бронебойность (ББ)
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Интенсивность огня (ИО)
-\end{quote}
-\end{minipage} \\
+ & Вес, кг & Скорость, см & Количество ходов в игре & Бронебойность (ББ) & Интенсивность огня (ИО) \\
 Разведывательный дрон & 2 & 50 & 50 & - & - \\
 Дрон со сбросом & 3 & 50 & 30 & 2 & 2 \\
 Ударный дрон c радиоканалом & 12 & 60 & 40 & 8 & 3 \\
 Ударный дрон с оптоволоконным каналом & 12 & 60 & 40 & 8 & 3 \\
 
 \end{tblr}
-\captionof{table}{характеристики беспилотных летательных аппаратов}\nopagebreak
+\captionof{table}{характеристики беспилотных летательных аппаратов}
 \label{table-drones}
+\end{minipage}
 
 \subsubsection{Взрывные устройства и
 мины}\label{explosives-mines}
@@ -2372,6 +2300,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 При использовании взрывных устройств в помещении показатель
 интенсивности огня удваивается.
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2379,20 +2308,7 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.6607] X[l, co=0.1164] X[l, co=0.1101] X[l, co=0.1128] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Вес
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Бронебойность (ББ)
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Интенсивность огня (ИО)
-\end{quote}
-\end{minipage} \\
+ & Вес & Бронебойность (ББ) & Интенсивность огня (ИО) \\
 Противопехотная мина ПФМ & - & - & 1 \\
 Противопехотная мина ОЗМ & 5 & - & 4 \\
 Противотанковая мина ТМ & 11 & 6 & 4\footnote{Для поражения пехоты
@@ -2406,12 +2322,14 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 Взрывчатка & 10 & 6 & 4 \\
 
 \end{tblr}
-\captionof{table}{характеристики взрывных устройств и мин}\nopagebreak
+\captionof{table}{характеристики взрывных устройств и мин}
 \label{table-explosives}
+\end{minipage}
 
 \subsection{Вооружение
 техники}\label{vehicle-weapons}
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2444,12 +2362,14 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 БМ 21 Град & - & - & 1200 & 15 & 8 & 4 & - & СА \\
 
 \end{tblr}
-\captionof{table}{характеристики вооружения техники}\nopagebreak
+\captionof{table}{характеристики вооружения техники}
 \label{table-vehicle-weapons}
+\end{minipage}
 
 \subsection{Бронебойность и
 бронированность}\label{armor}
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2479,8 +2399,9 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 & Уничтожен & & & & & & & & 26+ & 23+ & 21+ & 19+ \\
 & Стресс & & & & & & & & 23+ & 21+ & 19+ & 17+ \\
 \end{tblr}
-\captionof{table}{бронебойность оружия (ББ) и броня техники (Бр)}\nopagebreak
+\captionof{table}{бронебойность оружия (ББ) и броня техники (Бр)}
 \label{table-armor}
+\end{minipage}
 
 \subsection{Огневая
 поддержка}\label{fire-support-section}
@@ -2556,6 +2477,7 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
   6.3.2.4.1 Модификатор навыка.} Ур(X) и оценивается по таблице исходя
 из текущих очков корректировки орудия (см. Таблица 21).
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2563,11 +2485,7 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.4877] X[l, co=0.5123] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-Очки корректировки
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Результат броска D20 с учётом навыка
-\end{minipage} \\
+Очки корректировки & Результат броска D20 с учётом навыка \\
 0 & 22+ \\
 1 & 19+ \\
 2 & 14+ \\
@@ -2575,8 +2493,9 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 4 & 4+ \\
 5 & 1+ \\
 \end{tblr}
-\captionof{table}{пристрелка и корректировка при стрельбе непрямой наводкой}\nopagebreak
+\captionof{table}{пристрелка и корректировка при стрельбе непрямой наводкой}
 \label{table-fire-correction}
+\end{minipage}
 
 В случае успеха тот же самый результат кубика снова используется для
 определения эффекта от попадания по цели.
@@ -2628,6 +2547,7 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 радиостанциям, 1 уровень соответствует военным радиостанциям 5
 поколения, 2 уровень соответствует военным радиостанциям 6 поколения.
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2635,25 +2555,9 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.2157] X[l, co=0.0980] X[l, co=0.1373] X[l, co=0.2941] X[l, co=0.2549] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-Тип
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Уровень
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Вес, кг
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Название
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Радиус передачи, см
-\end{minipage} \\
-Сотовый & 0 & 0.5 & \begin{minipage}[t]{\linewidth}\raggedright
-Apple\\
-Samsung\strut
-\end{minipage} & $\infty$ (в зоне покрытия) \\
+Тип & Уровень & Вес, кг & Название & Радиус передачи, см \\
+Сотовый & 0 & 0.5 & Apple\\
+Samsung\strut & $\infty$ (в зоне покрытия) \\
 Радио & 0 & 0.5 & Baofeng Motorola & 200 \\
 Радио & 1 & 1.0 & Р-168 Акведук & 200 \\
 Радио & 2 & 0.5 & Р-187-П1 Азарт & 200 \\
@@ -2661,9 +2565,11 @@ Samsung\strut
 & & & & \\
 
 \end{tblr}
-\captionof{table}{переносные средства связи}\nopagebreak
+\captionof{table}{переносные средства связи}
 \label{table-portable-comms}
+\end{minipage}
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2671,17 +2577,7 @@ Samsung\strut
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.1794] X[l, co=0.0940] X[l, co=0.4961] X[l, co=0.2305] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-Тип
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Уровень
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Название
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Радиус передачи, км
-\end{minipage} \\
+Тип & Уровень & Название & Радиус передачи, км \\
 Радио & 1 & Р-168-100У Акведук & 200 \\
 Радио & 1 & Зоопарк & 200 \\
 Радио & 2 & Р-187ВЕ Азарт & 200 \\
@@ -2689,8 +2585,9 @@ Samsung\strut
 & & & \\
 
 \end{tblr}
-\captionof{table}{возимые средства связи}\nopagebreak
+\captionof{table}{возимые средства связи}
 \label{table-vehicle-comms}
+\end{minipage}
 
 Для подавления радиосвязи, в том числе для выведения из строя дронов с
 радиоканалом управления, существуют станции РЭП\footnote{РадиоЭлектронное
@@ -2699,6 +2596,7 @@ Samsung\strut
 разведывательные дроны, дроны со сбросом, а также барражирующие
 боеприпасы с радиоканалом.
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2706,27 +2604,17 @@ Samsung\strut
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.0938] X[l, co=0.1133] X[l, co=0.5367] X[l, co=0.2562] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Уровень
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Вес, кг
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Название
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Радиус подавления, см
-\end{minipage} \\
+Уровень & Вес, кг & Название & Радиус подавления, см \\
 1 & 3.8 & Капюшон & 20 \\
 2 & 20.0 & Гарпия Периметр & 60 \\
 & & & \\
 
 \end{tblr}
-\captionof{table}{переносные средства РЭП}\nopagebreak
+\captionof{table}{переносные средства РЭП}
 \label{table-portable-ew}
+\end{minipage}
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2734,22 +2622,15 @@ Samsung\strut
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.0938] X[l, co=0.6500] X[l, co=0.2562] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Уровень
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Название
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Радиус подавления, см
-\end{minipage} \\
+Уровень & Название & Радиус подавления, см \\
 1 & Капюшон & 40 \\
 2 & Ромашка & 100 \\
 2 & Чистюля & 300 \\
 
 \end{tblr}
-\captionof{table}{возимые и стационарные средства РЭП}\nopagebreak
+\captionof{table}{возимые и стационарные средства РЭП}
 \label{table-vehicle-ew}
+\end{minipage}
 
 Отряды, попадающие в зону действия РЭП, не могут корректировать огонь
 артиллерии, не могут управлять дронами, не могут дистанционно подрывать
@@ -2768,6 +2649,7 @@ Samsung\strut
 перехватывать и подделывать сообщения. Станции РЭР могут быть 1 или 2
 уровней и работать с радиостанциями 0 и 1 уровней, соответственно.
 
+\begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
   row{1}={halign=c},
@@ -2775,24 +2657,15 @@ Samsung\strut
   row{even}={fg=navy},
   colspec={@{} X[l, co=0.0938] X[l, co=0.4349] X[l, co=0.2562] X[l, co=0.2151] @{}},
 }
-\begin{minipage}[b]{\linewidth}\raggedright
-\begin{quote}
-Уровень
-\end{quote}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Название
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Радиус подавления, см
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Радиус передачи, км
-\end{minipage} \\
+Уровень & Название & Радиус подавления, см & Радиус передачи, км \\
 1 & Леер-2 & 100 & 200 \\
 2 & Леер-3 & 150 & 200 \\
 2 & Монолит & 300 & 200 \\
 
 \end{tblr}
-\captionof{table}{возимые и стационарные средства РЭР}\nopagebreak
+\captionof{table}{возимые и стационарные средства РЭР}
 \label{table-vehicle-esm}
+\end{minipage}
 
 Любые боевые единицы, использующие радиосвязь, регистрируемую РЭР,
 демаскируются, в том числе и другие станции РЭР, которые передают
