@@ -54,12 +54,12 @@
 \providecommand{\tightlist}{
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{4}
-\setlength{\cftsecindent}{0pt}
-\setlength{\cftsubsecindent}{0pt}
-\setlength{\cftsubsubsecindent}{0pt}
-\setlength{\cftparagraph}{0pt}
-\setlength{\cftsubparagraph}{0pt}
+\setcounter{tocdepth}{5}
+\titlecontents{section}[0em]{}{\contentslabel}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{subsection}[0.5em]{}{\contentslabel}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{subsubsection}[1em]{}{\contentslabel}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{paragraph}[1.5em]{}{\contentslabel}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{subparagraph}[2em]{}{\contentslabel}{\titlerule*[0.8pc]{.}\contentspage}
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
@@ -318,10 +318,9 @@ States Army Field Manuals, в том числе с использованием 
 который напрямую зависит от тренированности и обозначается как Ур(х),
 где х --- очки тренированности в некотором навыке.
 
-\begin{minipage}
 \begin{center}
+\begin{minipage}{0.6\columnwidth}
 \begin{tblr}{
-  0.6\columnwidth,
   hlines,
   row{even}={fg=black},
   row{odd}={fg=navy},
@@ -335,13 +334,13 @@ States Army Field Manuals, в том числе с использованием 
 16--19 & 5 \\
 20 & 6 \\
 \end{tblr}
-\end{center}
 \captionof{table}{очки тренированности и навыка}\label{table-skill-levels}
 \end{minipage}
+\end{center}
 
 Навыки ЛГК и ВЛН используются при определении порядка действия отрядов и
 при восстановлении эффективности отряда после полученного
-стресса\footnote{См. стр.~\pageref{action-phase}, \ref{action-phase} \nameref{action-phase}}. При этом выбирается
+стресса\footnote{См. стр.~\pageref{action-phase}, \ref{action-phase}~\nameref{action-phase}.}. При этом выбирается
 наибольшее значение из этих двух навыков. Далее в тексте это
 обозначается как Макс(ЛГК/ВЛН).
 
@@ -368,17 +367,15 @@ States Army Field Manuals, в том числе с использованием 
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
-  row{odd}={fg=black},
-  row{even}={fg=navy},
-  colspec={@{} X[l, co=0.3212] X[l, co=0.2777] X[l, co=0.1650] X[l, co=0.2362] @{}},
+  row{even}={fg=black},
+  row{odd}={fg=navy},
+  colspec={Q[c,m,co=3]Q[c,m,co=3]Q[c,m,co=1]Q[c,m,co=2]}
 }
-Нагрузка в \% от максимальной грузоподъёмности & Скорость пешего передвижения отряда, см & Бег & Преодоление препятствий без остановки \\
+\SetRow{font=\footnotesize}Нагрузка в \% от максимальной грузоподъёмности & Скорость пешего передвижения отряда, см & Бег & Преодоление препятствий без остановки \\
 0\%--25\% & 5 & $+$ & $+$ \\
 25\%--50\% & 4 & $+$ & $-$ \\
 50\%--75\% & 3 & $+$ & $-$ \\
 75\%--100\% & 2 & $-$ & $-$ \\
-
 \end{tblr}
 \captionof{table}{скорость пешего передвижения в зависимости от нагрузки}\label{table-movement}
 \end{minipage}
@@ -389,7 +386,7 @@ States Army Field Manuals, в том числе с использованием 
 При нагрузке менее 25\% отряд может преодолевать препятствия без
 остановки, но при этом обязан получить 1 очко усталости.
 
-Очков усталости\footnote{См. стр. 8, 3.3.5 Очки усталости.} у отряда не
+Очков усталости\footnote{См. стр.~\pageref{fatigue}, \ref{fatigue}~\nameref{fatigue}.} у отряда не
 может быть больше, чем минимальный Ур(ВНС) среди персонажей отряда.
 
 \paragraph{Пример}\label{example-endurance}
@@ -399,9 +396,7 @@ States Army Field Manuals, в том числе с использованием 
 штурмовые винтовки (каждая весом 4,7 кг c боезапасом), то у него 14,1 кг
 нагрузки, что составляет менее 20\%. Такой отряд может идти со скоростью
 5 см за ход или бежать на 10 см за ход, а кроме того преодолевать
-препятствия без остановки (см. стр.
-\hyperref[obstacles]{13},
-6.2.2.2 Преодоление препятствий).
+препятствия без остановки\footnote{См. стр.~\pageref{obstacles}, \ref{obstacles}~\nameref{obstacles}.}.
 
 Если этот отряд возьмёт ручной противотанковый гранатомёт с боезапасом
 общим весом 12,3 кг, то его нагрузка будет 26,4 кг, что составляет около
@@ -413,8 +408,7 @@ States Army Field Manuals, в том числе с использованием 
 кг, то нагрузка станет около 98\%, его скорость будет уже всего 2 см за
 ход и он не сможет двигаться бегом.
 
-\subsubsection{Маневрирование
-(МНВ)}\label{maneuver}
+\subsubsection{Маневрирование (МНВ)}\label{maneuver}
 
 \includegraphics[width=\linewidth]{media/image6.png}
 
@@ -428,23 +422,17 @@ States Army Field Manuals, в том числе с использованием 
 отряду.
 
 При определении навыка маневрирования Ур(МНВ) отряда среди солдат отряда
-выбирается минимальное значение\footnote{См. стр.
-  \hyperref[mod-skill]{17},
-  6.3.2.4.1 Модификатор навыка.}.
+выбирается минимальное значение\footnote{См. стр.~\pageref{mod-skill}, \ref{mod-skill}~\nameref{mod-skill}.}.
 
-\subsubsection{Маскировка
-(МСК)}\label{camouflage-skill}
+\subsubsection{Маскировка (МСК)}\label{camouflage-skill}
 
 Тренировки по маскировке включают в себя собственно маскировку, а также
-обнаружение (демаскировку)\footnote{См. стр.
-  \hyperref[camouflage]{8},
-  3.3.3 Маскировка.}. В ролевой части навык МСК используется во
+обнаружение (демаскировку)\footnote{См. стр.~\pageref{camouflage}, \ref{camouflage}~\nameref{camouflage}.}.
+В ролевой части навык МСК используется во
 взаимодействиях, связанных с восприятием и наблюдательностью.
 
 Навык маскировки Ур(МСК) влияет на дальность обнаружения (демаскировки)
-противника при наблюдении (см. стр.
-\hyperref[observation]{14}, 6.3.1
-Наблюдение).
+противника при наблюдении\footnote{См. стр.~\pageref{observation}, \ref{observation}~\nameref{observation}.}.
 
 Игрок самостоятельно выбирает персонажа, который ведёт наблюдение,
 поэтому применяется значение навыка Ур(МСК) конкретного персонажа, а
@@ -453,36 +441,16 @@ States Army Field Manuals, в том числе с использованием 
 наблюдение, выбирается минимальное значение среди персонажей этого
 отряда.
 
-\subsubsection{Навыки использования
-оружия}\label{weapon-skills}
+\subsubsection{Навыки меткости}\label{weapon-skills}
 
 Навыки, связанные с атрибутом меткость используются для определения
 результативности применения оружия прямой наводкой, в том числе бросков
 гранат.
 
 Снаряжение и оружие делится на классы, для каждого из которых необходима
-отдельная тренировка:
+отдельная тренировка.
 
-\begin{itemize}
-\item
-  метательное оружие (гранаты) (ГРН);
-\item
-  лёгкое стрелковое оружие (ЛС);
-\item
-  снайперское оружие (СН);
-\item
-  пулемёты (ПЛМ);
-\item
-  управляемые ракеты (УР);
-\item
-  управляемые дроны (ДРН);
-\item
-  тяжёлое вооружение (всё остальное оружие, ведущее огонь прямой
-  наводкой) (ТВ).
-\end{itemize}
-
-\subsubsection{Медицина
-(МЕД)}\label{medicine}
+\subsubsection{Медицина (МЕД)}\label{medicine}
 
 Навык медицины позволяет спасти жизнь смертельно раненого солдата и
 остановить кровотечение. В ролевой части навык медицины используется во
@@ -490,42 +458,35 @@ States Army Field Manuals, в том числе с использованием 
 
 Санитару или медику, то есть персонажу с количеством очков навыка МЕД
 больше 0, доступно специальное действие \textbf{оказание первой
-помощи}\footnote{См. стр.
-  \hyperref[first-aid]{19},
-  6.3.4 Оказание первой помощи.}.
+помощи}\footnote{См. стр.~\pageref{first-aid}, \ref{first-aid}~\nameref{first-aid}.}.
 
-\subsubsection{Механика
-(МЕХ)}\label{mechanics}
+\subsubsection{Механика (МЕХ)}\label{mechanics}
 
 Навык механики определяет возможности по ремонту и созданию различных
 механизмов, а также по управлению ими. Навык может использоваться для
 физического взлома и ремонта замков, автомобилей, а также для проверок
 при управлении автомобилями и боевыми машинами.
 
-\subsubsection{Электроника
-(ЭЛ)}\label{electronics}
+\subsubsection{Электроника (ЭЛ)}\label{electronics}
 
 Навык работы с компьютерами, включающий и программную, и аппаратную
 части: программирование, пайка, электрические схемы. Используется для
 работы со средствами связи, радиооборудованием.
 
-\subsubsection{Взрывные устройства и мины
-(ВЗР)}\label{explosives}
+\subsubsection{Взрывные устройства и мины (ВЗР)}\label{explosives}
 
 Навык работы с взрывчатыми веществами и взрывными устройствами,
-минами\footnote{См. стр. 23, 7.1.9 Взрывные устройства и мины.}.
+минами\footnote{См. стр.~\pageref{explosives-mines}, \ref{explosives-mines}~\nameref{explosives-mines}.}.
 Используется для создания и установки взрывных устройств и
 разминирования.
 
-\subsubsection{Огневая поддержка
-(ОП)}\label{fire-support}
+\subsubsection{Огневая поддержка (ОП)}\label{fire-support}
 
 Используется для любой навесной стрельбы (стрельбы непрямой наводкой)
 начиная от подствольных гранатомётов и АГС и заканчивая ствольной
 артиллерией и РСЗО\footnote{См. стр. 27, 7.4 Огневая поддержка.}.
 
-\subsubsection{Логика
-(ЛГК)}\label{logic}
+\subsubsection{Логика (ЛГК)}\label{logic}
 
 Навык логики используется при взаимодействии с другими персонажами.
 
@@ -536,8 +497,7 @@ States Army Field Manuals, в том числе с использованием 
 специального образования, 8 для оконченного высшего, 11 для нескольких
 высших, 15 для кандидата наук, 19 для доктора наук.
 
-\subsubsection{Влияние
-(ВЛН)}\label{influence}
+\subsubsection{Влияние (ВЛН)}\label{influence}
 
 Навык влияния используется при взаимодействии с другими персонажами.
 
@@ -556,8 +516,7 @@ States Army Field Manuals, в том числе с использованием 
   бонус +5 к влиянию при применении обаяния.
 \end{itemize}
 
-\subsubsection{Создание случайного
-персонажа}\label{char-gen}
+\subsubsection{Создание случайного персонажа}\label{char-gen}
 
 Определить примерный уровень требуемого персонажа, который определит
 минимальный навык ЛГК/ВЛН. Игрок может выбрать любой из этих навыков в
@@ -567,31 +526,19 @@ States Army Field Manuals, в том числе с использованием 
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
-  row{odd}={fg=black},
-  row{even}={fg=navy},
-  colspec={@{} X[l, co=0.3694] X[l, co=0.1662] X[l, co=0.1293] X[l, co=0.1662] X[l, co=0.1689] @{}},
+  row{evenodd}={fg=black},
+  row{odd}={fg=navy},
+  colspec={Q[c,m,co=3]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]}
 }
-Уровень & Макс(ЛГК/ВЛН) & Количество навыков & Количество навыков меткости & Макс значение навыка \\
-Рядовой
-
-Чернорабочий & 2 & 1 & 1 & 10 \\
-Мл. сержант & 4 & 1 & 2 & 20 \\
-Сержант
-
-Прораб & 6 & 2 & 2 & 20 \\
-Лейтенант
-
-Специалист & 8 & 2 & 1 & 14 \\
-Капитан
-
+Уровень & \rotatebox{90}{Макс(ЛГК/ВЛН)} & \rotatebox{90}{Количество навыков} & \rotatebox{90}{Количество навыков меткости} & \rotatebox{90}{Макс значение навыка} \\
+{Рядовой\\Чернорабочий} & 2 & 1 & 1 & 10 \\
+{Мл. сержант\\Сержант} & 4 & 1 & 2 & 20 \\
+{Прораб\\Лейтенант} & 6 & 2 & 2 & 20 \\
+{Специалист\\Капитан} & 8 & 2 & 1 & 14 \\
 Руководитель & 11 & 3 & 3 & 14 \\
-Майор & 14 & 4 & 3 & 14 \\
-Полковник
-
+{Майор\\Полковник} & 14 & 4 & 3 & 14 \\
 Топ менеджер & 17 & 4 & 3 & 10 \\
 Генерал & 20 & 5 & 3 & 6 \\
-
 \end{tblr}
 \captionof{table}{создание случайного персонажа}\label{table-char-gen}
 \end{minipage}
@@ -606,8 +553,7 @@ States Army Field Manuals, в том числе с использованием 
 выбранного навыка определяется значение очков тренированности навыка,
 случайно или по желанию.
 
-\subsubsection{Ролевые проверки и
-состязания}\label{role-checks}
+\subsubsection{Ролевые проверки и состязания}\label{role-checks}
 
 В ролевой части проверка тренированности --- это бросок кубика D20 с
 прибавлением очков тренированности. Пороговое значение, которое нужно
@@ -637,8 +583,7 @@ D20, прибавляет к своему броску свой показате
 помеха, только выбирается худший результат или бросок модифицируется на
 -5.
 
-\subsection{Режимы
-игры}\label{game-modes}
+\subsection{Режимы игры}\label{game-modes}
 
 В игре предлагается 3 режима:
 
@@ -1916,7 +1861,7 @@ https://github.com/guidebot/peace\_and\_prosperity
   hlines,
   row{even}={fg=black},
   row{odd}={fg=navy},
-  colspec={Q[l,m,co=6]Q[c,m,co=7] *{8}Q[c,m,co=1]}
+  colspec={Q[l,m,co=5]Q[c,m,co=5]Q[c,m,co=2]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]}
   %colspec={X[l] Q[l, wd=0.2\linewidth] *{8}{Q[c, wd=0.04\linewidth]}},
 }
 Навык & Название & \rotatebox{90}{Вес, кг} & \rotatebox{90}{Вес боеприпасов, кг} & \rotatebox{90}{Идеальная дальность, см} & \rotatebox{90}{Эффективная дальность, см} & \rotatebox{90}{Максимальная дальность, см} & \rotatebox{90}{Бронебойность (\textbf{ББ})} & \rotatebox{90}{Интенсивность огня (\textbf{ИО})} & \rotatebox{90}{Свойства\footnotemark[1]} \\
