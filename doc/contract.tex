@@ -4,23 +4,24 @@
 
 \documentclass[
 ]{article}
-\usepackage[margin=1cm, includeheadfoot]{geometry}
+\usepackage[margin=1cm,includeheadfoot,a4paper]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{fontspec}
-\setmainfont{Noto Serif}
-\setsansfont{Noto Sans}
-\setmonofont{Noto Sans Mono}
 \usepackage[russian]{babel}
 \usepackage{microtype}
 \usepackage{parskip}
 \usepackage{xcolor}
 \definecolor{navy}{RGB}{0,0,128}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Sans Mono}
+\newfontfamily\headingfont{Operation Napalm}[Script=Cyrillic]
 \usepackage{titlesec}
-\titleformat{\section}{\color{navy}\normalfont\Large\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}{\color{navy}\normalfont\large\bfseries}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}{\color{navy}\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
-\titleformat{\paragraph}{\color{navy}\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
-\titleformat{\subparagraph}{\color{navy}\normalfont\normalsize\itshape}{\thesubparagraph}{1em}{}
+\titleformat{\section}{\headingfont\color{navy}\Large}{\thesection}{1em}{}
+\titleformat{\subsection}{\headingfont\color{navy}\large}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\headingfont\color{navy}\normalsize}{\thesubsubsection}{1em}{}
+\titleformat{\paragraph}{\headingfont\color{navy}\normalsize}{\theparagraph}{1em}{}
+\titleformat{\subparagraph}{\headingfont\color{navy}\normalsize\itshape}{\thesubparagraph}{1em}{}
 \usepackage{multicol}
 \usepackage{array}
 \usepackage{background}
@@ -55,11 +56,11 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{5}
-\titlecontents{section}[0em]{}{\makebox[1.3em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{subsection}[0em]{}{\makebox[2.1em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{section}[0em]{}{\Large\makebox[1.3em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{subsection}[0em]{}{\large\makebox[2.1em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
 \titlecontents{subsubsection}[0em]{}{\makebox[2.9em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{paragraph}[0em]{}{\makebox[3.7em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{subparagraph}[0em]{}{\makebox[4.5em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{paragraph}[0em]{}{\small\makebox[3.9em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{subparagraph}[0em]{}{\footnotesize\makebox[4.7em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
