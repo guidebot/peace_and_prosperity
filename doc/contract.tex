@@ -1035,10 +1035,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.5147] X[l, co=0.4853] @{}},
+  colspec={@{} Q[c,m, co=0.5147] Q[c,m, co=0.4853] @{}},
 }
 Восстановление очков стресса & Уровень навыка Ур(Макс(ЛГК/ВЛН)) \\
 0,1 & 0 \\
@@ -1087,19 +1086,17 @@ https://github.com/guidebot/peace\_and\_prosperity
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={Q[l, wd=0.18\linewidth] Q[l, wd=0.28\linewidth] Q[l, wd=0.18\linewidth] Q[l, wd=0.22\linewidth]},
+  colspec={Q[c,m,co=2] Q[c,m,co=1] Q[c,m,co=1] Q[c,m,co=1]},
 }
 & Открытая местность & Дорога & Препятствия \\
 Пехота &
-\SetCell[c=2]{l}{%
-2-5 см\footnote{См. Таблицу~\ref{table-movement}.}} & - \\
+\SetCell[c=2]{c,m}{
+2--5~см\footnote{См. стр.~\pageref{table-movement}, \ref{table-movement}~\nameref{table-movement}.}} & $-$ \\
 Гусеничные БМ & 12 см & 16 см & 10+ \\
 Колёсные БМ & 12 см & 16 см & 20+ \\
 Автомобиль & 6 см & 20 см & 30+ \\
-
 \end{tblr}
 \captionof{table}{дальность движения за ход и значения для броска кубиков при преодолении препятствий}\label{table-vehicle-movement}
 \end{minipage}
@@ -1107,8 +1104,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 При выполнении действия следует положить рядом с боевой единицей маркер
 движения, его можно будет убрать при следующей активации боевой единицы.
 
-\subsubsection{Особенности движения
-техники}\label{vehicle-movement}
+\subsubsection{Особенности движения техники}\label{vehicle-movement}
 
 \includegraphics[width=\linewidth]{media/image13.png}
 
@@ -1119,7 +1115,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 поворачиваться на любой угол.
 
 Если у экипажа техники, выполняющей движение, количество очков стресса
-больше показателя брони\footnote{См. Таблицу~\ref{table-armor}.} она не
+больше показателя брони\footnote{См. стр.~\pageref{table-armor}, \ref{table-armor}~\nameref{table-armor}.} она не
 может приближаться к \textbf{демаскированным} вражеским отрядам, но
 может отдаляться от них. Если это условие выполнить невозможно, то
 экипаж покидает технику.
@@ -1132,8 +1128,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 При движении через \textbf{препятствия} техника движется как по открытой
 местности, но должна пройти проверку на управление.
 
-\paragraph{Проверка на
-управление}\label{control-check}
+\paragraph{Проверка на управление}\label{control-check}
 
 Бросить кубик D20, к результату броска прибавить уровень навыка вождения
 Ур(МЕХ)\footnote{См. стр.~\pageref{mechanics}, \ref{mechanics}~\nameref{mechanics}.}, итоговый результат сравнить со значением из
@@ -1162,8 +1157,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 может осуществить посадку в этот же БТР, если расстояние до него не
 более максимальной дальности движения.
 
-\subsubsection{Особенности движения
-пехоты}\label{infantry-movement}
+\subsubsection{Особенности движения пехоты}\label{infantry-movement}
 
 Если у пехотного отряда, выполняющего движение, количество очков
 \textbf{стресса} больше половины численности отряда, он не может
@@ -1183,8 +1177,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 Бег возможен только если количество очков усталости в отряде меньше, чем
 минимальное значение Ур(ВНС) у персонажей этого отряда.
 
-\paragraph{Преодоление
-препятствий}\label{obstacles}
+\paragraph{Преодоление препятствий}\label{obstacles}
 
 Преодоление препятствия для отряда пехоты возможно только если
 количество очков усталости в отряде меньше, чем минимальное значение
@@ -1200,8 +1193,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 может быть легко проходимо для пехоты (например, противотанковые ежи),
 такие элементы не влияют на движение пехоты.
 
-\paragraph{Посадка и
-высадка}\label{boarding-disembark}
+\paragraph{Посадка и высадка}\label{boarding-disembark}
 
 При движении пехотные отряды могут осуществлять посадку в технику и
 высадку из неё. Для посадки точка назначения для движения должна быть на
@@ -1209,8 +1201,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 дальности движения. Посадка и высадка несовместима с движением техники в
 том же ходу. Это же правило применяется для экипажа техники.
 
-\subsection{Действия
-персонажей}\label{person-actions}
+\subsection{Действия персонажей}\label{person-actions}
 
 Персонажи в отряде могут действовать раздельно: наблюдать, вести огонь
 по разным целям, оказывать помощь раненым.
@@ -1258,7 +1249,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 
 При наблюдении за отрядом пехоты нужно отнять удвоенный навык маскировки
 цели Ур(МСК)\footnote{См. стр.~\pageref{camouflage-skill}, \ref{camouflage-skill}~\nameref{camouflage-skill}.} (выбирается минимальный МСК из персонажей
-отряда)\textbf{.}
+отряда).
 
 После этого к модифицированному значению прибавить результат броска D20
 и получившееся значение сравнить с пороговыми значениями (см. Таблица
@@ -1267,10 +1258,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.3324] X[l, co=0.3509] X[l, co=0.3166] @{}},
+  colspec={@{} Q[c,m, co=0.3324] Q[c,m, co=0.3509] Q[c,m, co=0.3166] @{}},
 }
 Условия & Базовое значение видимости & Макс. дальность видимости, см \\
 Ясный день & 12 & 160 \\
@@ -1278,7 +1268,6 @@ https://github.com/guidebot/peace\_and\_prosperity
 Ночь & 2 & 16 \\
 Сильные осадки & 8 & 40 \\
 Туман & 7 & 6 \\
-
 \end{tblr}
 \captionof{table}{базовое значение видимости и дальность видимости}\label{table-visibility}
 \end{minipage}
@@ -1286,10 +1275,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.2850] X[l, co=0.1656] X[l, co=0.2424] X[l, co=0.3070] @{}},
+  colspec={@{} Q[c,m, co=0.2850] Q[c,m, co=0.1656] Q[c,m, co=0.2424] Q[c,m, co=0.3070] @{}},
 }
 Предмет & Условие & Модификатор видимости & Макс. дальность видимости, см \\
 \SetCell[r=2]{l} Бинокль & День & +5 & 320 \\
@@ -1309,10 +1297,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.4800] X[l, co=0.5200] @{}},
+  colspec={@{} Q[c,m, co=0.4800] Q[c,m, co=0.5200] @{}},
 }
 Дистанция обнаружения, см & Модифицированный результат \\
 3 & 10+ \\
@@ -1414,10 +1401,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.3267] X[l, co=0.3505] X[l, co=0.3228] @{}},
+  colspec={@{} Q[c,m, co=0.3267] Q[c,m, co=0.3505] Q[c,m, co=0.3228] @{}},
 }
 Интенсивность Огня (ИО) оружия & Модифицированный результат броска & Количество очков стресса \\
 1 & 15+ & 1 \\
@@ -1441,10 +1427,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.3267] X[l, co=0.3505] X[l, co=0.3228] @{}},
+  colspec={@{} Q[c,m, co=0.3267] Q[c,m, co=0.3505] Q[c,m, co=0.3228] @{}},
 }
 Интенсивность Огня (ИО) оружия & Модифицированный результат броска D20 & Количество раненых \\
 1 & 16+ & 1 \\
@@ -1675,10 +1660,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.4849] X[l, co=0.5151] @{}},
+  colspec={@{} Q[c,m, co=0.4849] Q[c,m, co=0.5151] @{}},
 }
 Тип укрытия & Значение модификатора \\
 Среднее & -2 \\
@@ -1870,10 +1854,9 @@ https://github.com/guidebot/peace\_and\_prosperity
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.6799] X[l, co=0.1535] X[l, co=0.1666] @{}},
+  colspec={@{} Q[c,m, co=0.6799] Q[c,m, co=0.1535] Q[c,m, co=0.1666] @{}},
 }
 Бронежилет & Вес, кг & Защита \\
 MSV без плит\footnote{Может быть спрятан под одеждой.} & 2.5 & 1 \\
@@ -1960,10 +1943,9 @@ MSV с плитами и модулями для шеи и паха & 11.5 & 6 \
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.2545] X[l, co=0.1091] X[l, co=0.0909] X[l, co=0.1091] X[l, co=0.0727] X[l, co=0.0545] X[l, co=0.0909] X[l, co=0.1091] X[l, co=0.1091] @{}},
+  colspec={@{} Q[c,m, co=0.2545] Q[c,m, co=0.1091] Q[c,m, co=0.0909] Q[c,m, co=0.1091] Q[c,m, co=0.0727] Q[c,m, co=0.0545] Q[c,m, co=0.0909] Q[c,m, co=0.1091] Q[c,m, co=0.1091] @{}},
 }
 Название & Вес, кг & Вес боеприпасов, кг & Максимальная дальность, см & Бронебойность (\textbf{ББ}) & Интенсивность оня (\textbf{ИО}) & Прицел & Только стационарное положение & Модификатор стационарного положения \\
 H\&K G28 & 5.7 & 0.1 & 80 & 1 & 1 & 10x & - & +8 \\
@@ -2002,10 +1984,9 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.2147] X[l, co=0.3042] X[l, co=0.4811] @{}},
+  colspec={@{} Q[c,m, co=0.2147] Q[c,m, co=0.3042] Q[c,m, co=0.4811] @{}},
 }
 Кратность & Модификатор стационарного положения\footnote{См. стр.~\pageref{mod-stationary}, \ref{mod-stationary}~\nameref{mod-stationary}.} & Оптические характеристики (модификатор днём/в сумерки/макс. дальность,
 см) \\
@@ -2089,10 +2070,9 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.4490] X[l, co=0.0855] X[l, co=0.1271] X[l, co=0.1271] X[l, co=0.1057] X[l, co=0.1057] @{}},
+  colspec={@{} Q[c,m, co=0.4490] Q[c,m, co=0.0855] Q[c,m, co=0.1271] Q[c,m, co=0.1271] Q[c,m, co=0.1057] Q[c,m, co=0.1057] @{}},
 }
  & Вес, кг & Скорость, см & Количество ходов в игре & Бронебойность (ББ) & Интенсивность огня (ИО) \\
 Разведывательный дрон & 2 & 50 & 50 & - & - \\
@@ -2167,10 +2147,9 @@ Barret M107A1 & 13.7 & 0.2 & 150 & 3 & 1 & 30x & + & +9 \\
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.6607] X[l, co=0.1164] X[l, co=0.1101] X[l, co=0.1128] @{}},
+  colspec={@{} Q[c,m, co=0.6607] Q[c,m, co=0.1164] Q[c,m, co=0.1101] Q[c,m, co=0.1128] @{}},
 }
  & Вес & Бронебойность (ББ) & Интенсивность огня (ИО) \\
 Противопехотная мина ПФМ & - & - & 1 \\
@@ -2337,10 +2316,9 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.4877] X[l, co=0.5123] @{}},
+  colspec={@{} Q[c,m, co=0.4877] Q[c,m, co=0.5123] @{}},
 }
 Очки корректировки & Результат броска D20 с учётом навыка \\
 0 & 22+ \\
@@ -2405,10 +2383,9 @@ MILAN & 240 & 240 & 240 & - & 10 & - & - & С \\
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.2157] X[l, co=0.0980] X[l, co=0.1373] X[l, co=0.2941] X[l, co=0.2549] @{}},
+  colspec={@{} Q[c,m, co=0.2157] Q[c,m, co=0.0980] Q[c,m, co=0.1373] Q[c,m, co=0.2941] Q[c,m, co=0.2549] @{}},
 }
 Тип & Уровень & Вес, кг & Название & Радиус передачи, см \\
 Сотовый & 0 & 0.5 & Apple\\
@@ -2426,10 +2403,9 @@ Samsung & $\infty$ (в зоне покрытия) \\
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.1794] X[l, co=0.0940] X[l, co=0.4961] X[l, co=0.2305] @{}},
+  colspec={@{} Q[c,m, co=0.1794] Q[c,m, co=0.0940] Q[c,m, co=0.4961] Q[c,m, co=0.2305] @{}},
 }
 Тип & Уровень & Название & Радиус передачи, км \\
 Радио & 1 & Р-168-100У Акведук & 200 \\
@@ -2452,10 +2428,9 @@ Samsung & $\infty$ (в зоне покрытия) \\
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.0938] X[l, co=0.1133] X[l, co=0.5367] X[l, co=0.2562] @{}},
+  colspec={@{} Q[c,m, co=0.0938] Q[c,m, co=0.1133] Q[c,m, co=0.5367] Q[c,m, co=0.2562] @{}},
 }
 Уровень & Вес, кг & Название & Радиус подавления, см \\
 1 & 3.8 & Капюшон & 20 \\
@@ -2469,10 +2444,9 @@ Samsung & $\infty$ (в зоне покрытия) \\
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.0938] X[l, co=0.6500] X[l, co=0.2562] @{}},
+  colspec={@{} Q[c,m, co=0.0938] Q[c,m, co=0.6500] Q[c,m, co=0.2562] @{}},
 }
 Уровень & Название & Радиус подавления, см \\
 1 & Капюшон & 40 \\
@@ -2503,10 +2477,9 @@ Samsung & $\infty$ (в зоне покрытия) \\
 \begin{minipage}{\columnwidth}
 \begin{tblr}{
   hlines,
-  row{1}={halign=c},
   row{odd}={fg=black},
   row{even}={fg=navy},
-  colspec={@{} X[l, co=0.0938] X[l, co=0.4349] X[l, co=0.2562] X[l, co=0.2151] @{}},
+  colspec={@{} Q[c,m, co=0.0938] Q[c,m, co=0.4349] Q[c,m, co=0.2562] Q[c,m, co=0.2151] @{}},
 }
 Уровень & Название & Радиус подавления, см & Радиус передачи, км \\
 1 & Леер-2 & 100 & 200 \\
@@ -2561,34 +2534,33 @@ Samsung & $\infty$ (в зоне покрытия) \\
 действия независимо от времени суток и погодных условий. Станция
 радиолокационной разведки неуязвима к РЭП.
 
-\begin{center}
-\begin{tabular}{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth--4\tabcolsep) * \real{0.6591}}
-  >{\centering\arraybackslash}p{(\columnwidth--4\tabcolsep) * \real{0.1133}}
-  >{\centering\arraybackslash}p{(\columnwidth--4\tabcolsep) * \real{0.2276}}@{}}
-\toprule
+\begin{minipage}{\columnwidth}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={Q[l,m,wd=0.66\columnwidth] Q[c,m,wd=0.11\columnwidth] Q[c,m,wd=0.23\columnwidth]},
+}
 Название & Вес, кг & Радиус, см \\
-\midrule
 Соболятник & 36.0 & 600 \\
-\bottomrule
-\end{tabular}
-\captionof{table}{переносные РЛС}\nopagebreak\label{table-portable-radar}
-\end{center}
+\end{tblr}
+\captionof{table}{переносные РЛС}\label{table-portable-radar}
+\end{minipage}
 
-\begin{center}
-\begin{tabular}{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth--2\tabcolsep) * \real{0.7679}}
-  >{\centering\arraybackslash}p{(\columnwidth--2\tabcolsep) * \real{0.2321}}@{}}
-\toprule
+\begin{minipage}{\columnwidth}
+\begin{tblr}{
+  hlines,
+  row{odd}={fg=black},
+  row{even}={fg=navy},
+  colspec={Q[l,m,wd=0.77\columnwidth] Q[c,m,wd=0.23\columnwidth]},
+}
 Название & Радиус, см \\
-\midrule
 Зоопарк & 3000 \\
 AN/TPQ-53 & 3000 \\
 & \\
-\bottomrule
-\end{tabular}
-\captionof{table}{возимые РЛС}\nopagebreak\label{table-vehicle-radar}
-\end{center}
+\end{tblr}
+\captionof{table}{возимые РЛС}\label{table-vehicle-radar}
+\end{minipage}
 
 \end{multicols}
 
