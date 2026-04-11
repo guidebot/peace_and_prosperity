@@ -55,11 +55,11 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{5}
-\titlecontents{section}[0em]{}{\contentslabel}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{subsection}[0.5em]{}{\contentslabel}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{subsubsection}[1em]{}{\contentslabel}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{paragraph}[1.5em]{}{\contentslabel}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{subparagraph}[2em]{}{\contentslabel}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{section}[0em]{}{\makebox[1.3em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{subsection}[0em]{}{\makebox[2.1em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{subsubsection}[0em]{}{\makebox[2.9em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{paragraph}[0em]{}{\makebox[3.7em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{subparagraph}[0em]{}{\makebox[4.5em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
@@ -530,7 +530,7 @@ States Army Field Manuals, в том числе с использованием 
   row{even}={fg=black},
   colspec={Q[c,m,co=3]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]}
 }
-Уровень & \rotatebox{90}{Макс(ЛГК/ВЛН)} & \rotatebox{90}{Количество навыков} & \rotatebox{90}{Количество навыков меткости} & \rotatebox{90}{Макс значение навыка} \\
+Уровень & \rotatebox{90}{Макс(ЛГК/ВЛН)} & \rotatebox{90}{Количество\\навыков} & \rotatebox{90}{Количество\\навыков\\меткости} & \rotatebox{90}{Макс\\значение\\навыка} \\
 {Рядовой\\Чернорабочий} & 2 & 1 & 1 & 10 \\
 {Мл. сержант\\Сержант} & 4 & 1 & 2 & 20 \\
 {Прораб\\Лейтенант} & 6 & 2 & 2 & 20 \\
@@ -633,8 +633,7 @@ D20, прибавляет к своему броску свой показате
 средство без экипажа можно назвать боевой единицей или отрядом без
 персонажей.
 
-\subsubsection{Положение в
-пространстве}\label{position}
+\subsubsection{Положение в пространстве}\label{position}
 
 Каждая боевая единица имеет местоположение, выраженное точкой в
 пространстве с точностью до 1 см. От этой точки измеряются расстояния и
@@ -664,11 +663,12 @@ D20, прибавляет к своему броску свой показате
 линией, ведут фронтальный огонь (атака «в лоб»), а те, что находятся за
 фронтальной линией ведут фланговый огонь (атака во фланг или с тыла).
 
+\begin{minipage}{\columnwidth}
 \includegraphics[width=\linewidth]{media/image7.png}
 \captionof{scheme}{ориентация и фронтальная линия}
+\end{minipage}
 
-\subsubsection{Линии видимости и
-огня}\label{los}
+\subsubsection{Линии видимости и огня}\label{los}
 
 В игре используется понятие линии видимости при определении возможностей
 наблюдать вражескую боевую единицу и открывать огонь по ней. Линия
@@ -1276,9 +1276,9 @@ https://github.com/guidebot/peace\_and\_prosperity
   hlines,
   row{odd}={fg=navy},
   row{even}={fg=black},
-  colspec={ Q[c,m,co=2]Q[c,m,co=1]Q[c,m,co=2]Q[c,m,co=2] },
+  colspec={ Q[c,m,co=2]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1] },
 }
-Предмет & Условие & Модификатор видимости & Макс. дальность видимости, см \\
+Предмет & Условие & \rotatebox{90}{Модификатор\\видимости} & \rotatebox{90}{Макс.\\дальность\\видимости,\\см} \\
 \SetCell[r=2]{l} Бинокль & День & +5 & 320 \\
 & Сумерки & +2 & 160 \\
 \SetCell[r=2]{l} Прибор ночного видения & Сумерки & +3 & 80 \\
