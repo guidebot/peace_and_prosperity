@@ -1,5 +1,6 @@
 import { useRef, useState, useCallback } from 'react';
 import { CalculateVisibilityDistance } from '../actions/Watch';
+import { MdUploadFile, MdDelete } from 'react-icons/md';
 import './emap.css';
 
 const FIELD_WIDTH = 540;
@@ -13,9 +14,29 @@ export const UnitMap = ({
     onOtherChange
 }) => {
     const battlefieldRef = useRef(null);
+    const fileInputRef = useRef(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [uavClickPos, setUavClickPos] = useState(null);
     const [draggingUnitPos, setDraggingUnitPos] = useState(null);
+    const [backgroundImage, setBackgroundImage] = useState(null);
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const url = URL.createObjectURL(file);
+            setBackgroundImage(url);
+        }
+    };
+
+    const handleResetImage = () => {
+        if (backgroundImage && backgroundImage.startsWith('blob:')) {
+            URL.revokeObjectURL(backgroundImage);
+        }
+        setBackgroundImage(null);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
+    };
 
     const getAllUnits = () => {
         const units = [];
@@ -279,6 +300,12 @@ export const UnitMap = ({
         }
     }
 
+    const battlefieldStyle = {
+        backgroundImage: backgroundImage
+            ? `url(${backgroundImage})`
+            : undefined
+    };
+
     return (
         <div className="interactive-battlefield-container">
             <div className="battlefield-wrapper">
@@ -298,7 +325,8 @@ export const UnitMap = ({
             </div>
             <div
                 ref={battlefieldRef}
-                className="interactive-battlefield"
+                className={`interactive-battlefield ${backgroundImage ? 'with-background' : ''}`}
+                style={battlefieldStyle}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
                 onContextMenu={(e) => handleRightClick(e)}
@@ -324,16 +352,38 @@ export const UnitMap = ({
                     );
                 })}
             </div>
-            <div className="map-info-panel">
-                <div>
-                    {draggingUnitPos
-                        ? (`Позиция: ${Math.round(draggingUnitPos.x / 3)}, ${Math.round(draggingUnitPos.y / 3)}`)
-                        : (`${Math.round(mousePos.x / 3)}, ${Math.round(mousePos.y / 3)}`)}
-                </div>
-                {distanceToCursor !== null && (
-                    <div>Дистанция: {Math.round(distanceToCursor / 3)} см</div>
+            <div className='buttons-panel'>
+                <button
+                    title="Загрузить картинку"
+                    onClick={() => fileInputRef.current?.click()}
+                >
+                    <MdUploadFile />
+                </button>
+                {backgroundImage && (
+                    <button
+                        title="Сбросить картинку"
+                        onClick={handleResetImage}
+                    >
+                        <MdDelete />
+                    </button>
                 )}
-
+                <div className="map-info-panel">
+                    <div>
+                        {draggingUnitPos
+                            ? (`Позиция: ${Math.round(draggingUnitPos.x / 3)}, ${Math.round(draggingUnitPos.y / 3)}`)
+                            : (`${Math.round(mousePos.x / 3)}, ${Math.round(mousePos.y / 3)}`)}
+                    </div>
+                    {distanceToCursor !== null && (
+                        <div>Дистанция: {Math.round(distanceToCursor / 3)} см</div>
+                    )}
+                    <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={handleImageUpload}
+                    />
+                </div>
             </div>
         </div >
     );
