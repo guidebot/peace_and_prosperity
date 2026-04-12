@@ -5,7 +5,7 @@ A roleplaying wargame.
 A module of 6-8 games, 4 hours each.
 
 ## Contents
-- [Contract Core Rules](https://github.com/guidebot/peace_and_prosperity/blob/main/doc/contract.docx).
+- [Contract Core Rules](https://github.com/guidebot/peace_and_prosperity/blob/main/doc/contract.tex).
 - [Peace and Prosperity Master's book](https://github.com/guidebot/peace_and_prosperity/blob/main/doc/peace_and_prosperity_masters_book.docx).
 - [Peace and Prosperity Player's book](https://github.com/guidebot/peace_and_prosperity/blob/main/doc/peace_and_prosperity_players_book.docx).
 - [Master's application (typescript, react)](https://github.com/guidebot/peace_and_prosperity/tree/main/src).
