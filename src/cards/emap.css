@@ -16,11 +16,32 @@
     background-color: #222222;
     border: 1px solid #ddd;
     overflow: hidden;
-    background-image: radial-gradient(#7a7a7a 1px, transparent 1px);
+    --grid-color: #7a7a7a;
+    background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
     background-size: 15px 15px;
     width: 540px;
     height: 360px;
     cursor: default;
+}
+
+.interactive-battlefield.grid-white {
+    --grid-color: #ffffff;
+}
+
+.interactive-battlefield.grid-black {
+    --grid-color: #000000;
+}
+
+.interactive-battlefield.grid-red {
+    --grid-color: #ff0000;
+}
+
+.interactive-battlefield.grid-green {
+    --grid-color: #00ff00;
+}
+
+.interactive-battlefield.grid-blue {
+    --grid-color: #0000ff;
 }
 
 .interactive-battlefield.with-background {
@@ -38,7 +59,7 @@
     height: 100%;
     pointer-events: none;
     z-index: 1;
-    background-image: radial-gradient(#7a7a7a 1px, transparent 1px);
+    background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
     background-size: 15px 15px;
 }
 

@@ -1,10 +1,19 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import { CalculateVisibilityDistance } from '../actions/Watch';
-import { MdUploadFile, MdDelete } from 'react-icons/md';
+import { MdUploadFile, MdDelete, MdPalette } from 'react-icons/md';
 import './emap.css';
 
 const FIELD_WIDTH = 540;
 const FIELD_HEIGHT = 360;
+
+const GRID_COLORS = {
+    default: '#7a7a7a',
+    white: '#ffffff',
+    black: '#000000',
+    red: '#ff0000',
+    green: '#00ff00',
+    blue: '#0000ff',
+};
 
 export const UnitMap = ({
     players,
@@ -15,10 +24,29 @@ export const UnitMap = ({
 }) => {
     const battlefieldRef = useRef(null);
     const fileInputRef = useRef(null);
+    const colorPickerRef = useRef(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [uavClickPos, setUavClickPos] = useState(null);
     const [draggingUnitPos, setDraggingUnitPos] = useState(null);
     const [backgroundImage, setBackgroundImage] = useState(null);
+    const [gridColor, setGridColor] = useState('default');
+    const [showColorPicker, setShowColorPicker] = useState(false);
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (colorPickerRef.current && !colorPickerRef.current.contains(e.target)) {
+                setShowColorPicker(false);
+            }
+        };
+
+        if (showColorPicker) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [showColorPicker]);
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
@@ -325,7 +353,7 @@ export const UnitMap = ({
             </div>
             <div
                 ref={battlefieldRef}
-                className={`interactive-battlefield ${backgroundImage ? 'with-background' : ''}`}
+                className={`interactive-battlefield ${backgroundImage ? 'with-background' : ''} grid-${gridColor}`}
                 style={battlefieldStyle}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
@@ -367,6 +395,12 @@ export const UnitMap = ({
                         <MdDelete />
                     </button>
                 )}
+                <button
+                    title="Цвет сетки"
+                    onClick={() => setShowColorPicker(!showColorPicker)}
+                >
+                    <MdPalette />
+                </button>
                 <input
                     ref={fileInputRef}
                     type="file"
@@ -374,6 +408,44 @@ export const UnitMap = ({
                     style={{ display: 'none' }}
                     onChange={handleImageUpload}
                 />
+                <div className="grid-color-selector" style={{ position: 'relative', marginLeft: '8px' }} ref={colorPickerRef}>
+                    {showColorPicker && (
+                        <div className="color-picker-dropdown" style={{
+                            position: 'absolute',
+                            bottom: '100%',
+                            left: 0,
+                            display: 'grid',
+                            gridTemplateColumns: '1fr 1fr 1fr',
+                            gap: '2px',
+                            padding: '4px',
+                            backgroundColor: '#333',
+                            border: '1px solid #666',
+                            borderRadius: '4px',
+                            marginBottom: '4px',
+                            zIndex: 100,
+                        }}>
+                            {Object.entries(GRID_COLORS).map(([name, color]) => (
+                                <button
+                                    key={name}
+                                    title={name}
+                                    onClick={() => {
+                                        setGridColor(name);
+                                        setShowColorPicker(false);
+                                    }}
+                                    style={{
+                                        width: '20px',
+                                        height: '20px',
+                                        backgroundColor: color,
+                                        border: gridColor === name ? '2px solid #00ff99' : '1px solid #555',
+                                        borderRadius: '2px',
+                                        cursor: 'pointer',
+                                        padding: 0,
+                                    }}
+                                />
+                            ))}
+                        </div>
+                    )}
+                </div>
                 <div className="map-info-panel">
                     <div>
                         {draggingUnitPos
