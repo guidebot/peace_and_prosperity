@@ -352,7 +352,7 @@ export const UnitMap = ({
                     );
                 })}
             </div>
-            <div className='buttons-panel'>
+            <div className="buttons-panel">
                 <button
                     title="Загрузить картинку"
                     onClick={() => fileInputRef.current?.click()}
@@ -367,6 +367,13 @@ export const UnitMap = ({
                         <MdDelete />
                     </button>
                 )}
+                <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    onChange={handleImageUpload}
+                />
                 <div className="map-info-panel">
                     <div>
                         {draggingUnitPos
@@ -376,13 +383,6 @@ export const UnitMap = ({
                     {distanceToCursor !== null && (
                         <div>Дистанция: {Math.round(distanceToCursor / 3)} см</div>
                     )}
-                    <input
-                        ref={fileInputRef}
-                        type="file"
-                        accept="image/*"
-                        style={{ display: 'none' }}
-                        onChange={handleImageUpload}
-                    />
                 </div>
             </div>
         </div >
