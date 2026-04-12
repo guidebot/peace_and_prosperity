@@ -13,7 +13,6 @@ Gamemaster driven cooperative roleplaying wargame.
     - `Emap.jsx`, `emap.css` interactive scheme representing battlefield map.
   - `actions/` modal windows.
 - `doc/` game documentation.
-  - `contract.docx` core rules.
   - `contract.tex` core rules in tex format; use xelatex for compilation: xelatex -interaction=nonstopmode contract.tex.
   - `peace_and_prosperity_masters_book.docx` campagain description.
 
