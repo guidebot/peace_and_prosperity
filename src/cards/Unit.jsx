@@ -23,7 +23,7 @@ import { useVisibilityConditions } from '../game/conditions';
 import { BestActorForUnit } from '../actions/Watch';
 import { VehicleEditorModal } from '../actions/VehicleEditor';
 
-export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNode, setPlayers, addLogEntry }) {
+export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNode, setPlayers, addLogEntry, mapBackgroundImage, setMapBackgroundImage }) {
     const calculateFireEffect = CalculateFireEffectWithConditions();
     const applyFireEffectsWithConditions = ApplyFireEffectWithConditions();
     const { activeConditionIds } = useVisibilityConditions();
@@ -240,6 +240,8 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                             activeConditions={activeConditionIds}
                             setSelectedNode={setSelectedNode}
                             onOtherChange={onOtherChange}
+                            backgroundImage={mapBackgroundImage}
+                            setBackgroundImage={setMapBackgroundImage}
                         />
                     </div>
                 )}

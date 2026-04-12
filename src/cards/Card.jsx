@@ -3,7 +3,7 @@ import { UnitForm } from './Unit';
 import { PlayerForm } from './Player';
 import { UpdateCardProperty } from './utils';
 
-export function ObjectCard({ players, node, setSelectedNode, setPlayers, addLogEntry }) {
+export function ObjectCard({ players, node, setSelectedNode, setPlayers, addLogEntry, mapBackgroundImage, setMapBackgroundImage }) {
     const getData = (nodes, id) => {
         for (const element of nodes) {
             if (element.id === id)
@@ -49,7 +49,9 @@ export function ObjectCard({ players, node, setSelectedNode, setPlayers, addLogE
                     onChange={handlePropertyChange}
                     onOtherChange={handleOtherPropertyChange}
                     setPlayers={setPlayers}
-                    addLogEntry={addLogEntry} />;
+                    addLogEntry={addLogEntry}
+                    mapBackgroundImage={mapBackgroundImage}
+                    setMapBackgroundImage={setMapBackgroundImage} />;
             case 'player':
                 return <PlayerForm data={data} onChange={handlePropertyChange} setPlayers={setPlayers} addLogEntry={addLogEntry} />;
             default:

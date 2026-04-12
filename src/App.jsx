@@ -80,6 +80,7 @@ function App() {
   const [log, setLog] = useState([]);
   const [randomN, setRandomN] = useState(Math.random());
   const [showInitiativeModal, setInitiativeModal] = useState(false);
+  const [mapBackgroundImage, setMapBackgroundImage] = useState(null);
 
   const addLogEntry = (message) => {
     if (message === 'Начинается новый ход.') {
@@ -129,7 +130,10 @@ function App() {
               node={selectedNode}
               setSelectedNode={handleInitiativeClick}
               setPlayers={setPlayers}
-              addLogEntry={addLogEntry} />}
+              addLogEntry={addLogEntry}
+              mapBackgroundImage={mapBackgroundImage}
+              setMapBackgroundImage={setMapBackgroundImage}
+            />}
           </div>
           <div className="log-container">
             <div className="log-content" ref={logContainerRef}>

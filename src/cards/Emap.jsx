@@ -20,7 +20,9 @@ export const UnitMap = ({
     currentUnitId,
     activeConditions,
     setSelectedNode,
-    onOtherChange
+    onOtherChange,
+    backgroundImage,
+    setBackgroundImage
 }) => {
     const battlefieldRef = useRef(null);
     const fileInputRef = useRef(null);
@@ -28,7 +30,6 @@ export const UnitMap = ({
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [uavClickPos, setUavClickPos] = useState(null);
     const [draggingUnitPos, setDraggingUnitPos] = useState(null);
-    const [backgroundImage, setBackgroundImage] = useState(null);
     const [gridColor, setGridColor] = useState('default');
     const [showColorPicker, setShowColorPicker] = useState(false);
 
@@ -380,7 +381,7 @@ export const UnitMap = ({
                     );
                 })}
             </div>
-            <div className="buttons-panel">
+            <div className="map-buttons-panel">
                 <button
                     title="Загрузить картинку"
                     onClick={() => fileInputRef.current?.click()}
@@ -408,44 +409,25 @@ export const UnitMap = ({
                     style={{ display: 'none' }}
                     onChange={handleImageUpload}
                 />
-                <div className="grid-color-selector" style={{ position: 'relative', marginLeft: '8px' }} ref={colorPickerRef}>
+                <div className="grid-color-selector" ref={colorPickerRef}>
                     {showColorPicker && (
-                        <div className="color-picker-dropdown" style={{
-                            position: 'absolute',
-                            bottom: '100%',
-                            left: 0,
-                            display: 'grid',
-                            gridTemplateColumns: '1fr 1fr 1fr',
-                            gap: '2px',
-                            padding: '4px',
-                            backgroundColor: '#333',
-                            border: '1px solid #666',
-                            borderRadius: '4px',
-                            marginBottom: '4px',
-                            zIndex: 100,
-                        }}>
+                        <div className="color-picker-dropdown">
                             {Object.entries(GRID_COLORS).map(([name, color]) => (
                                 <button
                                     key={name}
+                                    className={`color-option ${gridColor === name ? 'selected' : ''}`}
                                     title={name}
                                     onClick={() => {
                                         setGridColor(name);
                                         setShowColorPicker(false);
                                     }}
-                                    style={{
-                                        width: '20px',
-                                        height: '20px',
-                                        backgroundColor: color,
-                                        border: gridColor === name ? '2px solid #00ff99' : '1px solid #555',
-                                        borderRadius: '2px',
-                                        cursor: 'pointer',
-                                        padding: 0,
-                                    }}
+                                    style={{ backgroundColor: color }}
                                 />
                             ))}
                         </div>
                     )}
                 </div>
+                <div style={{ flexGrow: 1 }} />
                 <div className="map-info-panel">
                     <div>
                         {draggingUnitPos
