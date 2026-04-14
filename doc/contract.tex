@@ -26,7 +26,7 @@
 \usepackage{background}
 \usepackage{wallpaper}
 \usepackage{tabularray}
-\UseTblrLibrary{booktabs}
+\usepackage{tblr-extras}
 \usepackage{multirow}
 \usepackage{makecell}
 \usepackage{calc} % for calculating minipage widths
@@ -35,6 +35,7 @@
 \usepackage{capt-of}
 \usepackage{titletoc}
 \usepackage{graphicx}
+\UseTblrLibrary{booktabs,caption,babel}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -153,21 +154,12 @@
 Вдохновляясь этими людьми и такими их творениями как Art of Tactic,
 Fireteam: Modern и Team Yankee, была спроектирована основа симуляции
 боя, основным отличием которой считалось сочетание высокой динамичности
-и простоты. Выражалось это, в основном, в значительно меньшем количестве
-требуемых бросков кубиков при сохранении и даже увеличении разрешения
-вероятностной модели.
+и простоты. Выражалось это, в основном, в переходе на разрешение всех
+задач броском одной двадцатигранной игральной кости D20 с использованием
+таблиц эффектов в случаях, когда необходимо неравномерное (например, нормальное)
+распределение вероятностей.
 
-Что автор имеет в виду под разрешением вероятностной модели? Один
-шестигранный кубик (обозначается D6) даёт шаг вероятности в 1/6 (более
-15\%). Чтобы уменьшить шаг, требуется бросать больше кубиков и
-комбинировать результаты. Автор отдал предпочтение стандартному
-двадцатигранному кубику D20, грани которого пронумерованы от 1 до 20, и
-который даёт шаг вероятности 1/20, то есть 5\%. При необходимости,
-кривое (в том числе нормальное) распределение вероятностей, которое
-при использовании нескольких кубиков одновременно получается само по
-себе, автор достигает таблицами эффектов.
-
-Автор понимает, что для многих игроков броски кубиков~-- это важная
+Автор понимает, что для многих игроков броски кубиков --- это важная
 часть процесса игры, фактически игра в игре, однако сам воспринимает их
 всего лишь как один из способов получить случайное число и предпочитает
 вместо реальных кубиков использовать цифровое приложение, например, RPG
@@ -326,6 +318,7 @@ States Army Field Manuals, в том числе с использованием 
 
 \begin{center}
 \begin{minipage}{0.6\columnwidth}
+\small
 \begin{tblr}{
   hlines,
   row{odd}={fg=navy},
@@ -392,7 +385,7 @@ States Army Field Manuals, в том числе с использованием 
 При нагрузке менее 25\% отряд может преодолевать препятствия без
 остановки, но при этом обязан получить 1 очко усталости.
 
-Очков усталости\footnote{См. стр.~\pageref{fatigue}, \ref{fatigue}~\nameref{fatigue}.} у отряда не
+Очков усталости\footnote{См. стр. \pageref{fatigue}, \ref{fatigue} \nameref{fatigue}.} у отряда не
 может быть больше, чем минимальный Ур(ВНС) среди персонажей отряда.
 
 \paragraph{Пример}\label{example-endurance}
@@ -799,7 +792,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 средства связи.
 
 Для отрядов на технике превышение количества очков стресса над значением
-бронированности\footnote{См. стр.~\pageref{table-armor}, \autoref{table-armor} \nameref{table-armor}.} приводит к тому,
+бронированности\footnote{См. стр. \pageref{table-armor}, \autoref{table-armor} \nameref{table-armor}.} приводит к тому,
 что боевая единица может только двигаться на максимальной скорости в
 сторону от врага, исключая \textbf{замаскированные} вражеские боевые
 единицы. Если это действие выполнить невозможно, экипаж покидает
@@ -909,13 +902,13 @@ https://github.com/guidebot/peace\_and\_prosperity
 \begin{itemize}
 \item
   разрушаемость: можно задать минимальную \textbf{ББ} оружия для
-  разрушения\footnote{См. стр.~\pageref{infantry-weapons}, \ref{infantry-weapons}~\nameref{infantry-weapons}.};
+  разрушения\footnote{См. стр. \pageref{infantry-weapons}, \ref{infantry-weapons} \nameref{infantry-weapons}.};
 \item
   прерывает ли линию видимости;
 \item
   отдельный элемент, не прерывающий линию видимости, как правило
   является \textbf{укрытием}, \textbf{маскирует} боевые единицы и может
-  влиять на вероятность поражения. \textbf{Укрытия}\footnote{См. стр.~\pageref{mod-cover}, \ref{mod-cover}~\nameref{mod-cover}.} бывают нескольких видов:
+  влиять на вероятность поражения. \textbf{Укрытия}\footnote{См. стр. \pageref{mod-cover}, \ref{mod-cover} \nameref{mod-cover}.} бывают нескольких видов:
   \textbf{маскирующие}, \textbf{средние} и \textbf{надёжные}, они
   отличаются степенью защиты.
 \item
@@ -927,8 +920,7 @@ https://github.com/guidebot/peace\_and\_prosperity
   неё (например, руины здания).
 \end{itemize}
 
-\paragraph{Примеры дополнительных
-элементов}\label{element-examples}
+\paragraph{Примеры дополнительных элементов}\label{element-examples}
 
 Окоп. Не разрушаем, является препятствием для техники, не прерывает
 линию видимости, является \textbf{надёжным укрытием} для полностью
@@ -955,8 +947,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 же самое, что окна, но непроходимы и являются \textbf{надёжным
 укрытием}).
 
-\section{Симуляция
-боя}\label{combat}
+\section{Симуляция боя}\label{combat}
 
 В бою участвуют две стороны или более. На каждой стороне в бою могут
 участвовать один или несколько игроков-командиров, у каждого из которых
@@ -986,7 +977,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 
 Бой начинается с устройства локации и расстановки отрядов. После этого
 игроки могут заявлять действия в рамках упрощённого тактического
-режима\footnote{См. стр.~\pageref{game-modes}, \ref{game-modes}~\nameref{game-modes}.} Учитывая заявки игроков, определяется момент, с которого
+режима\footnote{См. стр. \pageref{game-modes}, \ref{game-modes} \nameref{game-modes}.} Учитывая заявки игроков, определяется момент, с которого
 потребуется переключиться на пошаговый тактический режим и время,
 которое пройдёт до этого момента с начала игры. Игроки могут параллельно
 выполнить озвученные заявки длительностью не более рассчитанного
@@ -1014,7 +1005,7 @@ https://github.com/guidebot/peace\_and\_prosperity
 следует учесть изменение очков стресса.
 
 При стрельбе во время перехвата действия должен быть применён
-модификатор внезапного огня\footnote{См. стр.~\pageref{mod-sudden}, \ref{mod-sudden}~\nameref{mod-sudden}.}
+модификатор внезапного огня\footnote{См. стр. \pageref{mod-sudden}, \ref{mod-sudden} \nameref{mod-sudden}.}
 
 Перехват движения может выполняться боевой единицей только один раз за
 ход. Перехват движения считается действием отряда, то есть отряд уже не
@@ -1086,22 +1077,24 @@ https://github.com/guidebot/peace\_and\_prosperity
 
 \setlength\rotheadsize{1.9cm}
 \begin{minipage}{\columnwidth}
-\begin{tblr}{
+\begin{talltblr}[
+  note{1}={\footnotesize См. стр. \pageref{table-movement}, \autoref{table-movement} \nameref{table-movement}.},
+  caption = {Дальность движения за ход и значения для броска кубиков при преодолении препятствий},
+  label = {table-vehicle-movement}
+]{
   hlines,
   row{odd}={fg=navy},
   row{even}={fg=black},
-  colspec={Q[c,m,co=3] Q[c,m,co=1] Q[c,m,co=1] Q[c,m,co=1]},
+  colspec={Q[c,m,co=3] Q[c,m,co=1] Q[c,m,co=1] Q[c,m,co=1]}
 }
 \SetRow{font=\footnotesize}& \rothead{Открытая\\местность} & \rothead{Дорога} & \rothead{Препятствия} \\
 Пехота &
-\SetCell[c=2]{c,m}{2--5~см\footnotemark[1]} & $-$ \\
+\SetCell[c=2]{c,m}{2--5~см\TblrNote{1}} & $-$ \\
 Гусеничные БМ & 12 см & 16 см & 10+ \\
 Колёсные БМ & 12 см & 16 см & 20+ \\
 Автомобиль & 6 см & 20 см & 30+ \\
-\end{tblr}
-\captionof{table}{дальность движения за ход и значения для броска кубиков при преодолении препятствий}\label{table-vehicle-movement}
+\end{talltblr}
 \end{minipage}
-\footnotetext[1]{См. стр. \pageref{table-movement}, \autoref{table-movement} \nameref{table-movement}.}
 
 При выполнении действия следует положить рядом с боевой единицей маркер
 движения, его можно будет убрать при следующей активации боевой единицы.
@@ -1519,7 +1512,7 @@ $2×(2-2)=0$. Модификатор навыка для пулемётчика 
 приносит никакого результата.
 
 К результату броска D20 необходимо применить модификаторы при
-стрельбе\footnote{См. стр.~\pageref{shooting-modifiers}, \ref{shooting-modifiers}~\nameref{shooting-modifiers}.} и сравнить результат с пороговым
+стрельбе\footnote{См. стр. \pageref{shooting-modifiers}, \ref{shooting-modifiers} \nameref{shooting-modifiers}.} и сравнить результат с пороговым
 значением.
 
 Если результат равен или превышает порог уничтожения, техника считается
@@ -1651,17 +1644,19 @@ $2×(2-2)=0$. Модификатор навыка для пулемётчика 
 
 \begin{center}
 \begin{minipage}{0.7\columnwidth}
-\begin{tblr}{
+\begin{talltblr}[
+  caption = {Значения модификаторов для типов укрытий},
+  label = {table-cover-modifiers}
+]{
   hlines,
   row{odd}={fg=navy},
   row{even}={fg=black},
-  colspec={ Q[c,m,co=1] Q[c,m,co=1] },
+  colspec={ Q[c,m,co=1] Q[c,m,co=1] }
 }
 Тип укрытия & Значение модификатора \\
 Среднее & -2 \\
 Надёжное & -4 \\
-\end{tblr}
-\captionof{table}{значения модификаторов для типов укрытий}\label{table-cover-modifiers}
+\end{talltblr}
 \end{minipage}
 \end{center}
 
