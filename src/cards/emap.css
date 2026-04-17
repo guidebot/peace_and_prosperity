@@ -112,6 +112,11 @@
     z-index: 30;
 }
 
+.movement-overlay {
+    z-index: 25;
+    pointer-events: none;
+}
+
 .map-info-panel {
     padding: 6px 10px;
     background-color: #333;
