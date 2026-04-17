@@ -29,6 +29,7 @@ export const UnitMap = ({
     const fileInputRef = useRef(null);
     const colorPickerRef = useRef(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [hoverUnitId, setHoverUnitId] = useState(null);
     const [uavClickPos, setUavClickPos] = useState(null);
     const [draggingUnitPos, setDraggingUnitPos] = useState(null);
     const [gridColor, setGridColor] = useState('default');
@@ -37,6 +38,32 @@ export const UnitMap = ({
     const [movementLineEnd, setMovementLineEnd] = useState(null);
     const [movementSpeed, setMovementSpeed] = useState(0);
     const [tickMarks, setTickMarks] = useState([]);
+    const [showClickMovement, setShowClickMovement] = useState(false);
+    const [clickMovementStart, setClickMovementStart] = useState(null);
+    const [clickMovementEnd, setClickMovementEnd] = useState(null);
+    const [clickTickMarks, setClickTickMarks] = useState([]);
+
+    const calculateTickMarks = useCallback((observerPos, targetPos, speed) => {
+        if (speed <= 0) return [];
+        const dx = targetPos.x - observerPos.x;
+        const dy = targetPos.y - observerPos.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const tickInterval = speed * 3;
+        const tickMarksArray = [];
+
+        if (distance > 0 && tickInterval > 0) {
+            const numTicks = Math.floor(distance / tickInterval);
+
+            for (let i = 1; i <= numTicks; i++) {
+                const t = (i * tickInterval) / distance;
+                const tickX = observerPos.x + t * dx;
+                const tickY = observerPos.y + t * dy;
+                tickMarksArray.push({ x: tickX, y: tickY });
+            }
+        }
+
+        return tickMarksArray;
+    }, []);
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
@@ -70,10 +97,8 @@ export const UnitMap = ({
         let speed = 0;
         
         if (typeof speedResult === 'object' && speedResult !== null) {
-            // For vehicles, use plain speed
             speed = speedResult.plain || 0;
         } else {
-            // For infantry, speedResult is a number
             speed = speedResult || 0;
         }
 
@@ -91,11 +116,9 @@ export const UnitMap = ({
         const dy = mousePos.y - observerPos.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Set line from unit to cursor
         setMovementLineStart(observerPos);
         setMovementLineEnd({ x: mousePos.x, y: mousePos.y });
 
-        // Generate tick marks every n*3 pixels where n is speed
         const tickInterval = speed * 3;
         const tickMarksArray = [];
         
@@ -327,6 +350,8 @@ export const UnitMap = ({
     }, []);
 
     const handleMouseDown = (e, unitId) => {
+        if (e.button !== 0) return;
+
         setUavClickPos(null);
 
         if (!battlefieldRef.current) return;
@@ -382,23 +407,23 @@ export const UnitMap = ({
     };
 
     const handleBattlefieldClick = (e) => {
-        // Check if clicking on empty space (not on a unit marker)
+        if (e.button !== 0) return;
+
         const target = e.target;
-        if (target.classList.contains('squad-marker') || 
-            target.classList.contains('squad-icon') || 
+        if (target.classList.contains('squad-marker') ||
+            target.classList.contains('squad-icon') ||
             target.classList.contains('squad-label')) {
             return; // Clicked on a unit, let handleMouseDown deal with it
         }
 
         if (!currentUnitId || !battlefieldRef.current) return;
 
-        // Calculate movement distance based on speed
         const observer = allUnits.find(u => u.id === currentUnitId);
         if (!observer || !observer.position) return;
 
         const speedResult = MovementSpeed(observer);
         let speed = 0;
-        
+
         if (typeof speedResult === 'object' && speedResult !== null) {
             speed = speedResult.plain || 0;
         } else {
@@ -416,21 +441,16 @@ export const UnitMap = ({
         const dy = clickY - observerPos.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Move exactly n*3 pixels in the direction of the click
         const moveDistance = speed * 3;
         if (distance >= moveDistance) {
-            // Move full n*3 pixels
             const t = moveDistance / distance;
             const newX = observerPos.x + t * dx;
             const newY = observerPos.y + t * dy;
-            
-            setDraggingUnitPos({ x: newX, y: newY });
+
             onOtherChange(currentUnitId, "hasMoved", true);
             onOtherChange(currentUnitId, "isMarked", true);
             onOtherChange(currentUnitId, "position", { x: newX, y: newY });
         } else if (distance > 0) {
-            // If click is closer than n*3, move to the click position
-            setDraggingUnitPos({ x: clickX, y: clickY });
             onOtherChange(currentUnitId, "hasMoved", true);
             onOtherChange(currentUnitId, "isMarked", true);
             onOtherChange(currentUnitId, "position", { x: clickX, y: clickY });
@@ -479,8 +499,7 @@ export const UnitMap = ({
                 onContextMenu={(e) => handleRightClick(e)}
                 onMouseDown={(e) => handleBattlefieldClick(e)}
             >
-                {/* Movement line with tick marks and arrow */}
-                {movementLineStart && movementLineEnd && movementSpeed > 0 && (
+                {movementLineStart && movementLineEnd && movementSpeed > 0 && !hoverUnitId && !draggingUnitPos && (
                     <svg
                         className="movement-overlay"
                         style={{
@@ -492,6 +511,16 @@ export const UnitMap = ({
                             pointerEvents: 'none'
                         }}
                     >
+                        {tickMarks.map((tick, index) => (
+                            <circle
+                                key={`tick-${index}`}
+                                cx={tick.x}
+                                cy={tick.y}
+                                r="2"
+                                fill="rgb(0, 155, 53)"
+                            />
+                        ))}
+
                         {/* Main movement line */}
                         <line
                             x1={movementLineStart.x}
@@ -499,13 +528,13 @@ export const UnitMap = ({
                             x2={movementLineEnd.x}
                             y2={movementLineEnd.y}
                             stroke="rgb(0, 255, 153)"
-                            strokeWidth="2"
+                            strokeWidth="1"
                         />
-                        
+
                         {/* Arrow head */}
                         <defs>
-                            <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-                                  refX="0" refY="3.5" orient="auto">
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7"
+                                  refX="10" refY="3.5" orient="auto">
                                 <polygon points="0 0, 10 3.5, 0 7" fill="rgb(0, 255, 153)" />
                             </marker>
                         </defs>
@@ -515,22 +544,9 @@ export const UnitMap = ({
                             x2={movementLineEnd.x}
                             y2={movementLineEnd.y}
                             stroke="rgb(0, 255, 153)"
-                            strokeWidth="2"
+                            strokeWidth="1"
                             marker-end="url(#arrowhead)"
                         />
-                        
-                        {/* Tick marks */}
-                        {tickMarks.map((tick, index) => (
-                            <line
-                                key={`tick-${index}`}
-                                x1={tick.x}
-                                y1={tick.y}
-                                x2={tick.x}
-                                y2={tick.y}
-                                stroke="rgb(0, 255, 153)"
-                                strokeWidth="2"
-                            />
-                        ))}
                     </svg>
                 )}
                 
@@ -548,6 +564,8 @@ export const UnitMap = ({
                                 top: pos.y,
                             }}
                             onMouseDown={(e) => handleMouseDown(e, unit.id)}
+                            onMouseEnter={() => setHoverUnitId(unit.id)}
+                            onMouseLeave={() => setHoverUnitId(null)}
                         >
                             <div className="squad-icon" />
                             <div className="squad-label">{unit.name}</div>
@@ -609,7 +627,10 @@ export const UnitMap = ({
                             : (`${Math.round(mousePos.x / 3)}, ${Math.round(mousePos.y / 3)}`)}
                     </div>
                     {distanceToCursor !== null && (
-                        <div>Дистанция: {Math.round(distanceToCursor / 3)} см</div>
+                        <>
+                            <div>Дистанция: {Math.round(distanceToCursor / 3)} см</div>
+                            <div>Ходов: {tickMarks.length}</div>
+                        </>
                     )}
                 </div>
             </div>
