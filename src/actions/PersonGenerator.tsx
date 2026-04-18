@@ -67,12 +67,11 @@ function assignEquipment(skills: Record<string, number>, isMilitary: boolean, ha
             equipment.push({ id: "smoke", count: 2 });
         }
 
-        if (stealth >= 3 && endurance >= 3 && (skills.TECH_uav ?? 0) >= 7) {
-            equipment.push("uav");
-        }
-
         if (endurance >= 7 && (skills.TECH_uav ?? 0) >= 12) {
             equipment.push("uav_grenade");
+        }
+        else if (stealth >= 3 && endurance >= 3 && (skills.TECH_uav ?? 0) >= 7) {
+            equipment.push("uav");
         }
 
         if (endurance >= 12 && maneuvering >= 7 && ((skills.TECH_mechanics ?? 0) < 7)) {

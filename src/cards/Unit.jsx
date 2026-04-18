@@ -56,7 +56,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
     function checkIfCanMove() {
         if (!data.children) return false;
         if (data.isDeployed) return false;
-        if (MovementSpeed(data) === 0) return false;
+        if (MovementSpeed(data).plain === 0) return false;
 
         if (!data.vehicle) {
             const bleedingCount = data.children.filter(p => !p.isDead && p.isBleeding).length;
@@ -339,7 +339,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                                 <>
                                     <IoMdMove />
                                     <label className="form-label">
-                                        <input name="speed" readOnly={true} type="number" value={speed} />
+                                        <input name="speed" readOnly={true} type="number" value={speed.plain} />
                                     </label>
                                 </>)
                         }
@@ -384,6 +384,10 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                         /
                         <label className="form-label">
                             <input name="capacity" readOnly={true} type="number" value={TotalCapacity(data) / 10} />
+                        </label>
+                        /
+                        <label className="form-label">
+                            <input name="loadPercent" readOnly={true} type="number" value={Math.round(TotalWeight(data) * 100 / TotalCapacity(data))} />%
                         </label>
                     </div>
                 </div>

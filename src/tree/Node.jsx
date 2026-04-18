@@ -66,7 +66,7 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
                     {!node.isEditing && node.data.type === 'unit' && node.data.vehicle?.type === "truck" && (<span><GiTruck /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.vehicle?.type === "wheel" && (<span><GiApc /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.vehicle?.type === "track" && (<span><GiTank /></span>)}
-                    {!node.isEditing && node.data.type === 'unit' && !node.data.vehicle && MovementSpeed(node.data) === 0 && (<span style={{ color: 'red' }}><GiStopSign /></span>)}
+                    {!node.isEditing && node.data.type === 'unit' && !node.data.vehicle && MovementSpeed(node.data).plain === 0 && (<span style={{ color: 'red' }}><GiStopSign /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.hasMoved && (<span><IoMdMove /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.isDeployed && (<span><FaLocationPinLock /></span>)}
                     {!node.isEditing && node.data.type === 'unit' && node.data.isMarked && (<span><GiCheckMark /></span>)}

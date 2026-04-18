@@ -30,6 +30,8 @@ export const UnitMap = ({
     const colorPickerRef = useRef(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [hoverUnitId, setHoverUnitId] = useState(null);
+    const [isMouseOverBattlefield, setIsMouseOverBattlefield] = useState(false);
+    const [isCtrlPressed, setIsCtrlPressed] = useState(false);
     const [uavClickPos, setUavClickPos] = useState(null);
     const [draggingUnitPos, setDraggingUnitPos] = useState(null);
     const [gridColor, setGridColor] = useState('default');
@@ -38,38 +40,22 @@ export const UnitMap = ({
     const [movementLineEnd, setMovementLineEnd] = useState(null);
     const [movementSpeed, setMovementSpeed] = useState(0);
     const [tickMarks, setTickMarks] = useState([]);
-    const [showClickMovement, setShowClickMovement] = useState(false);
-    const [clickMovementStart, setClickMovementStart] = useState(null);
-    const [clickMovementEnd, setClickMovementEnd] = useState(null);
-    const [clickTickMarks, setClickTickMarks] = useState([]);
 
-    const calculateTickMarks = useCallback((observerPos, targetPos, speed) => {
-        if (speed <= 0) return [];
-        const dx = targetPos.x - observerPos.x;
-        const dy = targetPos.y - observerPos.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const tickInterval = speed * 3;
-        const tickMarksArray = [];
-
-        if (distance > 0 && tickInterval > 0) {
-            const numTicks = Math.floor(distance / tickInterval);
-
-            for (let i = 1; i <= numTicks; i++) {
-                const t = (i * tickInterval) / distance;
-                const tickX = observerPos.x + t * dx;
-                const tickY = observerPos.y + t * dy;
-                tickMarksArray.push({ x: tickX, y: tickY });
-            }
-        }
-
-        return tickMarksArray;
-    }, []);
-
-    const handleImageUpload = (e) => {
+    const uploadMap = (e) => {
         const file = e.target.files[0];
         if (file) {
             const url = URL.createObjectURL(file);
             setBackgroundImage(url);
+        }
+    };
+
+    const resetMap = () => {
+        if (backgroundImage && backgroundImage.startsWith('blob:')) {
+            URL.revokeObjectURL(backgroundImage);
+        }
+        setBackgroundImage(null);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
         }
     };
 
@@ -84,8 +70,8 @@ export const UnitMap = ({
             return;
         }
 
-        const observer = allUnits.find(u => u.id === currentUnitId);
-        if (!observer || !observer.position) {
+        const selectedUnit = allUnits.find(u => u.id === currentUnitId);
+        if (!selectedUnit || !selectedUnit.position) {
             setMovementLineStart(null);
             setMovementLineEnd(null);
             setMovementSpeed(0);
@@ -93,14 +79,8 @@ export const UnitMap = ({
             return;
         }
 
-        const speedResult = MovementSpeed(observer);
-        let speed = 0;
-        
-        if (typeof speedResult === 'object' && speedResult !== null) {
-            speed = speedResult.plain || 0;
-        } else {
-            speed = speedResult || 0;
-        }
+        const speedResult = MovementSpeed(selectedUnit);
+        const speed = isCtrlPressed ? (speedResult.road || 0) : (speedResult.plain || 0);
 
         setMovementSpeed(speed);
 
@@ -111,30 +91,30 @@ export const UnitMap = ({
             return;
         }
 
-        const observerPos = observer.position;
-        const dx = mousePos.x - observerPos.x;
-        const dy = mousePos.y - observerPos.y;
+        const selectedUnitPos = selectedUnit.position;
+        const dx = mousePos.x - selectedUnitPos.x;
+        const dy = mousePos.y - selectedUnitPos.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        setMovementLineStart(observerPos);
+        setMovementLineStart(selectedUnitPos);
         setMovementLineEnd({ x: mousePos.x, y: mousePos.y });
 
         const tickInterval = speed * 3;
         const tickMarksArray = [];
-        
+
         if (distance > 0 && tickInterval > 0) {
             const numTicks = Math.floor(distance / tickInterval);
-            
+
             for (let i = 1; i <= numTicks; i++) {
                 const t = (i * tickInterval) / distance;
-                const tickX = observerPos.x + t * dx;
-                const tickY = observerPos.y + t * dy;
+                const tickX = selectedUnitPos.x + t * dx;
+                const tickY = selectedUnitPos.y + t * dy;
                 tickMarksArray.push({ x: tickX, y: tickY });
             }
         }
 
         setTickMarks(tickMarksArray);
-    }, [allUnits, currentUnitId, mousePos]);
+    }, [allUnits, currentUnitId, mousePos, isCtrlPressed]);
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -153,23 +133,35 @@ export const UnitMap = ({
     }, [showColorPicker]);
 
     useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Control') {
+                setIsCtrlPressed(true);
+            }
+        };
+
+        const handleKeyUp = (e) => {
+            if (e.key === 'Control') {
+                setIsCtrlPressed(false);
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('keyup', handleKeyUp);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('keyup', handleKeyUp);
+        };
+    }, []);
+
+    useEffect(() => {
         calculateMovementLine();
     }, [calculateMovementLine, mousePos, currentUnitId]);
 
-    const handleResetImage = () => {
-        if (backgroundImage && backgroundImage.startsWith('blob:')) {
-            URL.revokeObjectURL(backgroundImage);
-        }
-        setBackgroundImage(null);
-        if (fileInputRef.current) {
-            fileInputRef.current.value = '';
-        }
-    };
-
-    let observerPlayerId = null;
+    let activePlayerId = null;
     for (const player of players) {
         if (player.children?.some(u => u.id === currentUnitId)) {
-            observerPlayerId = player.id;
+            activePlayerId = player.id;
             break;
         }
     }
@@ -189,7 +181,7 @@ export const UnitMap = ({
             let isTargetFriendly = false;
             for (const player of players) {
                 if (player.children?.some(u => u.id === target.id)) {
-                    isTargetFriendly = (player.id === observerPlayerId);
+                    isTargetFriendly = (player.id === activePlayerId);
                     break;
                 }
             }
@@ -343,10 +335,12 @@ export const UnitMap = ({
         const x = Math.max(0, Math.min(e.clientX - rect.left, FIELD_WIDTH));
         const y = Math.max(0, Math.min(e.clientY - rect.top, FIELD_HEIGHT));
         setMousePos({ x, y });
+        setIsMouseOverBattlefield(true);
     }, []);
 
     const handleMouseLeave = useCallback(() => {
         setMousePos({ x: 0, y: 0 });
+        setIsMouseOverBattlefield(false);
     }, []);
 
     const handleMouseDown = (e, unitId) => {
@@ -413,7 +407,7 @@ export const UnitMap = ({
         if (target.classList.contains('squad-marker') ||
             target.classList.contains('squad-icon') ||
             target.classList.contains('squad-label')) {
-            return; // Clicked on a unit, let handleMouseDown deal with it
+            return;
         }
 
         if (!currentUnitId || !battlefieldRef.current) return;
@@ -422,13 +416,7 @@ export const UnitMap = ({
         if (!observer || !observer.position) return;
 
         const speedResult = MovementSpeed(observer);
-        let speed = 0;
-
-        if (typeof speedResult === 'object' && speedResult !== null) {
-            speed = speedResult.plain || 0;
-        } else {
-            speed = speedResult || 0;
-        }
+        const speed = isCtrlPressed ? (speedResult.road || 0) : (speedResult.plain || 0);
 
         if (speed <= 0) return;
 
@@ -499,7 +487,7 @@ export const UnitMap = ({
                 onContextMenu={(e) => handleRightClick(e)}
                 onMouseDown={(e) => handleBattlefieldClick(e)}
             >
-                {movementLineStart && movementLineEnd && movementSpeed > 0 && !hoverUnitId && !draggingUnitPos && (
+                {movementLineStart && movementLineEnd && movementSpeed > 0 && !hoverUnitId && !draggingUnitPos && isMouseOverBattlefield && (
                     <svg
                         className="movement-overlay"
                         style={{
@@ -534,7 +522,7 @@ export const UnitMap = ({
                         {/* Arrow head */}
                         <defs>
                             <marker id="arrowhead" markerWidth="10" markerHeight="7"
-                                  refX="10" refY="3.5" orient="auto">
+                                refX="10" refY="3.5" orient="auto">
                                 <polygon points="0 0, 10 3.5, 0 7" fill="rgb(0, 255, 153)" />
                             </marker>
                         </defs>
@@ -549,7 +537,7 @@ export const UnitMap = ({
                         />
                     </svg>
                 )}
-                
+
                 {allUnits.map(unit => {
                     const pos = unit.position || { x: 50, y: 50 };
                     const isCurrent = unit.id === currentUnitId;
@@ -583,7 +571,7 @@ export const UnitMap = ({
                 {backgroundImage && (
                     <button
                         title="Сбросить картинку"
-                        onClick={handleResetImage}
+                        onClick={resetMap}
                     >
                         <MdDelete />
                     </button>
@@ -599,7 +587,7 @@ export const UnitMap = ({
                     type="file"
                     accept="image/*"
                     style={{ display: 'none' }}
-                    onChange={handleImageUpload}
+                    onChange={uploadMap}
                 />
                 <div className="grid-color-selector" ref={colorPickerRef}>
                     {showColorPicker && (

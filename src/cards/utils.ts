@@ -71,10 +71,10 @@ export function TotalCapacity(unitData: Unit): number {
     return totalFpLevel * 120;
 };
 
-type MovementSpeedResult = number | { plain: number; road: number };
+type MovementSpeedResult = { plain: number; road: number };
 
 export function MovementSpeed(unitData: Unit): MovementSpeedResult {
-    if (!unitData.children || unitData.children.length === 0) return 2;
+    if (!unitData.children || unitData.children.length === 0) return { plain: 2, road: 2 };
 
     if (unitData.vehicle) {
         switch (unitData.vehicle.type) {
@@ -86,16 +86,17 @@ export function MovementSpeed(unitData: Unit): MovementSpeedResult {
                 return { plain: 12, road: 16 };
             default:
                 console.error(`Неизвестный тип транспортного средства ${unitData.vehicle.type}!`);
-                return 2;
+                return { plain: 2, road: 2 };
         }
     } else {
         const totalWeight = TotalWeight(unitData);
         const totalCapacity = TotalCapacity(unitData);
-        if (totalWeight > totalCapacity) return 0;
+        if (totalWeight > totalCapacity) return { plain: 0, road: 0 };
         const loadout = totalWeight / totalCapacity;
-        return loadout <= 0.25 ? 5 :
+        const speed = loadout <= 0.25 ? 5 :
             loadout <= 0.5 ? 4 :
                 loadout <= 0.75 ? 3 : 2;
+        return { plain: speed, road: speed };
     }
 };
 
