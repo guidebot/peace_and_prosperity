@@ -1,8 +1,7 @@
 \PassOptionsToPackage{unicode,pdfusetitle}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 
-\documentclass[
-]{article}
+\documentclass{article}
 \usepackage[a4paper,includeheadfoot,top=1cm,bottom=1cm,left=2cm,right=1cm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{fontspec}
@@ -24,6 +23,7 @@
 \usepackage{multicol}
 \usepackage{array}
 \usepackage{wallpaper}
+\usepackage{background}
 \usepackage{tabularray}
 \usepackage{tblr-extras}
 \usepackage{multirow}
@@ -77,14 +77,14 @@
 \renewcommand{\contentsname}{\centering Содержание}
 
 \begin{document}
-
 \begin{titlepage}
+
 \backgroundsetup{
   scale=1,
   angle=0,
   opacity=1,
   position={current page.center},
-  contents={\includegraphics[width=\paperwidth*2,height=\paperheight,clip]{media/pap_players_book/image2.jpg}}
+  contents={\includegraphics[width=\paperwidth,height=\paperheight,clip]{media/pap_players_book/image2.png}}
 }
 
 \begin{center}
@@ -98,13 +98,11 @@
 
 \vfill
 
-{\Large\textbf{Никита Макаров}}
+{\color{white}\Large\textbf{Никита Макаров}}
 
-{\href{\siteurl}{\textbf{\MakeUppercase{\siteurl}}}}
+{\color{white}\href{\siteurl}{\textbf{\MakeUppercase{\siteurl}}}}
 
-{\textbf{Санкт-Петербург}}
-
-{\textbf{Декабрь, 2025}}
+{\color{white}\textbf{Санкт-Петербург}}
 
 \end{center}
 \end{titlepage}
@@ -115,7 +113,7 @@
   angle=0,
   opacity=1,
   position={current page.center},
-  contents={\TileWallPaper{1cm}{1cm}{media/image1.jpg}}
+  contents={\TileWallPaper{1cm}{1cm}{media/common/image1.jpg}}
 }
 
 \begin{multicols}{2}
@@ -386,6 +384,8 @@
 При борьбе с техникой, следует помнить, что даже у танка есть слабые стороны --- например, борта и корма.
 
 Но игра --- это не только боевые действия, хотя им и уделяется много внимания. Также это история, но изначально персонажи игроков не являются в ней главными действующими лицами. Они нанимаются на работу и представляют одну из сторон, интересы которых пересекаются в Белизе. И далее уже от самих игроков зависит, поймут ли они, что происходит на самом деле и какая роль в этой истории ближе их персонажам. Будут ли они преданными служаками или захотят узнать больше о стране, в которую приехали? Будут ли они доверять своему руководству несмотря ни на что или решат, что заняли не ту сторону? Пойдут ли они по головам за деньгами и властью или человеческая жизнь станет для них высшей ценностью?
+
+\end{multicols}
 
 \includegraphics[width=\linewidth]{media/pap_players_book/image10.png}
 
