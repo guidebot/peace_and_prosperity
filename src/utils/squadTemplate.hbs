@@ -191,7 +191,7 @@
         </td>
         <td>
           {{#each equipment}}
-          {{this.name}}{{#if this.ammo > 0}} ({{this.ammo}}){{/if}}
+          {{this.name}}{{#if (gt this.ammo 0)}} ({{this.ammo}}){{/if}}
           {{/each}}
         </td>
       </tr>

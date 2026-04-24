@@ -4,7 +4,10 @@ import { Entity } from '../game/Entity';
 import Handlebars from 'handlebars';
 import template from './squadTemplate.hbs?raw';
 
-// Compile template once for performance
+Handlebars.registerHelper('gt', function(a, b) {
+  return a > b;
+});
+
 const compiledTemplate = Handlebars.compile(template);
 
 export function generateSquadViewHTML(players: Player[]): string {
