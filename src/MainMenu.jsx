@@ -1,11 +1,12 @@
 import { useState, useRef } from 'react';
-import { MdDownload, MdUpload, MdTimer } from "react-icons/md";
+import { MdDownload, MdUpload, MdTimer, MdPrint } from "react-icons/md";
 import { GiTabletopPlayers } from "react-icons/gi";
 import { Player } from './game/Player';
 import { RollModal } from './actions/Roll';
 import { Level, MaxLeadership } from './game/Skill';
 import { useVisibilityConditions } from './game/conditions';
 import { UpdateSuppressionStatusForPersons } from './cards/utils';
+import { generateSquadViewHTML } from './utils/squadView.tsx';
 
 export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) {
     const fileInputRef = useRef(null);
@@ -205,6 +206,21 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
         });
     };
 
+    const handlePrintSquad = () => {
+        const html = generateSquadViewHTML(players);
+        const printWindow = window.open('', '_blank');
+        if (printWindow) {
+            printWindow.document.write(html);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.onload = () => {
+                printWindow.print();
+            };
+        } else {
+            alert('Не удалось открыть окно для печати. Пожалуйста, разрешите всплывающие окна для этого сайта.');
+        }
+    };
+
     const triggerFileSelect = () => {
         fileInputRef.current.click();
     };
@@ -227,6 +243,9 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
             </button>
             <button title="Добавить игрока" onClick={handleCreatePlayer}>
                 <GiTabletopPlayers />
+            </button>
+            <button title="Печать листов отрядов" onClick={handlePrintSquad}>
+                <MdPrint />
             </button>
             <button title="Закончить ход" onClick={handleEndTurn}>
                 <MdTimer />
