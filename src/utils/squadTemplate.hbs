@@ -57,6 +57,10 @@
   {{#each players}}
   {{#each children}}
   <h1>Лист отряда {{name}}</h1>
+  {{#if vehicle}}
+  <div>Транспорт: {{vehicle.name}}</div>
+  {{/if}}
+  <h2>Навыки</h2>
   <table>
     <thead>
       <tr>
@@ -171,6 +175,32 @@
       </tr>
     </tbody>
   </table>
+  <h2>Снаряжение</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Персонаж</th>
+        <th>Снаряжение</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each children}}
+      <tr>
+        <td>
+          {{name}}
+        </td>
+        <td>
+          {{#each equipment}}
+          {{this.name}}{{#if this.ammo > 0}} ({{this.ammo}}){{/if}}
+          {{/each}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <div style="page-break-after: always;"></div>
+
   {{/each}}
   {{/each}}
 </body>
