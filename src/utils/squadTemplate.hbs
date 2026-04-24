@@ -1,103 +1,178 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
-  <title>Список отряда</title>
+  <title>Отряды</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #fff;
       color: #000;
-      margin: 20px;
+      font-size: 12px;
     }
+
     h1 {
       text-align: center;
-    }
-    .player {
-      margin-bottom: 30px;
-      page-break-inside: avoid;
-    }
-    .player-name {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .unit {
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      padding: 10px;
-      page-break-inside: avoid;
-    }
-    .unit-name {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .vehicle {
-      font-style: italic;
-      margin-bottom: 10px;
-    }
-    .soldier {
-      margin-bottom: 15px;
-      border-left: 2px solid #999;
-      padding-left: 10px;
-    }
-    .soldier-name {
       font-size: 18px;
-      font-weight: bold;
     }
-    .skills, .equipment {
-      margin-top: 5px;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
     }
-    .skill-item, .equip-item {
-      display: inline-block;
-      margin-right: 10px;
-      font-size: 14px;
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      text-align: left;
+      font-size: 12px;
     }
+
+    th {
+      background-color: #f2f2f2;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .vertical-header {
+      writing-mode: vertical-lr;
+      text-align: center;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
     @media print {
       body {
         background-color: #fff;
         color: #000;
-      }
-      .unit {
-        border: 1px solid #999;
+        font-size: 12px;
       }
     }
   </style>
 </head>
+
 <body>
-  <h1>Список отряда</h1>
   {{#each players}}
-    <div class="player">
-      <div class="player-name">Игрок: {{name}}</div>
-      {{#each children}}
-        <div class="unit">
-          <div class="unit-name">Отряд: {{name}}</div>
-          {{#if vehicle}}
-            <div class="vehicle">Транспорт: {{vehicle.name}}</div>
-          {{/if}}
-          {{#each children}}
-            <div class="soldier">
-              <div class="soldier-name">Лицо: {{name}}</div>
-              <div class="skills"><strong>Навыки:</strong>
-                {{#each skills}}
-                  <span class="skill-item">{{@key}}: {{this}}</span>
-                {{/each}}
-                </div>
-              <div class="equipment"><strong>Снаряжение:</strong>
-                {{#if equipment}}
-                  {{#each equipment}}
-                    <span class="equip-item">{{name}}{{#if ammo}} (боеприпасы: {{ammo}}){{/if}}</span>
-                  {{/each}}
-                {{else}}
-                  Отсутствует
-                {{/if}}
-              </div>
-            </div>
-          {{/each}}
-        </div>
-      {{/each}}
-    </div>
+  {{#each children}}
+  <h1>Лист отряда {{name}}</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Навык</th>
+        {{#each children}}
+        <th class="vertical-header">{{name}}</th>
+        {{/each}}
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>[ВНС] Выносливость</td>
+        {{#each children}}
+        <td>{{skills.END}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[МНВ] Маневрирование</td>
+        {{#each children}}
+        <td>{{skills.MNV}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[МСК] Маскировка</td>
+        {{#each children}}
+        <td>{{skills.STE}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[ВЛН] Влияние</td>
+        {{#each children}}
+        <td>{{skills.IFL}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[ЛГК] Логика</td>
+        {{#each children}}
+        <td>{{skills.LOG}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[МЕД] Медицина</td>
+        {{#each children}}
+        <td>{{skills.MED}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[МЕХ] Механика</td>
+        {{#each children}}
+        <td>{{skills.MCH}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[ЭЛ] Электроника</td>
+        {{#each children}}
+        <td>{{skills.EL}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[ВЗР] Взрывчатые вещества</td>
+        {{#each children}}
+        <td>{{skills.TECH_explosives}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[ОП] Огневая поддержка</td>
+        {{#each children}}
+        <td>{{skills.WPN_artillery}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[ГРН] Метательное оружие (гранаты)</td>
+        {{#each children}}
+        <td>{{skills.WPN_grenades}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[ЛС] Лёгкое стрелковое оружие</td>
+        {{#each children}}
+        <td>{{skills.WPN_rifles}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[СН] Снайперское оружие</td>
+        {{#each children}}
+        <td>{{skills.WPN_sniper}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[ПЛМ] Пулемёты</td>
+        {{#each children}}
+        <td>{{skills.WPN_mg}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[УР] Управляемые ракеты</td>
+        {{#each children}}
+        <td>{{skills.WPN_guided}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[ДРН] Управляемые дроны</td>
+        {{#each children}}
+        <td>{{skills.TECH_uav}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        <td>[ТВ] Тяжёлое вооружение</td>
+        {{#each children}}
+        <td>{{skills.WPN_heavy}}</td>
+        {{/each}}
+      </tr>
+    </tbody>
+  </table>
+  {{/each}}
   {{/each}}
 </body>
+
 </html>
