@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Список отряда</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #000;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .player {
+      margin-bottom: 30px;
+      page-break-inside: avoid;
+    }
+    .player-name {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .unit {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      page-break-inside: avoid;
+    }
+    .unit-name {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .vehicle {
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+    .soldier {
+      margin-bottom: 15px;
+      border-left: 2px solid #999;
+      padding-left: 10px;
+    }
+    .soldier-name {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .skills, .equipment {
+      margin-top: 5px;
+    }
+    .skill-item, .equip-item {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+    @media print {
+      body {
+        background-color: #fff;
+        color: #000;
+      }
+      .unit {
+        border: 1px solid #999;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Список отряда</h1>
+  {{#each players}}
+    <div class="player">
+      <div class="player-name">Игрок: {{name}}</div>
+      {{#each children}}
+        <div class="unit">
+          <div class="unit-name">Отряд: {{name}}</div>
+          {{#if vehicle}}
+            <div class="vehicle">Транспорт: {{vehicle.name}}</div>
+          {{/if}}
+          {{#each children}}
+            <div class="soldier">
+              <div class="soldier-name">Лицо: {{name}}</div>
+              <div class="skills"><strong>Навыки:</strong>
+                {{#each skills}}
+                  <span class="skill-item">{{@key}}: {{this}}</span>
+                {{/each}}
+                </div>
+              <div class="equipment"><strong>Снаряжение:</strong>
+                {{#if equipment}}
+                  {{#each equipment}}
+                    <span class="equip-item">{{name}}{{#if ammo}} (боеприпасы: {{ammo}}){{/if}}</span>
+                  {{/each}}
+                {{else}}
+                  Отсутствует
+                {{/if}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{/each}}
+    </div>
+  {{/each}}
+</body>
+</html>
