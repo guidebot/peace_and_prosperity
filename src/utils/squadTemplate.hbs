@@ -17,6 +17,11 @@
       font-size: 18px;
     }
 
+    h2 {
+      text-align: center;
+      font-size: 14px;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -26,7 +31,7 @@
     th,
     td {
       border: 1px solid #ddd;
-      text-align: left;
+      text-align: center;
       font-size: 12px;
     }
 
@@ -74,103 +79,103 @@
       <tr>
         <td>[ВНС] Выносливость</td>
         {{#each children}}
-        <td>{{skills.END}}</td>
+        <td>{{#if (gt skills.END 0)}}{{skills.END}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[МНВ] Маневрирование</td>
         {{#each children}}
-        <td>{{skills.MNV}}</td>
+        <td>{{#if (gt skills.MNV 0)}}{{skills.MNV}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[МСК] Маскировка</td>
         {{#each children}}
-        <td>{{skills.STE}}</td>
+        <td>{{#if (gt skills.STE 0)}}{{skills.STE}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ВЛН] Влияние</td>
         {{#each children}}
-        <td>{{skills.IFL}}</td>
+        <td>{{#if (gt skills.IFL 0)}}{{skills.IFL}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ЛГК] Логика</td>
         {{#each children}}
-        <td>{{skills.LOG}}</td>
+        <td>{{#if (gt skills.LOG 0)}}{{skills.LOG}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[МЕД] Медицина</td>
         {{#each children}}
-        <td>{{skills.MED}}</td>
+        <td>{{#if (gt skills.MED 0)}}{{skills.MED}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[МЕХ] Механика</td>
         {{#each children}}
-        <td>{{skills.MCH}}</td>
+        <td>{{#if (gt skills.MCH 0)}}{{skills.MCH}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ЭЛ] Электроника</td>
         {{#each children}}
-        <td>{{skills.EL}}</td>
+        <td>{{#if (gt skills.EL 0)}}{{skills.EL}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ВЗР] Взрывчатые вещества</td>
         {{#each children}}
-        <td>{{skills.TECH_explosives}}</td>
+        <td>{{#if (gt skills.TECH_explosives 0)}}{{skills.TECH_explosives}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ОП] Огневая поддержка</td>
         {{#each children}}
-        <td>{{skills.WPN_artillery}}</td>
+        <td>{{#if (gt skills.WPN_artillery 0)}}{{skills.WPN_artillery}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ГРН] Метательное оружие (гранаты)</td>
         {{#each children}}
-        <td>{{skills.WPN_grenades}}</td>
+        <td>{{#if (gt skills.WPN_grenades 0)}}{{skills.WPN_grenades}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ЛС] Лёгкое стрелковое оружие</td>
         {{#each children}}
-        <td>{{skills.WPN_rifles}}</td>
+        <td>{{#if (gt skills.WPN_rifles 0)}}{{skills.WPN_rifles}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[СН] Снайперское оружие</td>
         {{#each children}}
-        <td>{{skills.WPN_sniper}}</td>
+        <td>{{#if (gt skills.WPN_sniper 0)}}{{skills.WPN_sniper}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ПЛМ] Пулемёты</td>
         {{#each children}}
-        <td>{{skills.WPN_mg}}</td>
+        <td>{{#if (gt skills.WPN_mg 0)}}{{skills.WPN_mg}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[УР] Управляемые ракеты</td>
         {{#each children}}
-        <td>{{skills.WPN_guided}}</td>
+        <td>{{#if (gt skills.WPN_guided 0)}}{{skills.WPN_guided}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ДРН] Управляемые дроны</td>
         {{#each children}}
-        <td>{{skills.TECH_uav}}</td>
+        <td>{{#if (gt skills.TECH_uav 0)}}{{skills.TECH_uav}}{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ТВ] Тяжёлое вооружение</td>
         {{#each children}}
-        <td>{{skills.WPN_heavy}}</td>
+        <td>{{#if (gt skills.WPN_heavy 0)}}{{skills.WPN_heavy}}{{/if}}</td>
         {{/each}}
       </tr>
     </tbody>
@@ -191,7 +196,7 @@
         </td>
         <td>
           {{#each equipment}}
-          {{this.name}}{{#if (gt this.ammo 0)}} ({{this.ammo}}){{/if}}
+          •&nbsp;{{this.name}}{{#if (gt this.ammo 0)}} ({{this.ammo}}){{/if}}
           {{/each}}
         </td>
       </tr>
