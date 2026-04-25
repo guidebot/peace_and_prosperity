@@ -17,11 +17,6 @@
       font-size: 18px;
     }
 
-    h2 {
-      text-align: center;
-      font-size: 14px;
-    }
-
     .skills-table {
       width: 100%;
       border-collapse: collapse;
@@ -32,7 +27,10 @@
     .skills-table th:first-child,
     .skills-table td:first-child {
       width: 35%;
-      border: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      border-top: none;
+      border-left: none;
+      border-bottom: 1px solid #ddd;
       text-align: center;
       font-size: 12px;
     }
@@ -40,9 +38,25 @@
     .skills-table th:not(:first-child),
     .skills-table td:not(:first-child) {
       width: calc(65% / 13);
-      border: 1px solid #ddd;
+      border-left: 1px solid #ddd;
+      border-top: none;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
       text-align: center;
       font-size: 12px;
+    }
+
+    .skills-table thead th {
+      border-top: none;
+    }
+
+    .skills-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .skills-table th:last-child,
+    .skills-table td:last-child {
+      border-right: none;
     }
 
     .equipment-table {
@@ -54,9 +68,30 @@
 
     .equipment-table th,
     .equipment-table td {
-      border: 1px solid #ddd;
+      border-left: 1px solid #ddd;
+      border-top: none;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
       text-align: center;
       font-size: 12px;
+    }
+
+    .equipment-table thead th {
+      border-top: none;
+    }
+
+    .equipment-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .equipment-table th:first-child,
+    .equipment-table td:first-child {
+      border-left: none;
+    }
+
+    .equipment-table th:last-child,
+    .equipment-table td:last-child {
+      border-right: none;
     }
 
     .equipment-content {
@@ -70,12 +105,12 @@
 
     .equipment-table th:first-child,
     .equipment-table td:first-child {
-      width: 25%;
+      width: 23%;
     }
 
     .equipment-table th:last-child,
     .equipment-table td:last-child {
-      width: 75%;
+      width: 77%;
     }
 
     .equipment-table tr {
@@ -113,7 +148,7 @@
   {{#if vehicle}}
   <div>Транспорт: {{vehicle.name}}</div>
   {{/if}}
-  <h2>Навыки</h2>
+  <hr>
   <table class="skills-table">
     <thead>
       <tr>
@@ -228,7 +263,7 @@
       </tr>
     </tbody>
   </table>
-  <h2>Снаряжение</h2>
+  <hr>
   <table class="equipment-table">
     <thead>
       <tr>
