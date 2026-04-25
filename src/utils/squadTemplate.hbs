@@ -45,6 +45,34 @@
       font-size: 12px;
     }
 
+    .equipment-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      table-layout: fixed;
+    }
+
+    .equipment-table th,
+    .equipment-table td {
+      border: 1px solid #ddd;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .equipment-table th:first-child,
+    .equipment-table td:first-child {
+      width: 25%;
+    }
+
+    .equipment-table th:last-child,
+    .equipment-table td:last-child {
+      width: 75%;
+    }
+
+    .equipment-table tr {
+      height: 30px;
+    }
+
     th {
       background-color: #f2f2f2;
       font-size: 12px;
@@ -52,6 +80,7 @@
     }
 
     .vertical-header {
+      height: 14%;
       writing-mode: vertical-lr;
       text-align: center;
       vertical-align: middle;
@@ -191,7 +220,7 @@
     </tbody>
   </table>
   <h2>Снаряжение</h2>
-  <table>
+  <table class="equipment-table">
     <thead>
       <tr>
         <th>Персонаж</th>
