@@ -123,6 +123,28 @@
       text-align: center;
     }
 
+    .sheet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .sheet-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .sheet-transport {
+      font-size: 18px;
+      font-weight: normal;
+      margin: 0;
+      text-align: right;
+    }
+
     .vertical-header {
       height: 14%;
       writing-mode: vertical-lr;
@@ -144,11 +166,10 @@
 <body>
   {{#each players}}
   {{#each children}}
-  <h1>Лист отряда {{name}}</h1>
-  {{#if vehicle}}
-  <div>Транспорт: {{vehicle.name}}</div>
-  {{/if}}
-  <hr>
+  <div class="sheet-header">
+    <div class="sheet-title">Лист отряда {{name}}</div>
+    <div class="sheet-transport">Транспорт: {{#if vehicle}}{{vehicle.name}}{{else}}пешком{{/if}}</div>
+  </div>
   <table class="skills-table">
     <thead>
       <tr>
