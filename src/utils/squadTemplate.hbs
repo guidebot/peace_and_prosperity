@@ -57,6 +57,18 @@
       border: 1px solid #ddd;
       text-align: center;
       font-size: 12px;
+      height: 30px;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .equipment-content {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
 
     .equipment-table th:first-child,
@@ -234,9 +246,11 @@
           {{name}}
         </td>
         <td>
-          {{#each equipment}}
-          •&nbsp;{{this.name}}{{#if (gt this.ammo 0)}} ({{this.ammo}}){{/if}}
-          {{/each}}
+          <div class="equipment-content">
+            {{#each equipment}}
+            •&nbsp;{{this.name}}{{#if (gt this.ammo 0)}} ({{this.ammo}}){{/if}}
+            {{/each}}
+          </div>
         </td>
       </tr>
       {{/each}}
