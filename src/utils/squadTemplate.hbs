@@ -22,15 +22,19 @@
       border-collapse: collapse;
       font-size: 12px;
       table-layout: fixed;
+      background-image: url('/soldier_silhouette_1.png'), url('/soldier_silhouette_2.png');
+      background-repeat: no-repeat, no-repeat;
+      background-position: top left, bottom right;
+      background-size: 80px, 105px;
     }
 
     .skills-table th:first-child,
     .skills-table td:first-child {
       width: 35%;
-      border-right: 1px solid #ddd;
+      border-right: 1px solid #999;
       border-top: none;
       border-left: none;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #999;
       text-align: center;
       font-size: 12px;
     }
@@ -38,10 +42,10 @@
     .skills-table th:not(:first-child),
     .skills-table td:not(:first-child) {
       width: calc(65% / 13);
-      border-left: 1px solid #ddd;
+      border-left: 1px solid #999;
       border-top: none;
-      border-right: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #999;
+      border-bottom: 1px solid #999;
       text-align: center;
       font-size: 12px;
     }
@@ -64,14 +68,18 @@
       border-collapse: collapse;
       font-size: 12px;
       table-layout: fixed;
+      background-image: url('/soldier_silhouette_4.png'), url('/soldier_silhouette_3.png');
+      background-repeat: no-repeat, no-repeat;
+      background-position: top left, bottom right;
+      background-size: 70px, 70px;
     }
 
     .equipment-table th,
     .equipment-table td {
-      border-left: 1px solid #ddd;
+      border-left: 1px solid #999;
       border-top: none;
-      border-right: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #999;
+      border-bottom: 1px solid #999;
       text-align: center;
       font-size: 12px;
     }
@@ -118,7 +126,6 @@
     }
 
     th {
-      background-color: #f2f2f2;
       font-size: 12px;
       text-align: center;
     }
@@ -129,7 +136,7 @@
       align-items: center;
       padding: 5px 0;
       margin-bottom: 10px;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #333;
     }
 
     .sheet-title {
@@ -154,10 +161,9 @@
     }
 
     @media print {
-      body {
-        background-color: #fff;
-        color: #000;
-        font-size: 12px;
+      table {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
     }
   </style>
