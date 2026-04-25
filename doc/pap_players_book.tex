@@ -712,126 +712,76 @@
 
 \section*{Лист отряда}\label{squad-sheet}
 \addcontentsline{toc}{section}{Лист отряда}
-
-\noindent
-\begin{talltblr}[
-  caption = {},
-  label = {table-squad-sheet}
-]{
-  hlines,
-  colspec={Q[l,m,co=3]Q[l,m,co=1]Q[l,m,co=1]},
-  cell{1}{1}={c=5}{c},
-  row{1}=
-{ht=2cm}
-}
-\SetCell{c,m} \textbf{Лист отряда} \\
-& & & & \\
-\end{talltblr}
-
-Позывной: \rule{8cm}{0.4pt}
-
-\subsection*{Навыки}\label{skills-summary}
-\addcontentsline{toc}{subsection}{Навыки}
-
-\subsubsection*{Уровни}\label{skill-levels}
-\addcontentsline{toc}{subsubsection}{Уровни}
-
-\begin{center}
-\begin{minipage}{0.9\columnwidth}
-\small
-\begin{talltblr}[
-  caption = {Уровни навыков},
-  label = {table-skill-levels-summary}
-]{
-  hlines,
-  row{odd}={fg=navy},
-  row{even}={fg=black},
-  colspec={Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]},
-}
-Уровень навыка Ур(X) & 1 & 2 & 3 & 4 & 5 & 6 \\
-Очки навыка X & 1+ & 3+ & 7+ & 12+ & 16+ & 20+ \\
-\end{talltblr}
-\end{minipage}
-\end{center}
-
-\subsubsection*{Навыки персонажа}\label{character-skills}
-\addcontentsline{toc}{subsubsection}{Навыки персонажа}
+\thispagestyle{empty}
 
 \begin{minipage}{\columnwidth}
-\small
+\DefTblrTemplate{caption}{default}{}
+\footnotesize
 \begin{talltblr}[
-  caption = {Навыки персонажа},
-  label = {table-character-skills}
+  caption=none,
+  entry=none,
+  label=none
 ]{
   hlines,
-  row{odd}={fg=navy},
-  row{even}={fg=black},
-  colspec={Q[l,m,co=2]Q[c,m,co=1]},
+  vlines,
+  hline{1,Z}={0pt},
+  vline{1,Z}={0pt},
+  row{1}={3cm},
+  colspec={Q[c,m,co=9]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]Q[c,m,co=1]},
 }
-Лидерство (ЛИД) & Очки/уровень \\
-Физическая подготовка (ФП) & \\
-Тактическая подготовка (ТП) & \\
-Медицина (МЕД) & \\
-Маскировка (МСК) & \\
-Гранаты (метательное) & \\
-Лёгкое стрелковое & \\
-Пулемёты & \\
-Снайперское & \\
-Гранатомёты & \\
-Реактивные гранатомёты & \\
-Противотанковые ракетные комплексы & \\
-Миномёты & \\
-Беспилотные летательные аппараты & \\
-Взрывные устройства и мины & \\
-Переносные зенитно-ракетные комплексы & \\
-Автоматические пушки & \\
-Танковые орудия & \\
-Артиллерийские системы & \\
-Ракетные системы залпового огня & \\
-Автомобили (МЕХ) & \\
-Колёсные боевые машины (МЕХ) & \\
-Гусеничные боевые машины (МЕХ) & \\
+\textbf{Навык} & & & & & & & & & & & & & \\
+{[ВНС]} Выносливость & & & & & & & & & & & & & \\
+{[МНВ]} Маневрирование & & & & & & & & & & & & & \\
+{[МСК]} Маскировка & & & & & & & & & & & & & \\
+{[ВЛН]} Влияние & & & & & & & & & & & & & \\
+{[ЛГК]} Логика & & & & & & & & & & & & & \\
+{[МЕД]} Медицина & & & & & & & & & & & & & \\
+{[МЕХ]} Механика & & & & & & & & & & & & & \\
+{[ЭЛ]} Электроника & & & & & & & & & & & & & \\
+{[ВЗР]} Взрывчатые вещества & & & & & & & & & & & & & \\
+{[ОП]} Огневая поддержка & & & & & & & & & & & & & \\
+{[ГРН]} Метательное оружие & & & & & & & & & & & & & \\
+{[ЛС]} Лёгкое стрелковое & & & & & & & & & & & & & \\
+{[СН]} Снайперское оружие & & & & & & & & & & & & & \\
+{[ПЛМ]} Пулемёты & & & & & & & & & & & & & \\
+{[УР]} Управляемые ракеты & & & & & & & & & & & & & \\
+{[ДРН]} Управляемые дроны & & & & & & & & & & & & & \\
+{[ТВ]} Тяжёлое вооружение & & & & & & & & & & & & & \\
 \end{talltblr}
 \end{minipage}
 
-\subsubsection*{Снаряжение}\label{equipment}
-\addcontentsline{toc}{subsubsection}{Снаряжение}
+\hrulefill
 
 \begin{minipage}{\columnwidth}
-\small
+\DefTblrTemplate{caption}{default}{}
+\footnotesize
 \begin{talltblr}[
-  caption = {Снаряжение},
-  label = {table-equipment}
+  caption=none,
+  entry=none,
+  label=none
 ]{
   hlines,
-  row{odd}={fg=navy},
-  row{even}={fg=black},
-  colspec={Q[l,m,co=2]Q[l,m,co=1]},
+  vlines,
+  hline{1,Z}={0pt},
+  vline{1,Z}={0pt},
+  row{2-Z}={0.75cm},
+  colspec={Q[c,m,co=1]Q[c,m,co=4]}
 }
-Предмет, вес & Боезапас, вес \\
-& \\
-& \\
-& \\
-& \\
-& \\
-& \\
-& \\
-& \\
-& \\
-& \\
-& \\
-& \\
-& \\
-& \\
-& \\
-& \\
-& \\
+\textbf{Персонаж} & \textbf{Снаряжение} \\
+ & \\
+ & \\
+ & \\
+ & \\
+ & \\
+ & \\
+ & \\
+ & \\
+ & \\
+ & \\
+ & \\
+ & \\
+ & \\
 \end{talltblr}
 \end{minipage}
-
-\subsection*{Заметки}\label{notes}
-\addcontentsline{toc}{subsection}{Заметки}
-
-\vspace{10cm}
 
 \end{document}
