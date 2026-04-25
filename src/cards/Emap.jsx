@@ -60,6 +60,7 @@ export const UnitMap = ({
     };
 
     const allUnits = players.flatMap(player => player.children);
+    const activeUnits = allUnits.filter(unit => unit.isActive);
 
     const calculateMovementLine = useCallback(() => {
         if (!currentUnitId) {
@@ -70,7 +71,7 @@ export const UnitMap = ({
             return;
         }
 
-        const selectedUnit = allUnits.find(u => u.id === currentUnitId);
+        const selectedUnit = activeUnits.find(u => u.id === currentUnitId);
         if (!selectedUnit || !selectedUnit.position) {
             setMovementLineStart(null);
             setMovementLineEnd(null);
@@ -114,7 +115,7 @@ export const UnitMap = ({
         }
 
         setTickMarks(tickMarksArray);
-    }, [allUnits, currentUnitId, mousePos, isCtrlPressed]);
+    }, [activeUnits, currentUnitId, mousePos, isCtrlPressed]);
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -169,13 +170,13 @@ export const UnitMap = ({
     const renderVisibilityLines = () => {
         if (!currentUnitId) return null;
 
-        const observer = allUnits.find(u => u.id === currentUnitId);
+        const observer = activeUnits.find(u => u.id === currentUnitId);
         if (!observer || !observer.position) return null;
 
         const observerPos = observer.position;
         const lines = [];
 
-        allUnits.forEach(target => {
+        activeUnits.forEach(target => {
             if (target.id === currentUnitId || !target.position || !target.isHidden) return;
 
             let isTargetFriendly = false;
@@ -538,7 +539,7 @@ export const UnitMap = ({
                     </svg>
                 )}
 
-                {allUnits.map(unit => {
+                {activeUnits.map(unit => {
                     const pos = unit.position || { x: 50, y: 50 };
                     const isCurrent = unit.id === currentUnitId;
                     const isHidden = unit.isHidden;
