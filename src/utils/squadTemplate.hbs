@@ -22,14 +22,24 @@
       font-size: 14px;
     }
 
-    table {
+    .skills-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 12px;
+      table-layout: fixed;
     }
 
-    th,
-    td {
+    .skills-table th:first-child,
+    .skills-table td:first-child {
+      width: 35%;
+      border: 1px solid #ddd;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .skills-table th:not(:first-child),
+    .skills-table td:not(:first-child) {
+      width: calc(65% / 13);
       border: 1px solid #ddd;
       text-align: center;
       font-size: 12px;
@@ -66,7 +76,7 @@
   <div>Транспорт: {{vehicle.name}}</div>
   {{/if}}
   <h2>Навыки</h2>
-  <table>
+  <table class="skills-table">
     <thead>
       <tr>
         <th>Навык</th>
