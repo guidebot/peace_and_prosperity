@@ -8,12 +8,14 @@ Gamemaster driven cooperative roleplaying wargame.
   - `App.jsx` main application.
   - `tree/` arborist tree showing sides, units and persons.
   - `utils/` common functions.
+    - `squadTemplate.hbs` template for printable unit sheets.
   - `game/` game models, databases (equipment, vehicles, names and so on).
   - `cards/` visual components (forms). 
     - `Emap.jsx`, `emap.css` interactive scheme representing battlefield map.
   - `actions/` modal windows.
 - `doc/` game documentation.
   - `contract.tex` core rules in tex format; use xelatex for compilation: xelatex -interaction=nonstopmode contract.tex.
+  - `pap_players_book.tex` players book in tex format.
   - `peace_and_prosperity_masters_book.docx` campagain description.
 
 ## General Instructions:
