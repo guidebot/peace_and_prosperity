@@ -18,6 +18,7 @@ export class Unit {
   correction: number;
   position: { x: number; y: number } | null;
   alertness: number;
+  checkpoints: { x: number; y: number }[];
 
   constructor(name: string, soldiers: Entity[]) {
     this.isActive = true;
@@ -35,5 +36,6 @@ export class Unit {
     this.correction = 0;
     this.position = null;
     this.alertness = 1;
+    this.checkpoints = [];
   }
 }

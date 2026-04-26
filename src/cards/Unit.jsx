@@ -11,12 +11,12 @@ import { IoIosPersonAdd, IoMdMove } from "react-icons/io";
 import { PersonGenerator } from '../actions/PersonGenerator';
 import { BiSolidShow, BiSolidHide, BiShowAlt, BiPulse } from "react-icons/bi";
 import { PossibleTargets, MovementSpeed, TotalWeight, TotalCapacity, UpdateSuppressionStatusForPersons } from './utils';
-import { MdDelete, MdSettingsSuggest } from 'react-icons/md';
+import { MdClearAll, MdDelete, MdSettingsSuggest } from 'react-icons/md';
 import { CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from '../game/conditions';
 import { UnitMap } from './Emap';
 import { GrUserPolice } from "react-icons/gr";
 import { TbFlag } from 'react-icons/tb';
-import { RiCheckboxIndeterminateLine, RiCheckboxLine } from 'react-icons/ri';
+import { RiCheckboxIndeterminateLine, RiCheckboxLine, RiFlag2Fill } from 'react-icons/ri';
 import { CiLocationOff, CiLocationOn } from 'react-icons/ci';
 import { BsArrowsMove, BsSignStop } from 'react-icons/bs';
 import { useVisibilityConditions } from '../game/conditions';
@@ -366,6 +366,21 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                         <label className="form-label">
                             <input min={0} max={5} name="correction" type="number" value={data.correction} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
                         </label>
+                    </div>
+                    <div className="buttons-panel">
+                        <RiFlag2Fill />
+                        <label className="form-label">
+                            {data.checkpoints?.length || 0} чекпойнтов
+                        </label>
+                        {data.checkpoints?.length > 0 && (
+                            <button
+                                key="clearCheckpoints"
+                                title="Очистить чекпойнты"
+                                onClick={() => onChange("checkpoints", [])}
+                            >
+                                <MdClearAll />
+                            </button>
+                        )}
                     </div>
                     <div className="buttons-panel">
                         <GrUserPolice />

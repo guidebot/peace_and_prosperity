@@ -5,7 +5,7 @@ import { Player } from './game/Player';
 import { RollModal } from './actions/Roll';
 import { Level, MaxLeadership } from './game/Skill';
 import { useVisibilityConditions } from './game/conditions';
-import { UpdateSuppressionStatusForPersons } from './cards/utils';
+import { UpdateSuppressionStatusForPersons, MovementSpeed } from './cards/utils';
 import { generateSquadViewHTML } from './utils/squadView.tsx';
 
 export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) {
@@ -138,6 +138,34 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
 
                     const stress = newUnit?.stress ?? 0.0;
 
+                    let newPosition = unit.position;
+                    let newCheckpoints = unit.checkpoints;
+                    if (!actuallyMoved.has(unit.id) && unit.checkpoints && unit.checkpoints.length > 0) {
+                        const speed = MovementSpeed(unit);
+                        const moveDistance = speed.plain || 0;
+
+                        if (moveDistance > 0) {
+                            const currentPos = unit.position;
+                            const firstCheckpoint = unit.checkpoints[0];
+                            const dx = firstCheckpoint.x - currentPos.x;
+                            const dy = firstCheckpoint.y - currentPos.y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+
+                            if (distance <= moveDistance * 3) {
+                                newPosition = { x: firstCheckpoint.x, y: firstCheckpoint.y };
+                                newCheckpoints = unit.checkpoints.slice(1);
+                                logMessages.push(`${unit.name} достиг чекпойнта.`);
+                            } else {
+                                const t = (moveDistance * 3) / distance;
+                                newPosition = {
+                                    x: currentPos.x + t * dx,
+                                    y: currentPos.y + t * dy
+                                };
+                            }
+                            actuallyMoved.add(unit.id);
+                        }
+                    }
+
                     const newFatigue = unit.hasMoved && !unit.vehicle
                         ? unit.fatigue
                         : unit.fatigue > 0
@@ -194,6 +222,8 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
 
                     return {
                         ...unit,
+                        position: newPosition,
+                        checkpoints: newCheckpoints,
                         alertness: 1,
                         stress: stress,
                         fatigue: newFatigue,

@@ -1,7 +1,8 @@
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { CalculateVisibilityDistance } from '../actions/Watch';
 import { MovementSpeed } from '../cards/utils';
-import { MdUploadFile, MdDelete, MdPalette } from 'react-icons/md';
+import { MdUploadFile, MdDelete, MdPalette, MdClearAll } from 'react-icons/md';
+import { RiFlag2Fill } from 'react-icons/ri';
 import './emap.css';
 
 const FIELD_WIDTH = 540;
@@ -32,6 +33,7 @@ export const UnitMap = ({
     const [hoverUnitId, setHoverUnitId] = useState(null);
     const [isMouseOverBattlefield, setIsMouseOverBattlefield] = useState(false);
     const [isCtrlPressed, setIsCtrlPressed] = useState(false);
+    const [isAltPressed, setIsAltPressed] = useState(false);
     const [uavClickPos, setUavClickPos] = useState(null);
     const [draggingUnitPos, setDraggingUnitPos] = useState(null);
     const [gridColor, setGridColor] = useState('default');
@@ -40,6 +42,7 @@ export const UnitMap = ({
     const [movementLineEnd, setMovementLineEnd] = useState(null);
     const [movementSpeed, setMovementSpeed] = useState(0);
     const [tickMarks, setTickMarks] = useState([]);
+    const [hoveredCheckpointIndex, setHoveredCheckpointIndex] = useState(null);
 
     const uploadMap = (e) => {
         const file = e.target.files[0];
@@ -133,16 +136,46 @@ export const UnitMap = ({
         };
     }, [showColorPicker]);
 
+    const addCheckpoint = useCallback((unitId, x, y) => {
+        const unit = allUnits.find(u => u.id === unitId);
+        onOtherChange(unitId, "checkpoints", [
+            ...(unit?.checkpoints || []),
+            { x, y }
+        ]);
+    }, [onOtherChange, allUnits]);
+
+    const removeCheckpoint = useCallback((unitId, index) => {
+        const unit = allUnits.find(u => u.id === unitId);
+        onOtherChange(unitId, "checkpoints", (unit?.checkpoints || []).filter((_, i) => i !== index));
+    }, [onOtherChange, allUnits]);
+
+    const clearAllCheckpoints = useCallback((unitId) => {
+        const unit = allUnits.find(u => u.id === unitId);
+        onOtherChange(unitId, "checkpoints", unit?.checkpoints || []);
+    }, [onOtherChange, allUnits]);
+
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === 'Control') {
                 setIsCtrlPressed(true);
+            }
+            if (e.key === 'Alt') {
+                setIsAltPressed(true);
             }
         };
 
         const handleKeyUp = (e) => {
             if (e.key === 'Control') {
                 setIsCtrlPressed(false);
+            }
+            if (e.key === 'Alt') {
+                setIsAltPressed(false);
+            }
+            if (e.key === 'Delete' && currentUnitId) {
+                if (hoveredCheckpointIndex !== null) {
+                    removeCheckpoint(currentUnitId, hoveredCheckpointIndex);
+                    setHoveredCheckpointIndex(null);
+                }
             }
         };
 
@@ -153,7 +186,7 @@ export const UnitMap = ({
             document.removeEventListener('keydown', handleKeyDown);
             document.removeEventListener('keyup', handleKeyUp);
         };
-    }, []);
+    }, [currentUnitId, hoveredCheckpointIndex, removeCheckpoint]);
 
     useEffect(() => {
         calculateMovementLine();
@@ -394,11 +427,21 @@ export const UnitMap = ({
 
         if (!currentUnitId || !battlefieldRef.current) return;
 
+        const unit = allUnits.find(u => u.id === currentUnitId);
+        if (!unit) return;
+
         const rect = battlefieldRef.current.getBoundingClientRect();
         const x = Math.max(0, Math.min(e.clientX - rect.left, FIELD_WIDTH));
         const y = Math.max(0, Math.min(e.clientY - rect.top, FIELD_HEIGHT));
 
-        setUavClickPos({ x, y });
+        setUavClickPos(null);
+
+        if (isAltPressed && hoveredCheckpointIndex !== null) {
+            removeCheckpoint(currentUnitId, hoveredCheckpointIndex);
+            setHoveredCheckpointIndex(null);
+        } else {
+            addCheckpoint(currentUnitId, x, y);
+        }
     };
 
     const handleBattlefieldClick = (e) => {
@@ -443,6 +486,10 @@ export const UnitMap = ({
             onOtherChange(currentUnitId, "hasMoved", true);
             onOtherChange(currentUnitId, "isMarked", true);
             onOtherChange(currentUnitId, "position", { x: clickX, y: clickY });
+        }
+        
+        if (isAltPressed) {
+            clearAllCheckpoints(currentUnitId);
         }
     };
 
@@ -561,6 +608,60 @@ export const UnitMap = ({
                         </div>
                     );
                 })}
+
+                {currentUnitId && (
+                    <svg
+                        className="checkpoint-overlay"
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: FIELD_WIDTH,
+                            height: FIELD_HEIGHT,
+                            pointerEvents: 'none'
+                        }}
+                    >
+                        {activeUnits.filter(u => u.id === currentUnitId).map(unit => {
+                            const checkpoints = unit.checkpoints || [];
+                            return checkpoints.map((checkpoint, index) => {
+                                const isHovered = hoveredCheckpointIndex === index;
+                                return (
+                                    <g
+                                        key={`checkpoint-${index}`}
+                                        onMouseEnter={() => setHoveredCheckpointIndex(index)}
+                                        onMouseLeave={() => setHoveredCheckpointIndex(null)}
+                                        style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+                                    >
+                                        <circle
+                                            cx={checkpoint.x}
+                                            cy={checkpoint.y}
+                                            r={isHovered ? 10 : 6}
+                                            fill="none"
+                                            stroke={isHovered ? "rgb(255, 100, 100)" : "rgb(255, 0, 0)"}
+                                            strokeWidth="2"
+                                        />
+                                        <circle
+                                            cx={checkpoint.x}
+                                            cy={checkpoint.y}
+                                            r={isHovered ? 4 : 2}
+                                            fill={isHovered ? "rgb(255, 100, 100)" : "rgb(255, 0, 0)"}
+                                        />
+                                        <text
+                                            x={checkpoint.x + 8}
+                                            y={checkpoint.y + 3}
+                                            fontSize="10"
+                                            fill={isHovered ? "rgb(255, 100, 100)" : "rgb(255, 0, 0)"}
+                                            fontFamily="sans-serif"
+                                            fontWeight={isHovered ? "bold" : "normal"}
+                                        >
+                                            {index + 1}
+                                        </text>
+                                    </g>
+                                );
+                            });
+                        })}
+                    </svg>
+                )}
             </div>
             <div className="map-buttons-panel">
                 <button
@@ -583,6 +684,14 @@ export const UnitMap = ({
                 >
                     <MdPalette />
                 </button>
+                {currentUnitId && (
+                    <button
+                        title="Очистить чекпойнты"
+                        onClick={() => clearAllCheckpoints(currentUnitId)}
+                    >
+                        <MdClearAll />
+                    </button>
+                )}
                 <input
                     ref={fileInputRef}
                     type="file"
@@ -621,6 +730,15 @@ export const UnitMap = ({
                             <div>Ходов: {tickMarks.length}</div>
                         </>
                     )}
+                    {currentUnitId && (() => {
+                        const unit = activeUnits.find(u => u.id === currentUnitId);
+                        const checkpointCount = unit?.checkpoints?.length || 0;
+                        return checkpointCount > 0 && (
+                            <div>
+                                Чекпойнтов: {checkpointCount}
+                            </div>
+                        );
+                    })()}
                 </div>
             </div>
         </div >
