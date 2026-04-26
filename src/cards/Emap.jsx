@@ -431,20 +431,21 @@ export const UnitMap = ({
 
         if (!currentUnitId || !battlefieldRef.current) return;
 
-        const unit = allUnits.find(u => u.id === currentUnitId);
-        if (!unit) return;
-
         const rect = battlefieldRef.current.getBoundingClientRect();
         const x = Math.max(0, Math.min(e.clientX - rect.left, FIELD_WIDTH));
         const y = Math.max(0, Math.min(e.clientY - rect.top, FIELD_HEIGHT));
 
-        setUavClickPos(null);
-
-        if (isAltPressed && hoveredCheckpointIndex !== null) {
-            removeCheckpoint(currentUnitId, hoveredCheckpointIndex);
-            setHoveredCheckpointIndex(null);
-        } else {
-            addCheckpoint(currentUnitId, x, y);
+        if (isAltPressed) {
+            setUavClickPos(null);
+            if (hoveredCheckpointIndex !== null) {
+                removeCheckpoint(currentUnitId, hoveredCheckpointIndex);
+                setHoveredCheckpointIndex(null);
+            } else {
+                addCheckpoint(currentUnitId, x, y);
+            }
+        }
+        else {
+            setUavClickPos({ x, y });
         }
     };
 
@@ -491,7 +492,7 @@ export const UnitMap = ({
             onOtherChange(currentUnitId, "isMarked", true);
             onOtherChange(currentUnitId, "position", { x: clickX, y: clickY });
         }
-        
+
         if (isAltPressed) {
             clearAllCheckpoints(currentUnitId);
         }
@@ -734,15 +735,6 @@ export const UnitMap = ({
                             <div>Ходов: {tickMarks.length}</div>
                         </>
                     )}
-                    {currentUnitId && (() => {
-                        const unit = activeUnits.find(u => u.id === currentUnitId);
-                        const checkpointCount = unit?.checkpoints?.length || 0;
-                        return checkpointCount > 0 && (
-                            <div>
-                                Чекпойнтов: {checkpointCount}
-                            </div>
-                        );
-                    })()}
                 </div>
             </div>
         </div >
