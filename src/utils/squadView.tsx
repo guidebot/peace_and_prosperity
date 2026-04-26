@@ -7,6 +7,13 @@ Handlebars.registerHelper('gt', function (a, b) {
   return a > b;
 });
 
+Handlebars.registerHelper('skillColor', function (value) {
+  if (value >= 16) return 'skill-exceptional';
+  if (value >= 12) return 'skill-good';
+  if (value >= 7) return 'skill-mediocre';
+  return 'skill-bad';
+});
+
 const compiledTemplate = Handlebars.compile(template);
 
 function padTo<T>(arr: T[], size: number, filler: T): T[] {

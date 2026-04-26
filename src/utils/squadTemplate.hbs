@@ -160,6 +160,26 @@
       white-space: nowrap;
     }
 
+    .skill-value {
+      font-weight: bold;
+    }
+
+    .skill-bad {
+      color: #d32f2f;
+    }
+
+    .skill-mediocre {
+      color: #d19600;
+    }
+
+    .skill-good {
+      color: #388e3c;
+    }
+
+    .skill-exceptional {
+      color: #1976d2;
+    }
+
     @media print {
       table {
         -webkit-print-color-adjust: exact;
@@ -189,103 +209,103 @@
       <tr>
         <td>[ВНС] Выносливость</td>
         {{#each children}}
-        <td>{{#if (gt skills.END 0)}}{{skills.END}}{{/if}}</td>
+        <td>{{#if (gt skills.END 0)}}<span class="skill-value {{skillColor skills.END}}">{{skills.END}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[МНВ] Маневрирование</td>
         {{#each children}}
-        <td>{{#if (gt skills.MNV 0)}}{{skills.MNV}}{{/if}}</td>
+        <td>{{#if (gt skills.MNV 0)}}<span class="skill-value {{skillColor skills.MNV}}">{{skills.MNV}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[МСК] Маскировка</td>
         {{#each children}}
-        <td>{{#if (gt skills.STE 0)}}{{skills.STE}}{{/if}}</td>
+        <td>{{#if (gt skills.STE 0)}}<span class="skill-value {{skillColor skills.STE}}">{{skills.STE}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ВЛН] Влияние</td>
         {{#each children}}
-        <td>{{#if (gt skills.IFL 0)}}{{skills.IFL}}{{/if}}</td>
+        <td>{{#if (gt skills.IFL 0)}}<span class="skill-value {{skillColor skills.IFL}}">{{skills.IFL}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ЛГК] Логика</td>
         {{#each children}}
-        <td>{{#if (gt skills.LOG 0)}}{{skills.LOG}}{{/if}}</td>
+        <td>{{#if (gt skills.LOG 0)}}<span class="skill-value {{skillColor skills.LOG}}">{{skills.LOG}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[МЕД] Медицина</td>
         {{#each children}}
-        <td>{{#if (gt skills.MED 0)}}{{skills.MED}}{{/if}}</td>
+        <td>{{#if (gt skills.MED 0)}}<span class="skill-value {{skillColor skills.MED}}">{{skills.MED}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[МЕХ] Механика</td>
         {{#each children}}
-        <td>{{#if (gt skills.MCH 0)}}{{skills.MCH}}{{/if}}</td>
+        <td>{{#if (gt skills.MCH 0)}}<span class="skill-value {{skillColor skills.MCH}}">{{skills.MCH}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ЭЛ] Электроника</td>
         {{#each children}}
-        <td>{{#if (gt skills.EL 0)}}{{skills.EL}}{{/if}}</td>
+        <td>{{#if (gt skills.EL 0)}}<span class="skill-value {{skillColor skills.EL}}">{{skills.EL}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ВЗР] Взрывчатые вещества</td>
         {{#each children}}
-        <td>{{#if (gt skills.TECH_explosives 0)}}{{skills.TECH_explosives}}{{/if}}</td>
+        <td>{{#if (gt skills.TECH_explosives 0)}}<span class="skill-value {{skillColor skills.TECH_explosives}}">{{skills.TECH_explosives}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ОП] Огневая поддержка</td>
         {{#each children}}
-        <td>{{#if (gt skills.WPN_artillery 0)}}{{skills.WPN_artillery}}{{/if}}</td>
+        <td>{{#if (gt skills.WPN_artillery 0)}}<span class="skill-value {{skillColor skills.WPN_artillery}}">{{skills.WPN_artillery}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ГРН] Метательное оружие (гранаты)</td>
         {{#each children}}
-        <td>{{#if (gt skills.WPN_grenades 0)}}{{skills.WPN_grenades}}{{/if}}</td>
+        <td>{{#if (gt skills.WPN_grenades 0)}}<span class="skill-value {{skillColor skills.WPN_grenades}}">{{skills.WPN_grenades}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ЛС] Лёгкое стрелковое оружие</td>
         {{#each children}}
-        <td>{{#if (gt skills.WPN_rifles 0)}}{{skills.WPN_rifles}}{{/if}}</td>
+        <td>{{#if (gt skills.WPN_rifles 0)}}<span class="skill-value {{skillColor skills.WPN_rifles}}">{{skills.WPN_rifles}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[СН] Снайперское оружие</td>
         {{#each children}}
-        <td>{{#if (gt skills.WPN_sniper 0)}}{{skills.WPN_sniper}}{{/if}}</td>
+        <td>{{#if (gt skills.WPN_sniper 0)}}<span class="skill-value {{skillColor skills.WPN_sniper}}">{{skills.WPN_sniper}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ПЛМ] Пулемёты</td>
         {{#each children}}
-        <td>{{#if (gt skills.WPN_mg 0)}}{{skills.WPN_mg}}{{/if}}</td>
+        <td>{{#if (gt skills.WPN_mg 0)}}<span class="skill-value {{skillColor skills.WPN_mg}}">{{skills.WPN_mg}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[УР] Управляемые ракеты</td>
         {{#each children}}
-        <td>{{#if (gt skills.WPN_guided 0)}}{{skills.WPN_guided}}{{/if}}</td>
+        <td>{{#if (gt skills.WPN_guided 0)}}<span class="skill-value {{skillColor skills.WPN_guided}}">{{skills.WPN_guided}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ДРН] Управляемые дроны</td>
         {{#each children}}
-        <td>{{#if (gt skills.TECH_uav 0)}}{{skills.TECH_uav}}{{/if}}</td>
+        <td>{{#if (gt skills.TECH_uav 0)}}<span class="skill-value {{skillColor skills.TECH_uav}}">{{skills.TECH_uav}}</span>{{/if}}</td>
         {{/each}}
       </tr>
       <tr>
         <td>[ТВ] Тяжёлое вооружение</td>
         {{#each children}}
-        <td>{{#if (gt skills.WPN_heavy 0)}}{{skills.WPN_heavy}}{{/if}}</td>
+        <td>{{#if (gt skills.WPN_heavy 0)}}<span class="skill-value {{skillColor skills.WPN_heavy}}">{{skills.WPN_heavy}}</span>{{/if}}</td>
         {{/each}}
       </tr>
     </tbody>
