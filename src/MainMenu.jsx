@@ -140,6 +140,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
 
                     let newPosition = unit.position;
                     let newCheckpoints = unit.checkpoints;
+                    let hasMoved = unit.hasMoved;
                     if (!actuallyMoved.has(unit.id) && unit.checkpoints && unit.checkpoints.length > 0) {
                         const speed = MovementSpeed(unit);
                         const moveDistance = speed.plain || 0;
@@ -163,16 +164,17 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
                                 };
                             }
                             actuallyMoved.add(unit.id);
+                            hasMoved = true;
                         }
                     }
 
-                    const newFatigue = unit.hasMoved && !unit.vehicle
+                    const newFatigue = hasMoved && !unit.vehicle
                         ? unit.fatigue
                         : unit.fatigue > 0
                             ? unit.fatigue - 1
                             : 0;
 
-                    const newHasMoved = unit.hasMoved && !actuallyMoved.has(unit.id) ? false : unit.hasMoved;
+                    const newHasMoved = hasMoved && !actuallyMoved.has(unit.id) ? false : hasMoved;
 
                     const suppressionMap = new Map();
 
