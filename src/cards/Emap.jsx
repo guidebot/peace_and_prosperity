@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { CalculateVisibilityDistance } from '../actions/Watch';
 import { MovementSpeed } from '../cards/utils';
 import { MdUploadFile, MdDelete, MdPalette, MdClearAll } from 'react-icons/md';
@@ -29,6 +29,7 @@ export const UnitMap = ({
     const battlefieldRef = useRef(null);
     const fileInputRef = useRef(null);
     const colorPickerRef = useRef(null);
+    const mousePosRef = useRef({ x: 0, y: 0 });
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [hoverUnitId, setHoverUnitId] = useState(null);
     const [isMouseOverBattlefield, setIsMouseOverBattlefield] = useState(false);
@@ -62,8 +63,8 @@ export const UnitMap = ({
         }
     };
 
-    const allUnits = players.flatMap(player => player.children);
-    const activeUnits = allUnits.filter(unit => unit.isActive);
+    const allUnits = useMemo(() => players.flatMap(player => player.children), [players]);
+    const activeUnits = useMemo(() => allUnits.filter(unit => unit.isActive), [allUnits]);
 
     const calculateMovementLine = useCallback(() => {
         if (!currentUnitId) {
@@ -96,12 +97,12 @@ export const UnitMap = ({
         }
 
         const selectedUnitPos = selectedUnit.position;
-        const dx = mousePos.x - selectedUnitPos.x;
-        const dy = mousePos.y - selectedUnitPos.y;
+        const dx = mousePosRef.current.x - selectedUnitPos.x;
+        const dy = mousePosRef.current.y - selectedUnitPos.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         setMovementLineStart(selectedUnitPos);
-        setMovementLineEnd({ x: mousePos.x, y: mousePos.y });
+        setMovementLineEnd({ x: mousePosRef.current.x, y: mousePosRef.current.y });
 
         const tickInterval = speed * 3;
         const tickMarksArray = [];
@@ -118,7 +119,7 @@ export const UnitMap = ({
         }
 
         setTickMarks(tickMarksArray);
-    }, [activeUnits, currentUnitId, mousePos, isCtrlPressed]);
+    }, [activeUnits, currentUnitId, isCtrlPressed]);
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -190,7 +191,7 @@ export const UnitMap = ({
 
     useEffect(() => {
         calculateMovementLine();
-    }, [calculateMovementLine, mousePos, currentUnitId]);
+    }, [activeUnits, currentUnitId, isCtrlPressed]);
 
     let activePlayerId = null;
     for (const player of players) {
@@ -368,11 +369,14 @@ export const UnitMap = ({
         const rect = battlefieldRef.current.getBoundingClientRect();
         const x = Math.max(0, Math.min(e.clientX - rect.left, FIELD_WIDTH));
         const y = Math.max(0, Math.min(e.clientY - rect.top, FIELD_HEIGHT));
+        mousePosRef.current = { x, y };
         setMousePos({ x, y });
         setIsMouseOverBattlefield(true);
-    }, []);
+        calculateMovementLine();
+    }, [calculateMovementLine]);
 
     const handleMouseLeave = useCallback(() => {
+        mousePosRef.current = { x: 0, y: 0 };
         setMousePos({ x: 0, y: 0 });
         setIsMouseOverBattlefield(false);
     }, []);
