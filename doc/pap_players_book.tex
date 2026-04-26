@@ -22,8 +22,8 @@
 \titleformat{\subparagraph}{\headingfont\color{navy}\normalsize\itshape}{\thesubparagraph}{1em}{}
 \usepackage{multicol}
 \usepackage{array}
-\usepackage{wallpaper}
 \usepackage{background}
+\usepackage{wallpaper}
 \usepackage{tabularray}
 \usepackage{tblr-extras}
 \usepackage{multirow}
@@ -43,10 +43,10 @@
 \setlength{\emergencystretch}{3em}
 \providecommand{\tightlist}{
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\providecommand{\fillinline}[1]{%
+  \providecommand{\fillinline}[1]{
   \leavevmode\leaders\hbox to 0.5556em{\hss.\hss}\hfill\kern0pt}
-\setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{0}
+\setcounter{tocdepth}{2}
 \titlecontents{section}[0em]{}{\Large\makebox[1.3em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
 \titlecontents{subsection}[0em]{}{\large\makebox[2.1em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
 \titlecontents{subsubsection}[0em]{}{\makebox[3.2em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
@@ -78,8 +78,8 @@
 \author{Никита Макаров}
 
 \begin{document}
-\begin{titlepage}
 
+\begin{titlepage}
 \backgroundsetup{
   scale=1,
   angle=0,
@@ -123,6 +123,7 @@
 
 \renewcommand{\contentsname}{Содержание}
 \tableofcontents
+\BgThispage{}
 
 \end{multicols}
 
@@ -295,7 +296,7 @@
 \end{minipage}
 \end{center}
 
-\subsubsection{Выносливость (ВНС)}\label{endurance}
+\subsection{Выносливость (ВНС)}\label{endurance}
 
 Навык определяет максимальный вес, который солдат может нести, скорость
 передвижения и возможность преодоления препятствий. В ролевой части
@@ -356,7 +357,7 @@
 
 \includegraphics[width=\linewidth]{media/contract/image6.png}
 
-\subsubsection{Маневрирование (МНВ)}\label{maneuver}
+\subsection{Маневрирование (МНВ)}\label{maneuver}
 
 Навык определяет отработанные до автоматизма привычки, уменьшающие
 площадь поражения тела до минимума. Человек умеет двигаться так, чтобы
@@ -370,7 +371,7 @@
 При определении навыка маневрирования Ур(МНВ) отряда среди солдат отряда
 выбирается минимальное значение.
 
-\subsubsection{Маскировка (МСК)}\label{camouflage-skill}
+\subsection{Маскировка (МСК)}\label{camouflage-skill}
 
 Тренировки по маскировке включают в себя собственно маскировку, а также
 обнаружение (демаскировку).
@@ -387,7 +388,7 @@
 наблюдение, выбирается минимальное значение среди персонажей этого
 отряда.
 
-\subsubsection{Навыки меткости}\label{weapon-skills}
+\subsection{Навыки меткости}\label{weapon-skills}
 
 Навыки, связанные с атрибутом меткость используются для определения
 результативности применения оружия прямой наводкой, в том числе бросков
@@ -396,7 +397,7 @@
 Снаряжение и оружие делится на классы, для каждого из которых необходима
 отдельная тренировка.
 
-\subsubsection{Медицина (МЕД)}\label{medicine}
+\subsection{Медицина (МЕД)}\label{medicine}
 
 Навык медицины позволяет спасти жизнь смертельно раненого солдата и
 остановить кровотечение. В ролевой части навык медицины используется во
@@ -406,32 +407,32 @@
 больше 0, доступно оказание первой
 помощи.
 
-\subsubsection{Механика (МЕХ)}\label{mechanics}
+\subsection{Механика (МЕХ)}\label{mechanics}
 
 Навык механики определяет возможности по ремонту и созданию различных
 механизмов, а также по управлению ими. Навык может использоваться для
 физического взлома и ремонта замков, автомобилей, а также для проверок
 при управлении автомобилями и боевыми машинами.
 
-\subsubsection{Электроника (ЭЛ)}\label{electronics}
+\subsection{Электроника (ЭЛ)}\label{electronics}
 
 Навык работы с компьютерами, включающий и программную, и аппаратную
 части: программирование, пайка, электрические схемы. Используется для
 работы со средствами связи, радиооборудованием.
 
-\subsubsection{Взрывные устройства и мины (ВЗР)}\label{explosives}
+\subsection{Взрывные устройства и мины (ВЗР)}\label{explosives}
 
 Навык работы с взрывчатыми веществами и взрывными устройствами,
 минами. Используется для создания и установки взрывных устройств и
 разминирования.
 
-\subsubsection{Огневая поддержка (ОП)}\label{fire-support}
+\subsection{Огневая поддержка (ОП)}\label{fire-support}
 
 Используется для любой навесной стрельбы (стрельбы непрямой наводкой)
 начиная от подствольных гранатомётов и АГС и заканчивая ствольной
 артиллерией и РСЗО.
 
-\subsubsection{Логика (ЛГК)}\label{logic}
+\subsection{Логика (ЛГК)}\label{logic}
 
 Навык логики используется при взаимодействии с другими персонажами.
 
@@ -442,7 +443,7 @@
 специального образования, 8 для оконченного высшего, 11 для нескольких
 высших, 15 для кандидата наук, 19 для доктора наук.
 
-\subsubsection{Влияние (ВЛН)}\label{influence}
+\subsection{Влияние (ВЛН)}\label{influence}
 
 Навык влияния используется при взаимодействии с другими персонажами.
 
@@ -477,7 +478,7 @@
 
 Каждый персонаж может взять с собой сотовый телефон и \$100 в Белиз. Остальное снаряжение --- по согласованию с мастером или уже на месте.
 
-\subsubsection{Создание случайного персонажа}\label{char-gen}
+\subsection{Создание случайного персонажа}\label{char-gen}
 
 Начните с определения характера персонажа: эмоциональный и харизматичный или рациональный и интеллектуальный.
 Это можно сделать под предпочитаемый игроком отыгрыш, либо просто подбросив монетку.
@@ -556,8 +557,7 @@
 
 \noindent\includegraphics[width=4cm]{media/pap_players_book/image11.png}\hfill\colorbox{white}{\parbox[b][3cm][c]{3cm}{\centering\vspace*{0.2cm}Место для фото\vspace*{0.2cm}}}
 
-\section*{Анкета кандидата}\label{candidate-questionnaire}
-\addcontentsline{toc}{section}{Анкета кандидата}
+\subsubsection{Анкета кандидата}\label{candidate-questionnaire}
 \thispagestyle{empty}
 
 \begin{enumerate}
@@ -609,14 +609,12 @@
 \begin{multicols}{2}
 \raggedcolumns{}
 
-\section*{Краткая памятка}\label{quick-reference}
-\addcontentsline{toc}{section}{Краткая памятка}
+\section{Краткая памятка}\label{quick-reference}
 \thispagestyle{empty}
 
-\subsection*{Что можно делать?}\label{what-can-be-done}
-\addcontentsline{toc}{subsection}{Что можно делать?}
+\subsection{Что можно делать?}\label{what-can-be-done}
 
-\subsubsection*{Отряд в целом}\label{squad-as-a-whole}
+\subsubsection{Отряд в целом}\label{squad-as-a-whole}
 
 \begin{itemize}
 \item
@@ -627,7 +625,7 @@
   Штурмовать и захватывать в плен в бою (при сближении вплотную).
 \end{itemize}
 
-\subsubsection*{Отдельные персонажи}\label{individual-characters}
+\subsubsection{Отдельные персонажи}\label{individual-characters}
 
 \begin{itemize}
 \item
@@ -684,8 +682,7 @@
 
 \clearpage
 
-\section*{Лист отряда}\label{squad-sheet}
-\addcontentsline{toc}{section}{Лист отряда}
+\section{Лист отряда}\label{squad-sheet}
 \thispagestyle{empty}
 
 \begin{minipage}{\columnwidth}
