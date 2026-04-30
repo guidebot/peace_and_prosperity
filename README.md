@@ -6,8 +6,8 @@ A module of 6-8 games, 4 hours each.
 
 ## Contents
 - [Contract Core Rules (tex)](https://github.com/guidebot/peace_and_prosperity/blob/main/doc/contract.tex).
-- [Peace and Prosperity Master's book](https://github.com/guidebot/peace_and_prosperity/blob/main/doc/peace_and_prosperity_masters_book.docx).
-- [Peace and Prosperity Player's journal](https://github.com/guidebot/peace_and_prosperity/blob/main/doc/pap_players_journal.tex).
+- [Peace and Prosperity Master's book (docx)](https://github.com/guidebot/peace_and_prosperity/blob/main/doc/peace_and_prosperity_masters_book.docx).
+- [Peace and Prosperity Player's journal (tex)](https://github.com/guidebot/peace_and_prosperity/blob/main/doc/pap_players_journal.tex).
 - [Master's application (typescript, react)](https://github.com/guidebot/peace_and_prosperity/tree/main/src).
 
 ## Language
