@@ -129,8 +129,8 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
         addLogEntry(`${actor.name} установил дымовую завесу.`);
     };
 
-    const applyWatchEffect = (players, rolls, result, actor, target) => {
-        const effects = applyWatchEffectWithConditions(players, rolls, result, actor, target);
+    const applyWatchEffect = (players, rolls, actor, target) => {
+        const effects = applyWatchEffectWithConditions(players, rolls, actor, target);
         addLogEntry(effects[0].message);
         resetModalData();
     }

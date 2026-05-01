@@ -23,10 +23,10 @@ function App() {
   ];
 
   const units = [
-    new Unit("Волк-1", [soldiers[0]]),
-    new Unit("Ворон-1", [soldiers[1]]),
-    new Unit("Сокол-1", [soldiers[2], soldiers[4]]),
-    new Unit("Гром-1", [soldiers[3], soldiers[5]])
+    new Unit("Волк", [soldiers[0]]),
+    new Unit("Ворон", [soldiers[1]]),
+    new Unit("Сокол", [soldiers[2], soldiers[4]]),
+    new Unit("Гром", [soldiers[3], soldiers[5]])
   ];
 
   units.forEach((unit, idx) => {
@@ -83,11 +83,13 @@ function App() {
   const [mapBackgroundImage, setMapBackgroundImage] = useState(null);
 
   const addLogEntry = (message) => {
-    if (message === 'Начинается новый ход.') {
-      setRandomN(Math.random());
-    }
     const timestamp = new Date().toLocaleTimeString();
     setLog(prev => [...prev, `${timestamp} - ${message}`]);
+  };
+
+  const startNewTurn = () => {
+    setRandomN(Math.random());
+    addLogEntry('Начинается новый ход.');
   };
 
   const logContainerRef = useRef(null);
@@ -120,7 +122,7 @@ function App() {
     <VisibilityConditionsProvider>
       <div className="app-container">
         <div className="left-panel">
-          <MainMenu players={players} setPlayers={setPlayers} setSelectedNode={setSelectedNode} addLogEntry={addLogEntry} />
+          <MainMenu players={players} setPlayers={setPlayers} setSelectedNode={setSelectedNode} addLogEntry={addLogEntry} startNewTurn={startNewTurn} />
           <ObjectsTree ref={treeRef} players={players} setPlayers={setPlayers} selectedNode={selectedNode} setSelectedNode={setSelectedNode} handlePropertyChange={handleOtherPropertyChange} />
         </div>
         <div className="right-panel">

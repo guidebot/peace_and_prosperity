@@ -8,7 +8,7 @@ import { useVisibilityConditions } from './game/conditions';
 import { UpdateSuppressionStatusForPersons, MovementSpeed } from './cards/utils';
 import { generateSquadViewHTML } from './utils/squadView.tsx';
 
-export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) {
+export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry, startNewTurn }) {
     const fileInputRef = useRef(null);
 
     const { activeConditionIds, toggleCondition, conditionsList } = useVisibilityConditions();
@@ -87,7 +87,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry }) 
         setStartPositions(newStartPositions);
 
         logMessages.forEach(msg => addLogEntry(msg));
-        addLogEntry(`Начинается новый ход.`);
+        startNewTurn();
 
         resetModalData();
     };

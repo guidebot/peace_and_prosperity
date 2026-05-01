@@ -1,8 +1,7 @@
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { CalculateVisibilityDistance } from '../actions/Watch';
 import { MovementSpeed } from '../cards/utils';
-import { MdUploadFile, MdDelete, MdPalette, MdClearAll } from 'react-icons/md';
-import { RiFlag2Fill } from 'react-icons/ri';
+import { MdPalette, MdOutlineCleaningServices, MdLayers, MdLayersClear } from 'react-icons/md';
 import './emap.css';
 
 const FIELD_WIDTH = 540;
@@ -152,7 +151,7 @@ export const UnitMap = ({
 
     const clearAllCheckpoints = useCallback((unitId) => {
         const unit = allUnits.find(u => u.id === unitId);
-        onOtherChange(unitId, "checkpoints", unit?.checkpoints || []);
+        onOtherChange(unitId, "checkpoints", []);
     }, [onOtherChange, allUnits]);
 
     useEffect(() => {
@@ -673,14 +672,14 @@ export const UnitMap = ({
                     title="Загрузить картинку"
                     onClick={() => fileInputRef.current?.click()}
                 >
-                    <MdUploadFile />
+                    <MdLayers />
                 </button>
                 {backgroundImage && (
                     <button
                         title="Сбросить картинку"
                         onClick={resetMap}
                     >
-                        <MdDelete />
+                        <MdLayersClear />
                     </button>
                 )}
                 <button
@@ -691,10 +690,10 @@ export const UnitMap = ({
                 </button>
                 {currentUnitId && (
                     <button
-                        title="Очистить чекпойнты"
+                        title="Удалить все путевые точки"
                         onClick={() => clearAllCheckpoints(currentUnitId)}
                     >
-                        <MdClearAll />
+                        <MdOutlineCleaningServices />
                     </button>
                 )}
                 <input

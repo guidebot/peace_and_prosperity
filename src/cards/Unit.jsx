@@ -192,7 +192,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
 
             const unitData = BestActorForUnit(unit, activeConditionIds);
 
-            return { id: roll.id, alertness: roll.roll, message: `Наблюдение ${unit.name}: ${unitData?.actor.name}${unitData?.equipment ? " (" + unitData.equipment.name + ")" : ""}: d20=${roll.roll}.` };
+            return { id: roll.id, alertness: roll.roll, message: `${unitData?.actor.name} (${unit.name}) наблюдает ${unitData?.equipment ? "используя " + unitData.equipment.name: " не используя снаряжение"}: d20=${roll.roll}.` };
         });
     }
 
@@ -366,21 +366,6 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                         <label className="form-label">
                             <input min={0} max={5} name="correction" type="number" value={data.correction} onChange={(e) => onChange(e.target.name, Number(e.target.value))} />
                         </label>
-                    </div>
-                    <div className="buttons-panel">
-                        <RiFlag2Fill />
-                        <label className="form-label">
-                            {data.checkpoints?.length || 0} чекпойнтов
-                        </label>
-                        {data.checkpoints?.length > 0 && (
-                            <button
-                                key="clearCheckpoints"
-                                title="Очистить чекпойнты"
-                                onClick={() => onChange("checkpoints", [])}
-                            >
-                                <MdClearAll />
-                            </button>
-                        )}
                     </div>
                     <div className="buttons-panel">
                         <GrUserPolice />

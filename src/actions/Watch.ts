@@ -125,17 +125,11 @@ export function ApplyWatchEffect(
     players: Player[],
     rolls: RollData[],
     result: any,
-    actor: Entity | Unit,
+    actor: WatchCandidate,
     target: Entity | Unit,
     activeConditions: string[]
 ): WatchEffect[] {
-    const actorCandidate: WatchCandidate = {
-        actor: actor as Entity,
-        equipment: null,
-        visibilityValue: 0,
-        totalScore: 0
-    };
-    const effects = CalculateWatchEffect(players, rolls, [actorCandidate], target as Unit, activeConditions);
+    const effects = CalculateWatchEffect(players, rolls, [actor], target as Unit, activeConditions);
     return effects;
 }
 
@@ -215,7 +209,7 @@ export function CalculateWatchEffect(
 
     const mineResult = mineDetected ? " (мины обнаружены)" : "";
 
-    const message = `Наблюдение ${actor.name} за ${target.name}${equipment ? " (" + equipment.name + ")" : ""}: d20=${rolls[0].roll}, результат ${modifiedRoll}, ${distance}${mineResult}.`;
+    const message = `${actor.name} наблюдает за ${target.name} ${equipment ? " используя " + equipment.name : " не используя снаряжение"}: d20=${rolls[0].roll}, результат ${modifiedRoll}, ${distance}${mineResult}.`;
 
     return [{ value: modifiedRoll, message }];
 }

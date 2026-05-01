@@ -118,7 +118,7 @@ export function ApplyWatchEffectWithConditions() {
     const { activeConditionIds } = useVisibilityConditions();
 
     return (players: Player[], rolls: RollData[], actors: WatchCandidate[], target: Unit): WatchEffect[] => {
-        return ApplyWatchEffect(players, rolls, [], actors[0].actor, target, activeConditionIds);
+        return ApplyWatchEffect(players, rolls, [], actors[0], target, activeConditionIds);
     };
 }
 
