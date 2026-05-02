@@ -439,7 +439,7 @@ export const UnitMap = ({
         if (isCtrlPressed && !isShiftPressed) {
             const unit = allUnits.find(u => u.id === currentUnitId);
 
-            if (!unit || !unit.position) return;
+            if (!unit || !unit.position || unit.isDeployed) return;
 
             const speedResult = MovementSpeed(unit);
             const speed = speedResult.road || 0;
@@ -473,7 +473,7 @@ export const UnitMap = ({
         if (isCtrlPressed && !isShiftPressed) {
             const unit = allUnits.find(u => u.id === currentUnitId);
 
-            if (!unit || !unit.position) return;
+            if (!unit || !unit.position || unit.isDeployed) return;
 
             const speedResult = MovementSpeed(unit);
             const speed = speedResult.plain || 0;
