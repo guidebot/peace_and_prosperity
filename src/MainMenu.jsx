@@ -141,7 +141,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry, st
                     let newPosition = unit.position;
                     let newCheckpoints = unit.checkpoints;
                     let hasMoved = unit.hasMoved;
-                    if (!actuallyMoved.has(unit.id) && unit.checkpoints && unit.checkpoints.length > 0) {
+                    if (!actuallyMoved.has(unit.id) && !unit.isDeployed && unit.checkpoints && unit.checkpoints.length > 0) {
                         const speed = MovementSpeed(unit);
                         const moveDistance = speed.plain || 0;
 
@@ -162,6 +162,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry, st
                                     x: currentPos.x + t * dx,
                                     y: currentPos.y + t * dy
                                 };
+                                logMessages.push(`${unit.name} перемещался по маршруту.`);
                             }
                             actuallyMoved.add(unit.id);
                             hasMoved = true;
