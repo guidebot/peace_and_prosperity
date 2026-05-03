@@ -25,7 +25,7 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
         const actor = actors[0].actor;
         const skill = Level(actor.skills["MED"]) || 0;
         const result = rolls[0].roll + skill;
-        const effect = result >= 12 ? "кровотечение остановлено" : "эффекта нет";
+        const effect = result >= 20 ? "кровотечение остановлено" : "эффекта нет";
         const message = `${actor.name} оказывает первую помощь, d20=${rolls[0].roll}, результат ${result}, ${effect}.`;
         return [{ message: message }];
     }

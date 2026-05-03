@@ -99,6 +99,10 @@ function assignEquipment(skills: Record<string, number>, isMilitary: boolean, ha
         equipment.push("phone");
     }
 
+    if (isMilitary && skills.MED > 0) {
+        equipment.push({ id: "bandage", count: 2 });
+    }
+
     return CreateInfantryEquipment(equipment);
 }
 

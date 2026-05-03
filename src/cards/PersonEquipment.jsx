@@ -8,7 +8,7 @@ import { TfiTarget } from "react-icons/tfi";
 import { CanFireInfantryEquipment } from '../actions/Fire';
 import { CanWatchEquipment } from '../actions/Watch';
 import { CiBookmark, CiBookmarkCheck } from "react-icons/ci";
-import { GiSmokeBomb, GiConfirmed, GiCancel } from 'react-icons/gi';
+import { GiSmokeBomb, GiConfirmed, GiCancel, GiHealing } from 'react-icons/gi';
 import { PossibleTargets, RemoveEquipmentFromPerson } from './utils';
 import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from "../game/conditions";
 import { PiBinocularsFill } from 'react-icons/pi';
@@ -148,6 +148,21 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
         else {
             onPropertyChange("defaultEquipment", newDefaultEquipment.id);
         }
+    }
+
+    function calculateHealEffect(players, rolls, actors, target) {
+        const actor = actors[0].actor;
+        const skill = Level(actor.skills["MED"]) || 0;
+        const result = rolls[0].roll + skill;
+        const effect = result >= 10 ? "кровотечение остановлено" : "эффекта нет";
+        const message = `${actor.name} оказывает первую помощь, d20=${rolls[0].roll}, результат ${result}, ${effect}.`;
+        return [{ message: message }];
+    }
+
+    function applyHealEffect(players, rolls, actors, target) {
+        const effects = calculateHealEffect(players, rolls, actors, target);
+        addLogEntry(effects[0].message);
+        resetModalData();
     }
 
     const [modalData, setModalData] = useState({});
@@ -324,6 +339,16 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                                         </button>)}
                                     {item.name === "Дымовая шашка" && actor.skills[item.skill] > 0 && item.ammo > 0 && (<button title="Дымовая завеса" onClick={() => applySmoke(item)} >
                                         <GiSmokeBomb />
+                                    </button>)}
+                                    {item.skill === "MED" && actor.skills[item.skill] > 0 && item.ammo > 0 && (<button title="Первая помощь" onClick={() => setModalData({
+                                        open: true,
+                                        equipment: item,
+                                        targets: [],
+                                        title: "Первая помощь",
+                                        onConfirm: applyHealEffect,
+                                        calculateEffect: calculateHealEffect
+                                    })} >
+                                        <GiHealing />
                                     </button>)}
                                     <button title="Редактировать" onClick={() => { setEditorModal({ open: true, equipment: item }); }}>
                                         <MdSettingsSuggest />

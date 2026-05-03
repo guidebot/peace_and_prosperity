@@ -277,7 +277,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry, st
             <button title="Добавить игрока" onClick={handleCreatePlayer}>
                 <GiTabletopPlayers />
             </button>
-            <button title="Печать листов отрядов" onClick={handlePrintSquad}>
+            <button title="Печать листов отрядов..." onClick={handlePrintSquad}>
                 <MdPrint />
             </button>
             <button title="Закончить ход" onClick={handleEndTurn}>
