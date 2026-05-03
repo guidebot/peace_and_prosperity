@@ -1155,5 +1155,23 @@
         "mustBeDeployed": false,
         "dispersion": 0,
         "armorMod": 7
+    },
+    {
+        "id": "bandage",
+        "skill": "MED",
+        "name": "ИПП",
+        "weight": 0,
+        "ammo": 1,
+        "ammoWeight": 1,
+        "bestRange": 0,
+        "effectiveRange": 0,
+        "maxRange": 0,
+        "minRange": 0,
+        "ap": 0,
+        "he": 0,
+        "deployBonus": 0,
+        "mustBeDeployed": false,
+        "dispersion": 0,
+        "armorMod": 0
     }
 ]
