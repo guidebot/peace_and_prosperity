@@ -542,6 +542,7 @@ export const UnitMap = ({
                             position: 'absolute',
                             top: 0,
                             left: 0,
+                            zIndex: 40,
                             width: FIELD_WIDTH,
                             height: FIELD_HEIGHT,
                             pointerEvents: 'none'
