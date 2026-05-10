@@ -6,6 +6,16 @@ import { Vehicle } from "../game/Vehicle";
 import { Level } from "../game/Skill";
 import { SortByPropertyWithRandomTies } from "../utils/sorting";
 
+const DEFAULT_EQUIPMENT_SKILLS = ["WPN_rifles", "WPN_sniper", "WPN_mg", "WPN_heavy"] as const;
+
+export function isDefaultEquipmentSkill(skill: string): boolean {
+    return DEFAULT_EQUIPMENT_SKILLS.includes(skill as any);
+}
+
+export function findDefaultEquipment(equipment: Equipment[]): Equipment | undefined {
+    return equipment.find(item => isDefaultEquipmentSkill(item.skill));
+}
+
 type NodeWithChildren = {
     id: string;
     children?: NodeWithChildren[];
@@ -145,7 +155,7 @@ export function RemoveEquipmentFromPerson(person: EntityWithSkills, equipment: E
         onPropertyChange(person.id, "defaultEquipment", null);
     }
     else if (equipment.id === person.defaultEquipment) {
-        onPropertyChange(person.id, "defaultEquipment", newEquipment.find(eq => eq.skill === "WPN_rifles" || eq.skill === "WPN_sniper" || eq.skill === "WPN_mg")?.id);
+        onPropertyChange(person.id, "defaultEquipment", findDefaultEquipment(newEquipment)?.id);
     }
 
     onPropertyChange(person.id, "equipment", newEquipment);

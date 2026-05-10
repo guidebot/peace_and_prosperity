@@ -91,7 +91,7 @@ function assignEquipment(skills: Record<string, number>, isMilitary: boolean, ha
         }
     }
 
-    if (isMilitary) {
+    if (isMilitary && leadership > 2) {
         equipment.push("baofeng");
         equipment.push("phone");
     }

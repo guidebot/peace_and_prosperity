@@ -9,7 +9,7 @@ import { CanFireInfantryEquipment } from '../actions/Fire';
 import { CanWatchEquipment } from '../actions/Watch';
 import { CiBookmark, CiBookmarkCheck } from "react-icons/ci";
 import { GiSmokeBomb, GiConfirmed, GiCancel, GiHealing } from 'react-icons/gi';
-import { PossibleTargets, RemoveEquipmentFromPerson } from './utils';
+import { PossibleTargets, RemoveEquipmentFromPerson, isDefaultEquipmentSkill, findDefaultEquipment } from './utils';
 import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions, CalculateFireEffectWithConditions, ApplyFireEffectWithConditions } from "../game/conditions";
 import { PiBinocularsFill } from 'react-icons/pi';
 import { MdSettingsSuggest, MdOutlineAdd } from 'react-icons/md';
@@ -76,7 +76,7 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
         onPropertyChange("equipment", newOwnEquipment);
 
         if (selectedEquipmentIds.has(actor.defaultEquipment)) {
-            const newDefault = newOwnEquipment.find(eq => eq.skill !== "WPN_grenades")?.id || null;
+            const newDefault = findDefaultEquipment(newOwnEquipment)?.id || null;
             onPropertyChange("defaultEquipment", newDefault);
         }
 
@@ -87,7 +87,7 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
         onOtherChange(recipientId, "equipment", newRecipientEquipment);
 
         if (!recipientNode?.defaultEquipment) {
-            const newDefaultForRecipient = newRecipientEquipment.find(eq => eq.skill !== "WPN_grenades")?.id;
+            const newDefaultForRecipient = findDefaultEquipment(newRecipientEquipment)?.id;
             if (newDefaultForRecipient) {
                 onOtherChange(recipientId, "defaultEquipment", newDefaultForRecipient);
             }
@@ -117,7 +117,7 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
             const newEquipment = [...actor.equipment, equipment];
             onPropertyChange("equipment", newEquipment);
             if (!actor.defaultEquipment) {
-                onPropertyChange("defaultEquipment", newEquipment.find(eq => eq.skill !== "WPN_grenades")?.id);
+                onPropertyChange("defaultEquipment", findDefaultEquipment(newEquipment)?.id);
             }
         }
 
@@ -125,7 +125,12 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
     };
 
     const applySmoke = (equipment) => {
-        onOtherChange(equipment.id, "ammo", equipment.ammo - 1);
+        const newAmmo = equipment.ammo - 1;
+        if (newAmmo <= 0 && equipment.weight === 0) {
+            RemoveEquipmentFromPerson(actor, equipment, onOtherChange);
+        } else {
+            onOtherChange(equipment.id, "ammo", newAmmo);
+        }
         addLogEntry(`${actor.name} установил дымовую завесу.`);
     };
 
@@ -153,8 +158,8 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
     function calculateHealEffect(players, rolls, actors, target) {
         const actor = actors[0].actor;
         const skill = Level(actor.skills["MED"]) || 0;
-        const result = rolls[0].roll + skill;
-        const effect = result >= 10 ? "кровотечение остановлено" : "эффекта нет";
+        const result = rolls[0].roll + skill + (actor.equipment ? 10 : 0);
+        const effect = result >= 20 ? "кровотечение остановлено" : "эффекта нет";
         const message = `${actor.name} оказывает первую помощь, d20=${rolls[0].roll}, результат ${result}, ${effect}.`;
         return [{ message: message }];
     }
@@ -162,6 +167,17 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
     function applyHealEffect(players, rolls, actors, target) {
         const effects = calculateHealEffect(players, rolls, actors, target);
         addLogEntry(effects[0].message);
+
+        const equipment = actors[0].equipment;
+        if (equipment) {
+            const newAmmo = equipment.ammo - 1;
+            if (newAmmo <= 0 && equipment.weight === 0) {
+                RemoveEquipmentFromPerson(actors[0].actor, equipment, onOtherChange);
+            } else {
+                onOtherChange(equipment.id, "ammo", newAmmo);
+            }
+        }
+
         resetModalData();
     }
 
@@ -333,7 +349,7 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                                     })} >
                                         <PiBinocularsFill />
                                     </button>)}
-                                    {item.skill !== "WPN_grenades" && item.skill !== "WPN_explosives" && item.skill !== "TECH_uav"
+                                    {isDefaultEquipmentSkill(item.skill)
                                         && CanFireInfantryEquipment(players, actor, item) && (<button title="Установить основным" onClick={() => toggleDefaultEquipment(item)}>
                                             {actor.defaultEquipment === item.id ? (<CiBookmarkCheck />) : (<CiBookmark />)}
                                         </button>)}
