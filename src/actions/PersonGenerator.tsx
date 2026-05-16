@@ -187,7 +187,7 @@ export function PersonGenerator({ onCancel, onConfirm }: PersonGeneratorProps) {
 
             <div className="buttons-panel" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <button title="Так точно" onClick={() => {
-                    const newPerson = GeneratePerson(selectedTitle, isMilitary, isCharismatic, defaultWeapon, name);
+                    const newPerson = GeneratePerson(selectedTitle, isMilitary, defaultWeapon, name, isCharismatic);
                     onConfirm(newPerson);
                 }}><GiConfirmed /></button>
                 <button title="Никак нет" onClick={onCancel}><GiCancel /></button>
@@ -198,8 +198,7 @@ export function PersonGenerator({ onCancel, onConfirm }: PersonGeneratorProps) {
 
 export function GenerateDefaultPerson(isMilitary: boolean, hasWeapon: boolean, titleName: string): Entity {
     const name = generateNameForCountry(CountriesData[0].CountryName, Genders[0].id);
-    const isCharismatic = Math.random() < 0.5;
-    return GeneratePerson(titleName, isMilitary, isCharismatic, hasWeapon, name);
+    return GeneratePerson(titleName, isMilitary, hasWeapon, name);
 }
 
 function shuffleArray<T>(array: T[]): T[] {
@@ -211,19 +210,19 @@ function shuffleArray<T>(array: T[]): T[] {
     return shuffled;
 }
 
-export function GeneratePerson(titleName: string, isMilitary: boolean, isCharismatic: boolean, hasWeapon: boolean, name: string): Entity {
+export function GeneratePerson(titleName: string, isMilitary: boolean, hasWeapon: boolean, name: string, isCharismatic?: boolean): Entity {
     const title = Titles.find(title => title.name === titleName);
 
     if (!title) {
         throw new Error(`Title "${titleName}" not found`);
     }
 
-    const logic = isCharismatic ? 0 : title.leadership;
-    const influence = isCharismatic ? title.leadership : 0;
-
+    const [maxSkill, randomSkill] = (isCharismatic ?? (Math.random() < 0.5)) ? ["IFL", "LOG"] as const : ["LOG", "IFL"] as const;
     const skills: Record<string, number> = isMilitary
-        ? { LOG: logic, IFL: influence, END: 8, MNV: 4, STE: 1, WPN_rifles: 5, WPN_grenades: 2 }
-        : { LOG: logic, IFL: influence, END: 5 };
+        ? { LOG: 0, IFL: 0, END: 8, MNV: 4, STE: 1, WPN_rifles: 5, WPN_grenades: 2 }
+        : { LOG: 0, IFL: 0, END: 5 };
+    skills[maxSkill] = title.leadership;
+    skills[randomSkill] = Math.floor(Math.random() * (title.leadership + 1));
 
     const weaponSkillRolls = isMilitary ? title.weaponSkillRolls : 1;
     const skillRolls = title.skillRolls + title.weaponSkillRolls - weaponSkillRolls;
