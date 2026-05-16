@@ -2,7 +2,7 @@
 \PassOptionsToPackage{hyphens}{url}
 
 \documentclass{article}
-\usepackage[a4paper,includeheadfoot,top=1cm,bottom=1cm,left=2cm,right=1cm]{geometry}
+\usepackage[a4paper,includeheadfoot,top=0cm,bottom=0.2cm,left=1.5cm,right=0.2cm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{fontspec}
 \usepackage[russian]{babel}
@@ -47,11 +47,11 @@
   \leavevmode\leaders\hbox to 0.5556em{\hss.\hss}\hfill\kern0pt}
 \setcounter{secnumdepth}{0}
 \setcounter{tocdepth}{2}
-\titlecontents{section}[0em]{}{\Large\makebox[1.3em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{subsection}[0em]{}{\large\makebox[2.1em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{subsubsection}[0em]{}{\makebox[3.2em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{paragraph}[0em]{}{\small\makebox[4.2em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
-\titlecontents{subparagraph}[0em]{}{\footnotesize\makebox[5.0em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{section}[0em]{}{\headingfont\Large\makebox[1.3em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{subsection}[0em]{}{\headingfont\large\makebox[2.1em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{subsubsection}[0em]{}{\headingfont\makebox[3.2em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{paragraph}[0em]{}{\headingfont\small\makebox[4.2em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
+\titlecontents{subparagraph}[0em]{}{\headingfont\footnotesize\makebox[5.0em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{}
 \urlstyle{same}
@@ -735,7 +735,7 @@
   vlines,
   hline{1,Z}={0pt},
   vline{1,Z}={0pt},
-  row{2-Z}={0.75cm},
+  row{2-Z}={0.9cm},
   colspec={Q[c,m,co=1]Q[c,m,co=4]}
 }
 \textbf{Персонаж} & \textbf{Снаряжение} \\
