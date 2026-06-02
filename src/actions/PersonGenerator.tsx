@@ -86,8 +86,18 @@ function assignEquipment(skills: Record<string, number>, isMilitary: boolean, ha
     }
 
     if (!isMilitary && hasWeapon) {
-        if (endurance >= 1 && (leadership >= 12 || maneuvering >= 3)) {
+        if (endurance >= 1 && maneuvering >= 3) {
             equipment.push("vest_msv_base");
+        }
+
+        if ((skills.WPN_rifles ?? 0) >= 3 && endurance >= 3) {
+            equipment.push("smg");
+        } else if ((skills.WPN_rifles ?? 0) >= 1 && endurance >= 1) {
+            equipment.push("pistol");
+        }
+
+        if (grenadeSkill >= 3 && endurance >= 1) {
+            equipment.push({ id: "grenades", count: 1 });
         }
     }
 
@@ -177,7 +187,7 @@ export function PersonGenerator({ onCancel, onConfirm }: PersonGeneratorProps) {
                 <input title='Выбор коммуникативной стратегии между логикой и харизматичным влиянием' type="checkbox" checked={isCharismatic} onChange={() => setIsCharismatic(!isCharismatic)} />
             </label>
             <label className="form-label">
-                <span>Действующий солдат</span>
+                <span>Военный</span>
                 <input title='Недавно проходил военные сборы или в настоящее время проходит службу' type="checkbox" checked={isMilitary} onChange={() => setIsMilitary(!isMilitary)} />
             </label>
             <label className="form-label">
