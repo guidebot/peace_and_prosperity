@@ -19,6 +19,6 @@ Only Russian is available.
 
 ## Contacts
 - Author: Nikita Makarov
-- Mail: nmmakarov@vk.com
-- Telegram: @nikmakarow
+- Mail: [nmmakarov@vk.com](mailto:nmmakarov@vk.com)
+- Telegram: [@nikmakarow](https://t.me/nikmakarow)
 - Web: [Закат настольных военных игр @vk.com](https://vk.com/playingwar)
