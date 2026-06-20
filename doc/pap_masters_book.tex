@@ -1,7 +1,7 @@
 \PassOptionsToPackage{unicode,pdfusetitle}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 
-\documentclass{article}
+\documentclass[twoside]{article}
 \usepackage[a4paper,includeheadfoot,top=0cm,bottom=0.2cm,left=1.5cm,right=0.2cm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{fontspec}
@@ -47,7 +47,7 @@
   \providecommand{\fillinline}[1]{
   \leavevmode\leaders\hbox to 0.5556em{\hss.\hss}\hfill\kern0pt}
 \setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{5}
+\setcounter{tocdepth}{3}
 \titlecontents{section}[0em]{}{\headingfont\Large\makebox[1.3em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
 \titlecontents{subsection}[0em]{}{\headingfont\large\makebox[2.1em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
 \titlecontents{subsubsection}[0em]{}{\headingfont\makebox[3.2em][l]{\thecontentslabel}}{}{\titlerule*[0.8pc]{.}\contentspage}
@@ -124,11 +124,10 @@
 \raggedcolumns{}
 
 \renewcommand{\contentsname}{Содержание}
+\pagestyle{empty}
 \tableofcontents
-\thispagestyle{empty}
-\BgThispage{}
-
 \clearpage
+\pagestyle{plain}
 
 \section{Введение}\label{intro}
 
@@ -325,11 +324,10 @@
 
   \begin{itemize}
   \item
-    в начале игры -- под прикрытием обычных наёмников;
+    в начале игры --- под прикрытием обычных наёмников;
   \item
-    в ходе игры -- в любое время; в этом случае мастеру нужно продумать,
-    как за одну игру ввести агента ЦРУ и команду оперативников <<Мир и
-    процветание>>.
+    в ходе игры --- в любое время; в этом случае мастеру нужно продумать,
+    как ввести агента ЦРУ в команду оперативников <<Мир и процветание>>.
   \end{itemize}
 \item
   как солдат армии Белиза, который хочет перейти в <<Мир и процветание>>;
