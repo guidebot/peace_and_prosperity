@@ -1,70 +1,76 @@
-import { useState, useEffect } from 'react';
-import { GiConfirmed, GiCancel } from 'react-icons/gi';
+import { useCallback } from 'react';
 import { vehicleTypes, VehicleType } from '../game/VehicleTypes';
+import { BaseRollModal, ActorRoll } from './BaseRollModal';
+import { Player } from '../game/Player';
+import { Entity } from '../game/Entity';
 
-interface Props {
+interface DriveModalProps {
     isOpen: boolean;
     title: string;
+    actor: Entity;
+    players: Player[];
     onCancel: () => void;
-    onConfirm: (players: unknown, rolls: Array<{ id: string; roll: number }>, actors: Array<{ actor: unknown }>, vehicleType: VehicleType) => void;
-    calculateEffect: (players: unknown, rolls: Array<{ id: string; roll: number }>, actors: Array<{ actor: unknown }>, vehicleType: VehicleType) => Array<{ message: string; success: boolean; vehicleType: VehicleType }>;
-    actor: unknown;
-    players: unknown;
+    onConfirm: (players: Player[], rolls: ActorRoll[], actors: Array<{ actor: Entity }>, vehicleType: VehicleType) => void;
+    calculateEffect: (players: Player[], rolls: ActorRoll[], actors: Array<{ actor: Entity }>, vehicleType: VehicleType) => Array<{ message: string; success: boolean; vehicleType: VehicleType }>;
 }
 
-export function DriveModal({ isOpen, title, onCancel, onConfirm, calculateEffect, actor, players }: Props) {
-    if (!isOpen) return null;
+export function DriveModal({
+    isOpen,
+    title,
+    actor,
+    players,
+    onCancel,
+    onConfirm,
+    calculateEffect
+}: DriveModalProps) {
+    const initialExtra = { selectedVehicleType: vehicleTypes[0] };
 
-    const [selectedVehicleType, setSelectedVehicleType] = useState<VehicleType>(vehicleTypes[0]);
-    const [roll, setRoll] = useState(() => Math.floor(Math.random() * 20) + 1);
-    const [effect, setEffect] = useState<{ message: string; success: boolean; vehicleType: VehicleType } | null>(null);
+    const getRollsCallback = useCallback((rolls: ActorRoll[]) => {
+        return rolls;
+    }, []);
 
-    const rolls = [{ id: (actor as { id: string }).id, roll }];
+    const wrappedCalculateEffect = useCallback((players: Player[], rolls: ActorRoll[], actors: Array<{ actor: Entity }>, extraData: unknown) => {
+        const { selectedVehicleType } = extraData as { selectedVehicleType: VehicleType };
+        return calculateEffect(players, rolls, actors, selectedVehicleType);
+    }, [calculateEffect]);
 
-    useEffect(() => {
-        const eff = calculateEffect(players, rolls, [{ actor }], selectedVehicleType);
-        setEffect(eff[0]);
-    }, [roll, selectedVehicleType, calculateEffect, actor, players]);
+    const wrappedOnConfirm = useCallback((players: Player[], rolls: ActorRoll[], actors: Array<{ actor: Entity }>, extraData: unknown) => {
+        const { selectedVehicleType } = extraData as { selectedVehicleType: VehicleType };
+        onConfirm(players, rolls, actors, selectedVehicleType);
+    }, [onConfirm]);
 
-    const handleConfirm = () => {
-        onConfirm(players, rolls, [{ actor }], selectedVehicleType);
+    const renderExtraFields = ({ selectedExtra, setSelectedExtra }: { selectedExtra: unknown; setSelectedExtra: (extra: unknown) => void }) => {
+        const { selectedVehicleType: currentVehicleType } = selectedExtra as { selectedVehicleType: VehicleType };
+
+        return (
+            <label className='form-label'>
+                <span style={{ width: "150px" }}>Тип:</span>
+                <select
+                    value={currentVehicleType.id}
+                    onChange={(e) => setSelectedExtra({ selectedVehicleType: vehicleTypes.find(vt => vt.id === e.target.value)! })}
+                >
+                    {vehicleTypes.map(vt => (
+                        <option key={vt.id} value={vt.id}>
+                            {vt.name}
+                        </option>
+                    ))}
+                </select>
+            </label>
+        );
     };
 
     return (
-        <div className='modal-overlay'>
-            <h3>{title}</h3>
-            <div className="modal-body">
-                <label className='form-label'>
-                    <span style={{ width: "150px" }}>Тип:</span>
-                    <select
-                        value={selectedVehicleType.id}
-                        onChange={(e) => setSelectedVehicleType(vehicleTypes.find(vt => vt.id === e.target.value)!)}
-                    >
-                        {vehicleTypes.map(vt => (
-                            <option key={vt.id} value={vt.id}>
-                                {vt.name}
-                            </option>
-                        ))}
-                    </select>
-                </label>
-                <label className='form-label'>
-                    <span style={{ width: "150px" }}>Бросок d20:</span>
-                    <input
-                        type="number"
-                        min={1}
-                        max={20}
-                        value={roll}
-                        onChange={(e) => setRoll(Math.max(1, Math.min(20, Number(e.target.value))))}
-                    />
-                    {effect && (
-                        <span style={{ textAlign: "left", width: "100%", fontSize: "10px" }}>{effect.message}</span>
-                    )}
-                </label>
-            </div>
-            <div className="buttons-panel" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <button title="Так точно" onClick={handleConfirm}><GiConfirmed /></button>
-                <button title="Никак нет" onClick={onCancel}><GiCancel /></button>
-            </div>
-        </div>
+        <BaseRollModal
+            isOpen={isOpen}
+            title={title}
+            actors={[{ actor }]}
+            players={players}
+            onCancel={onCancel}
+            onConfirm={wrappedOnConfirm}
+            calculateEffect={wrappedCalculateEffect}
+            getRollsCallback={getRollsCallback}
+            initialExtra={initialExtra}
+            renderExtraFields={renderExtraFields}
+        />
     );
 }

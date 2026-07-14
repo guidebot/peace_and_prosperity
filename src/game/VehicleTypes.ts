@@ -5,9 +5,9 @@ export type VehicleType = {
 };
 
 export const vehicleTypes: VehicleType[] = [
+    { id: 'car', name: 'Автомобиль', threshold: 25 },
+    { id: 'wheel', name: 'Колёсная БМ', threshold: 18 },
     { id: 'track', name: 'Гусеничная БМ', threshold: 10 },
-    { id: 'wheel', name: 'Колёсная БМ', threshold: 20 },
-    { id: 'car', name: 'Автомобиль', threshold: 30 },
     { id: 'helicopter', name: 'Вертолёт', threshold: 15 },
     { id: 'plane', name: 'Самолёт', threshold: 13 }
 ];
