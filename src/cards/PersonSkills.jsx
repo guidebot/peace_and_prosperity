@@ -3,7 +3,8 @@ import { MdArrowRight, MdArrowDropDown } from "react-icons/md";
 import { GiHealing } from 'react-icons/gi';
 import { Level } from '../game/Skill';
 import { RollModal } from '../actions/Roll';
-import { TbFilter, TbFilterOff } from 'react-icons/tb';
+import { DriveModal } from '../actions/Drive';
+import { TbFilter, TbFilterOff, TbSteeringWheel } from 'react-icons/tb';
 import { PiBinocularsFill } from 'react-icons/pi';
 import { PossibleTargets } from './utils';
 import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions } from "../game/conditions";
@@ -36,6 +37,22 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
         resetModalData();
     }
 
+    function calculateMechanicsEffect(players, rolls, actors, vehicleType) {
+        const actor = actors[0].actor;
+        const skill = actor.skills["MCH"] || 0;
+        const roll = rolls[0].roll;
+        const result = roll + skill;
+        const success = result >= vehicleType.threshold;
+        const message = `${actor.name} управляет (${vehicleType.name}), d20=${roll}, результат ${result}: ${success ? 'успех' : 'неудача'}.`;
+        return [{ message, success, vehicleType }];
+    }
+
+    function applyMechanicsEffect(players, rolls, actors, vehicleType) {
+        const effects = calculateMechanicsEffect(players, rolls, actors, vehicleType);
+        addLogEntry(effects[0].message);
+        resetModalData();
+    }
+
     return (
         <div>
             <div className="buttons-panel">
@@ -48,7 +65,20 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
                     </button>)}
             </div>
             {
-                modalData?.open && (
+                modalData?.open && modalData?.type === 'mechanics' && (
+                    <DriveModal
+                        isOpen={modalData?.open || false}
+                        title={modalData?.title}
+                        onCancel={resetModalData}
+                        onConfirm={modalData?.onConfirm}
+                        calculateEffect={modalData?.calculateEffect}
+                        actor={modalData?.actor}
+                        players={players}
+                    />
+                )
+            }
+            {
+                modalData?.open && modalData?.type !== 'mechanics' && (
                     <RollModal
                         players={players}
                         actors={[{ actor: actor, equipment: modalData?.equipment }]}
@@ -105,6 +135,16 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
                                             calculateEffect: calculateHealEffect
                                         })} >
                                             <GiHealing />
+                                        </button>)}
+                                        {skill.id === "MCH" && skillValue > 0 && (<button title="Управление транспортом" onClick={() => setModalData({
+                                            open: true,
+                                            type: 'mechanics',
+                                            actor: actor,
+                                            title: "Управление транспортом",
+                                            onConfirm: applyMechanicsEffect,
+                                            calculateEffect: calculateMechanicsEffect
+                                        })} >
+                                            <TbSteeringWheel />
                                         </button>)}
                                         {PossibleTargets(players, actor).length > 0 && skill.id === "STE" && (<button title="Наблюдение" onClick={() => setModalData({
                                             open: true,
