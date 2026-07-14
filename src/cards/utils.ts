@@ -72,7 +72,7 @@ export function TotalCapacity(unitData: Unit): number {
     if (!unitData.children || unitData.children.length === 0) return 0;
 
     const totalFpLevel = unitData.children.filter(s => !s.isDead && !s.isBleeding).reduce((total, soldier) => {
-        const fpPoints = soldier.skills["END"] || 0;
+        const fpPoints = soldier.skills?.["END"] ?? 0;
         const level = Level(fpPoints);
 
         return total + level;

@@ -7,10 +7,11 @@ import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { MovementSpeed } from "../cards/utils";
 import { PiDropFill, PiDropSlashFill } from "react-icons/pi";
 import { TbPlayerPause, TbPlayerPlay } from "react-icons/tb";
-import { BsEmojiDizzy } from "react-icons/bs";
+import { BsEmojiDizzy, BsArrowsMove, BsSignStop } from "react-icons/bs";
 import { RiTeamFill } from "react-icons/ri";
 import { Unit } from "../game/Unit";
 import { generateUnitName } from "../game/callsigns";
+import { CiLocationOn, CiLocationOff } from "react-icons/ci";
 
 export function TreeNode({ node, style, dragHandle, tree, isSelected, handlePropertyChange, players, setPlayers }) {
     if (!node) return null;
@@ -31,6 +32,26 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
                 return player;
             });
         });
+    };
+
+    const checkIfCanMove = () => {
+        if (!node.data.children) return false;
+        if (node.data.isDeployed) return false;
+        if (MovementSpeed(node.data).plain === 0) return false;
+
+        if (!node.data.vehicle) {
+            const bleedingCount = node.data.children.filter(p => !p.isDead && p.isBleeding).length;
+            const healthyCount = node.data.children.filter(p => !p.isDead && !p.isBleeding).length;
+            if (bleedingCount > healthyCount) return false;
+        }
+
+        return true;
+    };
+
+    const checkIfCanDeploy = () => {
+        if (!node.data.children) return false;
+        if (node.data.hasMoved) return false;
+        return true;
     };
 
     const renderGlyph = (node) => {
@@ -92,6 +113,20 @@ export function TreeNode({ node, style, dragHandle, tree, isSelected, handleProp
                         handlePropertyChange(node.id, "isHidden", !node.data.isHidden);
                     }} title={node.data.isHidden ? "Демаскировать" : "Замаскировать"}>
                         {node.data.isHidden ? (<BiSolidShow />) : (<BiSolidHide />)}
+                    </button>
+                    {checkIfCanMove() && node.data.hasMoved && (
+                        <button style={{ display: !node.isEditing && node.data.type === 'unit' ? 'inline' : 'none' }} onClick={(e) => {
+                            e.stopPropagation();
+                            handlePropertyChange(node.id, "hasMoved", !node.data.hasMoved);
+                        }} title="Переключить пометку передвижения">
+                            {node.data.hasMoved ? (<BsSignStop />) : (<BsArrowsMove />)}
+                        </button>
+                    )}
+                    <button style={{ display: !node.isEditing && node.data.type === 'unit' && checkIfCanDeploy() ? 'inline' : 'none' }} onClick={(e) => {
+                        e.stopPropagation();
+                        handlePropertyChange(node.id, "isDeployed", !node.data.isDeployed);
+                    }} title="Переключить пометку стационарного положения">
+                        {node.data.isDeployed ? (<CiLocationOff />) : (<CiLocationOn />)}
                     </button>
                     <button style={{ display: !node.isEditing && node.data.type === "entity" && !node.data.isDead ? 'inline' : 'none' }} onClick={(e) => {
                         e.stopPropagation();
