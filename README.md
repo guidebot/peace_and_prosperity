@@ -23,7 +23,7 @@ Only Russian is available.
 - Telegram: [@nikmakarow](https://t.me/nikmakarow)
 - Web: [Закат настольных военных игр @vk.com](https://vk.com/playingwar)
 
-## Interactive battle view contols:
+## Interactive battle view contols
 - Left click = check visibility for a drone
 - Right click = set/remove waypoints
 - Ctrl + Left click = regular move
