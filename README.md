@@ -22,3 +22,10 @@ Only Russian is available.
 - Mail: [nmmakarov@vk.com](mailto:nmmakarov@vk.com)
 - Telegram: [@nikmakarow](https://t.me/nikmakarow)
 - Web: [Закат настольных военных игр @vk.com](https://vk.com/playingwar)
+
+## Interactive battle view contols:
+- Left click = check visibility for a drone
+- Right click = set/remove waypoints
+- Ctrl + Left click = regular move
+- Ctrl + Right click = fast move (road)
+- Shift = show arrow (measure distance) from the last waypoint
