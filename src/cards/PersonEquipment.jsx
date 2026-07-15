@@ -3,7 +3,9 @@ import { Level } from '../game/Skill';
 import { SCALE_PREFIX } from '../game/Constants';
 import { MdArrowRight, MdArrowDropDown, MdDelete } from "react-icons/md";
 import { EquipmentEditorModal } from '../actions/EquipmentEditor';
-import { RollModal } from '../actions/Roll';
+import { FireModal } from '../actions/FireModal';
+import { WatchModal } from '../actions/WatchModal';
+import { FirstAidModal } from '../actions/FirstAidModal';
 import { TfiTarget } from "react-icons/tfi";
 import { CanFireInfantryEquipment } from '../actions/Fire';
 import { CanWatchEquipment } from '../actions/Watch';
@@ -214,13 +216,37 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                 initialData={editorModal.equipment}
             />
             {
-                modalData?.open && (
-                    <RollModal
+                modalData?.open && modalData.title === "Огонь" && (
+                    <FireModal
                         players={players}
                         actors={[{ actor: actor, equipment: modalData?.equipment }]}
                         targets={modalData?.targets}
                         isOpen={modalData?.open || false}
-                        title={modalData?.title}
+                        onCancel={resetModalData}
+                        onConfirm={modalData?.onConfirm}
+                        calculateEffect={modalData?.calculateEffect}
+                    />
+                )
+            }
+            {
+                modalData?.open && modalData.title === "Наблюдение" && (
+                    <WatchModal
+                        players={players}
+                        actors={[{ actor: actor, equipment: modalData?.equipment }]}
+                        targets={modalData?.targets}
+                        isOpen={modalData?.open || false}
+                        onCancel={resetModalData}
+                        onConfirm={modalData?.onConfirm}
+                        calculateEffect={modalData?.calculateEffect}
+                    />
+                )
+            }
+            {
+                modalData?.open && modalData.title === "Первая помощь" && (
+                    <FirstAidModal
+                        players={players}
+                        actors={[{ actor: actor, equipment: modalData?.equipment }]}
+                        isOpen={modalData?.open || false}
                         onCancel={resetModalData}
                         onConfirm={modalData?.onConfirm}
                         calculateEffect={modalData?.calculateEffect}

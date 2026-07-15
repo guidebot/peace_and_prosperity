@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { MdArrowRight, MdArrowDropDown } from "react-icons/md";
 import { GiHealing } from 'react-icons/gi';
 import { Level } from '../game/Skill';
-import { RollModal } from '../actions/Roll';
-import { DriveModal } from '../actions/Drive';
+import { DriveModal } from '../actions/DriveModal';
+import { WatchModal } from '../actions/WatchModal';
+import { FirstAidModal } from '../actions/FirstAidModal';
 import { TbFilter, TbFilterOff, TbSteeringWheel } from 'react-icons/tb';
 import { PiBinocularsFill } from 'react-icons/pi';
 import { PossibleTargets } from './utils';
@@ -78,13 +79,24 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
                 )
             }
             {
-                modalData?.open && modalData?.type !== 'mechanics' && (
-                    <RollModal
+                modalData?.open && modalData?.title === "Наблюдение" && (
+                    <WatchModal
                         players={players}
-                        actors={[{ actor: actor, equipment: modalData?.equipment }]}
+                        actors={[{ actor: modalData?.actors?.[0] }]}
                         targets={modalData?.targets}
                         isOpen={modalData?.open || false}
-                        title={modalData?.title}
+                        onCancel={resetModalData}
+                        onConfirm={modalData?.onConfirm}
+                        calculateEffect={modalData?.calculateEffect}
+                    />
+                )
+            }
+            {
+                modalData?.open && modalData?.title === "Первая помощь" && (
+                    <FirstAidModal
+                        players={players}
+                        actors={[{ actor: modalData?.actors?.[0] }]}
+                        isOpen={modalData?.open || false}
                         onCancel={resetModalData}
                         onConfirm={modalData?.onConfirm}
                         calculateEffect={modalData?.calculateEffect}

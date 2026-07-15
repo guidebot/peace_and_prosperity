@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Level } from '../game/Skill';
 import { SCALE_PREFIX } from '../game/Constants';
 import { MdArrowRight, MdArrowDropDown } from "react-icons/md";
-import { RollModal } from '../actions/Roll';
+import { FireModal } from '../actions/FireModal';
+import { WatchModal } from '../actions/WatchModal';
 import { TfiTarget } from "react-icons/tfi";
 import { CanFireVehicleEquipment } from '../actions/Fire';
 import { PossibleTargets, CurrentUnit } from './utils';
@@ -42,13 +43,25 @@ export function CollapsibleDrivingGroup({ isOpen, toggle, players, actor, onOthe
                 </button>
             </h2>
             {
-                modalData?.open && (
-                    <RollModal
+                modalData?.open && modalData.title === "Огонь" && (
+                    <FireModal
                         players={players}
                         actors={[{ actor: actor, equipment: modalData?.equipment }]}
                         targets={modalData?.targets}
                         isOpen={modalData?.open || false}
-                        title={modalData?.title}
+                        onCancel={resetModalData}
+                        onConfirm={modalData?.onConfirm}
+                        calculateEffect={modalData?.calculateEffect}
+                    />
+                )
+            }
+            {
+                modalData?.open && modalData.title === "Наблюдение" && (
+                    <WatchModal
+                        players={players}
+                        actors={[{ actor: actor, equipment: modalData?.equipment }]}
+                        targets={modalData?.targets}
+                        isOpen={modalData?.open || false}
                         onCancel={resetModalData}
                         onConfirm={modalData?.onConfirm}
                         calculateEffect={modalData?.calculateEffect}

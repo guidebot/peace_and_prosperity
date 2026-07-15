@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { RangeKey } from '../game/Equipment';
 import { Level, MinSkill, MaxLeadership } from '../game/Skill';
-import { RollModal } from '../actions/Roll';
+import { FireModal } from '../actions/FireModal';
+import { WatchModal } from '../actions/WatchModal';
 import { GiBullseye, GiGunshot, GiWeight, GiTireTracks, GiFootsteps } from "react-icons/gi";
 import { GiRun } from 'react-icons/gi';
 import { PiBinocularsFill } from 'react-icons/pi';
@@ -217,14 +218,25 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                 )
             }
             {
-                modalData?.open && (
-                    <RollModal
+                modalData?.open && modalData.title?.startsWith("Групповой огонь") && (
+                    <FireModal
                         players={players}
                         actors={modalData?.actors}
-                        equipment={modalData?.equipment}
                         targets={modalData?.targets}
                         isOpen={modalData?.open || false}
-                        title={modalData?.title}
+                        onCancel={resetModalData}
+                        onConfirm={modalData?.onConfirm}
+                        calculateEffect={modalData?.calculateEffect}
+                    />
+                )
+            }
+            {
+                modalData?.open && modalData.title === "Наблюдение" && (
+                    <WatchModal
+                        players={players}
+                        actors={modalData?.actors}
+                        targets={modalData?.targets}
+                        isOpen={modalData?.open || false}
                         onCancel={resetModalData}
                         onConfirm={modalData?.onConfirm}
                         calculateEffect={modalData?.calculateEffect}
@@ -275,7 +287,7 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
                         <button key="toggleIsHidden" title="Переключить пометку маскировки" onClick={toggleIsHidden}>
                             {data.isHidden ? (<BiSolidShow />) : (<BiSolidHide />)}
                         </button>
-                        {PossibleTargets(players, data).length > 0 && (<button key="watch" title="Наблюдать" onClick={() => setModalData({ open: true, actors: [{ actor: data }], targets: [], onConfirm: applyAlertnessRoll, calculateEffect: getAlertnessRoll })}>
+                        {PossibleTargets(players, data).length > 0 && (<button key="watch" title="Наблюдать" onClick={() => setModalData({ open: true, actors: [{ actor: data }], targets: [], title: "Наблюдение", onConfirm: applyAlertnessRoll, calculateEffect: getAlertnessRoll })}>
                             <PiBinocularsFill />
                         </button>)}
                     </div>

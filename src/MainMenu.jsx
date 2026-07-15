@@ -2,7 +2,6 @@ import { useState, useRef } from 'react';
 import { MdDownload, MdUpload, MdTimer, MdPrint } from "react-icons/md";
 import { GiTabletopPlayers } from "react-icons/gi";
 import { Player } from './game/Player';
-import { RollModal } from './actions/Roll';
 import { Level, MaxLeadership } from './game/Skill';
 import { useVisibilityConditions } from './game/conditions';
 import { UpdateSuppressionStatusForPersons, MovementSpeed } from './cards/utils';
@@ -14,9 +13,6 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry, st
     const { activeConditionIds, toggleCondition, conditionsList } = useVisibilityConditions();
 
     const [startPositions, setStartPositions] = useState({});
-
-    const [modalData, setModalData] = useState({});
-    const resetModalData = () => setModalData({ equipment: null, open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
 
     const handleEndTurn = () => {
         const STRESS_RECOVERY_PER_TURN = [0.1, 0.2, 0.5, 0.8, 1.3, 1.9, 2.7];
@@ -88,8 +84,6 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry, st
 
         logMessages.forEach(msg => addLogEntry(msg));
         startNewTurn();
-
-        resetModalData();
     };
 
     const handleSaveToFile = () => {
@@ -293,21 +287,6 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry, st
                     {cond.pic}
                 </button>
             ))}
-            {
-                modalData?.open && (
-                    <RollModal
-                        players={players}
-                        actors={modalData?.actors}
-                        equipment={modalData?.equipment}
-                        targets={modalData?.targets}
-                        isOpen={modalData?.open || false}
-                        title={modalData?.title}
-                        onCancel={resetModalData}
-                        onConfirm={modalData?.onConfirm}
-                        calculateEffect={modalData?.calculateEffect}
-                    />
-                )
-            }
         </div>
     );
 }
