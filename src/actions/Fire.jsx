@@ -102,6 +102,10 @@ function calculateFireEffect(players, roll, actorData, target, activeConditions)
         return { result: false, actorData, supression: 0, hits: 0, message: `${equipment.name} не готово к стрельбе непрямой наводкой` };
     }
 
+    if (roll.indirectFire && equipment.skill !== "WPN_artillery") {
+        return { result: false, actorData, supression: 0, hits: 0, message: `${equipment.name} не предназначен для огня непрямой наводкой` };
+    }
+
     const deploymentMod = unit.isDeployed ? equipment.deployBonus : 0;
     const hasAmmo = (equipment.ammo ?? 0) > 0;
 
