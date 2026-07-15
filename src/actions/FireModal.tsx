@@ -137,7 +137,10 @@ export function FireModal({
                     <span>Цель:</span>
                     <select
                         value={extra.selectedTargetId}
-                        onChange={(e) => setSelectedExtra({ ...extra, selectedTargetId: e.target.value, target: selectedTarget })}
+                        onChange={(e) => {
+                            const newTarget = targets.find(t => t.id === e.target.value) ?? targets[0];
+                            setSelectedExtra({ ...extra, selectedTargetId: e.target.value, target: newTarget, blindFire: newTarget.isHidden });
+                        }}
                     >
                         {targets.map((t) => (
                             <option key={t.id} value={t.id}>{t.name}</option>
