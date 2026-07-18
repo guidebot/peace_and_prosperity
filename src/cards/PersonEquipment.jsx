@@ -298,7 +298,10 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
             <table className="skills-table" style={{ display: isOpen && actor.equipment.length > 0 ? 'table' : 'none' }}>
                 <thead>
                     <tr>
-                        <td>Название</td>
+                        <td className='big-table-header'>Действия</td>
+                        <td className='big-table-header'>Наименование</td>
+                        <td className='big-table-header'>Боеприпасы</td>
+                        <td className='big-table-header'>Время</td>
                         <td className='big-table-header'>Вес</td>
                         <td className='big-table-header'>Уровень навыка</td>
                         <td className='big-table-header'>Минимальная дальность</td>
@@ -307,54 +310,13 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                         <td className='big-table-header'>Максимальная дальность</td>
                         <td className='big-table-header'>Бронебойность</td>
                         <td className='big-table-header'>Интенсивность огня</td>
-                        <td className='big-table-header'>Боеприпасы</td>
-                        <td className='big-table-header'>Время</td>
-                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
                     {actor.equipment.map((item) => (
                         <tr key={item.id}>
-                            <td>{item.name}</td>
-                            <td>{(item.weight + item.ammo * item.ammoWeight) / 10} кг</td>
-                            <td>{Level(actor.skills[item.skill] || 0)}</td>
-                            <td>{item.minRange > 0 ? item.minRange + SCALE_PREFIX : "-"}</td>
-                            <td>{item.bestRange > 0 ? item.bestRange + SCALE_PREFIX : "-"}</td>
-                            <td>{item.effectiveRange > 0 ? item.effectiveRange >= 20000000 ? "∞" : item.effectiveRange + SCALE_PREFIX : "-"}</td>
-                            <td>{item.maxRange > 0 ? item.maxRange >= 20000000 ? "∞" : item.maxRange + SCALE_PREFIX : "-"}</td>
-                            <td>{item.ap > 0 ? item.ap : "-"}</td>
-                            <td>{item.he > 0 ? item.he : "-"}</td>
                             <td>
-                                {item.ammoWeight > 0 && <input
-                                    key={`ammo${item.id}`}
-                                    name={`ammo${item.id}`}
-                                    type="number"
-                                    min={0}
-                                    value={item.ammo || 0}
-                                    onChange={(e) => {
-                                        const newAmmo = Number(e.target.value);
-                                        onOtherChange(item.id, "ammo", newAmmo);
-                                    }}
-                                />}
-                            </td>
-                            <td>
-                                {item.counter > 0 && <input
-                                    key={`counter${item.id}`}
-                                    name={`counter${item.id}`}
-                                    type="number"
-                                    min={0}
-                                    value={item.counter || 0}
-                                    onChange={(e) => {
-                                        const newCounter = Number(e.target.value);
-                                        onOtherChange(item.id, "counter", newCounter);
-                                    }}
-                                />}
-                                {item.defaultCounter > 0 && item.counter === 0 && <button title={`Активировать (${item.defaultCounter})`} onClick={() => onOtherChange(item.id, "counter", item.defaultCounter)} >
-                                    <RiTimerFlashLine />
-                                </button>}
-                            </td>
-                            <td>
-                                <div className='buttons-panel' style={{ justifyContent: "center" }}>
+                                <div className='buttons-panel'>
                                     {PossibleTargets(players, actor).length > 0 && CanFireInfantryEquipment(players, actor, item) && (<button title="Огонь!" onClick={() => setModalData({
                                         open: true,
                                         equipment: item,
@@ -400,6 +362,44 @@ export function CollapsibleEquipmentGroup({ isOpen, toggle, players, actor, onPr
                                     </button>
                                 </div>
                             </td>
+                            <td>{item.name}</td>
+                            <td>
+                                {item.ammoWeight > 0 && <input
+                                    key={`ammo${item.id}`}
+                                    name={`ammo${item.id}`}
+                                    type="number"
+                                    min={0}
+                                    value={item.ammo || 0}
+                                    onChange={(e) => {
+                                        const newAmmo = Number(e.target.value);
+                                        onOtherChange(item.id, "ammo", newAmmo);
+                                    }}
+                                />}
+                            </td>
+                            <td>
+                                {item.counter > 0 && <input
+                                    key={`counter${item.id}`}
+                                    name={`counter${item.id}`}
+                                    type="number"
+                                    min={0}
+                                    value={item.counter || 0}
+                                    onChange={(e) => {
+                                        const newCounter = Number(e.target.value);
+                                        onOtherChange(item.id, "counter", newCounter);
+                                    }}
+                                />}
+                                {item.defaultCounter > 0 && item.counter === 0 && <button title={`Активировать (${item.defaultCounter})`} onClick={() => onOtherChange(item.id, "counter", item.defaultCounter)} >
+                                    <RiTimerFlashLine />
+                                </button>}
+                            </td>
+                            <td>{(item.weight + item.ammo * item.ammoWeight) / 10} кг</td>
+                            <td>{Level(actor.skills[item.skill] || 0)}</td>
+                            <td>{item.minRange > 0 ? item.minRange + SCALE_PREFIX : "-"}</td>
+                            <td>{item.bestRange > 0 ? item.bestRange + SCALE_PREFIX : "-"}</td>
+                            <td>{item.effectiveRange > 0 ? item.effectiveRange >= 20000000 ? "∞" : item.effectiveRange + SCALE_PREFIX : "-"}</td>
+                            <td>{item.maxRange > 0 ? item.maxRange >= 20000000 ? "∞" : item.maxRange + SCALE_PREFIX : "-"}</td>
+                            <td>{item.ap > 0 ? item.ap : "-"}</td>
+                            <td>{item.he > 0 ? item.he : "-"}</td>
                         </tr>
                     ))}
                 </tbody>

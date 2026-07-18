@@ -107,10 +107,10 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
             <table className="skills-table" style={{ display: isOpen ? 'table' : 'none' }}>
                 <thead>
                     <tr>
-                        <td width={"60%"}>Навык</td>
-                        <td>Уровень</td>
-                        <td>Очки тренированности</td>
-                        <td width={"50px"}></td>
+                        <td className='big-table-header'>Действия</td>
+                        <td className='big-table-header'>Наименование</td>
+                        <td className='big-table-header'>Очки тренированности</td>
+                        <td className='big-table-header'>Уровень</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -119,22 +119,6 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
                         if (filterSkills && skillValue === 0) return "";
                         return (
                             <tr key={skill.id}>
-                                <td>{skill.name}</td>
-                                <td>{Level(skillValue)}</td>
-                                <td>
-                                    <input
-                                        key={skill.id}
-                                        name={skill.id}
-                                        type="number"
-                                        min={0}
-                                        value={skillValue}
-                                        onChange={(e) => {
-                                            const { name, value } = e.target;
-                                            const newSkills = { ...currentSkills, [name]: Number(value) };
-                                            onPropertyChange("skills", newSkills);
-                                        }}
-                                    />
-                                </td>
                                 <td>
                                     <div className='buttons-panel'>
                                         {skill.id === "MED" && skillValue > 0 && (<button title="Первая помощь" onClick={() => setModalData({
@@ -170,6 +154,22 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
                                         </button>)}
                                     </div>
                                 </td>
+                                <td>{skill.name}</td>
+                                <td>
+                                    <input
+                                        key={skill.id}
+                                        name={skill.id}
+                                        type="number"
+                                        min={0}
+                                        value={skillValue}
+                                        onChange={(e) => {
+                                            const { name, value } = e.target;
+                                            const newSkills = { ...currentSkills, [name]: Number(value) };
+                                            onPropertyChange("skills", newSkills);
+                                        }}
+                                    />
+                                </td>
+                                <td>{Level(skillValue)}</td>
                             </tr>
                         );
                     })}
