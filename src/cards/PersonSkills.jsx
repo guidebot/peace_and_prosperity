@@ -10,12 +10,28 @@ import { PiBinocularsFill } from 'react-icons/pi';
 import { PossibleTargets } from './utils';
 import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions } from "../game/conditions";
 
-export function CollapsibleSkillGroup({ players, actor, title, skills, currentSkills, onPropertyChange, onOtherChange, isOpen, toggle, addLogEntry }) {
+function SkillGroupHeader({ title, isOpen, toggle, filterSkills, setFilterSkills }) {
+    return (
+        <tr className="skill-group-header">
+            <td colSpan={4}>
+                <div className="buttons-panel">
+                    <button onClick={toggle}>
+                        {isOpen ? <MdArrowDropDown /> : <MdArrowRight />} {title}
+                    </button>
+                    {isOpen && (
+                        <button onClick={() => setFilterSkills(!filterSkills)}>
+                            {filterSkills ? <TbFilterOff /> : <TbFilter />}
+                        </button>
+                    )}
+                </div>
+            </td>
+        </tr>
+    );
+}
+
+function SkillGroupRows({ players, actor, skills, currentSkills, onPropertyChange, filterSkills, modalData, setModalData, addLogEntry, resetModalData }) {
     const calculateWatchEffect = CalculateWatchEffectWithConditions();
     const applyWatchEffectWithConditions = ApplyWatchEffectWithConditions();
-    const [filterSkills, setFilterSkills] = useState(true);
-    const [modalData, setModalData] = useState({});
-    const resetModalData = () => setModalData({ open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
 
     const applyWatchEffect = (players, rolls, result, actor, target) => {
         const effects = applyWatchEffectWithConditions(players, rolls, result, actor, target);
@@ -55,22 +71,80 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
     }
 
     return (
-        <div>
-            <div className="buttons-panel">
-                <button onClick={toggle}>
-                    {isOpen ? <MdArrowDropDown /> : <MdArrowRight />} {title}
-                </button>
-                {isOpen && (
-                    <button onClick={() => setFilterSkills(!filterSkills)}>
-                        {filterSkills ? <TbFilterOff /> : <TbFilter />}
-                    </button>)}
-            </div>
+        <>
+            {skills.map((skill) => {
+                const skillValue = currentSkills[skill.id] || 0;
+                if (filterSkills && skillValue === 0) return null;
+                return (
+                    <tr key={skill.id}>
+                        <td>
+                            <div className='buttons-panel'>
+                                {skill.id === "MED" && skillValue > 0 && (<button title="Первая помощь" onClick={() => setModalData({
+                                    open: true,
+                                    actors: [actor],
+                                    equipment: null,
+                                    targets: [],
+                                    title: "Первая помощь",
+                                    onConfirm: applyHealEffect,
+                                    calculateEffect: calculateHealEffect
+                                })} >
+                                    <GiHealing />
+                                </button>)}
+                                {skill.id === "MCH" && skillValue > 0 && (<button title="Управление транспортом" onClick={() => setModalData({
+                                    open: true,
+                                    type: 'mechanics',
+                                    actor: actor,
+                                    title: "Управление транспортом",
+                                    onConfirm: applyMechanicsEffect,
+                                    calculateEffect: calculateMechanicsEffect
+                                })} >
+                                    <TbSteeringWheel />
+                                </button>)}
+                                {PossibleTargets(players, actor).length > 0 && skill.id === "STE" && (<button title="Наблюдение" onClick={() => setModalData({
+                                    open: true,
+                                    actors: [actor],
+                                    targets: PossibleTargets(players, actor),
+                                    title: "Наблюдение",
+                                    onConfirm: applyWatchEffect,
+                                    calculateEffect: calculateWatchEffect
+                                })} >
+                                    <PiBinocularsFill />
+                                </button>)}
+                            </div>
+                        </td>
+                        <td>{skill.name}</td>
+                        <td>
+                            <input
+                                key={skill.id}
+                                name={skill.id}
+                                type="number"
+                                min={0}
+                                value={skillValue}
+                                onChange={(e) => {
+                                    const { name, value } = e.target;
+                                    const newSkills = { ...currentSkills, [name]: Number(value) };
+                                    onPropertyChange("skills", newSkills);
+                                }}
+                            />
+                        </td>
+                        <td>{Level(skillValue)}</td>
+                    </tr>
+                );
+            })}
+        </>
+    );
+}
+
+function SkillGroupModals({ players, modalData, setModalData }) {
+    const onCancel = () => setModalData({ open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
+    return (
+        <>
             {
                 modalData?.open && modalData?.type === 'mechanics' && (
                     <DriveModal
                         isOpen={modalData?.open || false}
                         title={modalData?.title}
-                        onCancel={resetModalData}
+                        onCancel={onCancel}
                         onConfirm={modalData?.onConfirm}
                         calculateEffect={modalData?.calculateEffect}
                         actor={modalData?.actor}
@@ -85,7 +159,7 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
                         actors={[{ actor: modalData?.actors?.[0] }]}
                         targets={modalData?.targets}
                         isOpen={modalData?.open || false}
-                        onCancel={resetModalData}
+                        onCancel={onCancel}
                         onConfirm={modalData?.onConfirm}
                         calculateEffect={modalData?.calculateEffect}
                     />
@@ -97,84 +171,62 @@ export function CollapsibleSkillGroup({ players, actor, title, skills, currentSk
                         players={players}
                         actors={[{ actor: modalData?.actors?.[0] }]}
                         isOpen={modalData?.open || false}
-                        onCancel={resetModalData}
+                        onCancel={onCancel}
                         onConfirm={modalData?.onConfirm}
                         calculateEffect={modalData?.calculateEffect}
                     />
                 )
             }
+        </>
+    );
+}
 
-            <table className="skills-table" style={{ display: isOpen ? 'table' : 'none' }}>
-                <thead>
-                    <tr>
-                        <td className='big-table-header'>Действия</td>
-                        <td className='big-table-header'>Наименование</td>
-                        <td className='big-table-header'>Очки тренированности</td>
-                        <td className='big-table-header'>Уровень</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {skills.map((skill) => {
-                        const skillValue = currentSkills[skill.id] || 0;
-                        if (filterSkills && skillValue === 0) return "";
-                        return (
-                            <tr key={skill.id}>
-                                <td>
-                                    <div className='buttons-panel'>
-                                        {skill.id === "MED" && skillValue > 0 && (<button title="Первая помощь" onClick={() => setModalData({
-                                            open: true,
-                                            actors: [actor],
-                                            equipment: null,
-                                            targets: [],
-                                            title: "Первая помощь",
-                                            onConfirm: applyHealEffect,
-                                            calculateEffect: calculateHealEffect
-                                        })} >
-                                            <GiHealing />
-                                        </button>)}
-                                        {skill.id === "MCH" && skillValue > 0 && (<button title="Управление транспортом" onClick={() => setModalData({
-                                            open: true,
-                                            type: 'mechanics',
-                                            actor: actor,
-                                            title: "Управление транспортом",
-                                            onConfirm: applyMechanicsEffect,
-                                            calculateEffect: calculateMechanicsEffect
-                                        })} >
-                                            <TbSteeringWheel />
-                                        </button>)}
-                                        {PossibleTargets(players, actor).length > 0 && skill.id === "STE" && (<button title="Наблюдение" onClick={() => setModalData({
-                                            open: true,
-                                            actors: [actor],
-                                            targets: PossibleTargets(players, actor),
-                                            title: "Наблюдение",
-                                            onConfirm: applyWatchEffect,
-                                            calculateEffect: calculateWatchEffect
-                                        })} >
-                                            <PiBinocularsFill />
-                                        </button>)}
-                                    </div>
-                                </td>
-                                <td>{skill.name}</td>
-                                <td>
-                                    <input
-                                        key={skill.id}
-                                        name={skill.id}
-                                        type="number"
-                                        min={0}
-                                        value={skillValue}
-                                        onChange={(e) => {
-                                            const { name, value } = e.target;
-                                            const newSkills = { ...currentSkills, [name]: Number(value) };
-                                            onPropertyChange("skills", newSkills);
-                                        }}
-                                    />
-                                </td>
-                                <td>{Level(skillValue)}</td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div >
+export function CollapsibleSkillGroupTableBody({ players, actor, title, skills, currentSkills, onPropertyChange, onOtherChange, isOpen, toggle, addLogEntry, filterSkills, setFilterSkills, modalData, setModalData }) {
+    const resetModalData = () => setModalData({ open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
+
+    return (
+        <tbody>
+            <SkillGroupHeader
+                title={title}
+                isOpen={isOpen}
+                toggle={toggle}
+                filterSkills={filterSkills}
+                setFilterSkills={setFilterSkills}
+            />
+            {isOpen && (
+                <SkillGroupRows
+                    players={players}
+                    actor={actor}
+                    skills={skills}
+                    currentSkills={currentSkills}
+                    onPropertyChange={onPropertyChange}
+                    filterSkills={filterSkills}
+                    modalData={modalData}
+                    setModalData={setModalData}
+                    addLogEntry={addLogEntry}
+                    resetModalData={resetModalData}
+                />
+            )}
+        </tbody>
+    );
+}
+
+export function CollapsibleSkillGroupModals({ players, actor, title, skills, currentSkills, onPropertyChange, onOtherChange, isOpen, toggle, addLogEntry, modalData, setModalData }) {
+    return <SkillGroupModals players={players} modalData={modalData} setModalData={setModalData} />;
+}
+
+export function SkillsTable({ groups }) {
+    return (
+        <table className="skills-table">
+            <thead>
+                <tr>
+                    <td className='big-table-header'>Действия</td>
+                    <td className='big-table-header'>Наименование</td>
+                    <td className='big-table-header'>Очки тренированности</td>
+                    <td className='big-table-header'>Уровень</td>
+                </tr>
+            </thead>
+            {groups}
+        </table>
     );
 }

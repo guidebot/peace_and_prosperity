@@ -2,8 +2,19 @@ import { useState, useEffect, useMemo } from 'react';
 import { Attributes, SkillsByAttributes } from '../game/Skill';
 import { CollapsibleEquipmentGroup } from './PersonEquipment';
 import { CollapsibleDrivingGroup } from './PersonDriving';
-import { CollapsibleSkillGroup } from './PersonSkills';
+import { CollapsibleSkillGroupTableBody, CollapsibleSkillGroupModals, SkillsTable } from './PersonSkills';
 import { CurrentUnit } from './utils';
+
+function createInitialSkillGroupStates() {
+    const states = {};
+    Object.keys(SkillsByAttributes).forEach(key => {
+        states[key] = {
+            filterSkills: true,
+            modalData: { open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } },
+        };
+    });
+    return states;
+}
 
 export function PersonForm({ players, data, onPropertyChange, onOtherChange, addLogEntry }) {
     const equipment = useMemo(() => data.equipment || [], [data.equipment]);
@@ -52,6 +63,8 @@ export function PersonForm({ players, data, onPropertyChange, onOtherChange, add
         });
     }, [data]);
 
+    const [skillGroupStates, setSkillGroupStates] = useState(() => createInitialSkillGroupStates());
+
     const unit = CurrentUnit(players, data);
 
     if (!unit) return;
@@ -59,6 +72,60 @@ export function PersonForm({ players, data, onPropertyChange, onOtherChange, add
     const toggleGroup = (group) => {
         setOpenGroups((prev) => ({ ...prev, [group]: !prev[group] }));
     };
+
+    const updateSkillGroupState = (key, updater) => {
+        setSkillGroupStates(prev => ({
+            ...prev,
+            [key]: { ...prev[key], ...updater(prev[key]) }
+        }));
+    };
+
+    const skillGroupTableBodies = Object.entries(SkillsByAttributes).map(([key, group]) => {
+        const state = skillGroupStates[key];
+        const setFilterSkills = (value) => updateSkillGroupState(key, s => ({ ...s, filterSkills: value }));
+        const setModalData = (value) => updateSkillGroupState(key, s => ({ ...s, modalData: value }));
+        return (
+            <CollapsibleSkillGroupTableBody
+                players={players}
+                actor={data}
+                key={key}
+                title={Attributes[key]}
+                skills={group}
+                currentSkills={data.skills}
+                onPropertyChange={onPropertyChange}
+                onOtherChange={onOtherChange}
+                isOpen={openGroups[key]}
+                toggle={() => toggleGroup(key)}
+                addLogEntry={addLogEntry}
+                filterSkills={state.filterSkills}
+                setFilterSkills={setFilterSkills}
+                modalData={state.modalData}
+                setModalData={setModalData}
+            />
+        );
+    });
+
+    const skillGroupModals = Object.entries(SkillsByAttributes).map(([key, group]) => {
+        const state = skillGroupStates[key];
+        const setModalData = (value) => updateSkillGroupState(key, s => ({ ...s, modalData: value }));
+        return (
+            <CollapsibleSkillGroupModals
+                players={players}
+                actor={data}
+                key={key}
+                title={Attributes[key]}
+                skills={group}
+                currentSkills={data.skills}
+                onPropertyChange={onPropertyChange}
+                onOtherChange={onOtherChange}
+                isOpen={openGroups[key]}
+                toggle={() => toggleGroup(key)}
+                addLogEntry={addLogEntry}
+                modalData={state.modalData}
+                setModalData={setModalData}
+            />
+        );
+    });
 
     return (
         <div>
@@ -92,21 +159,8 @@ export function PersonForm({ players, data, onPropertyChange, onOtherChange, add
                 onOtherChange={onOtherChange}
                 addLogEntry={addLogEntry}
             />
-            {Object.entries(SkillsByAttributes).map(([key, group]) => (
-                <CollapsibleSkillGroup
-                    players={players}
-                    actor={data}
-                    key={key}
-                    title={Attributes[key]}
-                    skills={group}
-                    currentSkills={data.skills}
-                    onPropertyChange={onPropertyChange}
-                    onOtherChange={onOtherChange}
-                    isOpen={openGroups[key]}
-                    toggle={() => toggleGroup(key)}
-                    addLogEntry={addLogEntry}
-                />
-            ))}
+            <SkillsTable groups={skillGroupTableBodies} />
+            {skillGroupModals}
         </div>
     );
 }
