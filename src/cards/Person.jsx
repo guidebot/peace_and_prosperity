@@ -71,7 +71,7 @@ export function PersonForm({ players, data, onPropertyChange, onOtherChange, add
                 <input name="totalWeight" readOnly={true} type="number" value={totalWeight / 10} />кг
             </label>
             <label className="form-label" >
-                <span>Очков тренированности:</span>
+                <span>Очки тренированности:</span>
                 <input name="totalSkill" readOnly={true} type="number" value={totalSkill} />
             </label>
             {unit.vehicle && (<CollapsibleDrivingGroup

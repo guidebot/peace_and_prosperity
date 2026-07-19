@@ -56,6 +56,10 @@ body,
   margin-top: 2px;
   margin-bottom: 2px;
   align-items: center;
+  justify-content: flex-start;
+}
+
+.skills-table .buttons-panel {
   justify-content: center;
 }
 
@@ -140,9 +144,9 @@ table {
 
 .skills-table td:first-child,
 .skills-table th:first-child {
-  width: 80px;
-  min-width: 80px;
-  max-width: 80px;
+  width: 90px;
+  min-width: 90px;
+  max-width: 100px;
 }
 
 .skills-table td:nth-child(2),
@@ -166,7 +170,7 @@ table {
 
 .skills-table .big-table-header:nth-child(1),
 .skills-table .big-table-header:nth-child(2) {
-  writing-mode: horizontal-tb !important;
+  writing-mode: horizontal-tb;
   white-space: normal;
   text-align: center;
   vertical-align: bottom;
