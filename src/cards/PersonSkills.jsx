@@ -10,26 +10,49 @@ import { PiBinocularsFill } from 'react-icons/pi';
 import { PossibleTargets } from './utils';
 import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions } from "../game/conditions";
 
-function SkillGroupHeader({ title, isOpen, toggle, filterSkills, setFilterSkills }) {
+function SkillsHeader({ isOpen, toggle, filterZeroSkills, setFilterZeroSkills }) {
+    return (
+        <div className="skills-header">
+            <div className="buttons-panel">
+                <button onClick={toggle}>
+                    {isOpen ? <MdArrowDropDown /> : <MdArrowRight />} Навыки
+                </button>
+                {isOpen && (
+                    <button onClick={() => setFilterZeroSkills(!filterZeroSkills)}>
+                        {filterZeroSkills ? <TbFilterOff /> : <TbFilter />}
+                    </button>
+                )}
+            </div>
+        </div>
+    );
+}
+
+function SkillsTableHeader() {
+    return (
+        <thead>
+            <tr>
+                <td className='big-table-header'>Действия</td>
+                <td className='big-table-header'>Наименование</td>
+                <td className='big-table-header'>Очки тренированности</td>
+                <td className='big-table-header'>Уровень</td>
+            </tr>
+        </thead>
+    );
+}
+
+function AttributeHeader({ title }) {
     return (
         <tr className="skill-group-header">
             <td colSpan={4}>
                 <div className="buttons-panel">
-                    <button onClick={toggle}>
-                        {isOpen ? <MdArrowDropDown /> : <MdArrowRight />} {title}
-                    </button>
-                    {isOpen && (
-                        <button onClick={() => setFilterSkills(!filterSkills)}>
-                            {filterSkills ? <TbFilterOff /> : <TbFilter />}
-                        </button>
-                    )}
+                    <span className="attribute-title">{title}</span>
                 </div>
             </td>
         </tr>
     );
 }
 
-function SkillGroupRows({ players, actor, skills, currentSkills, onPropertyChange, filterSkills, modalData, setModalData, addLogEntry, resetModalData }) {
+function SkillRows({ players, actor, skills, currentSkills, onPropertyChange, filterZeroSkills, modalData, setModalData, addLogEntry, resetModalData }) {
     const calculateWatchEffect = CalculateWatchEffectWithConditions();
     const applyWatchEffectWithConditions = ApplyWatchEffectWithConditions();
 
@@ -74,7 +97,7 @@ function SkillGroupRows({ players, actor, skills, currentSkills, onPropertyChang
         <>
             {skills.map((skill) => {
                 const skillValue = currentSkills[skill.id] || 0;
-                if (filterSkills && skillValue === 0) return null;
+                if (filterZeroSkills && skillValue === 0) return null;
                 return (
                     <tr key={skill.id}>
                         <td>
@@ -135,7 +158,7 @@ function SkillGroupRows({ players, actor, skills, currentSkills, onPropertyChang
     );
 }
 
-function SkillGroupModals({ players, modalData, setModalData }) {
+function SkillsModals({ players, modalData, setModalData }) {
     const onCancel = () => setModalData({ open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
     return (
         <>
@@ -181,52 +204,57 @@ function SkillGroupModals({ players, modalData, setModalData }) {
     );
 }
 
-export function CollapsibleSkillGroupTableBody({ players, actor, title, skills, currentSkills, onPropertyChange, onOtherChange, isOpen, toggle, addLogEntry, filterSkills, setFilterSkills, modalData, setModalData }) {
+export function SkillsTable({
+    groups,
+    isOpen,
+    toggle,
+    filterZeroSkills,
+    setFilterZeroSkills,
+    players,
+    actor,
+    currentSkills,
+    onPropertyChange,
+    onOtherChange,
+    addLogEntry,
+    modalData,
+    setModalData
+}) {
     const resetModalData = () => setModalData({ open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
 
     return (
-        <tbody>
-            <SkillGroupHeader
-                title={title}
+        <div className="skills-table-wrapper">
+            <SkillsHeader
                 isOpen={isOpen}
                 toggle={toggle}
-                filterSkills={filterSkills}
-                setFilterSkills={setFilterSkills}
+                filterZeroSkills={filterZeroSkills}
+                setFilterZeroSkills={setFilterZeroSkills}
             />
-            {isOpen && (
-                <SkillGroupRows
-                    players={players}
-                    actor={actor}
-                    skills={skills}
-                    currentSkills={currentSkills}
-                    onPropertyChange={onPropertyChange}
-                    filterSkills={filterSkills}
-                    modalData={modalData}
-                    setModalData={setModalData}
-                    addLogEntry={addLogEntry}
-                    resetModalData={resetModalData}
-                />
-            )}
-        </tbody>
+            <table className="skills-table" style={{ display: isOpen ? 'table' : 'none' }}>
+                <SkillsTableHeader />
+                <tbody>
+                    {groups.map((group) => (
+                        <>
+                            <AttributeHeader title={group.title} key={`attr-${group.title}`} />
+                            <SkillRows
+                                players={players}
+                                actor={actor}
+                                skills={group.skills}
+                                currentSkills={currentSkills}
+                                onPropertyChange={onPropertyChange}
+                                filterZeroSkills={filterZeroSkills}
+                                modalData={modalData}
+                                setModalData={setModalData}
+                                addLogEntry={addLogEntry}
+                                resetModalData={resetModalData}
+                            />
+                        </>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 }
 
-export function CollapsibleSkillGroupModals({ players, actor, title, skills, currentSkills, onPropertyChange, onOtherChange, isOpen, toggle, addLogEntry, modalData, setModalData }) {
-    return <SkillGroupModals players={players} modalData={modalData} setModalData={setModalData} />;
-}
-
-export function SkillsTable({ groups }) {
-    return (
-        <table className="skills-table">
-            <thead>
-                <tr>
-                    <td className='big-table-header'>Действия</td>
-                    <td className='big-table-header'>Наименование</td>
-                    <td className='big-table-header'>Очки тренированности</td>
-                    <td className='big-table-header'>Уровень</td>
-                </tr>
-            </thead>
-            {groups}
-        </table>
-    );
+export function SkillsModalsWrapper({ players, modalData, setModalData }) {
+    return <SkillsModals players={players} modalData={modalData} setModalData={setModalData} />;
 }

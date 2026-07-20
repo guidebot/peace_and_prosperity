@@ -1,20 +1,13 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Attributes, SkillsByAttributes } from '../game/Skill';
+import { Attributes, SkillsByAttributes, Level } from '../game/Skill';
 import { CollapsibleEquipmentGroup } from './PersonEquipment';
 import { CollapsibleDrivingGroup } from './PersonDriving';
-import { CollapsibleSkillGroupTableBody, CollapsibleSkillGroupModals, SkillsTable } from './PersonSkills';
-import { CurrentUnit } from './utils';
-
-function createInitialSkillGroupStates() {
-    const states = {};
-    Object.keys(SkillsByAttributes).forEach(key => {
-        states[key] = {
-            filterSkills: true,
-            modalData: { open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } },
-        };
-    });
-    return states;
-}
+import { SkillsTable, SkillsModalsWrapper } from './PersonSkills';
+import { CurrentUnit, PossibleTargets } from './utils';
+import { CalculateWatchEffectWithConditions, ApplyWatchEffectWithConditions } from "../game/conditions";
+import { GiHealing } from 'react-icons/gi';
+import { TbSteeringWheel } from 'react-icons/tb';
+import { PiBinocularsFill } from 'react-icons/pi';
 
 export function PersonForm({ players, data, onPropertyChange, onOtherChange, addLogEntry }) {
     const equipment = useMemo(() => data.equipment || [], [data.equipment]);
@@ -32,100 +25,78 @@ export function PersonForm({ players, data, onPropertyChange, onOtherChange, add
         setTotalWeight(newWeight);
     }, [equipment, data]);
 
+    const unit = CurrentUnit(players, data);
+
+    if (!unit) return null;
+
     const [openGroups, setOpenGroups] = useState(() => {
         const initial = {
             equipment: true,
-            HEL: true,
-            AGI: true,
-            CHR: true,
-            INT: true,
-            MRK: true
+            driving: true
         };
-
-        Object.entries(SkillsByAttributes).forEach(([key, group]) => {
-            const hasNonZeroSkill = group.some(skill => (data.skills?.[skill.id] || 0) > 0);
-            initial[key] = hasNonZeroSkill;
-        });
-
         return initial;
     });
 
-    useEffect(() => {
-        setOpenGroups((prev) => {
-            const updated = { ...prev };
-
-            Object.entries(SkillsByAttributes).forEach(([key, group]) => {
-                const hasNonZeroSkill = group.some(skill => (data.skills?.[skill.id] || 0) > 0);
-                updated[key] = hasNonZeroSkill;
-            });
-
-            return updated;
-        });
-    }, [data]);
-
-    const [skillGroupStates, setSkillGroupStates] = useState(() => createInitialSkillGroupStates());
-
-    const unit = CurrentUnit(players, data);
-
-    if (!unit) return;
+    const [filterZeroSkills, setFilterZeroSkills] = useState(true);
+    const [skillsOpen, setSkillsOpen] = useState(true);
+    const [skillsModalData, setSkillsModalData] = useState({ open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
 
     const toggleGroup = (group) => {
         setOpenGroups((prev) => ({ ...prev, [group]: !prev[group] }));
     };
 
-    const updateSkillGroupState = (key, updater) => {
-        setSkillGroupStates(prev => ({
-            ...prev,
-            [key]: { ...prev[key], ...updater(prev[key]) }
-        }));
-    };
+    const calculateWatchEffectWithConditions = CalculateWatchEffectWithConditions();
+    const applyWatchEffectWithConditions = ApplyWatchEffectWithConditions();
 
-    const skillGroupTableBodies = Object.entries(SkillsByAttributes).map(([key, group]) => {
-        const state = skillGroupStates[key];
-        const setFilterSkills = (value) => updateSkillGroupState(key, s => ({ ...s, filterSkills: value }));
-        const setModalData = (value) => updateSkillGroupState(key, s => ({ ...s, modalData: value }));
-        return (
-            <CollapsibleSkillGroupTableBody
-                players={players}
-                actor={data}
-                key={key}
-                title={Attributes[key]}
-                skills={group}
-                currentSkills={data.skills}
-                onPropertyChange={onPropertyChange}
-                onOtherChange={onOtherChange}
-                isOpen={openGroups[key]}
-                toggle={() => toggleGroup(key)}
-                addLogEntry={addLogEntry}
-                filterSkills={state.filterSkills}
-                setFilterSkills={setFilterSkills}
-                modalData={state.modalData}
-                setModalData={setModalData}
-            />
-        );
-    });
+    const groups = Object.entries(SkillsByAttributes).map(([key, group]) => ({
+        title: Attributes[key],
+        skills: group
+    }));
 
-    const skillGroupModals = Object.entries(SkillsByAttributes).map(([key, group]) => {
-        const state = skillGroupStates[key];
-        const setModalData = (value) => updateSkillGroupState(key, s => ({ ...s, modalData: value }));
-        return (
-            <CollapsibleSkillGroupModals
-                players={players}
-                actor={data}
-                key={key}
-                title={Attributes[key]}
-                skills={group}
-                currentSkills={data.skills}
-                onPropertyChange={onPropertyChange}
-                onOtherChange={onOtherChange}
-                isOpen={openGroups[key]}
-                toggle={() => toggleGroup(key)}
-                addLogEntry={addLogEntry}
-                modalData={state.modalData}
-                setModalData={setModalData}
-            />
-        );
-    });
+    function calculateWatchEffect(players, rolls, result, actor, target) {
+        const effects = applyWatchEffectWithConditions(players, rolls, result, actor, target);
+        addLogEntry(effects[0].message);
+        setSkillsModalData({ open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
+    }
+
+    function calculateHealEffect(players, rolls, actors, target) {
+        const actor = actors[0].actor;
+        const skill = Level(actor.skills["MED"]) || 0;
+        const result = rolls[0].roll + skill;
+        const effect = result >= 20 ? "кровотечение остановлено" : "эффекта нет";
+        const message = `${actor.name} оказывает первую помощь, d20=${rolls[0].roll}, результат ${result}, ${effect}.`;
+        return [{ message: message }];
+    }
+
+    function applyHealEffect(players, rolls, actors, target) {
+        const effects = calculateHealEffect(players, rolls, actors, target);
+        addLogEntry(effects[0].message);
+        setSkillsModalData({ open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
+    }
+
+    function calculateMechanicsEffect(players, rolls, actors, vehicleType) {
+        const actor = actors[0].actor;
+        const skill = actor.skills["MCH"] || 0;
+        const roll = rolls[0].roll;
+        const result = roll + skill;
+        const success = result >= vehicleType.threshold;
+        const message = `${actor.name} управляет (${vehicleType.name}), d20=${roll}, результат ${result}: ${success ? 'успех' : 'неудача'}.`;
+        return [{ message, success, vehicleType }];
+    }
+
+    function applyMechanicsEffect(players, rolls, actors, vehicleType) {
+        const effects = calculateMechanicsEffect(players, rolls, actors, vehicleType);
+        addLogEntry(effects[0].message);
+        setSkillsModalData({ open: false, title: "", targets: [], onConfirm: () => { }, calculateEffect: () => { } });
+    }
+
+    const skillModals = (
+        <SkillsModalsWrapper
+            players={players}
+            modalData={skillsModalData}
+            setModalData={setSkillsModalData}
+        />
+    );
 
     return (
         <div>
@@ -159,8 +130,22 @@ export function PersonForm({ players, data, onPropertyChange, onOtherChange, add
                 onOtherChange={onOtherChange}
                 addLogEntry={addLogEntry}
             />
-            <SkillsTable groups={skillGroupTableBodies} />
-            {skillGroupModals}
+            <SkillsTable
+                groups={groups}
+                isOpen={skillsOpen}
+                toggle={() => setSkillsOpen(!skillsOpen)}
+                filterZeroSkills={filterZeroSkills}
+                setFilterZeroSkills={setFilterZeroSkills}
+                players={players}
+                actor={data}
+                currentSkills={data.skills}
+                onPropertyChange={onPropertyChange}
+                onOtherChange={onOtherChange}
+                addLogEntry={addLogEntry}
+                modalData={skillsModalData}
+                setModalData={setSkillsModalData}
+            />
+            {skillModals}
         </div>
     );
 }
