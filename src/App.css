@@ -322,6 +322,10 @@ button:hover {
   border-bottom: none;
 }
 
+.attribute-title {
+  color: #666666;
+}
+
 .initiative-modal {
   position: fixed;
   bottom: 40px;
