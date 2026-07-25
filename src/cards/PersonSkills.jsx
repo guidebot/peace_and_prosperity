@@ -33,7 +33,7 @@ function SkillsTableHeader() {
             <tr>
                 <td className='big-table-header'>Действия</td>
                 <td className='big-table-header'>Наименование</td>
-                <td className='big-table-header'>Очки тренированности</td>
+                <td className='big-table-header'>Очки<br/>тренированности</td>
                 <td className='big-table-header'>Уровень</td>
             </tr>
         </thead>
