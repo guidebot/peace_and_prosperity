@@ -1,8 +1,9 @@
-import { useCallback } from 'react';
-import { vehicleTypes, VehicleType } from '../game/VehicleTypes';
+import { useCallback, useMemo } from 'react';
+import { vehicleTypes, VehicleType, getVehicleTypeById } from '../game/VehicleTypes';
 import { BaseRollModal, ActorRoll } from './BaseRollModal';
 import { Player } from '../game/Player';
 import { Entity } from '../game/Entity';
+import { CurrentUnit } from '../cards/utils';
 
 interface DriveModalProps {
     isOpen: boolean;
@@ -14,6 +15,15 @@ interface DriveModalProps {
     calculateEffect: (players: Player[], rolls: ActorRoll[], actors: Array<{ actor: Entity }>, vehicleType: VehicleType) => Array<{ message: string; success: boolean; vehicleType: VehicleType }>;
 }
 
+function getVehicleTypeFromUnit(actor: Entity, players: Player[]): VehicleType {
+    const unit = CurrentUnit(players, actor);
+    if (unit?.vehicle?.type) {
+        const vehicleType = getVehicleTypeById(unit.vehicle.type);
+        if (vehicleType) return vehicleType;
+    }
+    return vehicleTypes[0];
+}
+
 export function DriveModal({
     isOpen,
     title,
@@ -23,41 +33,19 @@ export function DriveModal({
     onConfirm,
     calculateEffect
 }: DriveModalProps) {
-    const initialExtra = { selectedVehicleType: vehicleTypes[0] };
+    const vehicleType = useMemo(() => getVehicleTypeFromUnit(actor, players), [actor, players]);
 
     const getRollsCallback = useCallback((rolls: ActorRoll[]) => {
         return rolls;
     }, []);
 
-    const wrappedCalculateEffect = useCallback((players: Player[], rolls: ActorRoll[], actors: Array<{ actor: Entity }>, extraData: unknown) => {
-        const { selectedVehicleType } = extraData as { selectedVehicleType: VehicleType };
-        return calculateEffect(players, rolls, actors, selectedVehicleType);
-    }, [calculateEffect]);
+    const wrappedCalculateEffect = useCallback((players: Player[], rolls: ActorRoll[], actors: Array<{ actor: Entity }>) => {
+        return calculateEffect(players, rolls, actors, vehicleType);
+    }, [calculateEffect, vehicleType]);
 
-    const wrappedOnConfirm = useCallback((players: Player[], rolls: ActorRoll[], actors: Array<{ actor: Entity }>, extraData: unknown) => {
-        const { selectedVehicleType } = extraData as { selectedVehicleType: VehicleType };
-        onConfirm(players, rolls, actors, selectedVehicleType);
-    }, [onConfirm]);
-
-    const renderExtraFields = ({ selectedExtra, setSelectedExtra }: { selectedExtra: unknown; setSelectedExtra: (extra: unknown) => void }) => {
-        const { selectedVehicleType: currentVehicleType } = selectedExtra as { selectedVehicleType: VehicleType };
-
-        return (
-            <label className='form-label'>
-                <span style={{ width: "150px" }}>Тип:</span>
-                <select
-                    value={currentVehicleType.id}
-                    onChange={(e) => setSelectedExtra({ selectedVehicleType: vehicleTypes.find(vt => vt.id === e.target.value)! })}
-                >
-                    {vehicleTypes.map(vt => (
-                        <option key={vt.id} value={vt.id}>
-                            {vt.name}
-                        </option>
-                    ))}
-                </select>
-            </label>
-        );
-    };
+    const wrappedOnConfirm = useCallback((players: Player[], rolls: ActorRoll[], actors: Array<{ actor: Entity }>) => {
+        onConfirm(players, rolls, actors, vehicleType);
+    }, [onConfirm, vehicleType]);
 
     return (
         <BaseRollModal
@@ -69,8 +57,6 @@ export function DriveModal({
             onConfirm={wrappedOnConfirm}
             calculateEffect={wrappedCalculateEffect}
             getRollsCallback={getRollsCallback}
-            initialExtra={initialExtra}
-            renderExtraFields={renderExtraFields}
         />
     );
 }
