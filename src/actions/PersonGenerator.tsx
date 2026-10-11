@@ -120,14 +120,12 @@ export function PersonGenerator({ onCancel, onConfirm }: PersonGeneratorProps) {
     const [selectedTitle, setSelectedTitle] = useState<string>(Titles[0].name);
     const [selectedCountry, setSelectedCountry] = useState<string>(CountriesData[0].CountryName);
     const [selectedGender, setSelectedGender] = useState<string>(Genders[0].id);
-    const [isCharismatic, setIsCharismatic] = useState<boolean>(Math.random() < 0.5);
     const [isMilitary, setIsMilitary] = useState<boolean>(true);
     const [defaultWeapon, setDefaultWeapon] = useState<boolean>(true);
     const [name, setName] = useState<string>(generateNameForCountry(selectedCountry, selectedGender));
 
     useEffect(() => {
         setName(generateNameForCountry(selectedCountry, selectedGender));
-        setIsCharismatic(Math.random() < 0.5);
     }, [selectedCountry, selectedGender]);
 
     return (
@@ -183,10 +181,6 @@ export function PersonGenerator({ onCancel, onConfirm }: PersonGeneratorProps) {
                 </select>
             </label>
             <label className="form-label">
-                <span>Харизматичный</span>
-                <input title='Выбор коммуникативной стратегии между логикой и харизматичным влиянием' type="checkbox" checked={isCharismatic} onChange={() => setIsCharismatic(!isCharismatic)} />
-            </label>
-            <label className="form-label">
                 <span>Военный</span>
                 <input title='Недавно проходил военные сборы или в настоящее время проходит службу' type="checkbox" checked={isMilitary} onChange={() => setIsMilitary(!isMilitary)} />
             </label>
@@ -197,7 +191,7 @@ export function PersonGenerator({ onCancel, onConfirm }: PersonGeneratorProps) {
 
             <div className="buttons-panel" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <button title="Так точно" onClick={() => {
-                    const newPerson = GeneratePerson(selectedTitle, isMilitary, defaultWeapon, name, isCharismatic);
+                    const newPerson = GeneratePerson(selectedTitle, isMilitary, defaultWeapon, name);
                     onConfirm(newPerson);
                 }}><GiConfirmed /></button>
                 <button title="Никак нет" onClick={onCancel}><GiCancel /></button>
@@ -220,19 +214,18 @@ function shuffleArray<T>(array: T[]): T[] {
     return shuffled;
 }
 
-export function GeneratePerson(titleName: string, isMilitary: boolean, hasWeapon: boolean, name: string, isCharismatic?: boolean): Entity {
+export function GeneratePerson(titleName: string, isMilitary: boolean, hasWeapon: boolean, name: string): Entity {
     const title = Titles.find(title => title.name === titleName);
 
     if (!title) {
         throw new Error(`Title "${titleName}" not found`);
     }
 
-    const [maxSkill, randomSkill] = (isCharismatic ?? (Math.random() < 0.5)) ? ["IFL", "LOG"] as const : ["LOG", "IFL"] as const;
     const skills: Record<string, number> = isMilitary
         ? { LOG: 0, IFL: 0, END: 8, MNV: 4, STE: 1, WPN_rifles: 5, WPN_grenades: 2 }
         : { LOG: 0, IFL: 0, END: 5 };
-    skills[maxSkill] = title.leadership;
-    skills[randomSkill] = Math.floor(Math.random() * (title.leadership + 1));
+    skills["IFL"] = title.leadership;
+    skills["LOG"] = Math.floor(Math.random() * (title.leadership + 1));
 
     const weaponSkillRolls = isMilitary ? title.weaponSkillRolls : 1;
     const skillRolls = title.skillRolls + title.weaponSkillRolls - weaponSkillRolls;
