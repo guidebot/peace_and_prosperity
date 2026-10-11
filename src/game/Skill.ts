@@ -46,11 +46,11 @@ export function MinSkill(unitData: Unit, SkillKey: string) {
 }
 
 export function MaxLeadership(unitData: Unit) {
-    return Math.max(MaxSkill(unitData, "LOG") ?? 0, MaxSkill(unitData, "IFL") ?? 0);
+    return MaxSkill(unitData, "IFL") ?? 0;
 }
 
 export function GetLeadershipFromSkills(skills: Record<string, number>): number {
-    return Math.max(skills?.["LOG"] || 0, skills?.["IFL"] || 0);
+    return skills?.["IFL"] || 0;
 }
 
 export function MaxLeadershipFromPersons(persons: Entity[]): number {
