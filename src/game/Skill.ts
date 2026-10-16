@@ -115,6 +115,7 @@ export const Skills = [
 
     new Skill("AGI", "MNV", "[МНВ] Маневрирование"),
     new Skill("AGI", "STE", "[МСК] Маскировка"),
+    new Skill("AGI", "WPN_grenades", "[ГРН] Метательное оружие (гранаты)"),
 
     new Skill("CHR", "IFL", "[ВЛН] Влияние"),
 
@@ -124,13 +125,12 @@ export const Skills = [
     new Skill("INT", "EL", "[ЭЛ] Электроника"),
     new Skill("INT", "TECH_explosives", "[ВЗР] Взрывчатые вещества"),
     new Skill("INT", "WPN_artillery", "[ОП] Огневая поддержка"),
+    new Skill("INT", "WPN_guided", "[УР] Управляемые ракеты"),
+    new Skill("INT", "TECH_uav", "[ДРН] Управляемые дроны"),
 
-    new Skill("MRK", "WPN_grenades", "[ГРН] Метательное оружие (гранаты)"),
     new Skill("MRK", "WPN_rifles", "[ЛС] Лёгкое стрелковое оружие"),
     new Skill("MRK", "WPN_sniper", "[СН] Снайперское оружие"),
     new Skill("MRK", "WPN_mg", "[ПЛМ] Пулемёты"),
-    new Skill("MRK", "WPN_guided", "[УР] Управляемые ракеты"),
-    new Skill("MRK", "TECH_uav", "[ДРН] Управляемые дроны"),
     new Skill("MRK", "WPN_heavy", "[ТВ] Тяжёлое вооружение")
 ]
 
