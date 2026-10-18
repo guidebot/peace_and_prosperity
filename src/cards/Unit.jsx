@@ -49,9 +49,9 @@ export function UnitForm({ players, data, onChange, onOtherChange, setSelectedNo
 
         if (loadout > 0.75) return false;
 
-        const minFpLevel = Level(MinSkill(data, "END"));
+        const maxFatigue = MinSkill(data, "END") / 3;
 
-        return data.fatigue < minFpLevel;
+        return data.fatigue < maxFatigue;
     }
 
     function checkIfCanMove() {

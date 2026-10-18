@@ -222,8 +222,8 @@ export function GeneratePerson(titleName: string, isMilitary: boolean, hasWeapon
     }
 
     const skills: Record<string, number> = isMilitary
-        ? { LOG: 0, IFL: 0, END: 8, MNV: 4, STE: 1, WPN_rifles: 5, WPN_grenades: 2 }
-        : { LOG: 0, IFL: 0, END: 5 };
+        ? { LOG: 0, IFL: 0, END: 12, MNV: 4, STE: 1, WPN_rifles: 5, WPN_grenades: 2 }
+        : { LOG: 0, IFL: 0, END: 6 };
     skills["IFL"] = title.leadership;
     skills["LOG"] = Math.floor(Math.random() * (title.leadership + 1));
 
