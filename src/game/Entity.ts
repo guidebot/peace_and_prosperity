@@ -24,6 +24,6 @@ export class Entity {
     this.isBleeding = false;
     this.isSuppressed = false;
     this.equipment = equipment;
-    this.defaultEquipment = equipment.length > 0 ? equipment.find(eq => SkillsByAttributes["MRK"].find(s => s.id === eq.skill))?.id : null;
+    this.defaultEquipment = equipment.length > 0 ? equipment.find(eq => SkillsByAttributes["MRK"].find(s => s.id === eq.skill))?.id ?? null : null;
   }
 }
