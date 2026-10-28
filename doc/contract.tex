@@ -9,6 +9,8 @@
 \usepackage{microtype}
 \usepackage{parskip}
 \usepackage{xcolor}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \definecolor{navy}{RGB}{0,0,128}
 \setmainfont{Noto Serif}
 \setsansfont{Monitorica}
@@ -59,6 +61,9 @@
 \hypersetup{
   hidelinks
 }
+
+\usepgfplotslibrary{external}
+\tikzexternalize[optimize=false]
 
 \captionsetup{labelfont={it,color=navy},textfont={it,color=navy},justification=centering}
 \captionsetup[table]{hypcap=false}
@@ -1026,31 +1031,57 @@ D20, прибавляет к своему броску свой показате
 рассеивается.
 
 Каждый отряд восстанавливает некоторое количество очков стресса, в
-соответствии с уровнем навыка влияния $\mathrm{Ур(ВЛН)}$ у персонажа этого отряда с максимальным
+соответствии со значением навыка влияния ВЛН у персонажа этого отряда с максимальным
 значением этого навыка.
 
-\begin{center}
-\begin{minipage}{0.7\columnwidth}
-\begin{talltblr}[
-  caption = {Восстановление очков стресса},
-  label = {table-stress-recovery}
-]{
-  hlines,
-  row{odd}={fg=navy},
-  row{even}={fg=black},
-  colspec={ Q[c,m,co=1] Q[c,m,co=1] },
-}
-\SetRow{font=\footnotesize}Восстановление очков стресса & Уровень навыка $\mathrm{Ур(ВЛН)}$ \\
-0,1 & 0 \\
-0,2 & 1 \\
-0,5 & 2 \\
-0,8 & 3 \\
-1,3 & 4 \\
-1,9 & 5 \\
-2,7 & 6 \\
-\end{talltblr}
-\end{minipage}
-\end{center}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Зависимость восстановления стресса от навыка влияния},
+    xlabel={Очки тренированности навыка влияния},
+    ylabel={Восстановление очков стресса},
+    xmin=0, xmax=20,
+    ymin=0, ymax=3,
+    xtick={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20},
+    ytick={0,0.1,0.2,0.3,0.4,0.5,0.6,0.8,0.9,1.1,1.2,1.4,1.6,1.8,2.1,2.3,2.5,2.8},
+    ymajorgrids=true,
+    xmajorgrids=true,
+    minor tick num=0,
+    nodes near coords,
+    nodes near coords align={anchor=east},
+    every node near coord/.append style={font=\tiny, color=black},
+]
+
+\addplot[
+    color=blue,
+    mark=*,
+    only marks,
+    ]
+    coordinates {
+    (0,0.1)
+    (1,0.1)
+    (2,0.1)
+    (3,0.2)
+    (4,0.2)
+    (5,0.3)
+    (6,0.3)
+    (7,0.4)
+    (8,0.5)
+    (9,0.6)
+    (10,0.8)
+    (11,0.9)
+    (12,1.1)
+    (13,1.2)
+    (14,1.4)
+    (15,1.6)
+    (16,1.8)
+    (17,2.1)
+    (18,2.3)
+    (19,2.5)
+    (20,2.8)
+    };
+
+\end{axis}
+\end{tikzpicture}
 
 Персонажи с кровотечением теряют 1 очко навыка ВНС, а если количество
 очков ВНС персонажа уже 0 к этому времени, такой персонаж умирает.
