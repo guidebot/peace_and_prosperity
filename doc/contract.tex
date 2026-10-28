@@ -64,6 +64,7 @@
 
 \usepgfplotslibrary{external}
 \tikzexternalize[optimize=false]
+\tikzset{external/export=false}
 
 \captionsetup{labelfont={it,color=navy},textfont={it,color=navy},justification=centering}
 \captionsetup[table]{hypcap=false}
@@ -1034,6 +1035,8 @@ D20, прибавляет к своему броску свой показате
 соответствии со значением навыка влияния ВЛН у персонажа этого отряда с максимальным
 значением этого навыка.
 
+\tikzset{external/export=true}
+\tikzsetnextfilename{stress-recovery-chart}
 \begin{tikzpicture}
 \begin{axis}[
     title={Зависимость восстановления стресса от навыка влияния},
