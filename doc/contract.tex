@@ -62,10 +62,6 @@
   hidelinks
 }
 
-\usepgfplotslibrary{external}
-\tikzexternalize[optimize=false]
-\tikzset{external/export=false}
-
 \captionsetup{labelfont={it,color=navy},textfont={it,color=navy},justification=centering}
 \captionsetup[table]{hypcap=false}
 \captionsetup[figure]{hypcap=false}
@@ -1035,12 +1031,10 @@ D20, прибавляет к своему броску свой показате
 соответствии со значением навыка влияния ВЛН у персонажа этого отряда с максимальным
 значением этого навыка.
 
-\tikzset{external/export=true}
-\tikzsetnextfilename{stress-recovery-chart}
-\begin{tikzpicture}
+\begin{tikzpicture}\label{stress-recovery}
 \begin{axis}[
     title={Зависимость восстановления стресса от навыка влияния},
-    xlabel={Очки тренированности навыка влияния},
+    xlabel={Очки тренированности навыка влияния ВЛН},
     ylabel={Восстановление очков стресса},
     xmin=0, xmax=20,
     ymin=0, ymax=3,
@@ -1053,13 +1047,13 @@ D20, прибавляет к своему броску свой показате
     label style={font=\small},
     nodes near coords,
     nodes near coords align={anchor=east},
-    every node near coord/.append style={font=\tiny, color=blue},
+    every node near coord/.append style={font=\tiny, color=navy},
     point meta=explicit symbolic,
 ]
 
 \addplot[
-    color=blue,
-    mark=*,
+    color=navy,
+    mark=triangle*,
     only marks,
     ]
     coordinates {

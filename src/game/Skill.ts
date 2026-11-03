@@ -53,11 +53,6 @@ export function GetLeadershipFromSkills(skills: Record<string, number>): number 
     return skills?.["IFL"] || 0;
 }
 
-export function MaxLeadershipFromPersons(persons: Entity[]): number {
-    if (!persons || persons.length === 0) return 0;
-    return Math.max(...persons.map(p => GetLeadershipFromSkills(p.skills || {})));
-}
-
 export function EffectiveManeuvering(soldier: Entity): number {
     const baseTP = soldier.skills["MNV"] || 0;
     return baseTP + GetArmorMod(soldier);

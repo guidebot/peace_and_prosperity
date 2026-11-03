@@ -15,7 +15,7 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry, st
     const [startPositions, setStartPositions] = useState({});
 
     const handleEndTurn = () => {
-        const STRESS_RECOVERY_PER_TURN = [0.1, 0.2, 0.5, 0.8, 1.3, 1.9, 2.7];
+        const STRESS_RECOVERY_PER_TURN = [0.1, 0.1, 0.1, 0.2, 0.2, 0.3, 0.3, 0.4, 0.5, 0.6, 0.8, 0.9, 1.1, 1.2, 1.4, 1.6, 1.8, 2.1, 2.3, 2.5, 2.8];
         const effects = [];
 
         const expiringCounters = [];
@@ -50,9 +50,8 @@ export function MainMenu({ players, setPlayers, setSelectedNode, addLogEntry, st
                 let stress = Number(unit.stress) || 0;
                 if (stress > 0) {
                     const leadership = MaxLeadership(unit);
-                    const leadershipLevel = Level(leadership);
 
-                    const recovery = Math.min(stress, STRESS_RECOVERY_PER_TURN[leadershipLevel]);
+                    const recovery = Math.min(stress, STRESS_RECOVERY_PER_TURN[leadership]);
                     const newStress = stress - recovery;
 
                     effects.push({
